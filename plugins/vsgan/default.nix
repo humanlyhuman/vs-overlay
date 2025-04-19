@@ -37,6 +37,6 @@ buildPythonPackage rec {
     homepage = "https://vsgan.phoeniix.dev/";
     license = licenses.mit;
     maintainers = with maintainers; [ aidalgol ];
-    platforms = platforms.all;
+    platforms = with platforms; x86_64 ++ aarch64;
   };
 }
