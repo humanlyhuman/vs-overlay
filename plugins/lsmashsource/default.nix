@@ -1,13 +1,13 @@
 { lib, stdenv, fetchFromGitHub, pkg-config, which, vapoursynth, ffmpeg, l-smash }:
 
-stdenv.mkDerivation {
+stdenv.mkDerivation (finalAttrs: {
   pname = "lsmashsource";
-  version = "stable-unstable-2019-09-15"; # last (only) release is from 2013 and there has still been development
+  version = "1194.0.0.0";
 
   src = fetchFromGitHub {
-    owner = "VFR-maniac";
+    owner = "HomeOfAviSynthPlusEvolution";
     repo = "L-SMASH-Works";
-    rev = "198cc7814c93209e23f1c6a20daffd651945ba2b";
+    rev = finalAttrs.version;
     sha256 = "1pb8rrh184pxy5calwfnmm02i0by8vc91c07w4ygj50y8yfqa3br";
   };
 
@@ -26,4 +26,4 @@ stdenv.mkDerivation {
     maintainers = with maintainers; [ ];
     platforms = platforms.all;
   };
-}
+})
