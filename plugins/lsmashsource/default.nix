@@ -2,7 +2,7 @@
 
 stdenv.mkDerivation {
   pname = "lsmashsource";
-  version = "unstable-2019-09-15"; # last (only) release is from 2013 and there has still been development
+  version = "stable-unstable-2019-09-15"; # last (only) release is from 2013 and there has still been development
 
   src = fetchFromGitHub {
     owner = "VFR-maniac";
