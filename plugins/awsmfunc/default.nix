@@ -2,7 +2,8 @@
   lib,
   vapoursynthPlugins,
   buildPythonPackage,
-  fetchgit,
+  fetchFromGitHub,
+  setuptools,
   numpy,
   vapoursynth,
 }:
@@ -16,24 +17,24 @@ let
 in
 buildPythonPackage rec {
   pname = "awsmfunc";
-  version = "unstable-2021-01-26";
+  version = "1.3.4";
+  pyproject = true;
 
-  src = fetchgit {
-    url = "https://git.concertos.live/AHD/awsmfunc.git";
-    rev = "e57ad6a976d059ffcf8ae59ee986bdbefef53cd0";
-    sha256 = "0j2gzxcz3sy0h7r5a1dhl6xjgjd2m66mw4kfm8q2glar5b7gn0k7";
+  src = fetchFromGitHub {
+    owner = "OpusGang";
+    repo = pname;
+    rev = version;
+    hash = "sha256-7J7s/SdnA5/A/q4SaBfIWG+qOwHpjSrUzWkY1r63wwc=";
   };
 
-  # This does not depend on vapoursynth (since this is used from within
-  # vapoursynth).
   postPatch = ''
-    substituteInPlace requirements.txt \
-        --replace "VapourSynth>=49" "" \
-        --replace "rekt@https://gitlab.com/Ututu/rekt/-/archive/3da2b2f2b2d670e635cef6dcc61f19c8fe10f1fa/rekt-3da2b2f2b2d670e635cef6dcc61f19c8fe10f1fa.zip" "rekt"
+    substituteInPlace pyproject.toml \
+      --replace-fail '"VapourSynth >= 57",' "" \
+      --replace-fail "vs-rekt" "rekt"
   '';
-
   propagatedBuildInputs =
     [
+      setuptools
       numpy
     ]
     ++ (with vapoursynthPlugins; [
@@ -46,8 +47,8 @@ buildPythonPackage rec {
 
   meta = with lib; {
     description = "A VapourSynth function collection";
-    homepage = "https://git.concertos.live/AHD/awsmfunc";
-    license = licenses.unfree; # no license
+    homepage = "https://github.com/OpusGang/awsmfunc";
+    license = licenses.mit;
     maintainers = with maintainers; [ sbruder ];
     platforms = platforms.all;
   };
