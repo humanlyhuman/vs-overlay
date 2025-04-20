@@ -31,7 +31,7 @@ pkgs.mkShell {
         combmask
         continuityfixer
         ctmf
-        # d2vsource
+        d2vsource
         dctfilter
         deblock
         decross
