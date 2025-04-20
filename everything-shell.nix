@@ -39,7 +39,6 @@ pkgs.mkShell {
         dfttest
         eedi2
         eedi3m
-        # f3kdb
         ffms2
         fft3dfilter
         fillborders
@@ -56,6 +55,7 @@ pkgs.mkShell {
         motionmask
         msmoosh
         mvtools
+        neo_f3kdb
         nnedi3
         nnedi3cl
         ocr

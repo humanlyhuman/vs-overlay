@@ -35,7 +35,6 @@ in
     dfttest = prev.callPackage ./plugins/dfttest { };
     eedi2 = prev.callPackage ./plugins/eedi2 { };
     eedi3m = prev.callPackage ./plugins/eedi3m { };
-    f3kdb = prev.callPackage ./plugins/f3kdb { };
     ffms2 = prev.ffms;
     fft3dfilter = prev.callPackage ./plugins/fft3dfilter { };
     fillborders = prev.callPackage ./plugins/fillborders { };
@@ -52,6 +51,7 @@ in
     motionmask = prev.callPackage ./plugins/motionmask { };
     msmoosh = prev.callPackage ./plugins/msmoosh { };
     mvtools = prev.vapoursynth-mvtools;
+    neo_f3kdb = prev.callPackage ./plugins/neo_f3kdb { };
     nnedi3 = prev.callPackage ./plugins/nnedi3 { };
     nnedi3cl = prev.callPackage ./plugins/nnedi3cl { };
     ocr = prev.callPackage ./plugins/ocr { };
