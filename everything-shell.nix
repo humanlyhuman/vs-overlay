@@ -21,7 +21,6 @@ pkgs.mkShell {
         addgrain
         autocrop
         awarpsharp2
-        bestaudiosource
         beziercurve
         bifrost
         bilateral
