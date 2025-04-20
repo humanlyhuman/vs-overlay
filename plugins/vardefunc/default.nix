@@ -3,7 +3,6 @@
   vapoursynthPlugins,
   buildPythonPackage,
   fetchFromGitHub,
-  python3,
   vapoursynth,
 }:
 let
@@ -11,7 +10,7 @@ let
     adaptivegrain
     bilateral
     eedi3m
-    f3kdb
+    neo_f3kdb
     ffms2
     nnedi3cl
     scxvid

@@ -8,7 +8,7 @@
 }:
 let
   propagatedBinaryPlugins = with vapoursynthPlugins; [
-    f3kdb
+    neo_f3kdb
     fmtconv
     #rgsf
   ];
