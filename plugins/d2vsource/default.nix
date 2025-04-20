@@ -1,4 +1,12 @@
-{ lib, stdenv, fetchFromGitHub, autoreconfHook, pkg-config, ffmpeg, vapoursynth }:
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  autoreconfHook,
+  pkg-config,
+  ffmpeg,
+  vapoursynth,
+}:
 
 stdenv.mkDerivation rec {
   pname = "d2vsource";
@@ -13,8 +21,14 @@ stdenv.mkDerivation rec {
 
   configureFlags = [ "--libdir=$(out)/lib/vapoursynth" ];
 
-  nativeBuildInputs = [ autoreconfHook pkg-config ];
-  buildInputs = [ ffmpeg vapoursynth ];
+  nativeBuildInputs = [
+    autoreconfHook
+    pkg-config
+  ];
+  buildInputs = [
+    ffmpeg
+    vapoursynth
+  ];
 
   meta = with lib; {
     description = "D2V parser and decoder for VapourSynth";

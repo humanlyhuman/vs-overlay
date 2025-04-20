@@ -1,4 +1,11 @@
-{ lib, stdenv, fetchFromGitHub, pkg-config, which, vapoursynth }:
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  pkg-config,
+  which,
+  vapoursynth,
+}:
 
 stdenv.mkDerivation rec {
   pname = "CombMask";
@@ -31,7 +38,10 @@ stdenv.mkDerivation rec {
     runHook postConfigure
   '';
 
-  nativeBuildInputs = [ pkg-config which ];
+  nativeBuildInputs = [
+    pkg-config
+    which
+  ];
   buildInputs = [ vapoursynth ];
 
   meta = with lib; {

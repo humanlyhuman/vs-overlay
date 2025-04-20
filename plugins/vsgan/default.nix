@@ -1,10 +1,11 @@
-{ lib
-, buildPythonPackage
-, fetchFromGitHub
-, vapoursynth
-, numpy
-, poetry-core
-, pytorch
+{
+  lib,
+  buildPythonPackage,
+  fetchFromGitHub,
+  vapoursynth,
+  numpy,
+  poetry-core,
+  pytorch,
 }:
 
 buildPythonPackage rec {

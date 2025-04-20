@@ -1,4 +1,11 @@
-{ lib, vapoursynthPlugins, buildPythonPackage, fetchFromGitHub, python3, vapoursynth }:
+{
+  lib,
+  vapoursynthPlugins,
+  buildPythonPackage,
+  fetchFromGitHub,
+  python3,
+  vapoursynth,
+}:
 let
   propagatedBinaryPlugins = with vapoursynthPlugins; [
     adaptivegrain
@@ -22,12 +29,14 @@ buildPythonPackage rec {
     sha256 = "0bkchcshxmfcfbqapw367y3cfj1rdz78a55fkcvznvy61fhqvzl7";
   };
 
-  propagatedBuildInputs = (with vapoursynthPlugins; [
-    fvsfunc
-    havsfunc
-    lvsfunc
-    vsutil
-  ]) ++ propagatedBinaryPlugins;
+  propagatedBuildInputs =
+    (with vapoursynthPlugins; [
+      fvsfunc
+      havsfunc
+      lvsfunc
+      vsutil
+    ])
+    ++ propagatedBinaryPlugins;
 
   postPatch = ''
     substituteInPlace requirements.txt \

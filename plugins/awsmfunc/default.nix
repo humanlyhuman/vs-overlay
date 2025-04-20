@@ -1,4 +1,11 @@
-{ lib, vapoursynthPlugins, buildPythonPackage, fetchgit, numpy, vapoursynth }:
+{
+  lib,
+  vapoursynthPlugins,
+  buildPythonPackage,
+  fetchgit,
+  numpy,
+  vapoursynth,
+}:
 let
   propagatedBinaryPlugins = with vapoursynthPlugins; [
     descale
@@ -25,12 +32,14 @@ buildPythonPackage rec {
         --replace "rekt@https://gitlab.com/Ututu/rekt/-/archive/3da2b2f2b2d670e635cef6dcc61f19c8fe10f1fa/rekt-3da2b2f2b2d670e635cef6dcc61f19c8fe10f1fa.zip" "rekt"
   '';
 
-  propagatedBuildInputs = [
-    numpy
-  ] ++ (with vapoursynthPlugins; [
-    rekt
-    vsutil
-  ]);
+  propagatedBuildInputs =
+    [
+      numpy
+    ]
+    ++ (with vapoursynthPlugins; [
+      rekt
+      vsutil
+    ]);
 
   checkInputs = [ (vapoursynth.withPlugins propagatedBinaryPlugins) ];
   pythonImportsCheck = [ "awsmfunc" ];

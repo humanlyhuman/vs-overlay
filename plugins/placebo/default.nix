@@ -1,4 +1,16 @@
-{ lib, stdenv, fetchFromGitHub, fetchpatch, meson, ninja, pkg-config, libplacebo, vapoursynth, vulkan-headers, vulkan-loader }:
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  fetchpatch,
+  meson,
+  ninja,
+  pkg-config,
+  libplacebo,
+  vapoursynth,
+  vulkan-headers,
+  vulkan-loader,
+}:
 
 stdenv.mkDerivation rec {
   pname = "vs-placebo";
@@ -12,8 +24,17 @@ stdenv.mkDerivation rec {
     fetchSubmodules = true;
   };
 
-  nativeBuildInputs = [ meson ninja pkg-config ];
-  buildInputs = [ libplacebo vapoursynth vulkan-headers vulkan-loader ];
+  nativeBuildInputs = [
+    meson
+    ninja
+    pkg-config
+  ];
+  buildInputs = [
+    libplacebo
+    vapoursynth
+    vulkan-headers
+    vulkan-loader
+  ];
 
   postPatch = ''
     substituteInPlace meson.build \

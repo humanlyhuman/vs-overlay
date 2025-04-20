@@ -1,4 +1,10 @@
-{ lib, buildPythonPackage, fetchFromGitHub, fetchpatch, vapoursynth }:
+{
+  lib,
+  buildPythonPackage,
+  fetchFromGitHub,
+  fetchpatch,
+  vapoursynth,
+}:
 
 buildPythonPackage rec {
   pname = "vsutil";

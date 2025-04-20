@@ -1,4 +1,13 @@
-{ lib, stdenv, fetchFromGitHub, meson, ninja, pkg-config, ffmpeg, vapoursynth }:
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  meson,
+  ninja,
+  pkg-config,
+  ffmpeg,
+  vapoursynth,
+}:
 
 stdenv.mkDerivation rec {
   pname = "bestaudiosource";
@@ -15,8 +24,15 @@ stdenv.mkDerivation rec {
     ./0001-Fix-audio-source-iteration-with-Wsign-compare.patch
   ];
 
-  nativeBuildInputs = [ meson ninja pkg-config ];
-  buildInputs = [ ffmpeg vapoursynth ];
+  nativeBuildInputs = [
+    meson
+    ninja
+    pkg-config
+  ];
+  buildInputs = [
+    ffmpeg
+    vapoursynth
+  ];
 
   postPatch = ''
     substituteInPlace meson.build \

@@ -1,4 +1,11 @@
-{ lib, vapoursynthPlugins, buildPythonPackage, fetchFromGitHub, python, vapoursynth }:
+{
+  lib,
+  vapoursynthPlugins,
+  buildPythonPackage,
+  fetchFromGitHub,
+  python,
+  vapoursynth,
+}:
 let
   propagatedBinaryPlugins = with vapoursynthPlugins; [
     f3kdb
@@ -17,11 +24,13 @@ buildPythonPackage rec {
     sha256 = "0gwpjglm74y6a7x9ws7is7algnwm3i0ds65nz3ki8faigx1jh52a";
   };
 
-  propagatedBuildInputs = (with vapoursynthPlugins; [
-    fvsfunc
-    muvsfunc
-    mvsfunc
-  ]) ++ propagatedBinaryPlugins;
+  propagatedBuildInputs =
+    (with vapoursynthPlugins; [
+      fvsfunc
+      muvsfunc
+      mvsfunc
+    ])
+    ++ propagatedBinaryPlugins;
 
   format = "other";
 

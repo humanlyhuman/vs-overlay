@@ -1,4 +1,11 @@
-{ lib, buildPythonPackage, fetchFromGitHub, vapoursynthPlugins, python, vapoursynth }:
+{
+  lib,
+  buildPythonPackage,
+  fetchFromGitHub,
+  vapoursynthPlugins,
+  python,
+  vapoursynth,
+}:
 let
   plugins_native = with vapoursynthPlugins; [
     addgrain
@@ -51,7 +58,7 @@ buildPythonPackage rec {
     runHook postInstall
   '';
 
-  checkInputs = [ (vapoursynth.withPlugins plugins_native ) ];
+  checkInputs = [ (vapoursynth.withPlugins plugins_native) ];
   checkPhase = ''
     PYTHONPATH=$out/${python.sitePackages}:$PYTHONPATH
   '';

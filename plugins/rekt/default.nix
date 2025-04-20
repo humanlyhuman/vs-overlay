@@ -1,4 +1,10 @@
-{ lib, buildPythonPackage, fetchFromGitLab, vapoursynthPlugins, vapoursynth }:
+{
+  lib,
+  buildPythonPackage,
+  fetchFromGitLab,
+  vapoursynthPlugins,
+  vapoursynth,
+}:
 
 buildPythonPackage rec {
   pname = "rekt";

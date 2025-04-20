@@ -1,11 +1,12 @@
-{ lib
-, stdenv
-, fetchFromGitHub
-, meson
-, ninja
-, cmake
-, pkg-config
-, vapoursynth
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  meson,
+  ninja,
+  cmake,
+  pkg-config,
+  vapoursynth,
 }:
 
 stdenv.mkDerivation rec {

@@ -1,8 +1,14 @@
-{ lib, stdenv, fetchFromGitHub, vapoursynth }:
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  vapoursynth,
+}:
 
 let
   ext = stdenv.targetPlatform.extensions.sharedLibrary;
-in stdenv.mkDerivation rec {
+in
+stdenv.mkDerivation rec {
   pname = "vs-continuityfixer";
   version = "6.1";
 

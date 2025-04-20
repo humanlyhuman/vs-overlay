@@ -1,4 +1,10 @@
-{ lib, buildPythonPackage, fetchFromGitHub, ffmpeg, vapoursynth }:
+{
+  lib,
+  buildPythonPackage,
+  fetchFromGitHub,
+  ffmpeg,
+  vapoursynth,
+}:
 
 buildPythonPackage rec {
   pname = "acsuite";

@@ -1,9 +1,20 @@
-{ lib, vapoursynth, vapoursynthPlugins, buildPythonApplication, fetchFromGitHub, matplotlib, imagemagick }:
+{
+  lib,
+  vapoursynth,
+  vapoursynthPlugins,
+  buildPythonApplication,
+  fetchFromGitHub,
+  matplotlib,
+  imagemagick,
+}:
 let
-  vapoursynth-with-plugins = vapoursynth.withPlugins (with vapoursynthPlugins; [
-    ffms2
-    descale
-  ]);
+  vapoursynth-with-plugins = vapoursynth.withPlugins (
+    with vapoursynthPlugins;
+    [
+      ffms2
+      descale
+    ]
+  );
 in
 buildPythonApplication rec {
   pname = "getnative";
