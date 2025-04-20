@@ -1,6 +1,15 @@
 {
   description = "vs-overlay";
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+  nixConfig = {
+    extra-substituters = [
+      "https://cache.kyouma.net"
+    ];
+    extra-trusted-public-keys = [
+      "cache.kyouma.net:Frjwu4q1rnwE/MnSTmX9yx86GNA/z3p/oElGvucLiZg="
+    ];
+    builders-use-substitutes = true;
+  };
 
   outputs =
     { self, nixpkgs }@inputs:
