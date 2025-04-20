@@ -78,7 +78,7 @@ pkgs.mkShell {
         wwxd
         znedi3
 
-        # acsuite
+        acsuite
         adjust
         astdr
         awsmfunc
