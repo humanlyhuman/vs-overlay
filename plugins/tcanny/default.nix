@@ -48,6 +48,6 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/HomeOfVapourSynthEvolution/VapourSynth-TCanny";
     license = licenses.gpl2;
     maintainers = with maintainers; [ ];
-    platforms = platforms.all;
+    platforms = with platforms; x86 ++ x86_64;
   };
 }

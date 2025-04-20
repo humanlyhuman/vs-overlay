@@ -35,6 +35,6 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/MonoS/VS-ContinuityFixer";
     license = licenses.unfree; # no license
     maintainers = with maintainers; [ ];
-    platforms = platforms.all;
+    platforms = with platforms; x86 ++ x86_64;
   };
 }

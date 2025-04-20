@@ -53,6 +53,7 @@ buildPythonPackage rec {
     homepage = "https://github.com/LightArrowsEXE/debandshit";
     license = licenses.mit;
     maintainers = with maintainers; [ sbruder ];
-    platforms = platforms.all;
+    # Tcanny uses inline x86 asm
+    platforms = with platforms; x86 ++ x86_64;
   };
 }

@@ -69,6 +69,7 @@ buildPythonPackage rec {
     homepage = "https://github.com/HomeOfVapourSynthEvolution/havsfunc";
     license = licenses.unfree; # no license
     maintainers = with maintainers; [ sbruder ];
-    platforms = platforms.all;
+    # eedi3m does inline asm
+    platforms = with platforms; x86 ++ x86_64;
   };
 }

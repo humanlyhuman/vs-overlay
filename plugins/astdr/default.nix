@@ -60,6 +60,6 @@ buildPythonPackage rec {
     homepage = "https://github.com/dubhater/vapoursynth-astdr";
     license = licenses.unfree; # no license
     maintainers = with maintainers; [ aidalgol ];
-    platforms = platforms.all;
+    platforms = with platforms; x86 ++ x86_64;
   };
 }

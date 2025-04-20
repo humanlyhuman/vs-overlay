@@ -49,6 +49,6 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/chikuzen/CombMask";
     license = licenses.lgpl21Plus;
     maintainers = with maintainers; [ sbruder ];
-    platforms = platforms.all;
+    platforms = with platforms; x86 ++ x86_64;
   };
 }

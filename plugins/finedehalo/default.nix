@@ -7,7 +7,7 @@
   vapoursynth,
 }:
 
-buildPythonPackage rec {
+buildPythonPackage {
   pname = "finedehalo";
   version = "unstable-2016-07-08";
 
@@ -43,6 +43,7 @@ buildPythonPackage rec {
     homepage = "https://forum.doom9.org/showthread.php?t=173672";
     license = licenses.unfree; # no license
     maintainers = with maintainers; [ sbruder ];
-    platforms = platforms.all;
+    # eedi3m does inline asm
+    platforms = with platforms; x86 ++ x86_64;
   };
 }

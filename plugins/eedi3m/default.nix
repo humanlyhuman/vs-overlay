@@ -48,6 +48,7 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/HomeOfVapourSynthEvolution/VapourSynth-EEDI3";
     license = licenses.gpl2;
     maintainers = with maintainers; [ ];
-    platforms = platforms.all;
+    # Does inline asm
+    platforms = with platforms; x86 ++ x86_64;
   };
 }
