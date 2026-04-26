@@ -13,10 +13,10 @@ stdenv.mkDerivation rec {
   version = "2";
 
   src = fetchFromGitHub {
-    owner = "dubhater";
+    owner = "dubhatervapoursynth";
     repo = pname;
     rev = "v${version}";
-    sha256 = "0c3y24796km382i6bn2ixqc6yfb87ipclvgp20b7h9rhg8sfhf9i";
+    sha256 = "sha256-zGVrqnzQ8ezN9eehwh5/eMdUNMmuS3PXvQ2wLL3Remg=";
   };
 
   nativeBuildInputs = [
@@ -34,7 +34,7 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     description = "VapourSynth plugin to fill the borders of a clip";
-    homepage = "https://github.com/dubhater/vapoursynth-fillborders";
+    homepage = "https://github.com/dubhatervapoursynth/vapoursynth-fillborders";
     license = licenses.wtfpl;
     maintainers = with maintainers; [ sbruder ];
     platforms = platforms.all;
