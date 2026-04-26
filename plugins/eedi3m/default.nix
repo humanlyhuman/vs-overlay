@@ -1,39 +1,29 @@
 {
   lib,
-  stdenv,
+  python3Packages,
   fetchFromGitHub,
-  meson,
-  ninja,
-  pkg-config,
-  vapoursynth,
 }:
-stdenv.mkDerivation rec {
+python3Packages.buildPythonPackage {
   pname = "vapoursynth-eedi3";
   version = "9";
+  pyproject = true;
 
   src = fetchFromGitHub {
     owner = "HomeOfVapourSynthEvolution";
     repo = "VapourSynth-EEDI3";
-    rev = "r${version}";
+    rev = "r9";
     sha256 = "sha256-/3elqMGarp1+T7K0wOIEbePsa80UUhMEwnYUudNnGxg=";
   };
 
-  nativeBuildInputs = [
-    meson
-    ninja
-    pkg-config
+  build-system = [
+    python3Packages.meson-python
   ];
 
-  buildInputs = [
-    vapoursynth
+  dependencies = [
+    python3Packages.vapoursynth
   ];
 
-  postPatch = ''
-    substituteInPlace meson.build \
-      --replace-fail \
-        "run_command(py, '-c', 'import vapoursynth as vs; print(vs.get_include())', check: true).stdout().strip()" \
-        "'${lib.getDev vapoursynth}/include/vapoursynth'"
-  '';
+  dontUseMesonConfigure = true;
 
   meta = with lib; {
     description = "Renewed EEDI3 filter for VapourSynth";
