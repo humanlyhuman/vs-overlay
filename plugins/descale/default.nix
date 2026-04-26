@@ -38,10 +38,13 @@ python3.pkgs.toPythonModule (
 
     postPatch = ''
       substituteInPlace meson.build \
-        --replace "vs.get_pkgconfig_variable('libdir')" "get_option('libdir')"
+        --replace-fail \
+        "import('python').find_installation(pure: false)" \
+        "import('python').find_installation('${python3Env}/bin/python3', pure: false)"
       substituteInPlace meson.build \
-        --replace "import('python').find_installation(pure: false)" \
-                  "import('python').find_installation('${python3Env}/bin/python3', pure: false)"
+        --replace-fail \
+        "import vapoursynth as vs; print(vs.get_include())" \
+        "print('${vapoursynth}/include')"
     '';
 
     postInstall = ''
