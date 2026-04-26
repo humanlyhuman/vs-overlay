@@ -2,6 +2,7 @@
   lib,
   python3Packages,
   fetchFromGitHub,
+  vapoursynth,
 }:
 python3Packages.buildPythonPackage {
   pname = "vapoursynth-eedi3";
@@ -19,9 +20,16 @@ python3Packages.buildPythonPackage {
     python3Packages.meson-python
   ];
 
+  buildInputs = [
+    vapoursynth
+  ];
+
   postPatch = ''
-    sed -i '/run_command/,/\.stdout()\.strip()/c\' meson.build
-  
+    substituteInPlace meson.build \
+      --replace-fail \
+        "vs_inc = dependency('vapoursynth').get_variable(pkgconfig: 'includedir')" \
+        "vs_inc = '${vapoursynth}/include/vapoursynth'"
+
     substituteInPlace pyproject.toml \
       --replace-fail '"VapourSynth>=74"' ""
   '';
@@ -29,8 +37,6 @@ python3Packages.buildPythonPackage {
   dependencies = [
     python3Packages.vapoursynth
   ];
-
-  dontUseMesonConfigure = true;
 
   meta = with lib; {
     description = "Renewed EEDI3 filter for VapourSynth";
