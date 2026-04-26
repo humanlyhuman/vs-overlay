@@ -30,6 +30,11 @@ in
 buildPythonPackage rec {
   pname = "lvsfunc";
   version = "0.9.0";
+  pyproject = true;
+
+  build-system = [
+    setuptools
+  ];
 
   src = fetchFromGitHub {
     owner = "Jaded-Encoding-Thaumaturgy";
