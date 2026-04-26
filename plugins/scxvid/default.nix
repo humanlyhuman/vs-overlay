@@ -7,6 +7,7 @@
   pkg-config,
   vapoursynth,
   xvidcore,
+  python3
 }:
 
 stdenv.mkDerivation rec {
