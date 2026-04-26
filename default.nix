@@ -89,7 +89,6 @@ in
     jetpytools = callPythonPackage ./plugins/jetpytools { };
     vsjetpack = callPythonPackage ./plugins/vsjetpack { inherit (final.vapoursynthPlugins) jetpytools; };
 
-    havsfunc = callPythonPackage ./plugins/havsfunc { };
     awsmfunc = callPythonPackage ./plugins/awsmfunc { };
     fvsfunc = callPythonPackage ./plugins/fvsfunc { };
     kagefunc = callPythonPackage ./plugins/kagefunc { };
