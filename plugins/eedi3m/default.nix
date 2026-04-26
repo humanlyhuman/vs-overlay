@@ -23,8 +23,8 @@ stdenv.mkDerivation rec {
     meson
     ninja
     pkg-config
-    python3Packages.python  # the interpreter
-    python3Packages.vapoursynth  # so `import vapoursynth` works at configure time
+    python3Packages.python
+    python3Packages.vapoursynth
   ];
 
   buildInputs = [
