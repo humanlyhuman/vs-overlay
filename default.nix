@@ -43,7 +43,6 @@ in
     lsmashsource = prev.callPackage ./plugins/lsmashsource { };
     median = prev.callPackage ./plugins/median { };
     minideen = prev.callPackage ./plugins/minideen { };
-    miscfilters-obsolete = prev.callPackage ./plugins/miscfilters-obsolete { };
     motionmask = prev.callPackage ./plugins/motionmask { };
     msmoosh = prev.callPackage ./plugins/msmoosh { };
     mvtools = prev.vapoursynth-mvtools;
