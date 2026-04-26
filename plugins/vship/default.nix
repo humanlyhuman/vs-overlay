@@ -35,23 +35,24 @@ stdenv.mkDerivation rec {
     ];
 
   strictDeps = true;
-
+  
   buildPhase = ''
     runHook preBuild
-
+  
     sources="
       src/FFVship.cpp
       src/VshipLib.cpp
     "
-
+  
     hip_sources=$(find src/HIP -name '*.cpp' -o -name '*.hip')
-
+  
     hipcc \
       $sources \
       $hip_sources \
       -I src \
       -I include \
       -I "${vapoursynth}/include/vapoursynth" \
+      -I "${ffms2}/include" \
       --offload-arch=gfx1100 \
       --offload-arch=gfx1101 \
       --offload-arch=gfx1102 \
@@ -66,16 +67,17 @@ stdenv.mkDerivation rec {
       -Wno-unused-result \
       -Wno-ignored-attributes \
       -shared -fPIC \
+      -L "${ffms2}/lib" -lffms2 \
       -o vship${hostPlatform.extensions.sharedLibrary}
-
+  
     runHook postBuild
   '';
 
   installPhase = ''
     runHook preInstall
 
-    install -Dm755 vship${hostPlatform.extensions.sharedLibrary} \
-      $out/lib/vapoursynth/vship${hostPlatform.extensions.sharedLibrary}
+    install -Dm755 vship${stdenv.hostPlatform.extensions.sharedLibrary} \
+      $out/lib/vapoursynth/vship${stdenv.hostPlatform.extensions.sharedLibrary}
 
     runHook postInstall
   '';
