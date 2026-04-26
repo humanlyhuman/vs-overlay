@@ -18,7 +18,7 @@ buildPythonPackage rec {
     owner = "Jaded-Encoding-Thaumaturgy";
     repo = "vs-jetpack";
     rev = "v${version}";
-    sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+    sha256 = "sha256-oZi7LerJiLC12qlS3hrwemLtTij23F77a9dVU4MBur4=";
   };
 
   build-system = [
