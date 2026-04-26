@@ -25,21 +25,16 @@
   
     buildInputs = [ vapoursynth xvidcore ];
       
-    postPatch = ''
-        substituteInPlace meson.build \
-          --replace-fail "incdir = include_directories(" "incdir = include_directories()" \
-          --replace-fail "run_command(" "#" \
-          --replace-fail "find_program('python', 'python3')," "#" \
-          --replace-fail "'-c'," "#" \
-          --replace-fail "'import vapoursynth as vs; print(vs.get_include())'," "#" \
-          --replace-fail "check: true," "#" \
-          --replace-fail ").stdout().strip()," "#" \
-          --replace-fail ")," "#"
-    
-        substituteInPlace meson.build \
-          --replace-fail "py.get_install_dir() / 'vapoursynth/plugins'" \
-          "get_option('libdir') / 'vapoursynth'"
-      '';
+  postPatch = ''
+      substituteInPlace meson.build \
+        --replace-fail "incdir = include_directories(" "incdir = include_directories()" \
+        --replace-fail "run_command(" "#" \
+        --replace-fail "py.get_install_dir() / 'vapoursynth/plugins'" \
+        "get_option('libdir') / 'vapoursynth'"
+  
+      substituteInPlace requirements.txt \
+        --replace-fail "VapourSynth>=69" ""
+    '';
 
     installPhase = ''
       mkdir -p $out/lib/vapoursynth
