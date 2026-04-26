@@ -25,7 +25,7 @@ python3Packages.buildPythonPackage {
   ];
   
   postPatch = ''
-    sed -i '/^incdir = include_directories(/,/^)/c\incdir = include_directories("${vapoursynth}/include/vapoursynth")' meson.build
+    sed -i '/^incdir = include_directories(/,/^)/c\incdir = include_directories('${vapoursynth}/include/vapoursynth')' meson.build
   
     substituteInPlace pyproject.toml \
       --replace-fail '"VapourSynth>=74"' ""
