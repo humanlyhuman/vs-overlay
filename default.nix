@@ -25,7 +25,6 @@ in
     cnr2 = prev.callPackage ./plugins/cnr2 { };
     combmask = prev.callPackage ./plugins/combmask { };
     continuityfixer = prev.callPackage ./plugins/continuityfixer { };
-    ctmf = prev.callPackage ./plugins/ctmf { };
     d2vsource = prev.callPackage ./plugins/d2vsource { };
     dctfilter = prev.callPackage ./plugins/dctfilter { };
     deblock = prev.callPackage ./plugins/deblock { };
@@ -37,10 +36,8 @@ in
     ffms2 = prev.ffms;
     fft3dfilter = prev.callPackage ./plugins/fft3dfilter { };
     fillborders = prev.callPackage ./plugins/fillborders { };
-    fluxsmooth = prev.callPackage ./plugins/fluxsmooth { };
     fmtconv = prev.callPackage ./plugins/fmtconv { };
     histogram = prev.callPackage ./plugins/histogram { };
-    hqdn3d = prev.callPackage ./plugins/hqdn3d { };
     imwri = prev.callPackage ./plugins/imwri { };
     knlmeanscl = prev.callPackage ./plugins/knlmeanscl { };
     lsmashsource = prev.callPackage ./plugins/lsmashsource { };
