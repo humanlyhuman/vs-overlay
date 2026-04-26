@@ -40,7 +40,6 @@ stdenv.mkDerivation rec {
     runHook preBuild
   
     sources="
-      src/FFVship.cpp
       src/VshipLib.cpp
     "
   
