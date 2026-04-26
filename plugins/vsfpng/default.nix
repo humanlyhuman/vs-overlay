@@ -22,14 +22,13 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [ meson ninja pkg-config ];
   buildInputs = [ vapoursynth ];
-  env.NIX_CFLAGS_COMPILE = "-Wno-error=missing-field-initializers";
-  mesonFlags = [ "-Dwerror=false" ];
-
   postPatch = ''
     substituteInPlace meson.build \
-      --replace "vapoursynth/include" "${vapoursynth}/include" \
+      --replace "vapoursynth/include" "${vapoursynth}/include/vapoursynth" \
       --replace "py.get_install_dir() / 'vapoursynth/plugins'" "'${placeholder "out"}/lib/vapoursynth'"
   '';
+  
+  env.NIX_CFLAGS_COMPILE = "-Wno-error=missing-field-initializers";
 
   meta = with lib; {
     description = "fpng plugin for VapourSynth";
