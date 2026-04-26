@@ -36,7 +36,7 @@
             check: true,
         ).stdout().strip(),
     )" \
-    "incdir = include_directories('${vapoursynth}/include')"
+    "incdir = include_directories('${vapoursynth}/include/vapoursynth')"
     '';
 
     installPhase = ''
