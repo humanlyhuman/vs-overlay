@@ -7,7 +7,7 @@
 }:
 buildPythonPackage rec {
   pname = "jetpytools";
-  version = "2.2.1"; # adjust if needed
+  version = "2.2.1";
 
   pyproject = true;
 
