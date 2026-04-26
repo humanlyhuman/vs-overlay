@@ -10,13 +10,13 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "d2vsource";
-  version = "1.3";
+  version = "1.4";
 
   src = fetchFromGitHub {
     owner = "dwbuiten";
     repo = finalAttrs.pname;
     rev = "v${finalAttrs.version}";
-    sha256 = "sha256-iq03BbrFqTB7n9gExLkp16TxgDZdUB4Ne8LUU69AOWc=";
+    sha256 = "sha256-GVMhksXz3Dep9YqgbouEy7d7AuFiHezbkxwjWj1fqvk=";
   };
 
   configureFlags = [ "--libdir=$(out)/lib/vapoursynth" ];
