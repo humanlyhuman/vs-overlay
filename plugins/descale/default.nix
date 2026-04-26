@@ -6,20 +6,20 @@
   ninja,
   pkg-config,
   vapoursynth,
-  python312,
+  python3,
 }:
 
 # required to make python.buildEnv use descale’s python module
-python312.pkgs.toPythonModule (
+python3.pkgs.toPythonModule (
   stdenv.mkDerivation (finalAttrs: {
     pname = "vapoursynth-descale";
-    version = "r8-unstable-2023-04-02";
+    version = "r12";
 
     src = fetchFromGitHub {
-      owner = "Irrational-Encoding-Wizardry";
+      owner = "Jaded-Encoding-Thaumaturgy";
       repo = finalAttrs.pname;
       rev = "master";
-      sha256 = "sha256-dobooNxoDH1MBQtycfiZTE3xy7j5fCGhD9cnPGGZocc=";
+      sha256 = "sha256-nTAv/aQYA4DXmlOLvpuc6lr3IR0beEx8FqVid11H+Qw=";
     };
 
     nativeBuildInputs = [
@@ -35,7 +35,7 @@ python312.pkgs.toPythonModule (
     '';
 
     postInstall = ''
-      install -D ../descale.py $out/${python312.sitePackages}/descale.py
+      install -D ../descale.py $out/${python3.sitePackages}/descale.py
     '';
 
     meta = with lib; {
