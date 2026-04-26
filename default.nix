@@ -53,7 +53,7 @@ in
     znedi3 = prev.callPackage ./plugins/znedi3 { };
     vsncnn = prev.callPackage ./plugins/vs-mlrt/vsncnn { };
     vstrt = prev.callPackage ./plugins/vs-mlrt/vstrt { };
-
+    vship = prev.callPackage ./plugins/vship { };
 
     insaneaa = callPythonPackage ./plugins/insaneaa { };
     acsuite = callPythonPackage ./plugins/acsuite { };
