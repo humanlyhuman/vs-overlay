@@ -24,19 +24,10 @@
     nativeBuildInputs = [ meson ninja pkg-config python3 ];
   
     buildInputs = [ vapoursynth xvidcore ];
-  
-    postPatch = ''
-      substituteInPlace meson.build \
-        --replace-fail \
-          "incdir = include_directories(" \
-          "incdir = include_directories()" \
-        --replace-fail \
-          "run_command(" \
-          "# run_command(" \
-        --replace-fail \
-          ").stdout().strip()," \
-          "# removed stdout strip"
-    '';
+      
+    patches = [
+      ./fix-meson.patch
+    ];
 
     installPhase = ''
       mkdir -p $out/lib/vapoursynth
