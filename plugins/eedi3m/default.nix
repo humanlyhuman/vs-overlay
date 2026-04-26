@@ -19,6 +19,11 @@ python3Packages.buildPythonPackage {
     python3Packages.meson-python
   ];
 
+  postPatch = ''
+    substituteInPlace pyproject.toml \
+      --replace-fail '"VapourSynth >= 74",' "" \
+  '';
+
   dependencies = [
     python3Packages.vapoursynth
   ];
