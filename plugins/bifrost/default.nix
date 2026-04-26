@@ -12,7 +12,7 @@ stdenv.mkDerivation rec {
   version = "3.0";
 
   src = fetchFromGitHub {
-    owner = "dubhater";
+    owner = "dubhatervapoursynth";
     repo = pname;
     rev = "v${version}";
     sha256 = "sha256-5miEJr8ys73G6NSpRJ3R50rgfUZ+F2VLGZQWF3j5K7s=";
