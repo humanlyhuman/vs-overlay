@@ -6,6 +6,7 @@
   vapoursynth,
   ncnn,
   protobuf,
+  onnx,
 }:
 
 stdenv.mkDerivation rec {
@@ -33,6 +34,7 @@ stdenv.mkDerivation rec {
     vapoursynth
     ncnn
     protobuf
+    onnx
   ];
 
   cmakeFlags = [
