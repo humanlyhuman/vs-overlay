@@ -1,25 +1,28 @@
 {
   lib,
   buildPythonPackage,
-  fetchgit,
-  vapoursynthPlugins,
+  fetchFromGitHub,
   python,
   vapoursynth,
+  vsjetpack,
+  jetpytools,
 }:
 
-buildPythonPackage {
+buildPythonPackage rec {
   pname = "finedehalo";
-  version = "unstable-2016-07-08";
+  version = "unstable-2026-04-26";
 
-  src = fetchgit {
-    url = "https://gist.github.com/bcd427ec0fa8fdf7c45433917521bac4.git";
-    rev = "879cd79512d8f43083bcc7832890649aaf4d49fe";
-    sha256 = "0iq8hjwab9lmyaa49k03pi64fw34hdv6xr33s9kyjn6f9j2dn8b5";
+  src = fetchFromGitHub {
+    owner = "humanlyhuman";
+    repo = "VapourSynth-scripts";
+    rev = "18aecf2f46b3273059eb7e7c258b3b670e2cfbe2";
+    sha256 = "";
   };
 
   propagatedBuildInputs = with vapoursynthPlugins; [
-    havsfunc
-    mvsfunc
+    vapoursynth
+    vsjetpack
+    jetpytools
   ];
 
   format = "other";
@@ -30,20 +33,13 @@ buildPythonPackage {
     runHook postInstall
   '';
 
-  checkInputs = [ vapoursynth ];
-  checkPhase = ''
-    runHook preCheck
-    PYTHONPATH=$out/${python.sitePackages}:$PYTHONPATH
-    runHook postCheck
-  '';
   pythonImportsCheck = [ "finedehalo" ];
 
   meta = with lib; {
-    description = "FineDehalo ported to VapourSynth";
-    homepage = "https://forum.doom9.org/showthread.php?t=173672";
-    license = licenses.unfree; # no license
-    maintainers = with maintainers; [ sbruder ];
-    # eedi3m does inline asm
-    platforms = with platforms; x86 ++ x86_64;
+    description = "FineDehalo";
+    homepage = "https://github.com/humanlyhuman/VapourSynth-scripts";
+    license = licenses.unfree;
+    maintainers = with maintainers; [ humanlyhuman ];
+    platforms = platforms.x86 ++ platforms.x86_64;
   };
 }
