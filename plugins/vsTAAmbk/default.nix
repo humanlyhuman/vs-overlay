@@ -9,13 +9,13 @@
 
 buildPythonPackage rec {
   pname = "vsTAAmbk";
-  version = "0.8.1";
+  version = "0.8.2";
 
   src = fetchFromGitHub {
     owner = "HomeOfVapourSynthEvolution";
     repo = pname;
     rev = "v${version}";
-    sha256 = "sha256-KfU2f7tBhw007f4RmVruV3Pkgo1zdA4o43+1lL/ohKo=";
+    sha256 = "sha256-fOMx4rEfqXAVds1rnHyP+srS8zSY9rMgRVdo4zZ0GhU=";
   };
 
   patches = [
