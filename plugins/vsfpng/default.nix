@@ -30,9 +30,11 @@ stdenv.mkDerivation rec {
     vapoursynth
   ];
 
-  mesonFlags = [
-    "-Dvapoursynth-include=${vapoursynth}/include"
-  ];
+  postPatch = ''
+    substituteInPlace meson.build \
+      --replace "vapoursynth/include" "${vapoursynth.dev}/include" \
+      --replace "py.get_install_dir() / 'vapoursynth/plugins'" "'${placeholder "out"}/lib/vapoursynth'"
+  '';
 
   libdir = "lib/vapoursynth";
   meta = with lib; {
