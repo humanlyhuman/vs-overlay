@@ -24,6 +24,7 @@ buildPythonPackage rec {
   ];
 
   doCheck = false;
+  dontCheckRuntimeDeps = true;
   pythonImportsCheck = [ ];
 
   meta = with lib; {
