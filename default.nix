@@ -12,7 +12,7 @@ let
   );
 in
 {
-  vapoursynthPlugins = prev.recurseIntoAttrs {
+  vapoursynthPlugins = prev.lib.recurseIntoAttrs {
     adaptivegrain = prev.callPackage ./plugins/adaptivegrain { };
     addgrain = prev.callPackage ./plugins/addgrain { };
     autocrop = prev.callPackage ./plugins/autocrop { };
