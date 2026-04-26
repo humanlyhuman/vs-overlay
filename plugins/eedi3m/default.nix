@@ -26,11 +26,14 @@ python3Packages.buildPythonPackage {
   
   postPatch = ''
     sed -i "/^incdir = include_directories(/,/^)/c\incdir = include_directories('${vapoursynth}/include/vapoursynth')" meson.build
-  
     substituteInPlace pyproject.toml \
       --replace-fail '"VapourSynth>=74"' ""
   '';
 
+  installPhase = ''
+    mkdir -p $out/lib/vapoursynth
+    cp *.so $out/lib/vapoursynth/
+  '';
   dependencies = [
     python3Packages.vapoursynth
   ];
