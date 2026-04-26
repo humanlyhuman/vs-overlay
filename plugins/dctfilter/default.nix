@@ -11,13 +11,13 @@
 
 stdenv.mkDerivation rec {
   pname = "VapourSynth-DCTFilter";
-  version = "2.1";
+  version = "3.1";
 
   src = fetchFromGitHub {
     owner = "HomeOfVapourSynthEvolution";
     repo = pname;
     rev = "r${version}";
-    sha256 = "032l2dh28jznplh8ww8hzr0fmm6hx34f0k29gqyyjksmn3ympr00";
+    sha256 = "sha256-Eif1WczZaJR4xQxqXFELVUJh2sr0ItyGN/uHlYOZcNI=";
   };
 
   nativeBuildInputs = [
