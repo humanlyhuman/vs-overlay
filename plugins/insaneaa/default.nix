@@ -13,7 +13,7 @@ buildPythonPackage {
     owner = "Beatrice-Raws";
     repo = "VapourSynth-insaneAA";
     rev = "9a7e646804997be888bf629be9df86e32ae967ce";
-    sha256 = "sha256-LydWMQ1UIEGIgxnDTVaJyVo8FmvoHsSFiBV3MuJYZR4=";
+    sha256 = "sha256-BafAq61ObDw4h8sLzm0VJdV3ekp0vIHjxk4zQPEUjIY=";
   };
   propagatedBuildInputs = with vapoursynthPlugins; [
     eedi3m
