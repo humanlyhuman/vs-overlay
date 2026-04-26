@@ -40,7 +40,7 @@ buildPythonApplication rec {
 
   postPatch = ''
     substituteInPlace requirements.txt \
-      --replace-fail "VapourSynth>=55" ""
+      --replace-fail "VapourSynth>=71" ""
   '';
 
   propagatedBuildInputs = [
