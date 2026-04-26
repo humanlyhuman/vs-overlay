@@ -30,11 +30,18 @@ stdenv.mkDerivation rec {
     fftwSinglePrec
   ];
 
+  mesonFlags = [
+    "--libdir=lib"
+  ];
+
   postPatch = ''
     substituteInPlace meson.build \
       --replace-fail \
         "run_command(py, '-c', 'import vapoursynth as vs; print(vs.get_include())', check: true).stdout().strip()" \
-        "dependency('vapoursynth').get_variable(pkgconfig: 'includedir')"
+        "dependency('vapoursynth').get_variable(pkgconfig: 'includedir')" \
+      --replace-fail \
+        "py.get_install_dir() / 'vapoursynth/plugins'" \
+        "get_option('libdir') / 'vapoursynth'"
   '';
 
   meta = with lib; {
