@@ -77,7 +77,6 @@ in
     adjust = callPythonPackage ./plugins/adjust { };
     astdr = callPythonPackage ./plugins/astdr { };
     dfmderainbow = callPythonPackage ./plugins/dfmderainbow { };
-    edi_rpow2 = callPythonPackage ./plugins/edi_rpow2 { };
     finedehalo = callPythonPackage ./plugins/finedehalo { };
     mt_lutspa = callPythonPackage ./plugins/mt_lutspa { };
     nnedi3_resample = callPythonPackage ./plugins/nnedi3_resample { };
@@ -90,8 +89,6 @@ in
     vsjetpack = callPythonPackage ./plugins/vsjetpack { inherit (final.vapoursynthPlugins) jetpytools; };
 
     awsmfunc = callPythonPackage ./plugins/awsmfunc { };
-    fvsfunc = callPythonPackage ./plugins/fvsfunc { };
-    kagefunc = callPythonPackage ./plugins/kagefunc { };
     lvsfunc = callPythonPackage ./plugins/lvsfunc { };
     muvsfunc = callPythonPackage ./plugins/muvsfunc { };
     mvsfunc = callPythonPackage ./plugins/mvsfunc { };
