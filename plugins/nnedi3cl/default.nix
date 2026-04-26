@@ -42,6 +42,7 @@ stdenv.mkDerivation rec {
     substituteInPlace meson.build \
         --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
   '';
+  env.NIX_CFLAGS_COMPILE = "-DCL_USE_DEPRECATED_OPENCL_1_2_APIS";
 
   meta = with lib; {
     description = "An OpenCL accelerated nnedi3 filter for VapourSynth";
