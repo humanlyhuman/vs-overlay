@@ -14,7 +14,7 @@ in
 {
   vapoursynthPlugins = prev.lib.recurseIntoAttrs {
     adaptivegrain = prev.callPackage ./plugins/adaptivegrain { };
-    addgrain = prev.callPackage ./plugins/addgrain { };
+    vs-noise = prev.callPackage ./plugins/vs-noise { };
     autocrop = prev.callPackage ./plugins/autocrop { };
     awarpsharp2 = prev.callPackage ./plugins/awarpsharp2 { };
     beziercurve = prev.callPackage ./plugins/beziercurve { };
