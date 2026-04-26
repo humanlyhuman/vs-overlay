@@ -12,7 +12,7 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "neo_f3kdb";
-  version = "r10";
+  version = "10";
 
   src = fetchFromGitHub {
     owner = "HomeOfAviSynthPlusEvolution";
