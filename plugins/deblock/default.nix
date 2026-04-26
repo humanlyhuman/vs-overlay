@@ -38,7 +38,7 @@ stdenv.mkDerivation rec {
         "install_dir: py.get_install_dir() / 'vapoursynth/plugins'," \
         "install_dir: get_option('libdir') / 'vapoursynth'," \
       --replace-fail \
-        "name_prefix: ''," \
+        "name_prefix: ''''," \
         ""
   '';
   meta = with lib; {
