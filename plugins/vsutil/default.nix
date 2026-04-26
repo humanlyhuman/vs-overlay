@@ -3,11 +3,17 @@
   buildPythonPackage,
   fetchFromGitHub,
   vapoursynth,
+  setuptools,
 }:
 
 buildPythonPackage rec {
   pname = "vsutil";
   version = "0.8.0";
+  pyproject = true;
+
+  build-system = [
+    setuptools
+  ];
 
   # there are no tests in the pypi tarball
   src = fetchFromGitHub {
