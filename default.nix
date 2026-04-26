@@ -86,7 +86,7 @@ in
     vsgan = callPythonPackage ./plugins/vsgan { };
     vsTAAmbk = callPythonPackage ./plugins/vsTAAmbk { };
     vsutil = callPythonPackage ./plugins/vsutil { };
-
+    vsjetpack = callPythonPackage ./plugins/vsjetpack { };
     awsmfunc = callPythonPackage ./plugins/awsmfunc { };
     fvsfunc = callPythonPackage ./plugins/fvsfunc { };
     havsfunc = callPythonPackage ./plugins/havsfunc { };
