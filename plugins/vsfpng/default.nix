@@ -30,11 +30,7 @@ stdenv.mkDerivation rec {
     vapoursynth
   ];
 
-  # install into VapourSynth plugin dir
-  mesonFlags = [
-    "-Dlibdir=${placeholder "out"}/lib/vapoursynth"
-  ];
-
+  libdir = "lib/vapoursynth";
   meta = with lib; {
     description = "fpng plugin for VapourSynth";
     homepage = "https://github.com/Mikewando/vsfpng";
