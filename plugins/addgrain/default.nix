@@ -24,7 +24,8 @@ stdenv.mkDerivation rec {
   buildInputs = [ vapoursynth ];
   postPatch = ''
     substituteInPlace meson.build \
-        --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
+      --replace "vapoursynth_dep.get_variable(pkgconfig: 'libdir') / 'vapoursynth'" \
+                "'${placeholder "out"}/lib/vapoursynth'"
   '';
   postInstall = ''
     mkdir -p $out/lib/vapoursynth
