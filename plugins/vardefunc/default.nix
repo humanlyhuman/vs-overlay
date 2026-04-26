@@ -20,12 +20,13 @@ let
 in
 buildPythonPackage rec {
   pname = "vardefunc";
-  version = "1.1.4";
+  version = "0.13.0";
   pyproject = true;
 
   build-system = [
     setuptools
   ];
+
 
   src = fetchFromGitHub {
     owner = "Ichunjo";
@@ -44,8 +45,15 @@ buildPythonPackage rec {
     ++ propagatedBinaryPlugins;
 
   postPatch = ''
+    substituteInPlace meson.build \
+      --replace-fail \
+        "run_command(py, '-c', 'import vapoursynth as vs; print(vs.get_include())', check: true).stdout().strip()" \
+        "dependency('vapoursynth').get_variable(pkgconfig: 'includedir')" \
+      --replace-fail \
+        "py.get_install_dir() / 'vapoursynth/plugins'" \
+        "get_option('libdir') / 'vapoursynth'"
     substituteInPlace requirements.txt \
-        --replace "VapourSynth>=51" ""
+        --replace "VapourSynth>=69" ""
   '';
 
   checkInputs = [ (vapoursynth.withPlugins propagatedBinaryPlugins) ];
