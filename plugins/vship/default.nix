@@ -67,7 +67,7 @@ stdenv.mkDerivation rec {
       -Wno-unused-result \
       -Wno-ignored-attributes \
       -shared -fPIC \
-      -L "${ffms2}/lib" -lffms2 \
+      -L "${vapoursynthPlugins.ffms2}/lib" -lffms2 \
       -o vship${hostPlatform.extensions.sharedLibrary}
   
     runHook postBuild
