@@ -43,13 +43,14 @@ stdenv.mkDerivation rec {
     chmod -R u+w $TMPDIR/boost-patched
   
     sed -i 's/desc\.mem_object = 0;//g' \
+      $TMPDIR/boost-patched/boost/compute/image/image1d.hpp \
       $TMPDIR/boost-patched/boost/compute/image/image2d.hpp \
       $TMPDIR/boost-patched/boost/compute/image/image3d.hpp
   
-    sed -i 's/desc\.mem_object = d->weights1Buffer\.get();//g' \
+    sed -i 's/desc\.mem_object = [^;]*;//g' \
       NNEDI3CL/NNEDI3CL.cpp
   
-    export NIX_CFLAGS_COMPILE="-I$TMPDIR/boost-patched $NIX_CFLAGS_COMPILE"
+    export NIX_CFLAGS_COMPILE="-I$TMPDIR/boost-patched -DCL_TARGET_OPENCL_VERSION=120 $NIX_CFLAGS_COMPILE"
   '';
   
   postPatch = ''
