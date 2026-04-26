@@ -25,14 +25,11 @@ python3Packages.buildPythonPackage {
   ];
 
   postPatch = ''
-    substituteInPlace meson.build \
-      --replace-fail \
-        "run_command(py, '-c', 'import vapoursynth as vs; print(vs.get_include())', check: true).stdout().strip()" \
-        "'${vapoursynth}/include/vapoursynth'"
-
-    substituteInPlace pyproject.toml \
-      --replace-fail '"VapourSynth>=74"' ""
-  '';
+      sed -i "s|run_command(py, '-c', 'import vapoursynth as vs; print(vs.get_include())', check: true).stdout().strip()|'${vapoursynth}/include/vapoursynth'|" meson.build
+  
+      substituteInPlace pyproject.toml \
+        --replace-fail '"VapourSynth>=74"' ""
+    '';
 
   dependencies = [
     python3Packages.vapoursynth
