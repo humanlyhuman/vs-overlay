@@ -11,7 +11,6 @@
 stdenv.mkDerivation rec {
   pname = "vapoursynth-addgrain";
   version = "10";
-
   src = fetchFromGitHub {
     owner = "HomeOfVapourSynthEvolution";
     repo = "VapourSynth-AddGrain";
@@ -24,12 +23,16 @@ stdenv.mkDerivation rec {
     ninja
     pkg-config
   ];
-  buildInputs = [ vapoursynth ];
 
+  buildInputs = [ vapoursynth ];
   postPatch = ''
     substituteInPlace meson.build \
         --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
   '';
+
+  mesonFlags = [
+    "--libdir=${placeholder "out"}/lib/vapoursynth"
+  ];
 
   meta = with lib; {
     description = "AddGrain filter for VapourSynth";
