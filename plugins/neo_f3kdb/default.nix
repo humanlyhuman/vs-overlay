@@ -18,7 +18,7 @@ stdenv.mkDerivation (finalAttrs: {
     owner = "HomeOfAviSynthPlusEvolution";
     repo = "neo_f3kdb";
     rev = "refs/tags/r${finalAttrs.version}";
-    hash = "sha256-pGl7aiMSSzXG5tNWNSLNgju9zwUPD4p2tcJQHmk9AZo=";
+    hash = "sha256-9aEJkK/5ObHJtPqf6CyB0JuqZbXvjZQArfgs+ChAt20=";
   };
 
   nativeBuildInputs = [
