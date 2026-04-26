@@ -2,7 +2,7 @@
 +++ b/meson.build
 @@ -17,13 +17,7 @@
  deps = [xvid_dep]
- 
+
 -incdir = include_directories(
 -    run_command(
 -        find_program('python', 'python3'),
@@ -12,5 +12,5 @@
 -    ).stdout().strip(),
 -)
 +incdir = include_directories()
- 
+
  py = import('python').find_installation(pure: false)
