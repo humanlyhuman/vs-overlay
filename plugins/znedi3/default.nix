@@ -7,7 +7,7 @@
 
 stdenv.mkDerivation rec {
   pname = "znedi3";
-  version = "2";
+  version = "3";
 
   src = fetchFromGitHub {
     owner = "sekrit-twc";
