@@ -41,7 +41,7 @@
 
     installPhase = ''
       mkdir -p $out/lib/vapoursynth
-      cp build/src/scxvid.so $out/lib/vapoursynth/
+      cp scxvid.so $out/lib/vapoursynth/
     '';
 
   meta = with lib; {
