@@ -12,12 +12,12 @@
 }:
 stdenv.mkDerivation rec {
   pname = "vapoursynth-eedi3";
-  version = "4";
+  version = "9";
   src = fetchFromGitHub {
     owner = "HomeOfVapourSynthEvolution";
     repo = "VapourSynth-EEDI3";
     rev = "r${version}";
-    sha256 = "1q79l27arcfl7k49czsspb4z7zfr616xsxsb04x9b4d9l763716x";
+    sha256 = "sha256-/3elqMGarp1+T7K0wOIEbePsa80UUhMEwnYUudNnGxg=";
   };
   nativeBuildInputs = [
     meson
@@ -33,7 +33,7 @@ stdenv.mkDerivation rec {
   BOOST_INCLUDEDIR = "${lib.getDev boost}/include";
   BOOST_LIBRARYDIR = "${lib.getLib boost}/lib";
   postPatch = ''
-    substituteInFind meson.build \
+    substituteInPlace meson.build \
         --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
   '';
   preConfigure = ''
