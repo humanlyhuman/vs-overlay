@@ -29,7 +29,7 @@ stdenv.mkDerivation rec {
   buildInputs = [
     vapoursynth
   ];
-
+  mesonFlags = [ "-Dwerror=false" ];
   postPatch = ''
     substituteInPlace meson.build \
       --replace "vapoursynth/include" "${vapoursynth}/include" \
