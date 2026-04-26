@@ -30,7 +30,7 @@
           {
             inherit (pkgs.${system}) getnative;
           }
-          lib.filterAttrs (_: lib.isDerivation) pkgs.${system}.vapoursynthPlugins
+          // lib.filterAttrs (_: lib.isDerivation) pkgs.${system}.vapoursynthPlugins
         )
       );
 
