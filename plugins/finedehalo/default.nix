@@ -2,6 +2,7 @@
   lib,
   buildPythonPackage,
   fetchFromGitHub,
+  vapoursynthPlugins,
   python,
   vapoursynth
 }:
@@ -17,7 +18,7 @@ buildPythonPackage rec {
     sha256 = "";
   };
 
-  propagatedBuildInputs = [
+  propagatedBuildInputs = with vapoursynthPlugins; [
     vapoursynth
     vsjetpack
     jetpytools
