@@ -5,6 +5,7 @@
   hostPlatform,
   rocmPackages,
   vapoursynth,
+  vapoursynthPlugins
 }:
 
 stdenv.mkDerivation rec {
@@ -30,7 +31,7 @@ stdenv.mkDerivation rec {
     ])
     ++ [
       vapoursynth
-      ffms2
+      vapoursynthPlugins.ffms2
     ];
 
   strictDeps = true;
