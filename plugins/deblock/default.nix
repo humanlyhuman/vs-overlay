@@ -26,18 +26,20 @@ stdenv.mkDerivation rec {
   buildInputs = [ vapoursynth ];
   postPatch = ''
     substituteInPlace meson.build \
-      --replace "name_prefix: ''," "" \
-      --replace "py.get_install_dir() / 'vapoursynth/plugins'" \
-                "join_paths(get_option('libdir'), 'vapoursynth')"
-  
-    substituteInPlace meson.build \
       --replace-fail \
-      "incdir = include_directories(vapoursynth.get_variable(pkgconfig: 'includedir'))
-  shared_library(deblock_src,
-    include_directories: incdir," \
-      "vapoursynth_dep = dependency('vapoursynth')
-  shared_library(deblock_src,
-    dependencies: vapoursynth_dep,"
+        "incdir = include_directories(
+      run_command(py, '-c', 'import vapoursynth as vs; print(vs.get_include())', check: true).stdout().strip(),
+  )" \
+        "vapoursynth_dep = dependency('vapoursynth')" \
+      --replace-fail \
+        "include_directories: incdir," \
+        "dependencies: vapoursynth_dep," \
+      --replace-fail \
+        "install_dir: py.get_install_dir() / 'vapoursynth/plugins'," \
+        "install_dir: get_option('libdir') / 'vapoursynth'," \
+      --replace-fail \
+        "name_prefix: ''," \
+        ""
   '';
   meta = with lib; {
     description = "A Deblock filter plugin for VapourSynth";
