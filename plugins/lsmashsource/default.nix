@@ -43,7 +43,7 @@ stdenv.mkDerivation (finalAttrs: {
   buildInputs = [
     l-smash
     vapoursynth
-    xxHash
+    xxhash
     (ffmpeg.override {
       source = fetchFromGitHub {
         owner = "HomeOfAviSynthPlusEvolution";
