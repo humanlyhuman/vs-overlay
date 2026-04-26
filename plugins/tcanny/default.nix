@@ -40,7 +40,8 @@ stdenv.mkDerivation rec {
   
   postPatch = ''
     substituteInPlace meson.build \
-      --replace "vapoursynth_dep.get_variable(pkgconfig: 'libdir') / 'vapoursynth'" "get_option('libdir') / 'vapoursynth'"
+      --replace "vapoursynth_dep.get_variable(pkgconfig: 'libdir') / 'vapoursynth'" "get_option('libdir') / 'vapoursynth'" \
+      --replace "link_with: libs," "link_whole: libs,"
   '';
 
   meta = with lib; {
