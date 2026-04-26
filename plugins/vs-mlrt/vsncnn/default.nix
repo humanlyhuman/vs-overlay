@@ -4,7 +4,8 @@
   fetchFromGitHub,
   cmake,
   vapoursynth,
-  ncnn
+  ncnn,
+  protobuf,
 }:
 
 stdenv.mkDerivation rec {
@@ -31,6 +32,7 @@ stdenv.mkDerivation rec {
   buildInputs = [
     vapoursynth
     ncnn
+    protobuf
   ];
 
   cmakeFlags = [
