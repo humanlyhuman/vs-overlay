@@ -11,7 +11,7 @@
 
 stdenv.mkDerivation rec {
   pname = "vapoursynth-bm3d";
-  version = "9";
+  version = "10";
 
   src = fetchFromGitHub {
     owner = "HomeOfVapourSynthEvolution";
