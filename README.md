@@ -2,13 +2,23 @@
 
 A collection of packages (mostly plugins) related to using VapourSynth with Nix.
 
+## Origin
+
+Forked from the original vs-overlay:
+
+- https://github.com/nix-community/vs-overlay  
+- https://github.com/snaakey/vs-overlay/tree/feature/updates  
+
+This fork updates an unmaintained version of the overlay and focuses on a modern, minimal plugin set,
+omitting many legacy or redundant plugins.
+
 ### Standalone Nix
 
 Add the repository to `~/.config/nixpkgs/overlays.nix`:
 
 ```nix
 [
-  (import (builtins.fetchTarball "https://github.com/nix-community/vs-overlay/archive/master.tar.gz"))
+  (import (builtins.fetchTarball "https://github.com/humanlyhuman/vs-overlay/archive/master.tar.gz"))
 ]
 ```
 
@@ -19,7 +29,7 @@ Add the repository to the `nixpkgs.overlays` option of `configuration.nix`:
 ```nix
 {
   nixpkgs.overlays = [
-    (import (builtins.fetchTarball "https://github.com/nix-community/vs-overlay/archive/master.tar.gz"))
+    (import (builtins.fetchTarball "https://github.com/humanlyhuman/vs-overlay/archive/master.tar.gz"))
   ];
 }
 ```
@@ -37,7 +47,7 @@ In `flake.nix`, add `vs-overlay` as an input:
 
 ```nix
 {
-  inputs.vs-overlay.url = "github:nix-community/vs-overlay";
+  inputs.vs-overlay.url = "github:humanlyhuman/vs-overlay";
 }
 ```
 
@@ -110,7 +120,7 @@ In `flake.nix`, add `vs-overlay` as an input:
 
 ```nix
 {
-  inputs.vs-overlay.url = "github:nix-community/vs-overlay";
+  inputs.vs-overlay.url = "github:humanlyhuman/vs-overlay";
 }
 ```
 
