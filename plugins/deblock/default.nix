@@ -10,13 +10,13 @@
 
 stdenv.mkDerivation rec {
   pname = "VapourSynth-Deblock";
-  version = "6.1";
+  version = "8";
 
   src = fetchFromGitHub {
     owner = "HomeOfVapourSynthEvolution";
     repo = pname;
     rev = "r${version}";
-    sha256 = "0s2aqfak8mxylkhfl350mm8abspp7sgfacnigf7qksvhdx232k2c";
+    sha256 = "sha256-ipQfEZY5ZD+notSD1jJxyxoU3zpGBRhcOIuz808TDn4=";
   };
 
   nativeBuildInputs = [
