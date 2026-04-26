@@ -10,7 +10,7 @@
 
 stdenv.mkDerivation rec {
   pname = "vstrt";
-  version = "10";
+  version = "15.16";
 
   src = fetchFromGitHub {
     owner = "AmusementClub";
