@@ -7,7 +7,7 @@
 }:
 buildPythonPackage rec {
   pname = "jetpytools";
-  version = "2.2.1";
+  version = "2.2.7";
 
   pyproject = true;
 
@@ -15,7 +15,7 @@ buildPythonPackage rec {
     owner = "Jaded-Encoding-Thaumaturgy";
     repo = "jetpytools";
     rev = "v${version}";
-    sha256 = "sha256-adqVxwbnxElfSkt/1nDX360/HshX5jLu2V7r0AnT0xo=";
+    sha256 = "sha256-LDzOLkL/KKSOBT+FU9sdg0pZGVDMBzioN4C645GQvRI=";
   };
 
   build-system = [
