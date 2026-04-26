@@ -39,7 +39,6 @@ stdenv.mkDerivation rec {
   '';
   mesonFlags = [
     "-Dr73-compat=true"
-    "--wrap-mode=nodownload"
   ];
   meta = with lib; {
     description = "A libplacebo-based debanding, scaling and color mapping plugin for VapourSynth";
