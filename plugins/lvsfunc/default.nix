@@ -6,6 +6,7 @@
   rich,
   toolz,
   vapoursynth,
+  setuptools,
   pythonOlder,
 }:
 let
@@ -28,10 +29,10 @@ let
 in
 buildPythonPackage rec {
   pname = "lvsfunc";
-  version = "0.4.2";
+  version = "0.9.0";
 
   src = fetchFromGitHub {
-    owner = "Irrational-Encoding-Wizardry";
+    owner = "Jaded-Encoding-Thaumaturgy";
     repo = pname;
     rev = "v${version}";
     sha256 = "sha256-Yv7WBr9suuYsDI9LfZVcTBuDTPkd/DMCk/lQ58qsLyw=";
