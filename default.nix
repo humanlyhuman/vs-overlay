@@ -74,8 +74,6 @@ in
 
     awsmfunc = callPythonPackage ./plugins/awsmfunc { };
     lvsfunc = callPythonPackage ./plugins/lvsfunc { };
-    muvsfunc = callPythonPackage ./plugins/muvsfunc { };
-    mvsfunc = callPythonPackage ./plugins/mvsfunc { };
     vardefunc = callPythonPackage ./plugins/vardefunc { };
   };
 
