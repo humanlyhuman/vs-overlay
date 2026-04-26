@@ -10,13 +10,13 @@
 
 stdenv.mkDerivation rec {
   pname = "vapoursynth-scxvid";
-  version = "1";
+  version = "3";
 
   src = fetchFromGitHub {
     owner = "dubhater";
     repo = pname;
     rev = "v${version}";
-    sha256 = "13afl3bsg4fx3w5myrbsd62sf76s9qhsggfn2fjai9vfq61lnb0f";
+    sha256 = "sha256-WgoIF7ni2j6wNCutysV18B693OapzniZoy94iyZR3uA=";
   };
 
   configureFlags = [ "--libdir=$(out)/lib/vapoursynth" ];
