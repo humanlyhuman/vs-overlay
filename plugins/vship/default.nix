@@ -30,6 +30,7 @@ stdenv.mkDerivation rec {
     ])
     ++ [
       vapoursynth
+      ffms2
     ];
 
   strictDeps = true;
