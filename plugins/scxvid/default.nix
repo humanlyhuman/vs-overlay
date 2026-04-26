@@ -28,7 +28,7 @@
   postPatch = ''
       substituteInPlace meson.build \
         --replace-fail "incdir = include_directories(" "incdir = include_directories()" \
-        --replace-fail "run_command(" "#" \
+        ---replace-fail "run_command('python', 'python3')," "''"
         --replace-fail "py.get_install_dir() / 'vapoursynth/plugins'" \
         "get_option('libdir') / 'vapoursynth'"
     '';
