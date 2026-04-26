@@ -11,12 +11,12 @@
 
 stdenv.mkDerivation rec {
   pname = "vs-ocr";
-  version = "unstable-2021-09-26";
+  version = "3";
 
   src = fetchFromGitHub {
     owner = "vapoursynth";
     repo = pname;
-    rev = "b5dd7749a2f0694840d287f0bf4d42ce5323a8cf";
+    rev = "R3";
     sha256 = "sha256-N2+S4YRMzjpFdRnCXGgvxU1rUKIjmHe7ylzBrB4CPL8=";
   };
 
