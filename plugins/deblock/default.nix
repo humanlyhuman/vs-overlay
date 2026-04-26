@@ -31,6 +31,10 @@ stdenv.mkDerivation rec {
                 "join_paths(get_option('libdir'), 'vapoursynth')" \
       --replace "incdir = include_directories(" "vapoursynth_dep = dependency('vapoursynth')" \
       --replace "include_directories: incdir," "dependencies: vapoursynth_dep,"
+  
+    sed -i '/run_command(py/d' meson.build
+    sed -i '/stdout().strip()/d' meson.build
+    sed -i '/^)/d' meson.build
   '';
   meta = with lib; {
     description = "A Deblock filter plugin for VapourSynth";
