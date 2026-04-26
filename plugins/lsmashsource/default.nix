@@ -9,7 +9,8 @@
   which,
   vapoursynth,
   ffmpeg,
-  l-smash
+  l-smash,
+  xxhash
 }:
 
 stdenv.mkDerivation (finalAttrs: {
