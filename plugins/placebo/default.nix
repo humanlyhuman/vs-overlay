@@ -14,7 +14,7 @@
 
 stdenv.mkDerivation rec {
   pname = "vs-placebo";
-  version = "2.0.1;
+  version = "2.0.1";
 
   src = fetchFromGitHub {
     owner = "Lypheo";
