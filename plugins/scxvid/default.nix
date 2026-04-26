@@ -25,11 +25,19 @@
   
     buildInputs = [ vapoursynth xvidcore ];
       
-  postPatch = ''
-    substituteInPlace meson.build \
-      --replace "run_command('python', '-c', 'import vapoursynth as vs; print(vs.get_include())').stdout().strip()" \
-                "'${vapoursynth}/include'"
-  '';
+    postPatch = ''
+      substituteInPlace meson.build \
+        --replace \
+    "incdir = include_directories(
+        run_command(
+            find_program('python', 'python3'),
+            '-c',
+            'import vapoursynth as vs; print(vs.get_include())',
+            check: true,
+        ).stdout().strip(),
+    )" \
+    "incdir = include_directories('${vapoursynth}/include')"
+    '';
 
     installPhase = ''
       mkdir -p $out/lib/vapoursynth
