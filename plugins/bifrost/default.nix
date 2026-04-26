@@ -9,13 +9,13 @@
 
 stdenv.mkDerivation rec {
   pname = "vapoursynth-bifrost";
-  version = "2.2";
+  version = "3.0";
 
   src = fetchFromGitHub {
     owner = "dubhater";
     repo = pname;
     rev = "v${version}";
-    sha256 = "0ivmxgqfp9d6axvznkjcckv6ajvs0advx6iisvry52pfc8lprbp8";
+    sha256 = "sha256-5miEJr8ys73G6NSpRJ3R50rgfUZ+F2VLGZQWF3j5K7s=";
   };
 
   configureFlags = [ "--libdir=$(out)/lib/vapoursynth" ];
