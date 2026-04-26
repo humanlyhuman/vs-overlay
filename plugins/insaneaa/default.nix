@@ -18,6 +18,7 @@ buildPythonPackage {
   propagatedBuildInputs = with vapoursynthPlugins; [
     eedi3m
     nnedi3
+    descale
   ];
   format = "other";
   installPhase = ''
