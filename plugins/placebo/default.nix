@@ -14,13 +14,13 @@
 
 stdenv.mkDerivation rec {
   pname = "vs-placebo";
-  version = "1.4.4";
+  version = "2.0.1;
 
   src = fetchFromGitHub {
     owner = "Lypheo";
     repo = pname;
     rev = version;
-    hash = "sha256-1DTdllP+Y4s+t2PMnpcgeLjOxOyyV/yhFSxPP9/Gy9M=";
+    hash = "sha256-PlqqMBU9WedOqQkl8S77xIUzBpaU1Bgv9ZY8Rfh803o=";
     fetchSubmodules = true;
   };
 
