@@ -38,11 +38,10 @@ stdenv.mkDerivation rec {
 
   postPatch = ''
     substituteInPlace meson.build \
-      --replace "vapoursynth_dep.get_variable(pkgconfig: 'libdir')" "get_option('libdir')" \
-      --replace \
-        "run_command(python, '-c', 'import vapoursynth as vs; print(vs.get_include())', check: true).stdout().strip()" \
-        "vapoursynth_dep.get_variable(pkgconfig: 'includedir')"
+      --replace "vapoursynth_dep.get_variable(pkgconfig: 'libdir')" "get_option('libdir')"
   '';
+  
+  mesonFlags = [ "-Dr73-compat=true" ];
 
   meta = with lib; {
     description = "A libplacebo-based debanding, scaling and color mapping plugin for VapourSynth";
