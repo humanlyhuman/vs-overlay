@@ -10,7 +10,7 @@ buildPythonPackage {
   pname = "insaneaa";
   version = "unstable-2021-10-22";
   src = fetchFromGitHub {
-    owner = "Beatrice-Raws";
+    owner = "humanlyhuman";
     repo = "VapourSynth-insaneAA";
     rev = "9a7e646804997be888bf629be9df86e32ae967ce";
     sha256 = "sha256-BafAq61ObDw4h8sLzm0VJdV3ekp0vIHjxk4zQPEUjIY=";
