@@ -2,7 +2,6 @@
   lib,
   stdenv,
   fetchFromGitHub,
-  stdenv.hostPlatform,
   cmake,
   pkg-config,
   vapoursynth,
@@ -42,7 +41,7 @@ stdenv.mkDerivation (finalAttrs: {
   installPhase = ''
     runHook preInstall
 
-    install -D -t "$out/lib/vapoursynth" libneo-f3kdb${hostPlatform.extensions.sharedLibrary}
+    install -D -t "$out/lib/vapoursynth" libneo-f3kdb${stdenv.hostPlatform.extensions.sharedLibrary}
 
     runHook postInstall
   '';
