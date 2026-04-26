@@ -32,8 +32,9 @@ python3Packages.buildPythonPackage {
 
   installPhase = ''
     mkdir -p $out/lib/vapoursynth
-    cp *.so $out/lib/vapoursynth/
+    find . -name "*.so" -exec cp {} $out/lib/vapoursynth/ \;
   '';
+
   dependencies = [
     python3Packages.vapoursynth
   ];
