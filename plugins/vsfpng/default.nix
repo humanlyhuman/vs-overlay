@@ -30,6 +30,7 @@ stdenv.mkDerivation rec {
     vapoursynth
   ];
   mesonFlags = [ "-Dwerror=false" ];
+  NIX_CFLAGS_COMPILE = "-Wno-error";
   postPatch = ''
     substituteInPlace meson.build \
       --replace "vapoursynth/include" "${vapoursynth}/include" \
