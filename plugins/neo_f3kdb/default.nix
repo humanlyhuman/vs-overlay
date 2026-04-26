@@ -2,7 +2,7 @@
   lib,
   stdenv,
   fetchFromGitHub,
-  hostPlatform,
+  stdenv.hostPlatform,
   cmake,
   pkg-config,
   vapoursynth,
