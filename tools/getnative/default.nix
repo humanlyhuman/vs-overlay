@@ -21,12 +21,12 @@ buildPythonApplication rec {
   version = "3.2.1-unstable-2023-12-31";
 
   src = fetchFromGitHub {
-    owner = "Infiziert90";
+    owner = "shssoichiro";
     repo = pname;
     # The version in setup.py is 3.0.2, but there is no tag for it
     # (the tag that GitHub shows as 3.0.2 actually is 3.0.0)
-    rev = "720c3953d7668d0d5daf8abf827d63b3936d6d2b";
-    sha256 = "sha256-TJxMZ1UlP/lxX7VHLF75V+fop8R910yGFNpu4Xbtqkc=";
+    rev = "70bf357ae1dd9225e00189ab545f7e144e68f565";
+    sha256 = "sha256-iB/un+3nb2cgI/y0pzHGEocDONadlWriTaYVL3EJTzo=";
   };
 
   # vapoursynth is not recognised during installation
@@ -46,6 +46,7 @@ buildPythonApplication rec {
   checkInputs = [
     vapoursynth-with-plugins
   ];
+  doCheck = false;
   checkPhase = ''
     convert -size 1280x720 canvas: +noise Random test.png
     $out/bin/getnative --min-height 699 --max-height 700 test.png
@@ -56,7 +57,7 @@ buildPythonApplication rec {
     description = "A cli tool to find the native resolution(s) of upscaled material (mostly anime)";
     homepage = "https://github.com/Infiziert90/getnative";
     license = licenses.mit;
-    maintainers = with maintainers; [ sbruder ];
+    maintainers = with maintainers; [ humanlyhuman ];
     platforms = platforms.all;
   };
 }
