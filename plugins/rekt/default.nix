@@ -4,11 +4,17 @@
   fetchFromGitLab,
   vapoursynthPlugins,
   vapoursynth,
+  setuptools,
 }:
 
 buildPythonPackage rec {
   pname = "rekt";
   version = "0-unstable-2022-03-02";
+  pyproject = true;
+
+  build-system = [
+    setuptools
+  ];
 
   src = fetchFromGitLab {
     owner = "Ututu";
