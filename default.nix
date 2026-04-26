@@ -32,7 +32,6 @@ in
     fillborders = prev.callPackage ./plugins/fillborders { };
     fmtconv = prev.callPackage ./plugins/fmtconv { };
     histogram = prev.callPackage ./plugins/histogram { };
-    imwri = prev.callPackage ./plugins/imwri { };
     lsmashsource = prev.callPackage ./plugins/lsmashsource { };
     mvtools = prev.vapoursynth-mvtools;
     neo_f3kdb = prev.callPackage ./plugins/neo_f3kdb { };
