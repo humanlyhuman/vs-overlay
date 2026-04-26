@@ -10,18 +10,15 @@
   opencl-headers,
   ocl-icd,
 }:
-
 stdenv.mkDerivation rec {
   pname = "vapoursynth-eedi3";
   version = "4";
-
   src = fetchFromGitHub {
     owner = "HomeOfVapourSynthEvolution";
     repo = "VapourSynth-EEDI3";
     rev = "r${version}";
     sha256 = "1q79l27arcfl7k49czsspb4z7zfr616xsxsb04x9b4d9l763716x";
   };
-
   nativeBuildInputs = [
     meson
     ninja
@@ -33,22 +30,31 @@ stdenv.mkDerivation rec {
     opencl-headers
     ocl-icd
   ];
-
-  # https://github.com/NixOS/nixpkgs/issues/86131
   BOOST_INCLUDEDIR = "${lib.getDev boost}/include";
   BOOST_LIBRARYDIR = "${lib.getLib boost}/lib";
-
   postPatch = ''
-    substituteInPlace meson.build \
+    substituteInFind meson.build \
         --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
   '';
+  preConfigure = ''
+    mkdir -p $TMPDIR/boost-patched
+    cp -r ${lib.getDev boost}/include/boost $TMPDIR/boost-patched/
+    chmod -R u+w $TMPDIR/boost-patched
 
+    sed -i 's/desc\.mem_object = 0;//g' \
+      $TMPDIR/boost-patched/boost/compute/image/image2d.hpp \
+      $TMPDIR/boost-patched/boost/compute/image/image3d.hpp
+
+    sed -i 's/desc\.mem_object = [^;]*;//g' \
+      EEDI3/EEDI3CL.cpp
+
+    export NIX_CFLAGS_COMPILE="-I$TMPDIR/boost-patched $NIX_CFLAGS_COMPILE"
+  '';
   meta = with lib; {
     description = "Renewed EEDI3 filter for VapourSynth";
     homepage = "https://github.com/HomeOfVapourSynthEvolution/VapourSynth-EEDI3";
     license = licenses.gpl2;
     maintainers = with maintainers; [ ];
-    # Does inline asm
     platforms = with platforms; x86 ++ x86_64;
   };
 }
