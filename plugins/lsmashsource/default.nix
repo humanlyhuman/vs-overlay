@@ -10,7 +10,7 @@
   vapoursynth,
   ffmpeg,
   l-smash,
-  xxhash
+  xxHash
 }:
 
 stdenv.mkDerivation (finalAttrs: {
