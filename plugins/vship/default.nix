@@ -1,7 +1,6 @@
 {
   lib,
   stdenv,
-  fetchFromGitHub,
   fetchgit,
   hostPlatform,
   rocmPackages,
@@ -15,11 +14,12 @@ stdenv.mkDerivation rec {
   src = fetchgit {
     url = "https://codeberg.org/Line-fr/Vship.git";
     rev = "v${version}";
-    sha256 = "sha256-JkWw1dTBb47CBLG3fGXtqHTEwbiX9IDwKHroJtY9s+A=";
+    hash = "sha256-JkWw1dTBb47CBLG3fGXtqHTEwbiX9IDwKHroJtY9s+A=";
   };
 
   nativeBuildInputs = [
     rocmPackages.clr
+    stdenv.cc
   ];
 
   buildInputs =
@@ -32,29 +32,56 @@ stdenv.mkDerivation rec {
       vapoursynth
     ];
 
-  postPatch = ''
-    rm -rf include
-  '';
+  strictDeps = true;
 
   buildPhase = ''
-    echo $PATH
-    hipcc src/main.cpp \
+    runHook preBuild
+
+    sources="
+      src/FFVship.cpp
+      src/VshipLib.cpp
+    "
+
+    hip_sources=$(find src/HIP -name '*.cpp' -o -name '*.hip')
+
+    hipcc \
+      $sources \
+      $hip_sources \
+      -I src \
+      -I include \
       -I "${vapoursynth}/include/vapoursynth" \
-      --offload-arch=gfx1100,gfx1101,gfx1102,gfx1030,gfx1031,gfx1032,gfx906,gfx801,gfx802,gfx803 \
-      -Wno-unused-result -Wno-ignored-attributes -shared -fPIC \
-      -o "vship${hostPlatform.extensions.sharedLibrary}" -v
+      --offload-arch=gfx1100 \
+      --offload-arch=gfx1101 \
+      --offload-arch=gfx1102 \
+      --offload-arch=gfx1030 \
+      --offload-arch=gfx1031 \
+      --offload-arch=gfx1032 \
+      --offload-arch=gfx906 \
+      --offload-arch=gfx801 \
+      --offload-arch=gfx802 \
+      --offload-arch=gfx803 \
+      -O3 \
+      -Wno-unused-result \
+      -Wno-ignored-attributes \
+      -shared -fPIC \
+      -o vship${hostPlatform.extensions.sharedLibrary}
+
+    runHook postBuild
   '';
 
   installPhase = ''
-    install -D -t "$out/lib/vapoursynth" vship${hostPlatform.extensions.sharedLibrary}
+    runHook preInstall
+
+    install -Dm755 vship${hostPlatform.extensions.sharedLibrary} \
+      $out/lib/vapoursynth/vship${hostPlatform.extensions.sharedLibrary}
+
+    runHook postInstall
   '';
 
   meta = with lib; {
-    description = "GPU-accelerated VapourSynth plugin for SSIMULACRA2 & Butteraugli metrics";
+    description = "GPU-accelerated VapourSynth plugin for SSIMULACRA2 & Butteraugli";
     homepage = "https://codeberg.org/Line-fr/Vship";
     license = licenses.mit;
-    maintainers = with maintainers; [ snaki ];
-    mainProgram = "vship";
-    platforms = platforms.all;
+    platforms = platforms.linux;
   };
 }
