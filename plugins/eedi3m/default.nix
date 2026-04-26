@@ -5,7 +5,7 @@
   meson,
   ninja,
   pkg-config,
-  python3,
+  python3Packages,
   vapoursynth,
 }:
 stdenv.mkDerivation rec {
@@ -23,7 +23,8 @@ stdenv.mkDerivation rec {
     meson
     ninja
     pkg-config
-    python3
+    python3Packages.python  # the interpreter
+    python3Packages.vapoursynth  # so `import vapoursynth` works at configure time
   ];
 
   buildInputs = [
@@ -34,7 +35,7 @@ stdenv.mkDerivation rec {
     description = "Renewed EEDI3 filter for VapourSynth";
     homepage = "https://github.com/HomeOfVapourSynthEvolution/VapourSynth-EEDI3";
     license = licenses.gpl2Plus;
-    maintainers = with maintainers; [ ];
+    maintainers = [ ];
     platforms = platforms.x86 ++ platforms.x86_64;
   };
 }
