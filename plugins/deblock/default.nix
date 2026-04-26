@@ -35,7 +35,9 @@ stdenv.mkDerivation rec {
       --replace \
         "name_prefix: ''''," \
         ""
-    
+  
+    sed -i '/incdir = include_directories(/,/)/c\incdir = []' meson.build
+  
     sed -i "s|py = import('python').find_installation(pure: false)|&\nvapoursynth_dep = dependency('vapoursynth')|" meson.build
   '';
   meta = with lib; {
