@@ -17,7 +17,7 @@ stdenv.mkDerivation rec {
     owner = "HomeOfVapourSynthEvolution";
     repo = "VapourSynth-BM3D";
     rev = "r${version}";
-    sha256 = "sha256-i7Kk7uFt2Wo/EWpVkGyuYgGZxBuQgOT3JM+WCFPHVrc=";
+    sha256 = "sha256-FMal1VlijqQbuY+jJ38tZqhlg0OCMJHhVihV+DLlZFs=";
   };
 
   nativeBuildInputs = [
