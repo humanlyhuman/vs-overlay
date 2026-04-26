@@ -10,6 +10,9 @@
 }:
 
 # required to make python.buildEnv use descale’s python module
+let
+  python = python3.withPackages (ps: [ ps.vapoursynth ]);
+in
 python3.pkgs.toPythonModule (
   stdenv.mkDerivation (finalAttrs: {
     pname = "vapoursynth-descale";
@@ -26,12 +29,16 @@ python3.pkgs.toPythonModule (
       meson
       ninja
       pkg-config
-      (python3.withPackages (ps: [ ps.vapoursynth ]))
+      python
     ];
-    
+
     buildInputs = [
       vapoursynth
     ];
+
+    preConfigure = ''
+      export PYTHON=${python}/bin/python3
+    '';
 
     postPatch = ''
       substituteInPlace meson.build \
