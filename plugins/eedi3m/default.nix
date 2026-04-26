@@ -5,7 +5,6 @@
   meson,
   ninja,
   pkg-config,
-  python3Packages,
   vapoursynth,
 }:
 stdenv.mkDerivation rec {
@@ -23,13 +22,18 @@ stdenv.mkDerivation rec {
     meson
     ninja
     pkg-config
-    python3Packages.python
-    python3Packages.vapoursynth
   ];
 
   buildInputs = [
     vapoursynth
   ];
+
+  postPatch = ''
+    substituteInPlace meson.build \
+      --replace-fail \
+        "run_command(py, '-c', 'import vapoursynth as vs; print(vs.get_include())', check: true).stdout().strip()" \
+        "'${lib.getDev vapoursynth}/include/vapoursynth'"
+  '';
 
   meta = with lib; {
     description = "Renewed EEDI3 filter for VapourSynth";
