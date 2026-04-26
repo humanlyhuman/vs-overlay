@@ -28,20 +28,16 @@
     postPatch = ''
       substituteInPlace meson.build \
         --replace-fail \
-          "deps = [xvid_dep]" \
-          "vapoursynth_dep = dependency('vapoursynth')
-    deps = [xvid_dep, vapoursynth_dep]" \
-        --replace-fail \
           "incdir = include_directories(" \
-          "# disabled python include detection
-    # incdir = include_directories(" \
+          "incdir = include_directories()" \
         --replace-fail \
-          "include_directories: incdir," \
-          "" \
+          "run_command(" \
+          "# run_command(" \
         --replace-fail \
-          "py.get_install_dir() / 'vapoursynth/plugins'" \
-          "get_option('libdir') / 'vapoursynth'"
+          ").stdout().strip()," \
+          "# removed stdout strip"
     '';
+
     installPhase = ''
       mkdir -p $out/lib/vapoursynth
       cp build/src/scxvid.so $out/lib/vapoursynth/
