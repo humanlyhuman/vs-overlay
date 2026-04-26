@@ -13,7 +13,7 @@ stdenv.mkDerivation rec {
     owner = "sekrit-twc";
     repo = pname;
     rev = "r${version}";
-    sha256 = "1p6563s1b52qisvvwid047jd376sz737lggwfhanci0sqxxphhrb";
+    sha256 = "sha256-ehqihRoQwi17RlLLEgCoPeWSzcXP8PKG8yIGw8I+5Gs=";
     fetchSubmodules = true;
   };
 
