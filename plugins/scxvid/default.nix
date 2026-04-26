@@ -31,9 +31,6 @@
         --replace-fail "run_command(" "#" \
         --replace-fail "py.get_install_dir() / 'vapoursynth/plugins'" \
         "get_option('libdir') / 'vapoursynth'"
-  
-      substituteInPlace pyproject.toml \
-        --replace-fail "VapourSynth>=69" ""
     '';
 
     installPhase = ''
