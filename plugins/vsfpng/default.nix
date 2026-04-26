@@ -30,6 +30,10 @@ stdenv.mkDerivation rec {
     vapoursynth
   ];
 
+  mesonFlags = [
+    "-Dvapoursynth-include=${vapoursynth}/include"
+  ];
+
   libdir = "lib/vapoursynth";
   meta = with lib; {
     description = "fpng plugin for VapourSynth";
