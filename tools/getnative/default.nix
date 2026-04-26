@@ -26,7 +26,7 @@ buildPythonApplication rec {
     # The version in setup.py is 3.0.2, but there is no tag for it
     # (the tag that GitHub shows as 3.0.2 actually is 3.0.0)
     rev = "70bf357ae1dd9225e00189ab545f7e144e68f565";
-    sha256 = "sha256-iB/un+3nb2cgI/y0pzHGEocDONadlWriTaYVL3EJTzo=";
+    sha256 = "sha256-ikUH45s8NlbxPA4ifoMvfj1S2d16mKkDCKJcmd4b83o=";
   };
 
   # vapoursynth is not recognised during installation
