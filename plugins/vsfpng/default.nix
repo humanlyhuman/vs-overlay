@@ -16,7 +16,7 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "Mikewando";
     repo = "vsfpng";
-    rev = "v${version}";
+    rev = "${version}";
     sha256 = "sha256-+OYUAp6T+ZGSFixw7W/QsqXVlPYea83WV88EVsI11KM=";
   };
 
