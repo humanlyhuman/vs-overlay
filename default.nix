@@ -91,7 +91,6 @@ in
 
     awsmfunc = callPythonPackage ./plugins/awsmfunc { };
     fvsfunc = callPythonPackage ./plugins/fvsfunc { };
-    havsfunc = callPythonPackage ./plugins/havsfunc { };
     kagefunc = callPythonPackage ./plugins/kagefunc { };
     lvsfunc = callPythonPackage ./plugins/lvsfunc { };
     muvsfunc = callPythonPackage ./plugins/muvsfunc { };
