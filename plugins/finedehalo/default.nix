@@ -3,9 +3,7 @@
   buildPythonPackage,
   fetchFromGitHub,
   python,
-  vapoursynth,
-  vsjetpack,
-  jetpytools,
+  vapoursynth
 }:
 
 buildPythonPackage rec {
