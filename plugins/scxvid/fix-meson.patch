@@ -1,10 +1,8 @@
 diff --git a/meson.build b/meson.build
 --- a/meson.build
 +++ b/meson.build
-@@ -15,15 +15,7 @@ xvid_dep = meson.get_compiler('cpp').find_library('xvidcore')
-
- deps = [xvid_dep]
-
+@@ -17,13 +17,7 @@ deps = [xvid_dep]
+ 
 -incdir = include_directories(
 -    run_command(
 -        find_program('python', 'python3'),
@@ -14,17 +12,5 @@ diff --git a/meson.build b/meson.build
 -    ).stdout().strip(),
 -)
 +incdir = include_directories()
-
- py = import('python').find_installation(pure: false)diff --git a/meson.build b/meson.build
---- a/meson.build
-+++ b/meson.build
-@@
--incdir = include_directories(
--    run_command(
--        find_program('python', 'python3'),
--        '-c',
--        'import vapoursynth as vs; print(vs.get_include())',
--        check: true,
--    ).stdout().strip(),
--)
-+incdir = include_directories()
+ 
+ py = import('python').find_installation(pure: false)
