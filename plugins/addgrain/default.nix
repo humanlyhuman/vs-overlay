@@ -16,7 +16,7 @@ stdenv.mkDerivation rec {
     owner = "HomeOfVapourSynthEvolution";
     repo = "VapourSynth-AddGrain";
     rev = "r${version}";
-    sha256 = "0qfazdifs1nq5ll6nvfvy3w9m28s2llm5i203ak6qf0bf98jnh4j";
+    sha256 = "sha256-HNdYDpoyhWkpZZhcji2tWxWTojXKTKBbvm+iHp6Zdeo=";
   };
 
   nativeBuildInputs = [
