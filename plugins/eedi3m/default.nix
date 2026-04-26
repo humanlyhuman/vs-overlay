@@ -27,8 +27,8 @@ python3Packages.buildPythonPackage {
   postPatch = ''
     substituteInPlace meson.build \
       --replace-fail \
-        "vs_inc = dependency('vapoursynth').get_variable(pkgconfig: 'includedir')" \
-        "vs_inc = '${vapoursynth}/include/vapoursynth'"
+        "run_command(py, '-c', 'import vapoursynth as vs; print(vs.get_include())', check: true).stdout().strip()" \
+        "'${vapoursynth}/include/vapoursynth'"
 
     substituteInPlace pyproject.toml \
       --replace-fail '"VapourSynth>=74"' ""
