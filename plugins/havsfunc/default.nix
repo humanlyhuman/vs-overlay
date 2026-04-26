@@ -36,7 +36,7 @@ buildPythonPackage rec {
     owner = "HomeOfVapourSynthEvolution";
     repo = pname;
     rev = "r33";
-    sha256 = "sha256-9/xTyk5rVHPlQC73tC17PsRhD0NReEAYIoN/4NkTI5A=";
+    sha256 = "sha256-BafAq61ObDw4h8sLzm0VJdV3ekp0vIHjxk4zQPEUjIY=";
   };
 
   format = "other";
