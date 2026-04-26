@@ -11,7 +11,7 @@
 buildPythonPackage rec {
   pname = "vsjetpack";
   version = "1.4.1";
-  
+
   pyproject = true;
 
   src = fetchFromGitHub {
@@ -32,8 +32,11 @@ buildPythonPackage rec {
     numpy
   ];
 
-  pythonImportsCheck = [ ];
+  env.VERSIONINGIT_OVERRIDE_VCS = version;
+
   doCheck = false;
+  dontCheckRuntimeDeps = true;
+  pythonImportsCheck = [ ];
 
   meta = with lib; {
     description = "Full suite of filters, wrappers, and helper functions for VapourSynth";
