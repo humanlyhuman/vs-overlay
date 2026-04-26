@@ -20,7 +20,7 @@ python3Packages.buildPythonPackage {
   ];
 
   postPatch = ''
-    sed -i '/run_command/,/\.stdout()\.strip()/c\    "${python3Packages.vapoursynth}/${python3Packages.python.sitePackages}",' meson.build
+    sed -i '/run_command/,/\.stdout()\.strip()/c\    '''',' meson.build
   
     substituteInPlace pyproject.toml \
       --replace-fail '"VapourSynth>=74"' ""
