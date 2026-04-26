@@ -41,7 +41,7 @@ stdenv.mkDerivation rec {
       include_directories: incdir,
       install: true,
       install_dir: get_option('libdir'),
-      name_prefix: '',
+      name_prefix: ''
   )
   EOF
     '';
