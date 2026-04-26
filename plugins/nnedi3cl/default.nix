@@ -41,7 +41,18 @@ stdenv.mkDerivation rec {
   postPatch = ''
     substituteInPlace meson.build \
         --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
+
+    for f in \
+      ${lib.getDev boost}/include/boost/compute/image/image2d.hpp \
+      ${lib.getDev boost}/include/boost/compute/image/image3d.hpp; do
+      cp "$f" "$(basename $f).orig"
+    done
+
+    substituteInPlace ../NNEDI3CL/NNEDI3CL.cpp \
+      --replace "desc.mem_object = d->weights1Buffer.get();" \
+                "/* mem_object removed in OpenCL 3.0 */"
   '';
+
   env.NIX_CFLAGS_COMPILE = "-DCL_USE_DEPRECATED_OPENCL_1_2_APIS";
 
   meta = with lib; {
