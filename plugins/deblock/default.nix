@@ -8,6 +8,9 @@
   python3,
   vapoursynth,
 }:
+let
+  python = python3.withPackages (ps: [ ps.vapoursynth ]);
+in
 stdenv.mkDerivation rec {
   pname = "VapourSynth-Deblock";
   version = "8";
@@ -21,12 +24,14 @@ stdenv.mkDerivation rec {
     meson
     ninja
     pkg-config
-    python3
+    python
   ];
   buildInputs = [ vapoursynth ];
   postPatch = ''
     substituteInPlace meson.build \
-        --replace-warn "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
+      --replace-fail \
+        "py.get_install_dir() / 'vapoursynth/plugins'" \
+        "get_option('libdir')"
   '';
   meta = with lib; {
     description = "A Deblock filter plugin for VapourSynth";
