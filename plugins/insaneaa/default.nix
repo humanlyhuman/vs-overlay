@@ -22,11 +22,7 @@ buildPythonPackage {
     finedehalo
   ];
   format = "other";
-  postPatch = ''
-    substituteInPlace insaneAA.py \
-      --replace-fail "import descale" "" \
-      --replace-fail "descale.Descale(" "core.descale.Descale("
-  '';
+
   installPhase = ''
     runHook preInstall
     install -D insaneAA.py $out/${python.sitePackages}/insaneAA.py
