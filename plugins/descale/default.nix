@@ -43,8 +43,14 @@ python3.pkgs.toPythonModule (
         "import('python').find_installation('${python3Env}/bin/python3', pure: false)"
       substituteInPlace meson.build \
         --replace-fail \
-        "import vapoursynth as vs; print(vs.get_include())" \
-        "print('${vapoursynth}/include')"
+        "r = run_command(
+        py,
+        '-c',
+        'import vapoursynth as vs; print(vs.get_include())',
+        check: true,
+    )
+    inc_vs = include_directories(r.stdout().strip())" \
+        "inc_vs = include_directories('${vapoursynth}/include')"
     '';
 
     postInstall = ''
