@@ -57,7 +57,6 @@ in
 
     insaneaa = callPythonPackage ./plugins/insaneaa { };
     acsuite = callPythonPackage ./plugins/acsuite { };
-    adjust = callPythonPackage ./plugins/adjust { };
     astdr = callPythonPackage ./plugins/astdr { };
     dfmderainbow = callPythonPackage ./plugins/dfmderainbow { };
     finedehalo = callPythonPackage ./plugins/finedehalo { };
