@@ -9,6 +9,11 @@
 buildPythonPackage rec {
   pname = "acsuite";
   version = "6.0.0";
+  pyproject = true;
+
+  build-system = [
+    setuptools
+  ];
 
   src = fetchFromGitHub {
     owner = "OrangeChannel";
