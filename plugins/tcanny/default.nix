@@ -13,7 +13,7 @@
 
 stdenv.mkDerivation rec {
   pname = "vapoursynth-tcanny";
-  version = "12";
+  version = "14";
 
   src = fetchFromGitHub {
     owner = "HomeOfVapourSynthEvolution";
