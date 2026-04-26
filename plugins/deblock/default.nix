@@ -26,7 +26,7 @@ stdenv.mkDerivation rec {
   buildInputs = [ vapoursynth ];
   postPatch = ''
     substituteInPlace meson.build \
-      --replace "name_prefix: ''," "" \
+      --replace "name_prefix: ''''," "" \
       --replace "py.get_install_dir() / 'vapoursynth/plugins'" \
                 "join_paths(get_option('libdir'), 'vapoursynth')"
   '';
