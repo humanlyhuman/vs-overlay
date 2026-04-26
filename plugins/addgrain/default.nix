@@ -10,7 +10,7 @@
 
 stdenv.mkDerivation rec {
   pname = "vapoursynth-addgrain";
-  version = "8";
+  version = "10";
 
   src = fetchFromGitHub {
     owner = "HomeOfVapourSynthEvolution";
