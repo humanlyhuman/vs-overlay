@@ -11,7 +11,7 @@
 
 # required to make python.buildEnv use descale’s python module
 let
-  python = python3.withPackages (ps: [ ps.vapoursynth ]);
+  python3Env = python3.withPackages (ps: [ ps.vapoursynth ]);
 in
 python3.pkgs.toPythonModule (
   stdenv.mkDerivation (finalAttrs: {
@@ -29,20 +29,19 @@ python3.pkgs.toPythonModule (
       meson
       ninja
       pkg-config
-      python
+      python3Env
     ];
 
     buildInputs = [
       vapoursynth
     ];
 
-    preConfigure = ''
-      export PYTHON=${python}/bin/python3
-    '';
-
     postPatch = ''
       substituteInPlace meson.build \
-          --replace "vs.get_pkgconfig_variable('libdir')" "get_option('libdir')"
+        --replace "vs.get_pkgconfig_variable('libdir')" "get_option('libdir')"
+      substituteInPlace meson.build \
+        --replace "import('python').find_installation(pure: false)" \
+                  "import('python').find_installation('${python3Env}/bin/python3', pure: false)"
     '';
 
     postInstall = ''
