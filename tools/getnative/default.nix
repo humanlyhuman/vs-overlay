@@ -35,13 +35,12 @@ buildPythonApplication rec {
     sha256 = "sha256-ikUH45s8NlbxPA4ifoMvfj1S2d16mKkDCKJcmd4b83o=";
   };
 
-  pythonRelaxDeps = [ "vapoursynth" ];  
+  dontCheckRuntimeDeps = true;
   doCheck = false;
 
-  # vapoursynth is not recognised during installation
   postPatch = ''
     substituteInPlace requirements.txt \
-        --replace "VapourSynth>=55" ""
+      --replace-fail "VapourSynth>=55" ""
   '';
 
   propagatedBuildInputs = [
