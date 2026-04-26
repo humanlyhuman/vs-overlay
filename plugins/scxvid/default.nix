@@ -25,22 +25,23 @@
   
     buildInputs = [ vapoursynth xvidcore ];
   
-    postPatch = ''
-      substituteInPlace meson.build \
-        --replace-fail \
-          "deps = [xvid_dep]" \
-          "vapoursynth_dep = dependency('vapoursynth')\ndeps = [xvid_dep, vapoursynth_dep]" \
-        --replace-fail \
-          "incdir = include_directories(" \
-          "# disabled python include detection\n# incdir = include_directories(" \
-        --replace-fail \
-          "include_directories: incdir," \
-          "" \
-        --replace-fail \
-          "py.get_install_dir() / 'vapoursynth/plugins'" \
-          "get_option('libdir') / 'vapoursynth'"
-    '';
-  
+  postPatch = ''
+    substituteInPlace meson.build \
+      --replace-fail \
+        "deps = [xvid_dep]" \
+        "vapoursynth_dep = dependency('vapoursynth')
+  deps = [xvid_dep, vapoursynth_dep]" \
+      --replace-fail \
+        "incdir = include_directories(" \
+        "# disabled python include detection
+  # incdir = include_directories(" \
+      --replace-fail \
+        "include_directories: incdir," \
+        "" \
+      --replace-fail \
+        "py.get_install_dir() / 'vapoursynth/plugins'" \
+        "get_option('libdir') / 'vapoursynth'"
+  '';
     installPhase = ''
       mkdir -p $out/lib/vapoursynth
       cp build/src/scxvid.so $out/lib/vapoursynth/
