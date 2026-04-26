@@ -2,7 +2,8 @@
   lib,
   stdenv,
   fetchFromGitHub,
-  autoreconfHook,
+  meson,
+  ninja,
   pkg-config,
   vapoursynth,
   xvidcore,
@@ -19,16 +20,25 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-WgoIF7ni2j6wNCutysV18B693OapzniZoy94iyZR3uA=";
   };
 
-  configureFlags = [ "--libdir=$(out)/lib/vapoursynth" ];
-
   nativeBuildInputs = [
+    meson
+    ninja
     pkg-config
-    autoreconfHook
   ];
+
   buildInputs = [
     vapoursynth
     xvidcore
   ];
+
+  installPhase = ''
+    runHook preInstall
+
+    mkdir -p $out/lib/vapoursynth
+    cp build/src/libscxvid.so $out/lib/vapoursynth/
+
+    runHook postInstall
+  '';
 
   meta = with lib; {
     description = "Scene change detection plugin for VapourSynth using xvid";
