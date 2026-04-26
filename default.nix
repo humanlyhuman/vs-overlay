@@ -71,8 +71,8 @@ in
     vstrt = prev.callPackage ./plugins/vstrt { };
     wwxd = prev.callPackage ./plugins/wwxd { };
     znedi3 = prev.callPackage ./plugins/znedi3 { };
-    insaneaa = prev.callPackage ./plugins/insaneaa { };
 
+    insaneaa = prev.callPythonPackage ./plugins/insaneaa { };
     acsuite = callPythonPackage ./plugins/acsuite { };
     adjust = callPythonPackage ./plugins/adjust { };
     astdr = callPythonPackage ./plugins/astdr { };
