@@ -4,6 +4,7 @@
   buildPythonPackage,
   fetchFromGitHub,
   vapoursynth,
+  setuptools,
 }:
 let
   propagatedBinaryPlugins = with vapoursynthPlugins; [
@@ -20,6 +21,11 @@ in
 buildPythonPackage rec {
   pname = "vardefunc";
   version = "1.1.4";
+  pyproject = true;
+
+  build-system = [
+    setuptools
+  ];
 
   src = fetchFromGitHub {
     owner = "Ichunjo";
