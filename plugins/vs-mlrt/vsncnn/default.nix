@@ -4,6 +4,7 @@
   fetchFromGitHub,
   cmake,
   vapoursynth,
+  ncnn
 }:
 
 stdenv.mkDerivation rec {
