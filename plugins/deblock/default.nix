@@ -25,18 +25,26 @@ stdenv.mkDerivation rec {
   ];
   buildInputs = [ vapoursynth ];
   postPatch = ''
-    substituteInPlace meson.build --replace-fail \
-      "py = import('python').find_installation(pure: false)
-incdir = include_directories(
-    run_command(py, '-c', 'import vapoursynth as vs; print(vs.get_include())', check: true).stdout().strip(),
-)" \
-      "vapoursynth_dep = dependency('vapoursynth')
-incdir = include_directories(vapoursynth_dep.get_variable(pkgconfig: 'includedir'))"
-
-    substituteInPlace meson.build --replace-fail \
-      "install_dir: py.get_install_dir() / 'vapoursynth/plugins'," \
-      "install_dir: get_option('libdir'),"
-  '';
+      cat > meson.build << 'EOF'
+  project('Deblock', 'cpp',
+      default_options: ['buildtype=release', 'warning_level=2', 'b_lto=true', 'b_ndebug=if-release', 'cpp_std=c++17'],
+      license: 'GPL-2.0-or-later',
+      license_files: 'LICENSE',
+      meson_version: '>=1.2.3',
+      version: '8.0',
+  )
+  vapoursynth_dep = dependency('vapoursynth')
+  incdir = include_directories(vapoursynth_dep.get_variable(pkgconfig: 'includedir'))
+  shared_module('deblock',
+      files('Deblock/Deblock.cpp'),
+      gnu_symbol_visibility: 'hidden',
+      include_directories: incdir,
+      install: true,
+      install_dir: get_option('libdir'),
+      name_prefix: '',
+  )
+  EOF
+    '';
   meta = with lib; {
     description = "A Deblock filter plugin for VapourSynth";
     homepage = "https://github.com/HomeOfVapourSynthEvolution/VapourSynth-Deblock";
