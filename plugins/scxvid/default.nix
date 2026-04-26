@@ -8,7 +8,6 @@
   vapoursynth,
   xvidcore,
   python3,
-  vapoursynth
 }:
 
   stdenv.mkDerivation rec {
@@ -29,7 +28,7 @@
   postPatch = ''
     substituteInPlace meson.build \
       --replace "run_command('python', '-c', 'import vapoursynth as vs; print(vs.get_include())').stdout().strip()" \
-                "'${vapoursynth.dev}/include'"
+                "'${vapoursynth}/include'"
   '';
 
     installPhase = ''
