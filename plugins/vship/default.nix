@@ -52,7 +52,7 @@ stdenv.mkDerivation rec {
       -I src \
       -I include \
       -I "${vapoursynth}/include/vapoursynth" \
-      -I "${ffms2}/include" \
+      -I "${vapoursynthPlugins.ffms2}/include" \
       --offload-arch=gfx1100 \
       --offload-arch=gfx1101 \
       --offload-arch=gfx1102 \
