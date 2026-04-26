@@ -57,6 +57,12 @@ python3.pkgs.toPythonModule (
         "avx2_args += ['-mavx2', '-mfma', '-Wno-maybe-uninitialized']"
     '';
 
+    postInstall = ''
+      mkdir -p $out/lib/vapoursynth
+      ln -s $out/${python3.sitePackages}/vapoursynth/plugins/libdescale.so \
+            $out/lib/vapoursynth/libdescale.so
+    '';
+
     meta = with lib; {
       description = "VapourSynth plugin to undo upscaling";
       homepage = "https://github.com/Jaded-Encoding-Thaumaturgy/vapoursynth-descale";
