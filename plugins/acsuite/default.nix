@@ -3,6 +3,7 @@
   buildPythonPackage,
   fetchFromGitHub,
   ffmpeg,
+  setuptools,
   vapoursynth,
 }:
 
