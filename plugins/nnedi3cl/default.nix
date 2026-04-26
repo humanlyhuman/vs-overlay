@@ -37,24 +37,26 @@ stdenv.mkDerivation rec {
   # https://github.com/NixOS/nixpkgs/issues/86131
   BOOST_INCLUDEDIR = "${lib.getDev boost}/include";
   BOOST_LIBRARYDIR = "${lib.getLib boost}/lib";
-
+  preConfigure = ''
+    mkdir -p $TMPDIR/boost-patched
+    cp -r ${lib.getDev boost}/include/boost $TMPDIR/boost-patched/
+    chmod -R u+w $TMPDIR/boost-patched
+  
+    sed -i 's/desc\.mem_object = 0;//g' \
+      $TMPDIR/boost-patched/boost/compute/image/image2d.hpp \
+      $TMPDIR/boost-patched/boost/compute/image/image3d.hpp
+  
+    sed -i 's/desc\.mem_object = d->weights1Buffer\.get();//g' \
+      NNEDI3CL/NNEDI3CL.cpp
+  
+    export NIX_CFLAGS_COMPILE="-I$TMPDIR/boost-patched $NIX_CFLAGS_COMPILE"
+  '';
+  
   postPatch = ''
     substituteInPlace meson.build \
-        --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
-
-    for f in \
-      ${lib.getDev boost}/include/boost/compute/image/image2d.hpp \
-      ${lib.getDev boost}/include/boost/compute/image/image3d.hpp; do
-      cp "$f" "$(basename $f).orig"
-    done
-
-    substituteInPlace ../NNEDI3CL/NNEDI3CL.cpp \
-      --replace "desc.mem_object = d->weights1Buffer.get();" \
-                "/* mem_object removed in OpenCL 3.0 */"
+      --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
   '';
-
-  env.NIX_CFLAGS_COMPILE = "-DCL_USE_DEPRECATED_OPENCL_1_2_APIS";
-
+        
   meta = with lib; {
     description = "An OpenCL accelerated nnedi3 filter for VapourSynth";
     homepage = "https://github.com/HomeOfVapourSynthEvolution/VapourSynth-NNEDI3CL";
