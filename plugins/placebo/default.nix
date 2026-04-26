@@ -20,7 +20,7 @@ stdenv.mkDerivation rec {
     owner = "Lypheo";
     repo = pname;
     rev = version;
-    hash = "sha256-PlqqMBU9WedOqQkl8S77xIUzBpaU1Bgv9ZY8Rfh803o=";
+    sha256 = "sha256-PlqqMBU9WedOqQkl8S77xIUzBpaU1Bgv9ZY8Rfh803o=";
     fetchSubmodules = true;
   };
 
