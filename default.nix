@@ -19,14 +19,12 @@ in
     awarpsharp2 = prev.callPackage ./plugins/awarpsharp2 { };
     beziercurve = prev.callPackage ./plugins/beziercurve { };
     bifrost = prev.callPackage ./plugins/bifrost { };
-    bilateral = prev.callPackage ./plugins/bilateral { };
     bm3d = prev.callPackage ./plugins/bm3d { };
     cas = prev.callPackage ./plugins/cas { };
     cnr2 = prev.callPackage ./plugins/cnr2 { };
     d2vsource = prev.callPackage ./plugins/d2vsource { };
     dctfilter = prev.callPackage ./plugins/dctfilter { };
     deblock = prev.callPackage ./plugins/deblock { };
-    decross = prev.callPackage ./plugins/decross { };
     descale = prev.callPackage ./plugins/descale { };
     dfttest = prev.callPackage ./plugins/dfttest { };
     eedi3m = prev.callPackage ./plugins/eedi3m { };
@@ -37,9 +35,7 @@ in
     imwri = prev.callPackage ./plugins/imwri { };
     knlmeanscl = prev.callPackage ./plugins/knlmeanscl { };
     lsmashsource = prev.callPackage ./plugins/lsmashsource { };
-    minideen = prev.callPackage ./plugins/minideen { };
     motionmask = prev.callPackage ./plugins/motionmask { };
-    msmoosh = prev.callPackage ./plugins/msmoosh { };
     mvtools = prev.vapoursynth-mvtools;
     neo_f3kdb = prev.callPackage ./plugins/neo_f3kdb { };
     nnedi3 = prev.callPackage ./plugins/nnedi3 { };
@@ -54,7 +50,6 @@ in
     scxvid = prev.callPackage ./plugins/scxvid { };
     subtext = prev.callPackage ./plugins/subtext { };
     tcanny = prev.callPackage ./plugins/tcanny { };
-    temporalsoften2 = prev.callPackage ./plugins/temporalsoften2 { };
     tnlmeans = prev.callPackage ./plugins/tnlmeans { };
     ttempsmooth = prev.callPackage ./plugins/ttempsmooth { };
     vivtc = prev.callPackage ./plugins/vivtc { };
