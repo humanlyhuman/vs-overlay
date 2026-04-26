@@ -27,8 +27,8 @@
       
   postPatch = ''
     substituteInPlace meson.build \
-      --replace-fail "py.get_install_dir() / 'vapoursynth/plugins'" \
-                     "get_option('libdir') / 'vapoursynth'"
+      --replace "run_command('python', '-c', 'import vapoursynth as vs; print(vs.get_include())').stdout().strip()" \
+                "'${vapoursynth.dev}/include'"
   '';
 
     installPhase = ''
