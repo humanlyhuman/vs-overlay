@@ -34,7 +34,7 @@ stdenv.mkDerivation rec {
     substituteInPlace meson.build \
       --replace-fail \
         "run_command(py, '-c', 'import vapoursynth as vs; print(vs.get_include())', check: true).stdout().strip()" \
-        "py.get_variable('INCLUDEPY')"
+        "dependency('vapoursynth').get_variable(pkgconfig: 'includedir')"
   '';
 
   meta = with lib; {
