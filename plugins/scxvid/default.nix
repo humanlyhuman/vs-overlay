@@ -15,7 +15,7 @@
     version = "3";
   
     src = fetchFromGitHub {
-      owner = "dubhater";
+      owner = "dubhatervapoursynth";
       repo = pname;
       rev = "v${version}";
       sha256 = "sha256-WgoIF7ni2j6wNCutysV18B693OapzniZoy94iyZR3uA=";
