@@ -21,7 +21,7 @@ python3Packages.buildPythonPackage {
 
   postPatch = ''
     substituteInPlace pyproject.toml \
-      --replace-fail '"VapourSynth>=74",' "" \
+      --replace-fail '"VapourSynth>=74"' "" \
   '';
 
   dependencies = [
