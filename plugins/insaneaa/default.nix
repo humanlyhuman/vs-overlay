@@ -19,6 +19,7 @@ buildPythonPackage {
     eedi3m
     nnedi3
     descale
+    finedehalo
   ];
   format = "other";
   installPhase = ''
