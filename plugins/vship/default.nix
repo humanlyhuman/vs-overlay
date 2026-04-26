@@ -1,7 +1,7 @@
 {
   lib,
   stdenv,
-  fetchFromGitHub, # still usable for Codeberg via fetchgit if preferred
+  fetchFromGitHub,
   fetchgit,
   hostPlatform,
   rocmPackages,
