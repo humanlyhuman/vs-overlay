@@ -18,8 +18,8 @@ python3.pkgs.toPythonModule (
     src = fetchFromGitHub {
       owner = "Jaded-Encoding-Thaumaturgy";
       repo = finalAttrs.pname;
-      rev = "master";
-      sha256 = "sha256-nTAv/aQYA4DXmlOLvpuc6lr3IR0beEx8FqVid11H+Qw=";
+      rev = "0d03b30194ea8588fcc345fcd84a6a1201ee0f34";
+      sha256 = "sha256-cvd9anNeNM0dktZf85BgLYgLrpnfxqpkYWeGhc3A7wI=";
     };
 
     nativeBuildInputs = [
