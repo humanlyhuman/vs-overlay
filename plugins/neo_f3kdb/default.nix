@@ -12,13 +12,13 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "neo_f3kdb";
-  version = "9";
+  version = "r10";
 
   src = fetchFromGitHub {
     owner = "HomeOfAviSynthPlusEvolution";
     repo = "neo_f3kdb";
     rev = "refs/tags/r${finalAttrs.version}";
-    hash = "sha256-MIvKjsemDeyv9qonuJbns0Dau8BjFQ1REppccs7s9JU=";
+    hash = "sha256-pGl7aiMSSzXG5tNWNSLNgju9zwUPD4p2tcJQHmk9AZo=";
   };
 
   nativeBuildInputs = [
@@ -54,7 +54,7 @@ stdenv.mkDerivation (finalAttrs: {
       gpl3Plus
       gpl2Plus
     ];
-    maintainers = with lib.maintainers; [ snaki ];
+    maintainers = with lib.maintainers; [ humanlyhuman ];
     platforms = lib.platforms.x86_64;
   };
 })
