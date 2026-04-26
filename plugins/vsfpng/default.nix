@@ -16,28 +16,22 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "Mikewando";
     repo = "vsfpng";
-    rev = "${version}";
+    rev = version;
     sha256 = "sha256-+OYUAp6T+ZGSFixw7W/QsqXVlPYea83WV88EVsI11KM=";
   };
 
-  nativeBuildInputs = [
-    meson
-    ninja
-    pkg-config
-  ];
+  nativeBuildInputs = [ meson ninja pkg-config ];
+  buildInputs = [ vapoursynth ];
 
-  buildInputs = [
-    vapoursynth
-  ];
   mesonFlags = [ "-Dwerror=false" ];
-  NIX_CFLAGS_COMPILE = "-Wno-error";
+
   postPatch = ''
     substituteInPlace meson.build \
+      --replace "-Werror" "" \
       --replace "vapoursynth/include" "${vapoursynth}/include" \
       --replace "py.get_install_dir() / 'vapoursynth/plugins'" "'${placeholder "out"}/lib/vapoursynth'"
   '';
 
-  libdir = "lib/vapoursynth";
   meta = with lib; {
     description = "fpng plugin for VapourSynth";
     homepage = "https://github.com/Mikewando/vsfpng";
