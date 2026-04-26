@@ -5,6 +5,7 @@
   buildPythonApplication,
   fetchFromGitHub,
   matplotlib,
+  setuptools,
   imagemagick,
 }:
 let
@@ -18,7 +19,12 @@ let
 in
 buildPythonApplication rec {
   pname = "getnative";
-  version = "3.2.1-unstable-2023-12-31";
+  version = "3.3.0";
+  pyproject = true;
+
+  build-system = [
+    setuptools
+  ];
 
   src = fetchFromGitHub {
     owner = "shssoichiro";
