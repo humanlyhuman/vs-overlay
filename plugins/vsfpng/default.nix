@@ -27,7 +27,9 @@ stdenv.mkDerivation rec {
 
   postPatch = ''
     substituteInPlace meson.build \
-      --replace "-Werror" "" \
+      --replace "-DFPNG_NO_SSE=0" "-DFPNG_NO_SSE=1" \
+      --replace "-msse4.1" "" \
+      --replace "-mpclmul" "" \
       --replace "vapoursynth/include" "${vapoursynth}/include" \
       --replace "py.get_install_dir() / 'vapoursynth/plugins'" "'${placeholder "out"}/lib/vapoursynth'"
   '';
