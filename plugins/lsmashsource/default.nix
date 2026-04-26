@@ -51,7 +51,6 @@ stdenv.mkDerivation (finalAttrs: {
         rev = "custom-patches-for-lsmashsource";
         hash = "sha256-vbnrdHOzANc+EXKr4SAW9Hcorbgih/apsFoTaJlIITQ=";
       };
-      yasm = nasm;
     })
   ];
 
