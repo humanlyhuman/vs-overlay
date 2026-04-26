@@ -1,7 +1,7 @@
-diff --git a/meson.build b/meson.build
 --- a/meson.build
 +++ b/meson.build
-@@ -17,13 +17,7 @@ deps = [xvid_dep]
+@@ -17,13 +17,7 @@
+ deps = [xvid_dep]
  
 -incdir = include_directories(
 -    run_command(
