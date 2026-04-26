@@ -10,7 +10,7 @@
   vapoursynth,
   ffmpeg,
   l-smash,
-  xxHash,
+  xxhash,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
@@ -51,6 +51,8 @@ stdenv.mkDerivation (finalAttrs: {
         rev = "custom-patches-for-lsmashsource";
         hash = "sha256-vbnrdHOzANc+EXKr4SAW9Hcorbgih/apsFoTaJlIITQ=";
       };
+    }).overrideAttrs (old: {
+      patches = [];
     })
   ];
 
