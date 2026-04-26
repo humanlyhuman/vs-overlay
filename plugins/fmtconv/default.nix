@@ -1,20 +1,20 @@
 {
   lib,
   stdenv,
-  fetchFromGitHub,
+  fetchFromGitLab,
   autoreconfHook,
   vapoursynth,
 }:
 
 stdenv.mkDerivation rec {
   pname = "fmtconv";
-  version = "29";
+  version = "31";
 
-  src = fetchFromGitHub {
+  src = fetchFromGitLab {
     owner = "EleonoreMizo";
     repo = pname;
     rev = "r${version}";
-    sha256 = "sha256-V2iY8mBIFtkLkiHXlN/KrlBmzCEpGStHYaOcJSTU9LE=";
+    sha256 = "sha256-SyctXpfhIOyx1R9XUi2DVlSRHYeODmYxs/4ZzCp1rWo=";
   };
 
   preAutoreconf = "cd build/unix";
@@ -26,7 +26,7 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     description = "Format conversion tools for VapourSynth";
-    homepage = "https://github.com/EleonoreMizo/fmtconv";
+    homepage = "https://gitlab.com/EleonoreMizo/fmtconv/";
     license = licenses.wtfpl;
     maintainers = with maintainers; [ ];
     platforms = platforms.all;
