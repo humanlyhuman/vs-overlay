@@ -51,6 +51,10 @@ python3.pkgs.toPythonModule (
     )
     inc_vs = include_directories(r.stdout().strip())" \
         "inc_vs = include_directories('${vapoursynth}/include')"
+      substituteInPlace meson.build \
+        --replace-fail \
+        "avx2_args += ['-mavx2', '-mfma']" \
+        "avx2_args += ['-mavx2', '-mfma', '-Wno-maybe-uninitialized']"
     '';
 
     postInstall = ''
