@@ -35,6 +35,9 @@ buildPythonApplication rec {
     sha256 = "sha256-ikUH45s8NlbxPA4ifoMvfj1S2d16mKkDCKJcmd4b83o=";
   };
 
+  pythonRelaxDeps = [ "vapoursynth" ];  
+  doCheck = false;
+
   # vapoursynth is not recognised during installation
   postPatch = ''
     substituteInPlace requirements.txt \
@@ -49,11 +52,14 @@ buildPythonApplication rec {
   nativeCheckInputs = [
     imagemagick
   ];
+  
+
+
   checkInputs = [
     vapoursynth-with-plugins
   ];
-  doCheck = false;
-  checkPhase = ''
+
+checkPhase = ''
     convert -size 1280x720 canvas: +noise Random test.png
     $out/bin/getnative --min-height 699 --max-height 700 test.png
     $out/bin/getnative --min-height 699 --max-height 700 -u ffms2.Source test.png
