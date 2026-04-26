@@ -26,8 +26,12 @@ python3.pkgs.toPythonModule (
       meson
       ninja
       pkg-config
+      (python3.withPackages (ps: [ ps.vapoursynth ]))
     ];
-    buildInputs = [ vapoursynth ];
+    
+    buildInputs = [
+      vapoursynth
+    ];
 
     postPatch = ''
       substituteInPlace meson.build \
@@ -40,9 +44,9 @@ python3.pkgs.toPythonModule (
 
     meta = with lib; {
       description = "VapourSynth plugin to undo upscaling";
-      homepage = "https://github.com/Irrational-Encoding-Wizardry/vapoursynth-descale";
-      license = licenses.wtfpl;
-      maintainers = with maintainers; [ sbruder ];
+      homepage = "https://github.com/Jaded-Encoding-Thaumaturgy/vapoursynth-descale";
+      license = licenses.mit;
+      maintainers = with maintainers; [ humanlyhuman ];
       platforms = platforms.all;
     };
   })
