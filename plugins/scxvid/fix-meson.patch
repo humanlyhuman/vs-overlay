@@ -1,8 +1,7 @@
 diff --git a/meson.build b/meson.build
 --- a/meson.build
 +++ b/meson.build
-@@ -16,15 +16,7 @@ deps = [xvid_dep]
-
+@@
 -incdir = include_directories(
 -    run_command(
 -        find_program('python', 'python3'),
@@ -12,5 +11,3 @@ diff --git a/meson.build b/meson.build
 -    ).stdout().strip(),
 -)
 +incdir = include_directories()
-
- py = import('python').find_installation(pure: false)
