@@ -7,7 +7,6 @@
   pkg-config,
   vapoursynth,
   fftwSinglePrec,
-  python3,
 }:
 stdenv.mkDerivation rec {
   pname = "vapoursynth-bm3d";
@@ -24,7 +23,6 @@ stdenv.mkDerivation rec {
     meson
     ninja
     pkg-config
-    (python3.withPackages (ps: [ ps.vapoursynth ]))  # makes `import vapoursynth` work
   ];
 
   buildInputs = [
@@ -34,9 +32,9 @@ stdenv.mkDerivation rec {
 
   postPatch = ''
     substituteInPlace meson.build \
-      --replace-warn \
-        "python3.find_installation().run_command(['python3', '-c', 'import vapoursynth as vs; print(vs.get_include())'], check: true).stdout().strip()" \
-        "vapoursynth_dep.get_variable(pkgconfig: 'includedir')"
+      --replace-fail \
+        "run_command(py, '-c', 'import vapoursynth as vs; print(vs.get_include())', check: true).stdout().strip()" \
+        "py.get_variable('INCLUDEPY')"
   '';
 
   meta = with lib; {
