@@ -24,6 +24,7 @@ stdenv.mkDerivation rec {
     meson
     ninja
     pkg-config
+    python3
   ];
 
   buildInputs = [
