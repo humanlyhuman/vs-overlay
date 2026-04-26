@@ -32,7 +32,7 @@
         --replace-fail "py.get_install_dir() / 'vapoursynth/plugins'" \
         "get_option('libdir') / 'vapoursynth'"
   
-      substituteInPlace requirements.txt \
+      substituteInPlace pyproject.toml \
         --replace-fail "VapourSynth>=69" ""
     '';
 
