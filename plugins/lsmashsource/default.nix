@@ -15,13 +15,13 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "lsmashsource";
-  version = "b43f75fab4a6f7330e24855c9f7c9c971cd626d9";
+  version = "1282";
 
   src = fetchFromGitHub {
     owner = "HomeOfAviSynthPlusEvolution";
     repo = "L-SMASH-Works";
     rev = finalAttrs.version;
-    hash = "sha256-64e1tDNFVyJnH0q41K9PT5YOxginhTYaj9NtdPu/g6A=";
+    hash = "sha256-0TSK5nvLAOwn6BrEFuMd342i+rAyu6JLWWk4czx9RXI=";
   };
 
   preConfigure = ''
@@ -49,7 +49,7 @@ stdenv.mkDerivation (finalAttrs: {
         owner = "HomeOfAviSynthPlusEvolution";
         repo = "FFmpeg";
         rev = "custom-patches-for-lsmashsource";
-        hash = "sha256-eMnn8G63BUU/dUWW8JIMkr67DI7atxmNpkYGwnnL37E=";
+        hash = "sha256-vbnrdHOzANc+EXKr4SAW9Hcorbgih/apsFoTaJlIITQ=";
       };
       yasm = nasm;
     })
