@@ -33,9 +33,7 @@ in
     fmtconv = prev.callPackage ./plugins/fmtconv { };
     histogram = prev.callPackage ./plugins/histogram { };
     imwri = prev.callPackage ./plugins/imwri { };
-    knlmeanscl = prev.callPackage ./plugins/knlmeanscl { };
     lsmashsource = prev.callPackage ./plugins/lsmashsource { };
-    motionmask = prev.callPackage ./plugins/motionmask { };
     mvtools = prev.vapoursynth-mvtools;
     neo_f3kdb = prev.callPackage ./plugins/neo_f3kdb { };
     nnedi3 = prev.callPackage ./plugins/nnedi3 { };
@@ -45,7 +43,6 @@ in
     readmpls = prev.callPackage ./plugins/readmpls { };
     remap = prev.callPackage ./plugins/remap { };
     removegrain = prev.callPackage ./plugins/removegrain { };
-    retinex = prev.callPackage ./plugins/retinex { };
     sangnom = prev.callPackage ./plugins/sangnom { };
     scxvid = prev.callPackage ./plugins/scxvid { };
     subtext = prev.callPackage ./plugins/subtext { };
