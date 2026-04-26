@@ -7,8 +7,8 @@
   pkg-config,
   vapoursynth,
   fftwSinglePrec,
+  python3,
 }:
-
 stdenv.mkDerivation rec {
   pname = "vapoursynth-bm3d";
   version = "10";
@@ -24,7 +24,9 @@ stdenv.mkDerivation rec {
     meson
     ninja
     pkg-config
+    (python3.withPackages (ps: [ ps.vapoursynth ]))  # makes `import vapoursynth` work
   ];
+
   buildInputs = [
     vapoursynth
     fftwSinglePrec
@@ -32,14 +34,16 @@ stdenv.mkDerivation rec {
 
   postPatch = ''
     substituteInPlace meson.build \
-        --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
+      --replace-warn \
+        "python3.find_installation().run_command(['python3', '-c', 'import vapoursynth as vs; print(vs.get_include())'], check: true).stdout().strip()" \
+        "vapoursynth_dep.get_variable(pkgconfig: 'includedir')"
   '';
 
   meta = with lib; {
     description = "BM3D denoising filter for VapourSynth";
     homepage = "https://github.com/HomeOfVapourSynthEvolution/VapourSynth-BM3D";
     license = licenses.mit;
-    maintainers = with maintainers; [ ];
+    maintainers = [ ];
     platforms = platforms.all;
   };
 }
