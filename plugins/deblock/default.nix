@@ -40,7 +40,7 @@ stdenv.mkDerivation rec {
       gnu_symbol_visibility: 'hidden',
       install: true,
       install_dir: join_paths(get_option('libdir'), 'vapoursynth'),
-      name_prefix: ""
+      name_prefix: ''''
   )
   EOF
   '';
