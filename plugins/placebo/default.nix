@@ -38,7 +38,10 @@ stdenv.mkDerivation rec {
 
   postPatch = ''
     substituteInPlace meson.build \
-        --replace "vapoursynth_dep.get_variable(pkgconfig: 'libdir')" "get_option('libdir')"
+      --replace "vapoursynth_dep.get_variable(pkgconfig: 'libdir')" "get_option('libdir')" \
+      --replace \
+        "run_command(python, '-c', 'import vapoursynth as vs; print(vs.get_include())', check: true).stdout().strip()" \
+        "vapoursynth_dep.get_variable(pkgconfig: 'includedir')"
   '';
 
   meta = with lib; {
