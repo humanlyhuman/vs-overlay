@@ -25,24 +25,10 @@ stdenv.mkDerivation rec {
   ];
   buildInputs = [ vapoursynth ];
   postPatch = ''
-    cat > meson.build << 'EOF'
-  project('Deblock', 'cpp',
-      default_options: ['buildtype=release', 'warning_level=2', 'b_lto=true', 'b_ndebug=if-release', 'cpp_std=c++17'],
-      license: 'GPL-2.0-or-later',
-      license_files: 'LICENSE',
-      meson_version: '>=1.2.3',
-      version: '8.0',
-  )
-  vapoursynth_dep = dependency('vapoursynth')
-  shared_module('deblock',
-      files('Deblock/Deblock.cpp'),
-      dependencies: vapoursynth_dep,
-      gnu_symbol_visibility: 'hidden',
-      install: true,
-      install_dir: join_paths(get_option('libdir'), 'vapoursynth'),
-      name_prefix: ''''
-  )
-  EOF
+    substituteInPlace meson.build \
+      --replace "name_prefix: ''," "" \
+      --replace "py.get_install_dir() / 'vapoursynth/plugins'" \
+                "join_paths(get_option('libdir'), 'vapoursynth')"
   '';
   meta = with lib; {
     description = "A Deblock filter plugin for VapourSynth";
