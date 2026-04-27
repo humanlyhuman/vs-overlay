@@ -23,7 +23,7 @@ in
       owner = "Lypheo";
       repo = pname;
       rev = version;
-      hash = "sha256-PlqqMBU9WedOqQkl8S77xIUzBpaU1Bgv9ZY8Rfh803o=";
+      hash = "sha256-oHRwovTJBwfFOe2UmaSHxE/11F/ttE9H/gznS5xk/y8=";
       fetchSubmodules = false;
     };
     nativeBuildInputs = [
