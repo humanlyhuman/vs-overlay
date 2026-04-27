@@ -33,22 +33,24 @@
 
     outputs = ["out" "dev"];
 
-    postInstall = ''
-      mkdir -p $dev/lib/pkgconfig
+postInstall = ''
+  mkdir -p $dev/lib/pkgconfig
 
-      if [ -f $out/lib/pkgconfig/zimg.pc ]; then
-        cp $out/lib/pkgconfig/zimg.pc $dev/lib/pkgconfig/zimg_patched.pc
-      elif [ -f $dev/lib/pkgconfig/zimg.pc ]; then
-        cp $dev/lib/pkgconfig/zimg.pc $dev/lib/pkgconfig/zimg_patched.pc
-      fi
+  if [ -f $out/lib/pkgconfig/zimg.pc ]; then
+    cp $out/lib/pkgconfig/zimg.pc $dev/lib/pkgconfig/zimg_patched.pc
+  elif [ -f $dev/lib/pkgconfig/zimg.pc ]; then
+    cp $dev/lib/pkgconfig/zimg.pc $dev/lib/pkgconfig/zimg_patched.pc
+  fi
 
-      if [ -f $dev/lib/pkgconfig/zimg_patched.pc ]; then
-        substituteInPlace $dev/lib/pkgconfig/zimg_patched.pc \
-          --replace-fail "Name: zimg" "Name: zimg_patched" \
-          --replace-fail "Requires: zimg" ""
-      fi
-    '';
+  if [ -f $dev/lib/pkgconfig/zimg_patched.pc ]; then
+    substituteInPlace $dev/lib/pkgconfig/zimg_patched.pc \
+      --replace "Name: zimg" "Name: zimg_patched"
 
+    substituteInPlace $dev/lib/pkgconfig/zimg_patched.pc \
+      --replace "Requires: zimg" "" \
+      --replace "Requires.private: zimg" ""
+  fi
+'';
     meta = with lib; {
       description = "Patched zimg fork required by vapoursynth-resize2";
       homepage = "https://github.com/sekrit-twc/zimg";
