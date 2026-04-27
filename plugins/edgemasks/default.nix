@@ -20,10 +20,10 @@ stdenv.mkDerivation rec {
 
   postPatch = ''
     substituteInPlace meson.build \
-      --replace \
+      --replace-fail \
         "run_command(py, '-c', 'import vapoursynth as vs; print(vs.get_include())', check: true).stdout().strip()" \
         "'${vapoursynth}/include/vapoursynth'" \
-      --replace \
+      --replace-fail \
         "py.get_install_dir() / 'vapoursynth/plugins'" \
         "'${placeholder "out"}/lib/vapoursynth'"
   '';
