@@ -32,6 +32,7 @@ stdenv.mkDerivation rec {
     meson
     ninja
     pkg-config
+    (vapoursynth.python3)
   ];
   buildInputs = [ vapoursynth ];
 
