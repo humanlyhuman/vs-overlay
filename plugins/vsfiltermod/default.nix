@@ -48,8 +48,12 @@ llvmPackages.stdenv.mkDerivation rec {
   ];
 
   installPhase = ''
+    runHook preInstall
+  
     mkdir -p $out/lib/vapoursynth
-    cp src/plugins/vsfiltermod.so $out/lib/vapoursynth/libvsfm.so
+    install -Dm755 src/plugins/vsfiltermod.so $out/lib/vapoursynth/libvsfm.so
+  
+    runHook postInstall
   '';
 
   meta = with lib; {
