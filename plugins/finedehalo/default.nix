@@ -19,7 +19,7 @@ buildPythonPackage {
 
   propagatedBuildInputs = with vapoursynthPlugins; [
     vapoursynth
-    vapoursynthPlugins.vsjetpack
+    vapoursynthPlugins.vs-jetpack
     vapoursynthPlugins.jetpytools
   ];
 
