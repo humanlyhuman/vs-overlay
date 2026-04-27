@@ -9,7 +9,7 @@
   harfbuzz,
   fontconfig,
 }:
-llvmPackages.stdenv.mkDerivation {
+llvmPackages.stdenv.mkDerivation rec {
   pname = "vsfiltermod";
   version = "unstable-2026-03-24";
 
@@ -48,8 +48,8 @@ llvmPackages.stdenv.mkDerivation {
   ];
 
   dontInstall = true;
-
-  postBuild = ''
+  
+  installPhase = ''
     mkdir -p $out/lib/vapoursynth
     cp src/plugins/vsfiltermod.so $out/lib/vapoursynth/libvsfm.so
   '';
