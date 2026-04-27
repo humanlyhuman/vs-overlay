@@ -14,14 +14,12 @@
   vapoursynth-bestsource,
   imagemagick,
 }: let
-  vapoursynth-with-plugins = vapoursynth.withPlugins (
-    with vapoursynthPlugins; [
-      ffms2
-      descale
-      vapoursynth-bestsource
-      lsmashsource
-    ]
-  );
+  vapoursynth-with-plugins = vapoursynth.withPlugins [
+    vapoursynthPlugins.ffms2
+    vapoursynthPlugins.lsmashsource
+    vapoursynthPlugins.descale
+    vapoursynth-bestsource
+  ];
 in
   buildPythonApplication rec {
     pname = "nativeres";
