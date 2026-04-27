@@ -31,12 +31,13 @@ buildPythonPackage rec {
     pkg-config
     python
     packaging
+    git
+    cmake
   ];
-
+  
   buildInputs = [
     vapoursynth
   ];
-
   propagatedBuildInputs = [
     vapoursynth
   ];
