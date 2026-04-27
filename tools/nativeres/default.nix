@@ -2,7 +2,6 @@
   lib,
   fetchFromGitHub,
   buildPythonApplication,
-  python3,
   hatchling,
   versioningit,
   typer,
@@ -30,7 +29,7 @@ in
       rev = "vsview-nativeres/v${version}";
       hash = "sha256-3+j/YKmiAcESbnxJS+Cp6EAZix37OTMT0g5HG/TEsTM=";
     };
-    env.VERSIONINGIT_OVERRIDE = version;
+    VERSIONINGIT_OVERRIDE = version;
     build-system = [
       hatchling
       versioningit
