@@ -16,7 +16,6 @@ in
     adaptivegrain = prev.callPackage ./plugins/adaptivegrain { };
     vs-noise = prev.callPackage ./plugins/vs-noise { };
     autocrop = prev.callPackage ./plugins/autocrop { };
-    awarpsharp2 = prev.callPackage ./plugins/awarpsharp2 { };
     beziercurve = prev.callPackage ./plugins/beziercurve { };
     bifrost = prev.callPackage ./plugins/bifrost { };
     bm3d = prev.callPackage ./plugins/bm3d { };
