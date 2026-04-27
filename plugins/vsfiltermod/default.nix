@@ -47,9 +47,11 @@ llvmPackages.stdenv.mkDerivation rec {
     "-DFETCHCONTENT_FULLY_DISCONNECTED=ON"
   ];
 
-  postInstall = ''
+  dontInstall = true;
+
+  postBuild = ''
     mkdir -p $out/lib/vapoursynth
-    ln -s $out/lib/libvsfm.so $out/lib/vapoursynth/
+    cp src/plugins/vsfiltermod.so $out/lib/vapoursynth/libvsfm.so
   '';
 
   meta = with lib; {
