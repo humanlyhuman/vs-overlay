@@ -29,33 +29,33 @@
     outputs = ["out" "dev"];
 
     installPhase = ''
-      mkdir -p $out/lib
-      mkdir -p $dev/include/graphengine
-      mkdir -p $dev/include/zimg
-      mkdir -p $dev/lib/pkgconfig
+        mkdir -p $out/lib
+        mkdir -p $dev/include/graphengine
+        mkdir -p $dev/include/zimg
+        mkdir -p $dev/lib/pkgconfig
 
-      find . -name "libzimg.a" -exec cp {} $out/lib/ \;
+        find . -name "libzimg.a" -exec cp {} $out/lib/ \;
 
-      cp -r $src/graphengine/include/graphengine/. $dev/include/graphengine/
+        cp -r $src/graphengine/include/graphengine/. $dev/include/graphengine/
 
-      cp -r $src/src/zimg/common     $dev/include/zimg/
-      cp -r $src/src/zimg/graph      $dev/include/zimg/
-      cp -r $src/src/zimg/depth      $dev/include/zimg/
-      cp -r $src/src/zimg/colorspace $dev/include/zimg/
-      cp -r $src/src/zimg/resize     $dev/include/zimg/
-      cp -r $src/src/zimg/api        $dev/include/zimg/
+        cp -r $src/src/zimg/common     $dev/include/zimg/
+        cp -r $src/src/zimg/graph      $dev/include/zimg/
+        cp -r $src/src/zimg/depth      $dev/include/zimg/
+        cp -r $src/src/zimg/colorspace $dev/include/zimg/
+        cp -r $src/src/zimg/resize     $dev/include/zimg/
+        cp -r $src/src/zimg/api        $dev/include/zimg/
 
-    cat > $dev/lib/pkgconfig/zimg_patched.pc <<EOF
-    Name: zimg_patched
-    Description: Patched zimg
-    Version: 3.0.6
-    Libs: -L$out/lib -lzimg
-    Cflags: -I$dev/include
-    EOF
+      cat > $dev/lib/pkgconfig/zimg_patched.pc <<EOF
+      Name: zimg_patched
+      Description: Patched zimg
+      Version: 3.0.6
+      Libs: -L$out/lib -lzimg
+      Cflags: -I$dev/include
+      EOF
 
-      sed -i "s|PLACEHOLDER_INCLUDE|$dev/include|g" $dev/lib/pkgconfig/zimg_patched.pc
-      sed -i "s|PLACEHOLDER_LIB|$out/lib|g" $dev/lib/pkgconfig/zimg_patched.pc
-      sed -i "s|PLACEHOLDER|$out|g" $dev/lib/pkgconfig/zimg_patched.pc
+        sed -i "s|PLACEHOLDER_INCLUDE|$dev/include|g" $dev/lib/pkgconfig/zimg_patched.pc
+        sed -i "s|PLACEHOLDER_LIB|$out/lib|g" $dev/lib/pkgconfig/zimg_patched.pc
+        sed -i "s|PLACEHOLDER|$out|g" $dev/lib/pkgconfig/zimg_patched.pc
     '';
 
     meta = with lib; {
