@@ -24,6 +24,7 @@
       hash = "sha256-8PDjDlG3Bso3IQUwjrGqZZR0VtCiVLHB77Ul6n4I+XM=";
       fetchSubmodules = true;
     };
+patches = [ ./0001.patch ];
 
     nativeBuildInputs = [meson ninja pkg-config python];
     buildInputs = [vapoursynth];
