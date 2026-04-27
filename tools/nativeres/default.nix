@@ -65,7 +65,7 @@ in
     '';
     postFixup = ''
       wrapProgram $out/bin/nativeres \
-        --suffix PATH : ${lib.makeBinPath [ vapoursynth ]}
+        --suffix PATH : ${lib.makeBinPath [vapoursynth]}
     '';
     meta = with lib; {
       description = "Descale analysis tools for VapourSynth";
