@@ -105,7 +105,7 @@
 
         cp -r graphengine/include/graphengine $dev/include/
         mkdir -p $dev/include
-        
+
         cp -r src/zimg/api        $dev/include/
         cp -r src/zimg/common     $dev/include/
         cp -r src/zimg/colorspace $dev/include/
