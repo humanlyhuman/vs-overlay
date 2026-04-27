@@ -55,6 +55,7 @@ in
     vship = prev.callPackage ./plugins/vship { };
     vsfpng = prev.callPackage ./plugins/vsfpng { };
     knlmeanscl = prev.callPackage ./plugins/knlmeanscl { };
+    vsfiltermod = prev.callPackage ./plugins/vsfiltermod { };
 
     insaneaa = callPythonPackage ./plugins/insaneaa { };
     acsuite = callPythonPackage ./plugins/acsuite { };
