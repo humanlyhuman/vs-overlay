@@ -8,9 +8,10 @@
   python3,
   vapoursynthPlugins,
 }:
-stdenv.mkDerivation rec {
+python3.pkgs.buildPythonPackage rec {
   pname = "vs-mlrt";
   version = "15.16";
+  format = "other";  # not a standard setuptools package
 
   src = fetchFromGitHub {
     owner = "AmusementClub";
@@ -30,7 +31,7 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [ p7zip ];
-  buildInputs = [ vapoursynth python3 ];
+  buildInputs = [ vapoursynth ];
 
   dontConfigure = true;
   dontBuild = true;
@@ -66,7 +67,6 @@ stdenv.mkDerivation rec {
     description = "Machine learning runtimes for VapourSynth (meta package: scripts + models)";
     homepage = "https://github.com/AmusementClub/vs-mlrt";
     license = licenses.gpl3;
-    maintainers = with maintainers; [ ];
     platforms = platforms.linux;
   };
 }
