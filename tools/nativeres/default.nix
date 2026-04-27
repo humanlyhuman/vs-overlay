@@ -28,7 +28,7 @@ in
       owner = "Jaded-Encoding-Thaumaturgy";
       repo = "nativeres";
       rev = "vsview-nativeres/v${version}";
-      hash = lib.fakeHash;
+      hash = "sha256-3+j/YKmiAcESbnxJS+Cp6EAZix37OTMT0g5HG/TEsTM=";
     };
 
     build-system = [
