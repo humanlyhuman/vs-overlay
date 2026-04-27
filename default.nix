@@ -30,7 +30,6 @@ in {
     ocr = prev.callPackage ./plugins/ocr {};
     placebo = prev.callPackage ./plugins/placebo {};
     readmpls = prev.callPackage ./plugins/readmpls {};
-    sneedif = prev.callPackage ./plugins/sneedif {};
     subtext = prev.callPackage ./plugins/subtext {};
     tnlmeans = prev.callPackage ./plugins/tnlmeans {};
     vivtc = prev.callPackage ./plugins/vivtc {};
@@ -52,6 +51,7 @@ in {
     jetpytools = callPythonPackage ./plugins/jetpytools {};
     lvsfunc = callPythonPackage ./plugins/lvsfunc {};
     rekt = callPythonPackage ./plugins/rekt {};
+    sneedif = callPythonPackage ./plugins/sneedif {};
     vardefunc = callPythonPackage ./plugins/vardefunc {};
     vs-jetpack = callPythonPackage ./plugins/vsjetpack {
       inherit (final.vapoursynthPlugins) jetpytools;
