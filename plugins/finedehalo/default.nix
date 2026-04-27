@@ -5,8 +5,7 @@
   vapoursynthPlugins,
   python,
   vapoursynth,
-  vsjetpack,
-  jetpytools,
+  vapoursynthPlugins,
 }:
 buildPythonPackage {
   pname = "finedehalo";
@@ -21,8 +20,8 @@ buildPythonPackage {
 
   propagatedBuildInputs = with vapoursynthPlugins; [
     vapoursynth
-    vsjetpack
-    jetpytools
+    vapoursynthPlugins.vsjetpack
+    vapoursynthPlugins.jetpytools
   ];
 
   format = "other";
