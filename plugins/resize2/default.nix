@@ -115,14 +115,16 @@
 
       cat > $dev/lib/pkgconfig/zimg_patched.pc <<EOF
       prefix=$out
-      exec_prefix=$out
-      libdir=$out/lib
+      exec_prefix=\${prefix}
+      libdir=\${prefix}/lib
       includedir=$dev/include
+      
       Name: zimg_patched
       Description: patched zimg static library
-      Version=${version}
-      Libs: -L$out/lib -lzimg
-      Cflags: -I$dev/include
+      Version: ${version}
+      Libs: -L\${libdir} -lzimg
+      Libs.private: -lstdc++
+      Cflags: -I\${includedir}
       EOF
     '';
   };
