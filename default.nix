@@ -14,7 +14,6 @@ in
 {
   vapoursynthPlugins = prev.lib.recurseIntoAttrs {
     # Native C plugins
-    adaptivegrain  = prev.callPackage ./plugins/adaptivegrain { };
     autocrop       = prev.callPackage ./plugins/autocrop { };
     awarp          = prev.callPackage ./plugins/awarp { };
     beziercurve    = prev.callPackage ./plugins/beziercurve { };
