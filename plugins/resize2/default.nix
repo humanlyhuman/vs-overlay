@@ -20,7 +20,7 @@ in
       src = fetchFromGitHub {
         owner = "Jaded-Encoding-Thaumaturgy";
         repo = finalAttrs.pname;
-        rev = "v${finalAttrs.version}";
+        rev = "${finalAttrs.version}";
         hash = "sha256-oOfDYHBZZ3JEYrbeiwSDNAaua7hlC61lYJOTqB6I7/Q=";
       };
 
