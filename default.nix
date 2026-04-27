@@ -29,6 +29,7 @@ in {
     nlm-ispc = prev.callPackage ./plugins/nlm-ispc {};
     ocr = prev.callPackage ./plugins/ocr {};
     placebo = prev.callPackage ./plugins/placebo {};
+    scxvid = prev.callPackage ./plugins/scxvid {};
     readmpls = prev.callPackage ./plugins/readmpls {};
     subtext = prev.callPackage ./plugins/subtext {};
     tnlmeans = prev.callPackage ./plugins/tnlmeans {};
