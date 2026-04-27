@@ -34,7 +34,7 @@ in
       buildInputs = [
         vapoursynth
       ];
-mesonFlags = [ "--wrap-mode=forcefallback" ];
+      mesonFlags = ["--wrap-mode=forcefallback"];
       postPatch = ''
         substituteInPlace meson.build \
           --replace-fail \
