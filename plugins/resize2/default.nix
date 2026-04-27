@@ -32,24 +32,19 @@
     ];
 
     outputs = ["out" "dev"];
+postInstall = ''
+  mkdir -p $dev/include/zimg/api
+  mkdir -p $dev/include/graphengine
+  mkdir -p $dev/lib/pkgconfig
 
-    postInstall = ''
-      mkdir -p $dev/include/zimg
-      mkdir -p $dev/include/zimg/api
-      mkdir -p $dev/lib/pkgconfig
-
-      # internal headers needed by resize2
-      cp -r src/zimg/common      $dev/include/zimg/
-      cp -r src/zimg/graph       $dev/include/zimg/ || true
-      cp -r src/zimg/depth       $dev/include/zimg/ || true
-      cp -r src/zimg/colorspace  $dev/include/zimg/ || true
-      cp -r src/zimg/resize      $dev/include/zimg/ || true
-      cp -r src/zimg/api/*       $dev/include/zimg/api/ || true
-
-      # graphengine submodule headers (included by filtergraph.h)
-      mkdir -p $dev/include/graphengine
-      cp -r src/graphengine/graphengine/*.h $dev/include/graphengine/ || true
-
+  # zimg internal headers
+  cp -r src/zimg/common      $dev/include/zimg/
+  cp -r src/zimg/graph       $dev/include/zimg/ || true
+  cp -r src/zimg/depth       $dev/include/zimg/ || true
+  cp -r src/zimg/colorspace  $dev/include/zimg/ || true
+  cp -r src/zimg/resize      $dev/include/zimg/ || true
+  cp -r src/zimg/api/*       $dev/include/zimg/api/ || true
+  cp -r src/graphengine/graphengine/* $dev/include/graphengine/
                 # create alias pkg-config file
                 if [ -f $dev/lib/pkgconfig/zimg.pc ]; then
                   cp $dev/lib/pkgconfig/zimg.pc \
