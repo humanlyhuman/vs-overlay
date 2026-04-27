@@ -31,7 +31,7 @@ stdenv.mkDerivation rec {
 
   contribModels = fetchurl {
     url = "https://github.com/AmusementClub/vs-mlrt/releases/download/v${version}/contrib-models.v${version}.7z";
-    sha256 = "sha256-uxw6XJMF8yvMtHUpbiUuAuhf8n1kgeO3ZQuskbUeqwc=";
+    sha256 = "sha256-Im515f+jHfcqxYR43LIv52bisiAMHutVHsKGEh8u43Y=";
   };
 
   nativeBuildInputs = [
