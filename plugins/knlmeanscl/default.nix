@@ -12,7 +12,6 @@
   opencl-headers,
   ocl-icd,
 }:
-
 buildPythonPackage rec {
   pname = "vapoursynth-knlmeanscl";
   version = "1.2";
@@ -25,9 +24,9 @@ buildPythonPackage rec {
     hash = "sha256-mFOcKqUzDhWu7yiqiHReTFSzb5jA/YDPb7IOASX9JUo=";
   };
 
-  build-system = [ hatchling meson ninja packaging ];
+  build-system = [hatchling meson ninja packaging];
 
-  nativeBuildInputs = [ pkg-config ];
+  nativeBuildInputs = [pkg-config];
 
   buildInputs = [
     vapoursynth
@@ -36,7 +35,7 @@ buildPythonPackage rec {
     ocl-icd
   ];
 
-  dependencies = [ vapoursynth ];
+  dependencies = [vapoursynth];
 
   postPatch = ''
     sed -i '/vapoursynth>=74/d' pyproject.toml
