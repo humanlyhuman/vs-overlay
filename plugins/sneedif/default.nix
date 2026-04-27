@@ -53,9 +53,9 @@ buildPythonPackage rec {
     "sneedif"
   ];
 
-postPatch = ''
-  sed -i '/vapoursynth>=74/d' pyproject.toml
-'';
+  postPatch = ''
+    sed -i '/vapoursynth>=74/d' pyproject.toml
+  '';
 
   doCheck = false;
   dontCheckRuntimeDeps = true;
