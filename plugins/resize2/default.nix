@@ -8,12 +8,11 @@
   libtool,
   pkg-config,
 }:
-
 stdenv.mkDerivation rec {
   pname = "zimg_patched";
   version = "unstable-2026-04-27";
 
-  outputs = [ "out" "dev" ];
+  outputs = ["out" "dev"];
 
   src = fetchgit {
     url = "https://github.com/sekrit-twc/zimg.git";
