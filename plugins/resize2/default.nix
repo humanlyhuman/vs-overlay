@@ -24,41 +24,37 @@
       fetchSubmodules = true;
     };
 
-    nativeBuildInputs = [meson ninja pkg-config];
-    outputs = ["out" "dev"];
+ nativeBuildInputs = [ meson ninja pkg-config ];
 
-    configurePhase = ''
-      meson setup build . --buildtype=release --default-library=static
-    '';
+mesonFlags = [ "--default-library=static" ];
 
-    buildPhase = ''
-      ninja -C build -j$NIX_BUILD_CORES
-    '';
+# disable install since zimg's meson.build doesn't have install targets
+dontUseNinjaInstall = true;
 
-    installPhase = ''
-      mkdir -p $out/lib
-      mkdir -p $dev/include/graphengine
-      mkdir -p $dev/include/zimg
-      mkdir -p $dev/lib/pkgconfig
+postBuild = ''
+  mkdir -p $out/lib
+  mkdir -p $dev/include/graphengine
+  mkdir -p $dev/include/zimg
+  mkdir -p $dev/lib/pkgconfig
 
-      find build -name "libzimg.a" -exec cp {} $out/lib/ \;
+  find . -name "libzimg.a" -exec cp {} $out/lib/ \;
 
-      cp -r $src/graphengine/include/graphengine/. $dev/include/graphengine/
-      cp -r $src/src/zimg/common     $dev/include/zimg/
-      cp -r $src/src/zimg/graph      $dev/include/zimg/
-      cp -r $src/src/zimg/depth      $dev/include/zimg/
-      cp -r $src/src/zimg/colorspace $dev/include/zimg/
-      cp -r $src/src/zimg/resize     $dev/include/zimg/
-      cp -r $src/src/zimg/api        $dev/include/zimg/
+  cp -r $src/graphengine/include/graphengine/. $dev/include/graphengine/
+  cp -r $src/src/zimg/common     $dev/include/zimg/
+  cp -r $src/src/zimg/graph      $dev/include/zimg/
+  cp -r $src/src/zimg/depth      $dev/include/zimg/
+  cp -r $src/src/zimg/colorspace $dev/include/zimg/
+  cp -r $src/src/zimg/resize     $dev/include/zimg/
+  cp -r $src/src/zimg/api        $dev/include/zimg/
 
-      cat > $dev/lib/pkgconfig/zimg_patched.pc <<EOF
-      Name: zimg_patched
-      Description: Patched zimg
-      Version: 3.0.6
-      Libs: -L$out/lib -lzimg
-      Cflags: -I$dev/include
-      EOF
-    '';
+  cat > $dev/lib/pkgconfig/zimg_patched.pc <<EOF
+  Name: zimg_patched
+  Description: Patched zimg
+  Version: 3.0.6
+  Libs: -L$out/lib -lzimg
+  Cflags: -I$dev/include
+  EOF
+'';
 
     meta = with lib; {
       description = "Patched zimg fork required by vapoursynth-resize2";
