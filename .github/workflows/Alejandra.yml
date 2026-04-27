@@ -1,4 +1,4 @@
-name: nixfmt-tree
+name: format
 
 on:
   push:
