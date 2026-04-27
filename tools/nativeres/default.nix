@@ -10,16 +10,18 @@
   numpy,
   scipy,
   vapoursynth,
-  bestsource,
   vapoursynthPlugins,
   imagemagick,
 }: let
-  vsEnv = vapoursynth.withPlugins (with vapoursynthPlugins; [
-    ffms2
-    bestsource
-    descale
-  ]);
+  vapoursynth-with-plugins = vapoursynth.withPlugins (
+    with vapoursynthPlugins; [
+      ffms2
+      descale  
+      bestsource
+    ]
+  );
 in
+
   buildPythonApplication rec {
     pname = "nativeres";
     version = "0.2.0";
@@ -46,7 +48,7 @@ in
       pyside6
       numpy
       scipy
-      vapoursynth
+      vapoursynth-with-plugins
     ];
 
     nativeCheckInputs = [
@@ -67,7 +69,7 @@ in
     '';
     postFixup = ''
       wrapProgram $out/bin/nativeres \
-        --set VAPOURSYNTH_PLUGIN_PATH ${vsEnv}/lib/vapoursynth
+        --set VAPOURSYNTH_PLUGIN_PATH ${vapoursynth-with-plugins}/lib/vapoursynth
     '';
     meta = with lib; {
       description = "Descale analysis tools for VapourSynth";
