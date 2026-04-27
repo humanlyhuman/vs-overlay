@@ -69,14 +69,24 @@
         'src/zimg/unresize/unresize.cpp',
         'src/zimg/unresize/unresize_impl.cpp'
       )
-
-      zimg = library(
-        'zimg',
+      zimg_obj = static_library(
+        'zimg_obj',
         sources,
+        c_args: compile_args,
+        cpp_args: compile_args,
+        dependencies: deps,
+        link_with: link_libs,
         include_directories: [vapoursynth_include, incl_dirs],
-        dependencies: [dependency('threads')],
-        gnu_symbol_visibility: 'default',
-        cpp_args: ['-fvisibility=default']
+        pic: true
+      )
+      
+      zimg = shared_library(
+        'zimg',
+        [],
+        dependencies: deps,
+        link_with: [zimg_obj],
+        version: '3.0.5',
+        soversion: '3'
       )
 
       zimg_patched_dep = declare_dependency(
