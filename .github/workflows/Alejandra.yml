@@ -1,2 +1,35 @@
-- name: Set up Alejandra
-  uses: 0xc000022070/setup-alejandra@v4.0.0
+name: nixfmt-tree
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  fmt:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Alejandra
+        uses: 0xc000022070/setup-alejandra@v4.0.0
+
+      - name: Format Nix files
+        run: alejandra .
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add .
+
+          git diff --cached --quiet && exit 0
+
+          git commit -m "chore: format nix files [skip ci]"
+          git push
