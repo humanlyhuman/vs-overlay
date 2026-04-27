@@ -34,7 +34,6 @@ buildPythonPackage rec {
     python
     packaging
     git
-    cmake
   ];
 
   buildInputs = [
