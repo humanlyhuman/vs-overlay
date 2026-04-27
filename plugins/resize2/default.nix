@@ -3,7 +3,7 @@
   stdenv,
   fetchFromGitHub,
   buildPythonPackage,
-  hatchling,
+  meson-python,
   meson,
   ninja,
   packaging,
