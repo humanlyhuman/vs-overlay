@@ -47,7 +47,9 @@ in {
     acsuite = callPythonPackage ./plugins/acsuite {};
     akarin = callPythonPackage ./plugins/akarin {};
     awsmfunc = callPythonPackage ./plugins/awsmfunc {};
-    finedehalo = callPythonPackage ./plugins/finedehalo {};
+    finedehalo = callPythonPackage ./plugins/finedehalo {
+      inherit (final.vapoursynthPlugins) jetpytools;
+    };
     insaneaa = callPythonPackage ./plugins/insaneaa {};
     jetpytools = callPythonPackage ./plugins/jetpytools {};
     lvsfunc = callPythonPackage ./plugins/lvsfunc {};
