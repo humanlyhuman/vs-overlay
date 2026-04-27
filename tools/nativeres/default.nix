@@ -45,14 +45,14 @@ dependencies = [
   pyside6
   numpy
   scipy
-]
+];
 
 propagatedBuildInputs = [
   vapoursynthPlugins.jetpytools
   vapoursynthPlugins.vs-jet-engine
   vapoursynthPlugins.vs-jetpack
   vapoursynth-with-plugins
-]
+];
 
     nativeCheckInputs = [
       imagemagick
