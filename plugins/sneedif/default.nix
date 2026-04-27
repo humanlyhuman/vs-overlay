@@ -53,12 +53,9 @@ buildPythonPackage rec {
     "sneedif"
   ];
 
-  postPatch = ''
-    # This does not depend on vapoursynth (since this is used from within
-    # vapoursynth).
-    substituteInPlace pyproject.toml \
-        --replace-fail "vapoursynth>=74" "" \
-  '';
+postPatch = ''
+  sed -i '/vapoursynth>=74/d' pyproject.toml
+'';
 
   doCheck = false;
   dontCheckRuntimeDeps = true;
@@ -67,7 +64,7 @@ buildPythonPackage rec {
     description = "Setsugen No Ensemble of Edge Directed Interpolation Functions for VapourSynth";
     homepage = "https://github.com/Jaded-Encoding-Thaumaturgy/vapoursynth-SNEEDIF";
     license = licenses.wtfpl;
-    platforms = platforms.linux ++ platforms.windows;
+    platforms = platforms.linux;
     maintainers = [];
   };
 }
