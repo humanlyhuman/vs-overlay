@@ -26,7 +26,7 @@ buildPythonPackage rec {
     hash = "sha256-oOfDYHBZZ3JEYrbeiwSDNAaua7hlC61lYJOTqB6I7/Q=";
 };
 
-  zimgSrc = zimgSrc = fetchgit {
+ zimgSrc = fetchgit {
     url = "https://github.com/sekrit-twc/zimg.git";
     rev = "df9c1472b9541d0e79c8d02dae37fdf12f189ec2";
     hash = "sha256-8PDjDlG3Bso3IQUwjrGqZZR0VtCiVLHB77Ul6n4I+XM=";
