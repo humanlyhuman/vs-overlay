@@ -67,7 +67,6 @@ in
     meta = {
       description = "Descale analysis tools for VapourSynth";
       homepage = "https://github.com/Jaded-Encoding-Thaumaturgy/nativeres";
-      changelog = "https://github.com/Jaded-Encoding-Thaumaturgy/nativeres/releases/tag/nativeres%2Fv${version}"
       license = lib.licenses.mit;
       mainProgram = "nativeres";
       platforms = lib.platforms.all;
