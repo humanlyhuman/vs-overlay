@@ -61,7 +61,6 @@ buildPythonPackage {
     meson
     ninja
     packaging
-    vapoursynth
   ];
 
   env.MESON_ARGS = lib.optionalString withBoostCharconv "-Dboost-charconv=true";
