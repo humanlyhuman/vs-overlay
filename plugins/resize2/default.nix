@@ -9,7 +9,7 @@
   ninja,
   pkg-config,
   packaging,
-  python3,
+  python,
   vapoursynth,
 }: let
   zimgMeson = builtins.toFile "meson.build" ''
@@ -87,7 +87,7 @@
       fetchSubmodules = true;
     };
 
-    nativeBuildInputs = [meson ninja pkg-config python3];
+    nativeBuildInputs = [meson ninja pkg-config python];
     buildInputs = [vapoursynth];
 
     postPatch = ''
@@ -155,7 +155,7 @@ in
       meson
       ninja
       pkg-config
-      python3
+      python
       packaging
     ];
 
@@ -165,7 +165,7 @@ in
     dontCheckRuntimeDeps = true;
 
     postPatch = ''
-      python3 <<EOF
+      python <<EOF
       import re
       p = open("pyproject.toml").read()
       p = re.sub(r'"vapoursynth>=.*?",?', "", p)
