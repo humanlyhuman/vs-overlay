@@ -56,6 +56,7 @@ in
     vsfpng = prev.callPackage ./plugins/vsfpng { };
     knlmeanscl = prev.callPackage ./plugins/knlmeanscl { };
     vsfiltermod = prev.callPackage ./plugins/vsfiltermod { };
+    vs-mlrt = prev.callPackage ./plugins/vs-mlrt { };
 
     insaneaa = callPythonPackage ./plugins/insaneaa { };
     acsuite = callPythonPackage ./plugins/acsuite { };
