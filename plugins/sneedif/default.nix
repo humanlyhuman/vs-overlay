@@ -49,50 +49,50 @@ buildPythonPackage rec {
     vapoursynth
   ];
 
-postPatch = ''
-  python3 -c "
-import re
+  postPatch = ''
+      python3 -c "
+    import re
 
-content = open('meson.build').read()
+    content = open('meson.build').read()
 
-content = re.sub(
-    r'r = run_command\\(.*?check: true,\\s*\\)',
-    \"\",
-    content,
-    flags=re.DOTALL
-)
+    content = re.sub(
+        r'r = run_command\\(.*?check: true,\\s*\\)',
+        \"\",
+        content,
+        flags=re.DOTALL
+    )
 
-content = re.sub(
-    r'incdir = include_directories\\(.*?\\n\\)',
-    \"\",
-    content,
-    flags=re.DOTALL
-)
+    content = re.sub(
+        r'incdir = include_directories\\(.*?\\n\\)',
+        \"\",
+        content,
+        flags=re.DOTALL
+    )
 
-content = content.replace(
-    'include_directories: incdir,',
-    'dependencies: vapoursynth_dep,'
-)
+    content = content.replace(
+        'include_directories: incdir,',
+        'dependencies: vapoursynth_dep,'
+    )
 
-content = content.replace(
-    \"py.get_install_dir() / 'vapoursynth/plugins'\",
-    \"'${placeholder "out"}/lib/vapoursynth'\"
-)
+    content = content.replace(
+        \"py.get_install_dir() / 'vapoursynth/plugins'\",
+        \"'${placeholder "out"}/lib/vapoursynth'\"
+    )
 
-open('meson.build', 'w').write(content)
-"
+    open('meson.build', 'w').write(content)
+    "
 
-  python3 -c "
-content = open('pyproject.toml').read()
+      python3 -c "
+    content = open('pyproject.toml').read()
 
-content = '\\n'.join(
-    line for line in content.splitlines()
-    if 'vapoursynth>=74' not in line
-) + '\\n'
+    content = '\\n'.join(
+        line for line in content.splitlines()
+        if 'vapoursynth>=74' not in line
+    ) + '\\n'
 
-open('pyproject.toml', 'w').write(content)
-"
-'';
+    open('pyproject.toml', 'w').write(content)
+    "
+  '';
 
   doCheck = false;
   dontCheckRuntimeDeps = true;
