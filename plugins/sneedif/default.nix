@@ -44,16 +44,19 @@ buildPythonPackage rec {
   ];
 
   dependencies = [vapoursynth];
+postPatch = ''
+  sed -i '/vapoursynth>=74/d' pyproject.toml
 
-  postPatch = ''
-    sed -i '/vapoursynth>=74/d' pyproject.toml
+  sed -i "/import vapoursynth as vs/d" meson.build
+  sed -i "/vs.get_include()/d" meson.build
 
-    substituteInPlace meson.build \
-      --replace-fail \
+  substituteInPlace meson.build \
+    --replace-fail "incdir = include_directories(r.stdout().strip())" \
+                   "incdir = include_directories('${vapoursynth}/include')" \
+    --replace-fail \
       "install_dir: py.get_install_dir() / 'vapoursynth/plugins'," \
       "install_dir: get_option('libdir') / 'vapoursynth',"
-  '';
-
+'';
   doCheck = false;
 
   meta = with lib; {
