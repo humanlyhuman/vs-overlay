@@ -11,9 +11,7 @@
   vapoursynth,
   git,
   autoreconfHook,
-}:
-
-let
+}: let
   zimg_patched = stdenv.mkDerivation rec {
     pname = "zimg_patched";
     version = "unstable-2026-04-27";
@@ -31,7 +29,7 @@ let
       pkg-config
     ];
 
-    outputs = [ "out" "dev" ];
+    outputs = ["out" "dev"];
 
     postInstall = ''
       mkdir -p $dev/lib/pkgconfig
@@ -58,76 +56,74 @@ let
       platforms = platforms.unix;
     };
   };
-
 in
+  buildPythonPackage rec {
+    pname = "vapoursynth-resize2";
+    version = "0.4.2";
 
-buildPythonPackage rec {
-  pname = "vapoursynth-resize2";
-  version = "0.4.2";
+    pyproject = true;
 
-  pyproject = true;
+    src = fetchFromGitHub {
+      owner = "Jaded-Encoding-Thaumaturgy";
+      repo = pname;
+      rev = version;
+      hash = "sha256-oOfDYHBZZ3JEYrbeiwSDNAaua7hlC61lYJOTqB6I7/Q=";
+    };
 
-  src = fetchFromGitHub {
-    owner = "Jaded-Encoding-Thaumaturgy";
-    repo = pname;
-    rev = version;
-    hash = "sha256-oOfDYHBZZ3JEYrbeiwSDNAaua7hlC61lYJOTqB6I7/Q=";
-  };
+    nativeBuildInputs = [
+      pkg-config
+      vapoursynth
+      zimg_patched
+    ];
 
-  nativeBuildInputs = [
-    pkg-config
-    vapoursynth
-    zimg_patched
-  ];
+    build-system = [
+      git
+      meson-python
+      meson
+      ninja
+      packaging
+    ];
 
-  build-system = [
-    git
-    meson-python
-    meson
-    ninja
-    packaging
-  ];
+    buildInputs = [
+      vapoursynth
+      zimg_patched
+    ];
 
-  buildInputs = [
-    vapoursynth
-    zimg_patched
-  ];
+    propagatedBuildInputs = [
+      vapoursynth
+    ];
 
-  propagatedBuildInputs = [
-    vapoursynth
-  ];
+    dontCheckRuntimeDeps = true;
 
-  dontCheckRuntimeDeps = true;
+    postPatch = ''
+          python3 <<'EOF'
+      import re
 
-  postPatch = ''
-    python3 <<'EOF'
-import re
+      p = open("pyproject.toml").read()
+      p = re.sub(r'"vapoursynth>=.*?",?', "", p)
+      p = re.sub(r'"ninja==.*?",?', '"ninja",', p)
 
-p = open("pyproject.toml").read()
-p = re.sub(r'"vapoursynth>=.*?",?', "", p)
-p = re.sub(r'"ninja==.*?",?', '"ninja",', p)
+      open("pyproject.toml", "w").write(p)
+      EOF
 
-open("pyproject.toml", "w").write(p)
-EOF
+          substituteInPlace meson.build \
+            --replace-fail \
+            "import vapoursynth as vs; print(vs.get_include())" \
+            "print(\"${vapoursynth}/include/vapoursynth\")"
+    '';
 
-    substituteInPlace meson.build \
-      --replace-fail \
-      "import vapoursynth as vs; print(vs.get_include())" \
-      "print(\"${vapoursynth}/include/vapoursynth\")"
-  '';
+    postInstall = ''
+      mkdir -p $out/lib/vapoursynth
 
-  postInstall = ''
-    mkdir -p $out/lib/vapoursynth
+      ln -s \
+        $out/lib/python*/site-packages/vapoursynth/plugins/resize2/libresize2${stdenv.hostPlatform.extensions.sharedLibrary} \
+        $out/lib/vapoursynth/libresize2${stdenv.hostPlatform.extensions.sharedLibrary}
+    '';
 
-    ln -s \
-      $out/lib/python*/site-packages/vapoursynth/plugins/resize2/libresize2${stdenv.hostPlatform.extensions.sharedLibrary} \
-      $out/lib/vapoursynth/libresize2${stdenv.hostPlatform.extensions.sharedLibrary}
-  '';
-
-  meta = with lib; {
-    description = "resize2 plugin for VapourSynth with blur support";
-    homepage = "https://github.com/Jaded-Encoding-Thaumaturgy/vapoursynth-resize2";
-    license = licenses.lgpl21Only;
-    platforms = platforms.all;
-  };
-}
+    meta = with lib; {
+      description = "resize2 plugin for VapourSynth with blur support";
+      homepage = "https://github.com/Jaded-Encoding-Thaumaturgy/vapoursynth-resize2";
+      license = licenses.lgpl21Only;
+      platforms = platforms.all;
+    };
+  }
