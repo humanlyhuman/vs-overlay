@@ -14,7 +14,6 @@
   vsstubs ? null,
   python,
 }:
-
 buildPythonPackage rec {
   pname = "vsjetengine";
   version = "1.2.0";
@@ -38,20 +37,21 @@ buildPythonPackage rec {
   ];
 
   optional-dependencies = {
-    trio = lib.optionals (trio != null) [ trio ];
+    trio = lib.optionals (trio != null) [trio];
   };
 
-  nativeCheckInputs = [
-    mypy
-    pytest
-    pytest-cov
-    pytest-asyncio
-    ruff
-  ]
-  ++ lib.optionals (trio != null) [ trio ]
-  ++ lib.optionals (vsstubs != null && lib.versionAtLeast python.pythonVersion "3.13") [
-    vsstubs
-  ];
+  nativeCheckInputs =
+    [
+      mypy
+      pytest
+      pytest-cov
+      pytest-asyncio
+      ruff
+    ]
+    ++ lib.optionals (trio != null) [trio]
+    ++ lib.optionals (vsstubs != null && lib.versionAtLeast python.pythonVersion "3.13") [
+      vsstubs
+    ];
 
   env.VERSIONINGIT_OVERRIDE_VCS = version;
 
