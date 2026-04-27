@@ -1,6 +1,6 @@
 {
   lib,
-  stdenv,
+  llvmPackages,
   fetchFromGitHub,
   cmake,
   pkg-config,
@@ -9,7 +9,7 @@
   harfbuzz,
   fontconfig,
 }:
-stdenv.mkDerivation rec {
+llvmPackages.stdenv.mkDerivation rec {
   pname = "vsfiltermod";
   version = "unstable-2026-03-24";
 
