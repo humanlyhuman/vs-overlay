@@ -29,7 +29,7 @@ buildPythonPackage rec {
     owner = "sekrit-twc";
     repo = "zimg";
     rev = "df9c1472b9541d0e79c8d02dae37fdf12f189ec2";
-    hash = "sha256-8PDjDlG3Bso3IQUwjrGqZZR0VtCiVLHB77Ul6n4I+XM=";
+    hash = "sha256-nEQWA/ia5E/NOX7aaAkdOokG3J08eDHW8JGSyRMsobw=";
   };
   nativeBuildInputs = [
     meson-python
