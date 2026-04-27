@@ -85,13 +85,13 @@
       )
       EOF
     '';
-
+    
     configurePhase = ''
       meson setup build \
         --prefix=$out \
         --libdir=lib \
         --includedir=include \
-        -Ddefault_library=static
+        -Ddefault_library=shared
     '';
 
     buildPhase = ''
