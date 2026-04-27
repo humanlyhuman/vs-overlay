@@ -72,7 +72,13 @@ buildPythonPackage rec {
     p.write_text(s)
     EOF
   '';
+postInstall = ''
+  mkdir -p $out/lib/vapoursynth
 
+  ln -s \
+    $out/lib/python*/site-packages/vapoursynth/plugins/libKNLMeansCL.so \
+    $out/lib/vapoursynth/libKNLMeansCL.so
+'';
   doCheck = false;
 
   meta = with lib; {
