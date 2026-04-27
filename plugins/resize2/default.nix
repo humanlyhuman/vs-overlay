@@ -102,8 +102,18 @@
               mkdir -p $dev/include
               mkdir -p $dev/lib/pkgconfig
 
-              cp build/libzimg.a $out/lib/
+mkdir -p $out/lib
 
+cp build/libzimg.a libzimg.a
+mkdir ar-tmp
+
+cd ar-tmp
+ar x ../libzimg.a
+cd ..
+
+ar rcs $out/lib/libzimg.a ar-tmp/*.o
+ranlib $out/lib/libzimg.a
+rm -rf ar-tmp libzimg.a
               cp -r graphengine/include/graphengine $dev/include/
       mkdir -p $dev/include/zimg
 
