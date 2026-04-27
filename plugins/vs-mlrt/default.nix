@@ -49,9 +49,9 @@ python3.pkgs.buildPythonPackage rec {
     install -Dm644 scripts/vsmlrt.py \
       $out/${python3.sitePackages}/vsmlrt.py
 
-    mkdir -p $out/share/vs-mlrt/models
-    7z x ${models}        -o$out/share/vs-mlrt/models
-    7z x ${contribModels} -o$out/share/vs-mlrt/models
+    mkdir -p $out/share/vs-mlrt
+    7z x ${models}        -o$out/share/vs-mlrt
+    7z x ${contribModels} -o$out/share/vs-mlrt
 
     mkdir -p $out/lib/vapoursynth
     for pkg in ${vapoursynthPlugins.vsncnn}; do
