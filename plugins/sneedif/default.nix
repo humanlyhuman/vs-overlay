@@ -58,6 +58,12 @@ buildPythonPackage rec {
         "install_dir: get_option('libdir') / 'vapoursynth',"
   '';
   doCheck = false;
+  postInstall = ''
+    mkdir -p $out/lib/vapoursynth
+    ln -s \
+      $out/lib/python*/site-packages/vapoursynth/plugins/sneedif/libsneedif.so \
+      $out/lib/vapoursynth/libsneedif.so
+  '';
 
   meta = with lib; {
     description = "Setsugen No Ensemble of Edge Directed Interpolation Functions for VapourSynth";
