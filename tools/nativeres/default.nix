@@ -18,10 +18,15 @@
     vapoursynthPlugins.ffms2
     vapoursynthPlugins.lsmashsource
     vapoursynthPlugins.descale
+    vapoursynthPlugins.akarin
     vapoursynth-bestsource
   ];
 
   jetpytools = vapoursynthPlugins.jetpytools.override {
+    vapoursynth = vapoursynth-with-plugins;
+  };
+
+  akarin = vapoursynthPlugins.akarin.override {
     vapoursynth = vapoursynth-with-plugins;
   };
 
