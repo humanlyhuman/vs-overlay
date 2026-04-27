@@ -13,8 +13,9 @@
   vapoursynthPlugins,
   imagemagick,
 }: let
-  vapoursynth-with-plugins = vapoursynth.withPlugins (with vapoursynthPlugins; [
+  vsEnv = vapoursynth.withPlugins (with vapoursynthPlugins; [
     ffms2
+    bestsource
     descale
   ]);
 in
@@ -65,7 +66,7 @@ in
     '';
     postFixup = ''
       wrapProgram $out/bin/nativeres \
-        --suffix PATH : ${lib.makeBinPath [vapoursynth]}
+        --set VAPOURSYNTH_PLUGIN_PATH ${vsEnv}/lib/vapoursynth
     '';
     meta = with lib; {
       description = "Descale analysis tools for VapourSynth";
