@@ -44,18 +44,18 @@ buildPythonPackage rec {
   ];
 
   dontCheckRuntimeDeps = true;
-postPatch = ''
-  python3 <<'EOF'
-import re
+  postPatch = ''
+      python3 <<'EOF'
+    import re
 
-p = open("pyproject.toml").read()
+    p = open("pyproject.toml").read()
 
-p = re.sub(r'"vapoursynth>=.*?",?', "", p)
-p = re.sub(r'"ninja==.*?",?', '"ninja",', p)
+    p = re.sub(r'"vapoursynth>=.*?",?', "", p)
+    p = re.sub(r'"ninja==.*?",?', '"ninja",', p)
 
-open("pyproject.toml", "w").write(p)
-EOF
-'';
+    open("pyproject.toml", "w").write(p)
+    EOF
+  '';
 
   postInstall = ''
     mkdir -p $out/lib/vapoursynth
