@@ -10,6 +10,7 @@
   numpy,
   scipy,
   vapoursynth,
+  bestsource,
   vapoursynthPlugins,
   imagemagick,
 }: let
