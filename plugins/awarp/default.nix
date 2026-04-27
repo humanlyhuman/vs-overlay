@@ -1,5 +1,4 @@
 { lib, stdenv, fetchFromGitHub, meson, ninja, pkg-config, vapoursynth }:
-
 stdenv.mkDerivation rec {
   pname = "vapoursynth-awarp";
   version = "3";
@@ -9,22 +8,21 @@ stdenv.mkDerivation rec {
     rev = "661084c9112bdd0fa9f37c851c05ecbd78fbc060";
     sha256 = "sha256-lNKGCyFET63qirqCgxCq4HCNPpaqjPQp0jrifVb9VKQ=";
   };
-
-  mesonFlags = [
-    "--libdir=${placeholder "out"}/lib/vapoursynth"
-    "-Dvapoursynth:includedir=${vapoursynth}/include/vapoursynth"
-  ];
-
-  nativeBuildInputs = [ meson ninja pkg-config
-    (vapoursynth.python3.withPackages (ps: [ vapoursynth ]))
-  ];
+  postPatch = ''
+    substituteInPlace meson.build \
+      --replace \
+        "run_command(py, '-c', 'import vapoursynth as vs; print(vs.get_include())', check: true).stdout().strip()" \
+        "'${vapoursynth}/include/vapoursynth'" \
+      --replace \
+        "py.get_install_dir() / 'vapoursynth/plugins'" \
+        "'${placeholder "out"}/lib/vapoursynth'"
+  '';
+  nativeBuildInputs = [ meson ninja pkg-config ];
   buildInputs = [ vapoursynth ];
-
   meta = with lib; {
-    description = "VapourSynth edge sharpener plugin";
+    description = "VapourSynth AWarp plugin";
     homepage = "https://github.com/HolyWu/VapourSynth-AWarp";
     license = licenses.mit;
-    maintainers = with maintainers; [ ];
     platforms = platforms.all;
   };
 }
