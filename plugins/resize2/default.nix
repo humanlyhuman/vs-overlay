@@ -44,33 +44,33 @@ buildPythonPackage rec {
   ];
 
   dontCheckRuntimeDeps = true;
-postPatch = ''
-  python3 <<'EOF'
-import re
+  postPatch = ''
+      python3 <<'EOF'
+    import re
 
-p = open("pyproject.toml").read()
-p = re.sub(r'"vapoursynth>=.*?",?', "", p)
-p = re.sub(r'"ninja==.*?",?', '"ninja",', p)
+    p = open("pyproject.toml").read()
+    p = re.sub(r'"vapoursynth>=.*?",?', "", p)
+    p = re.sub(r'"ninja==.*?",?', '"ninja",', p)
 
-open("pyproject.toml", "w").write(p)
-EOF
+    open("pyproject.toml", "w").write(p)
+    EOF
 
-  substituteInPlace meson.build \
-    --replace-fail \
-    "py = import('python').find_installation()" \
-    "py = import('python').find_installation(pure: false)"
+      substituteInPlace meson.build \
+        --replace-fail \
+        "py = import('python').find_installation()" \
+        "py = import('python').find_installation(pure: false)"
 
-  substituteInPlace meson.build \
-    --replace-fail \
-    "r = run_command(" \
-    "# disabled by nix\n# r = run_command("
+      substituteInPlace meson.build \
+        --replace-fail \
+        "r = run_command(" \
+        "# disabled by nix\n# r = run_command("
 
-  substituteInPlace meson.build \
-    --replace-fail \
-    "inc_vs = include_directories(r.stdout().strip())" \
-    "deps += dependency('vapoursynth')"
+      substituteInPlace meson.build \
+        --replace-fail \
+        "inc_vs = include_directories(r.stdout().strip())" \
+        "deps += dependency('vapoursynth')"
 
-'';
+  '';
 
   postInstall = ''
     mkdir -p $out/lib/vapoursynth
