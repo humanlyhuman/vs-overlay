@@ -12,7 +12,6 @@
   opencl-headers,
   ocl-icd,
 }:
-
 buildPythonPackage rec {
   pname = "vapoursynth-knlmeanscl";
   version = "1.2";
@@ -43,7 +42,7 @@ buildPythonPackage rec {
     ocl-icd
   ];
 
-  dependencies = [ vapoursynth ];
+  dependencies = [vapoursynth];
 
   postPatch = ''
     sed -i '/vapoursynth>=74/d' pyproject.toml
