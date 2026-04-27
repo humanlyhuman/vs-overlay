@@ -24,8 +24,8 @@ buildPythonPackage {
   src = fetchFromGitHub {
     owner = "Jaded-Encoding-Thaumaturgy";
     repo = "akarin-vapoursynth-plugin";
-    rev = "v1.4.1";
-    hash = "sha256-oZi7LerJiLC12qlS3hrwemLtTij23F77a9dVU4MBur4=";
+    rev = "v1.4.0";
+    hash = "sha256-g4KgEYS7s7IeJkx1ww1+2XxgkOW2uHmE6sIyDyVF6yE=";
   };
 
   postPatch = ''
