@@ -25,12 +25,15 @@ buildPythonPackage rec {
     rev = version;
     hash = "sha256-oOfDYHBZZ3JEYrbeiwSDNAaua7hlC61lYJOTqB6I7/Q=";
   };
+
   zimgSrc = fetchFromGitHub {
     owner = "sekrit-twc";
     repo = "zimg";
     rev = "df9c1472b9541d0e79c8d02dae37fdf12f189ec2";
     hash = "sha256-nEQWA/ia5E/NOX7aaAkdOokG3J08eDHW8JGSyRMsobw=";
+    fetchSubmodules = true;
   };
+
   nativeBuildInputs = [
     meson-python
     meson
