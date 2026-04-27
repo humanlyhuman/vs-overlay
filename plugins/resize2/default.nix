@@ -69,15 +69,15 @@
               'src/zimg/unresize/unresize.cpp',
               'src/zimg/unresize/unresize_impl.cpp'
             )
-
-      zimg = library(
-        'zimg',
-        sources,
-        include_directories: [vapoursynth_include, incl_dirs],
-        dependencies: [dependency('threads')],
-        gnu_symbol_visibility: 'default',
-        cpp_args: ['-fvisibility=default', '-fvisibility-inlines-hidden=0']
-      )
+            
+            zimg = library(
+              'zimg',
+              sources,
+              include_directories: [vapoursynth_include, incl_dirs],
+              dependencies: [dependency('threads')],
+              gnu_symbol_visibility: 'default',
+              cpp_args: ['-fvisibility=default']
+            )
 
             zimg_patched_dep = declare_dependency(
               link_with: zimg,
