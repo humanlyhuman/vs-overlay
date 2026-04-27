@@ -21,19 +21,16 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-mFOcKqUzDhWu7yiqiHReTFSzb5jA/YDPb7IOASX9JUo=";
   };
 
-  dontAddPrefix = true;
-  configureFlags = [ "--install=$(out)/lib/vapoursynth" ];
+  nativeBuildInputs = [ which pkg-config ];
+  buildInputs = [ vapoursynth boost opencl-headers ocl-icd ];
 
-  nativeBuildInputs = [
-    which
-    pkg-config
+  configureFlags = [
+    "--install=${placeholder "out"}/lib/vapoursynth"
   ];
-  buildInputs = [
-    vapoursynth
-    boost
-    opencl-headers
-    ocl-icd
-  ];
+
+  preInstall = ''
+    mkdir -p $out/lib/vapoursynth
+  '';
 
   meta = with lib; {
     description = "An optimized OpenCL implementation of the Non-local means de-noising algorithm";
