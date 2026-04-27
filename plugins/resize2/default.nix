@@ -13,54 +13,54 @@
   autoreconfHook,
   fetchgit,
 }: let
-zimg_patched = stdenv.mkDerivation rec {
-  pname = "zimg_patched";
-  version = "unstable-2026-04-27";
+  zimg_patched = stdenv.mkDerivation rec {
+    pname = "zimg_patched";
+    version = "unstable-2026-04-27";
 
-  outputs = [ "out" "dev" ];
+    outputs = ["out" "dev"];
 
-  src = fetchgit {
-    url = "https://github.com/sekrit-twc/zimg.git";
-    rev = "refs/heads/master";
-    hash = "sha256-MRWQ6tM1LEL1C4le7Ha7CmiA/V9hXrwp27KgJiHxSes=";
-    fetchSubmodules = true;
+    src = fetchgit {
+      url = "https://github.com/sekrit-twc/zimg.git";
+      rev = "refs/heads/master";
+      hash = "sha256-MRWQ6tM1LEL1C4le7Ha7CmiA/V9hXrwp27KgJiHxSes=";
+      fetchSubmodules = true;
+    };
+
+    nativeBuildInputs = [meson ninja pkg-config];
+
+    mesonFlags = ["-Ddefault_library=static"];
+
+    dontUseNinjaInstall = true;
+
+    postBuild = ''
+      mkdir -p $out/lib
+      mkdir -p $dev/include/graphengine
+      mkdir -p $dev/include/zimg
+      mkdir -p $dev/lib/pkgconfig
+      find . -name "libzimg.a" -exec cp {} $out/lib/ \;
+      cp -r $src/graphengine/include/graphengine/. $dev/include/graphengine/
+      cp -r $src/src/zimg/common     $dev/include/zimg/
+      cp -r $src/src/zimg/graph      $dev/include/zimg/
+      cp -r $src/src/zimg/depth      $dev/include/zimg/
+      cp -r $src/src/zimg/colorspace $dev/include/zimg/
+      cp -r $src/src/zimg/resize     $dev/include/zimg/
+      cp -r $src/src/zimg/api        $dev/include/zimg/
+      cat > $dev/lib/pkgconfig/zimg_patched.pc <<EOF
+      Name: zimg_patched
+      Description: Patched zimg
+      Version: 3.0.6
+      Libs: -L$out/lib -lzimg
+      Cflags: -I$dev/include
+      EOF
+    '';
+
+    meta = with lib; {
+      description = "Patched zimg fork required by vapoursynth-resize2";
+      homepage = "https://github.com/sekrit-twc/zimg";
+      license = licenses.wtfpl;
+      platforms = platforms.unix;
+    };
   };
-
-  nativeBuildInputs = [ meson ninja pkg-config ];
-
-  mesonFlags = [ "-Ddefault_library=static" ];
-
-  dontUseNinjaInstall = true;
-
-  postBuild = ''
-    mkdir -p $out/lib
-    mkdir -p $dev/include/graphengine
-    mkdir -p $dev/include/zimg
-    mkdir -p $dev/lib/pkgconfig
-    find . -name "libzimg.a" -exec cp {} $out/lib/ \;
-    cp -r $src/graphengine/include/graphengine/. $dev/include/graphengine/
-    cp -r $src/src/zimg/common     $dev/include/zimg/
-    cp -r $src/src/zimg/graph      $dev/include/zimg/
-    cp -r $src/src/zimg/depth      $dev/include/zimg/
-    cp -r $src/src/zimg/colorspace $dev/include/zimg/
-    cp -r $src/src/zimg/resize     $dev/include/zimg/
-    cp -r $src/src/zimg/api        $dev/include/zimg/
-    cat > $dev/lib/pkgconfig/zimg_patched.pc <<EOF
-    Name: zimg_patched
-    Description: Patched zimg
-    Version: 3.0.6
-    Libs: -L$out/lib -lzimg
-    Cflags: -I$dev/include
-    EOF
-  '';
-
-  meta = with lib; {
-    description = "Patched zimg fork required by vapoursynth-resize2";
-    homepage = "https://github.com/sekrit-twc/zimg";
-    license = licenses.wtfpl;
-    platforms = platforms.unix;
-  };
-};
 in
   buildPythonPackage rec {
     pname = "vapoursynth-resize2";
