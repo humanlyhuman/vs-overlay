@@ -1,67 +1,81 @@
 {
   lib,
+  stdenv,
   fetchFromGitHub,
+  buildPythonPackage,
+  hatchling,
   meson,
   ninja,
+  packaging,
   pkg-config,
   vapoursynth,
-  python,
-  python3Packages,
-  stdenv,
-}: let
-  pythonEnv = python.withPackages (ps: [
-    ps.vapoursynth
-  ]);
-in
-  python.pkgs.toPythonModule (
-    meson.buildMesonPackage rec {
-      pname = "vapoursynth-resize2";
-      version = "0.4.2";
+}:
 
-      src = fetchFromGitHub {
-        owner = "Jaded-Encoding-Thaumaturgy";
-        repo = pname;
-        rev = version;
-        hash = "sha256-oOfDYHBZZ3JEYrbeiwSDNAaua7hlC61lYJOTqB6I7/Q=";
-      };
+buildPythonPackage rec {
+  pname = "vapoursynth-resize2";
+  version = "0.4.2";
 
-      nativeBuildInputs = [
-        pkg-config
-        pythonEnv
-      ];
+  pyproject = true;
 
-      buildInputs = [
-        vapoursynth
-      ];
+  src = fetchFromGitHub {
+    owner = "Jaded-Encoding-Thaumaturgy";
+    repo = pname;
+    rev = version;
+    hash = "sha256-oOfDYHBZZ3JEYrbeiwSDNAaua7hlC61lYJOTqB6I7/Q=";
+  };
 
-      mesonFlags = [
-        "--wrap-mode=forcefallback"
-      ];
+  nativeBuildInputs = [
+    pkg-config
+    vapoursynth
+  ];
 
-      postPatch = ''
-        substituteInPlace meson.build \
-          --replace-fail \
-          "py = import('python').find_installation()" \
-          "py = import('python').find_installation('${pythonEnv}/bin/python')"
+  build-system = [
+    hatchling
+    meson
+    ninja
+    packaging
+    vapoursynth
+  ];
 
-        substituteInPlace meson.build \
-          --replace-fail \
-          "vapoursynth_include = include_directories(vapoursynth_include_command.stdout().strip())" \
-          "vapoursynth_include = include_directories('${vapoursynth}/include/vapoursynth')"
-      '';
+  buildInputs = [
+    vapoursynth
+  ];
 
-      postInstall = ''
-        mkdir -p $out/lib/vapoursynth
-        ln -s \
-          $out/${python.sitePackages}/vapoursynth/plugins/resize2${stdenv.hostPlatform.extensions.sharedLibrary} \
-          $out/lib/vapoursynth/resize2${stdenv.hostPlatform.extensions.sharedLibrary}
-      '';
+  dependencies = [
+    vapoursynth
+  ];
 
-      meta = with lib; {
-        description = "resize2 plugin for VapourSynth with blur support";
-        homepage = "https://github.com/Jaded-Encoding-Thaumaturgy/vapoursynth-resize2";
-        license = licenses.lgpl21Only;
-        platforms = platforms.all;
-      };
-    }
-  )
+  dontCheckRuntimeDeps = true;
+
+  postPatch = ''
+    substituteInPlace meson.build \
+      --replace-fail \
+      "py = import('python').find_installation()" \
+      "py = import('python').find_installation(pure: false)"
+
+    substituteInPlace meson.build \
+      --replace-fail \
+      "vapoursynth_include_command = run_command(" \
+      "# disabled by nix"
+
+    substituteInPlace meson.build \
+      --replace-fail \
+      "vapoursynth_include = include_directories(vapoursynth_include_command.stdout().strip())" \
+      "deps += dependency('vapoursynth')"
+  '';
+
+  postInstall = ''
+    mkdir -p $out/lib/vapoursynth
+
+    ln -s \
+      $out/lib/python*/site-packages/vapoursynth/plugins/resize2/libresize2${stdenv.hostPlatform.extensions.sharedLibrary} \
+      $out/lib/vapoursynth/libresize2${stdenv.hostPlatform.extensions.sharedLibrary}
+  '';
+
+  meta = with lib; {
+    description = "resize2 plugin for VapourSynth with blur support";
+    homepage = "https://github.com/Jaded-Encoding-Thaumaturgy/vapoursynth-resize2";
+    license = licenses.lgpl21Only;
+    platforms = platforms.all;
+  };
+}
