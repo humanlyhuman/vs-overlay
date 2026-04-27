@@ -4,7 +4,6 @@
   fetchFromGitHub,
   fetchurl,
   p7zip,
-  cmake,
   vapoursynth,
   python3,
   vapoursynthPlugins,
@@ -30,17 +29,18 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-Im515f+jHfcqxYR43LIv52bisiAMHutVHsKGEh8u43Y=";
   };
 
-  nativeBuildInputs = [
-    p7zip
-  ];
-
-  buildInputs = [
-    vapoursynth
-    python3
-  ];
+  nativeBuildInputs = [ p7zip ];
+  buildInputs = [ vapoursynth python3 ];
 
   dontConfigure = true;
   dontBuild = true;
+
+  postPatch = ''
+    substituteInPlace scripts/vsmlrt.py \
+      --replace \
+        'models_path: str = os.path.join(plugins_path, "models")' \
+        'models_path: str = "${placeholder "out"}/share/vs-mlrt/models"'
+  '';
 
   installPhase = ''
     runHook preInstall
@@ -49,11 +49,11 @@ stdenv.mkDerivation rec {
       $out/${python3.sitePackages}/vsmlrt.py
 
     mkdir -p $out/share/vs-mlrt/models
-    7z x ${models}       -o$out/share/vs-mlrt/models
+    7z x ${models}        -o$out/share/vs-mlrt/models
     7z x ${contribModels} -o$out/share/vs-mlrt/models
 
     mkdir -p $out/lib/vapoursynth
-    for pkg in ${vapoursynthPlugins.vsncnn} do 
+    for pkg in ${vapoursynthPlugins.vsncnn}; do
       for lib in $pkg/lib/vapoursynth/*.so; do
         ln -s "$lib" $out/lib/vapoursynth/
       done
@@ -61,15 +61,8 @@ stdenv.mkDerivation rec {
 
     runHook postInstall
   '';
-  
-  postPatch = ''
-    substituteInPlace scripts/vsmlrt.py \
-      --replace \
-        'models_path: str = os.path.join(plugins_path, "models")' \
-        'models_path: str = "${placeholder "out"}/share/vs-mlrt/models"'
-  '';
-  
-    meta = with lib; {
+
+  meta = with lib; {
     description = "Machine learning runtimes for VapourSynth (meta package: scripts + models)";
     homepage = "https://github.com/AmusementClub/vs-mlrt";
     license = licenses.gpl3;
