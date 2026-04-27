@@ -3,7 +3,6 @@
 stdenv.mkDerivation rec {
   pname = "vapoursynth-awarp";
   version = "3";
-
   src = fetchFromGitHub {
     owner = "HolyWu";
     repo = "VapourSynth-AWarp";
@@ -13,7 +12,9 @@ stdenv.mkDerivation rec {
 
   mesonFlags = [ "--libdir=${placeholder "out"}/lib/vapoursynth" ];
 
-  nativeBuildInputs = [ meson ninja pkg-config ];
+  nativeBuildInputs = [ meson ninja pkg-config
+    (vapoursynth.python3.withPackages (ps: [ vapoursynth ]))
+  ];
   buildInputs = [ vapoursynth ];
 
   meta = with lib; {
