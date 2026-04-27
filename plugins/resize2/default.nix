@@ -27,9 +27,9 @@
     nativeBuildInputs = [meson ninja pkg-config];
     outputs = ["out" "dev"];
 
-    configurePhase = ''
-      meson setup build --buildtype=release --default-library=static
-    '';
+configurePhase = ''
+  meson setup build . --buildtype=release --default-library=static
+'';
 
     buildPhase = ''
       ninja -C build -j$NIX_BUILD_CORES
