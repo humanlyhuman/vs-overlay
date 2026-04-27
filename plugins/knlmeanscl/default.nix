@@ -46,9 +46,9 @@ buildPythonPackage rec {
 
   postPatch = ''
     sed -i '/vapoursynth>=74/d' pyproject.toml
-  
+
     sed -i '/r = run_command(/,/^)/d' meson.build
-  
+
     substituteInPlace meson.build \
       --replace-fail \
         "inc_vs = include_directories(r.stdout().strip())" \
