@@ -125,7 +125,7 @@
       Version: ${version}
       Libs: -L$out/lib -lzimg
       Libs.private: -lstdc++
-      Cflags: -I$dev/include
+      Cflags: -I$dev/include -I$dev/include/zimg
       EOF
     '';
   };
