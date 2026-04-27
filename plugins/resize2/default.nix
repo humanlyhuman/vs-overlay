@@ -104,7 +104,6 @@
               cp build/libzimg.a $out/lib/
 
               cp -r graphengine/include/graphengine $dev/include/
-              mkdir -p $dev/include
       mkdir -p $dev/include/zimg
 
       cp -r src/zimg/api        $dev/include/zimg/
