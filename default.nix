@@ -20,7 +20,6 @@ in
     d2vsource      = prev.callPackage ./plugins/d2vsource { };
     deblock        = prev.callPackage ./plugins/deblock { };
     descale        = prev.callPackage ./plugins/descale { };
-    dfttest        = prev.callPackage ./plugins/dfttest { };
     edgemasks      = prev.callPackage ./plugins/edgemasks { };
     eedi3m         = prev.callPackage ./plugins/eedi3m { };
     ffms2          = prev.ffms;
