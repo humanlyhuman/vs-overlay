@@ -65,5 +65,4 @@ in {
 
   getnative = callPythonPackage ./tools/getnative {};
   nativeres = callPythonPackage ./tools/nativeres {};
-
 }
