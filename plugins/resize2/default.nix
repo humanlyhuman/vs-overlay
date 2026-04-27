@@ -10,7 +10,6 @@
   pkg-config,
   vapoursynth,
 }:
-
 buildPythonPackage rec {
   pname = "vapoursynth-resize2";
   version = "0.4.2";
