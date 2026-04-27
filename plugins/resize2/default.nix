@@ -113,19 +113,19 @@
       cp -r src/zimg/resize     $dev/include/zimg/
       cp -r src/zimg/unresize   $dev/include/zimg/
 
-      cat > $dev/lib/pkgconfig/zimg_patched.pc <<EOF
-      prefix=$out
-      exec_prefix=\${prefix}
-      libdir=\${prefix}/lib
-      includedir=$dev/include
-
-      Name: zimg_patched
-      Description: patched zimg static library
-      Version: ${version}
-      Libs: -L\${libdir} -lzimg
-      Libs.private: -lstdc++
-      Cflags: -I\${includedir}
-      EOF
+    cat > $dev/lib/pkgconfig/zimg_patched.pc <<EOF
+    prefix=$out
+    exec_prefix=$out
+    libdir=$out/lib
+    includedir=$dev/include
+    
+    Name: zimg_patched
+    Description: patched zimg static library
+    Version: ${version}
+    Libs: -L$out/lib -lzimg
+    Libs.private: -lstdc++
+    Cflags: -I$dev/include
+    EOF
     '';
   };
 in
