@@ -85,7 +85,7 @@
       )
       EOF
     '';
-
+    
     configurePhase = ''
       meson setup build \
         --prefix=$out \
@@ -102,18 +102,7 @@
       mkdir -p $dev/include
       mkdir -p $dev/lib/pkgconfig
 
-      mkdir -p repack
-      cd repack
-
-      for obj in $(cd ../build && ar t libzimg.a); do
-        cp "../build/$obj" .
-      done
-
-      ar rcs $out/lib/libzimg.a *.o
-      ranlib $out/lib/libzimg.a
-      cd ..
-      rm -rf repack
-
+      ninja -C build install
       cp -r graphengine/include/graphengine $dev/include/
       mkdir -p $dev/include/zimg
       cp -r src/zimg/api        $dev/include/zimg/
