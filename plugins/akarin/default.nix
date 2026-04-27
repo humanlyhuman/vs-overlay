@@ -68,7 +68,7 @@ buildPythonPackage {
   ];
   postInstall = ''
     mkdir -p $out/lib/vapoursynth
-  
+
     ln -s \
       $out/lib/python*/site-packages/vapoursynth/plugins/akarin/libakarin.so \
       $out/lib/vapoursynth/libakarin.so
