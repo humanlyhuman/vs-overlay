@@ -33,8 +33,8 @@ in
 
     propagatedBuildInputs = with python; [
       jetpytools
-      vsjetengine
-      vsjetpack
+      vs-jetengine
+      vs-jetpack
       typer
       rich
       pyside6
