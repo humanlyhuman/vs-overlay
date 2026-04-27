@@ -45,14 +45,13 @@
         cp -r $src/src/zimg/resize     $dev/include/zimg/
         cp -r $src/src/zimg/api        $dev/include/zimg/
 
-      cat > $dev/lib/pkgconfig/zimg_patched.pc <<EOF
-      Name: zimg_patched
-      Description: Patched zimg
-      Version: 3.0.6
-      Libs: -L$out/lib -lzimg
-      Cflags: -I$dev/include
-      EOF
-
+cat > $dev/lib/pkgconfig/zimg_patched.pc <<EOF
+Name: zimg_patched
+Description: Patched zimg
+Version: 3.0.6
+Libs: -L$out/lib -lzimg
+Cflags: -I$dev/include
+EOF
         sed -i "s|PLACEHOLDER_INCLUDE|$dev/include|g" $dev/lib/pkgconfig/zimg_patched.pc
         sed -i "s|PLACEHOLDER_LIB|$out/lib|g" $dev/lib/pkgconfig/zimg_patched.pc
         sed -i "s|PLACEHOLDER|$out|g" $dev/lib/pkgconfig/zimg_patched.pc
