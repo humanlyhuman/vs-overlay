@@ -79,7 +79,7 @@
         include_directories: [vapoursynth_include, incl_dirs],
         pic: true
       )
-      
+
       zimg = shared_library(
         'zimg',
         [],
