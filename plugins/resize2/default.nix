@@ -33,27 +33,37 @@
 
     outputs = ["out" "dev"];
 
-    postInstall = ''
-      mkdir -p $dev/include/zimg
-      mkdir -p $dev/include/zimg/api
-      mkdir -p $dev/lib/pkgconfig
+postInstall = ''
+  mkdir -p $dev/include/zimg
+  mkdir -p $dev/include/zimg/api
+  mkdir -p $dev/lib/pkgconfig
 
-      # install internal headers needed by resize2
-      cp -r src/zimg/common $dev/include/zimg/
-      cp -r src/zimg/graph $dev/include/zimg/ || true
-      cp -r src/zimg/depth $dev/include/zimg/ || true
-      cp -r src/zimg/colorspace $dev/include/zimg/ || true
-      cp -r src/zimg/resize $dev/include/zimg/ || true
-      cp -r src/zimg/api/* $dev/include/zimg/api/ || true
+  # internal headers needed by resize2
+  cp -r src/zimg/common      $dev/include/zimg/
+  cp -r src/zimg/graph       $dev/include/zimg/ || true
+  cp -r src/zimg/depth       $dev/include/zimg/ || true
+  cp -r src/zimg/colorspace  $dev/include/zimg/ || true
+  cp -r src/zimg/resize      $dev/include/zimg/ || true
+  cp -r src/zimg/api/*       $dev/include/zimg/api/ || true
 
-      if [ -f $out/lib/pkgconfig/zimg.pc ]; then
-        cp $out/lib/pkgconfig/zimg.pc $dev/lib/pkgconfig/zimg_patched.pc
-      fi
+  # create alias pkg-config file
+  if [ -f $dev/lib/pkgconfig/zimg.pc ]; then
+    cp $dev/lib/pkgconfig/zimg.pc \
+       $dev/lib/pkgconfig/zimg_patched.pc
+  elif [ -f $out/lib/pkgconfig/zimg.pc ]; then
+    cp $out/lib/pkgconfig/zimg.pc \
+       $dev/lib/pkgconfig/zimg_patched.pc
+  else
+    echo "zimg.pc not found"
+    exit 1
+  fi
 
-      substituteInPlace $dev/lib/pkgconfig/zimg_patched.pc \
-        --replace "Name: zimg" "Name: zimg_patched"
-
-    '';
+  substituteInPlace $dev/lib/pkgconfig/zimg_patched.pc \
+    --replace "Name: zimg" "Name: zimg_patched" \
+    --replace 'includedir=${prefix}/include' "includedir=$dev/include" \
+    --replace "Requires: zimg" "" \
+    --replace "Requires.private: zimg" ""
+'';
     meta = with lib; {
       description = "Patched zimg fork required by vapoursynth-resize2";
       homepage = "https://github.com/sekrit-twc/zimg";
