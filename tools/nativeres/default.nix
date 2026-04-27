@@ -44,7 +44,7 @@ in
       pyside6
       numpy
       scipy
-      vapoursynth-with-plugins
+      vapoursynth
     ];
 
     nativeCheckInputs = [
@@ -63,7 +63,10 @@ in
         --replace-fail '"vsjetengine>=1.2.0",' "" \
         --replace-fail '"vsjetpack>=1.3.0",' ""
     '';
-
+    postFixup = ''
+      wrapProgram $out/bin/nativeres \
+        --suffix PATH : ${lib.makeBinPath [ vapoursynth ]}
+    '';
     meta = with lib; {
       description = "Descale analysis tools for VapourSynth";
       homepage = "https://github.com/Jaded-Encoding-Thaumaturgy/nativeres";
