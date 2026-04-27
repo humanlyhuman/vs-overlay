@@ -68,10 +68,11 @@ in
         --replace-fail '"vsjetengine>=1.2.0",' "" \
         --replace-fail '"vsjetpack>=1.3.0",' ""
     '';
-    postFixup = ''
-      wrapProgram $out/bin/nativeres \
-        --set VAPOURSYNTH_PLUGIN_PATH ${vapoursynth-with-plugins}/lib/vapoursynth
-    '';
+  postFixup = ''
+    wrapProgram $out/bin/nativeres \
+      --prefix PYTHONPATH : ${vapoursynth-with-plugins}/${python.sitePackages} \
+      --prefix PATH : ${vapoursynth-with-plugins}/bin
+  '';
     meta = with lib; {
       description = "Descale analysis tools for VapourSynth";
       homepage = "https://github.com/Jaded-Encoding-Thaumaturgy/nativeres";
