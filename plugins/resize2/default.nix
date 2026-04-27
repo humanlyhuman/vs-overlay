@@ -51,30 +51,30 @@ buildPythonPackage rec {
   ];
 
   dontCheckRuntimeDeps = true;
-  postPatch = ''
-      mkdir -p subprojects/packagecache
-      rm -rf subprojects/packagecache/zimg
-      cp -r ${zimgSrc} subprojects/packagecache/zimg
-      chmod -R +w subprojects/packagecache/zimg
+postPatch = ''
+  mkdir -p subprojects/packagecache
+  rm -rf subprojects/packagecache/zimg
+  cp -r ${zimgSrc} subprojects/packagecache/zimg
+  chmod -R +w subprojects/packagecache/zimg
 
-      python <<EOF
-    import re
-    p = open("pyproject.toml").read()
-    p = re.sub(r'"vapoursynth>=.*?",?', "", p)
-    p = re.sub(r'"ninja==.*?",?', '"ninja",', p)
-    open("pyproject.toml", "w").write(p)
-    EOF
+  python <<EOF
+import re
+p = open("pyproject.toml").read()
+p = re.sub(r'"vapoursynth>=.*?",?', "", p)
+p = re.sub(r'"ninja==.*?",?', '"ninja",', p)
+open("pyproject.toml", "w").write(p)
+EOF
 
-      substituteInPlace meson.build \
-        --replace-fail \
-        "import vapoursynth as vs; print(vs.get_include())" \
-        "print(\"${vapoursynth}/include/vapoursynth\")"
+  substituteInPlace meson.build \
+    --replace-fail \
+    "import vapoursynth as vs; print(vs.get_include())" \
+    "print(\"${vapoursynth}/include/vapoursynth\")"
 
-      substituteInPlace subprojects/zimg/meson.build \
-        --replace-fail \
-        "import vapoursynth as vs; print(vs.get_include())" \
-        "print(\"${vapoursynth}/include/vapoursynth\")"
-  '';
+  substituteInPlace subprojects/packagefiles/zimg/meson.build \
+    --replace-fail \
+    "import vapoursynth as vs; print(vs.get_include())" \
+    "print(\"${vapoursynth}/include/vapoursynth\")"
+'';
 
   postInstall = ''
     mkdir -p $out/lib/vapoursynth
