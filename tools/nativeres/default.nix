@@ -36,7 +36,7 @@ in
       versioningit
     ];
 
-    propagatedBuildInputs = [
+    dependencies = [
       vapoursynthPlugins.jetpytools
       vapoursynthPlugins.vs-jet-engine
       vapoursynthPlugins.vs-jetpack
