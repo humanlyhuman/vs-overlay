@@ -38,7 +38,6 @@ buildPythonPackage rec {
     pkg-config
     python
     packaging
-    git
   ];
 
   buildInputs = [
