@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
     owner = "HolyWu";
     repo = "VapourSynth-EdgeMasks";
     rev = "r${version}";
-    sha256 = "sha256-D7oqGhDrT/vMVq2a0XzQHx6jDnvB1pFpMOG/0rDkyjM=";
+    sha256 = "sha256-H9kAmgoktxmxKWSG9ZBdxY4vGONlxOXwadNJdnIEjUI=";
   };
 
   postPatch = ''
