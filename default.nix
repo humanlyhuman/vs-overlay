@@ -37,8 +37,6 @@ in
     lsmashsource   = prev.callPackage ./plugins/lsmashsource { };
     mvtools        = prev.vapoursynth-mvtools;
     neo_f3kdb      = prev.callPackage ./plugins/neo_f3kdb { };
-    nnedi3         = prev.callPackage ./plugins/nnedi3 { };
-    nnedi3cl       = prev.callPackage ./plugins/nnedi3cl { };
     ocr            = prev.callPackage ./plugins/ocr { };
     placebo        = prev.callPackage ./plugins/placebo { };
     readmpls       = prev.callPackage ./plugins/readmpls { };
