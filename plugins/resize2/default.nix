@@ -59,7 +59,7 @@
             fi
       substituteInPlace $dev/lib/pkgconfig/zimg_patched.pc \
         --replace "Name: zimg" "Name: zimg_patched" \
-        --replace "includedir=\${prefix}/include" "includedir=$dev/include" \
+        --replace "includedir=''${prefix}/include" "includedir=$dev/include" \
         --replace "Requires: zimg" "" \
         --replace "Requires.private: zimg" ""
     '';
