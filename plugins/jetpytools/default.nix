@@ -4,6 +4,7 @@
   fetchFromGitHub,
   hatchling,
   versioningit,
+  vapoursynth,
 }:
 buildPythonPackage rec {
   pname = "jetpytools";
