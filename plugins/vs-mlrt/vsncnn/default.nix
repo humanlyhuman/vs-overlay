@@ -17,7 +17,7 @@ stdenv.mkDerivation rec {
     owner = "AmusementClub";
     repo = "vs-mlrt";
     rev = "v${version}";
-    sha256 = "sha256-mcIPNrPsVNgtGSSzLpwm7QYEbFOcB6IH2pepS9pVGCc=";
+    hash = "sha256-mcIPNrPsVNgtGSSzLpwm7QYEbFOcB6IH2pepS9pVGCc=";
   };
 
   sourceRoot = "source/vsncnn";

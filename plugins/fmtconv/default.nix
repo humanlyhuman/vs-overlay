@@ -14,7 +14,7 @@ stdenv.mkDerivation rec {
     owner = "EleonoreMizo";
     repo = pname;
     rev = "r${version}";
-    sha256 = "sha256-SyctXpfhIOyx1R9XUi2DVlSRHYeODmYxs/4ZzCp1rWo=";
+    hash = "sha256-SyctXpfhIOyx1R9XUi2DVlSRHYeODmYxs/4ZzCp1rWo=";
   };
 
   preAutoreconf = "cd build/unix";
@@ -28,7 +28,6 @@ stdenv.mkDerivation rec {
     description = "Format conversion tools for VapourSynth";
     homepage = "https://gitlab.com/EleonoreMizo/fmtconv/";
     license = licenses.wtfpl;
-    maintainers = with maintainers; [ ];
     platforms = platforms.all;
   };
 }

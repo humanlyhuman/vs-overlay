@@ -25,7 +25,7 @@ buildPythonPackage {
     owner = "Jaded-Encoding-Thaumaturgy";
     repo = "akarin-vapoursynth-plugin";
     rev = "v1.4.0";
-    sha256 = "sha256-g4KgEYS7s7IeJkx1ww1+2XxgkOW2uHmE6sIyDyVF6yE=";
+    hash = "sha256-g4KgEYS7s7IeJkx1ww1+2XxgkOW2uHmE6sIyDyVF6yE=";
   };
 
   postPatch = ''
@@ -80,10 +80,10 @@ buildPythonPackage {
 
   dependencies = [ vapoursynth ];
 
-  meta = {
+  meta = with lib; {
     description = "Enhanced LLVM-based std.Expr and other filters for VapourSynth";
     homepage = "https://github.com/Jaded-Encoding-Thaumaturgy/akarin-vapoursynth-plugin";
-    license = lib.licenses.lgpl3;
-    platforms = lib.platforms.all;
+    license = licenses.lgpl3;
+    platforms = platforms.all;
   };
 }

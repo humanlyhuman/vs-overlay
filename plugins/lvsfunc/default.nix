@@ -40,14 +40,14 @@ buildPythonPackage rec {
     owner = "Jaded-Encoding-Thaumaturgy";
     repo = pname;
     rev = "v${version}";
-    sha256 = "sha256-Yv7WBr9suuYsDI9LfZVcTBuDTPkd/DMCk/lQ58qsLyw=";
+    hash = "sha256-Yv7WBr9suuYsDI9LfZVcTBuDTPkd/DMCk/lQ58qsLyw=";
   };
 
   postPatch = ''
     # This does not depend on vapoursynth (since this is used from within
     # vapoursynth).
     substituteInPlace requirements.txt \
-        --replace "VapourSynth>=51" "" \
+        --replace-fail "VapourSynth>=51" "" \
   '';
 
   propagatedBuildInputs = [

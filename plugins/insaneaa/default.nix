@@ -13,7 +13,7 @@ buildPythonPackage {
     owner = "humanlyhuman";
     repo = "VapourSynth-insaneAA";
     rev = "master";
-    sha256 = "sha256-k/+PiVDC0pAgPQtHtToRBfX+k0LYNwj0BCm8CdpjlPY=";
+    hash = "sha256-k/+PiVDC0pAgPQtHtToRBfX+k0LYNwj0BCm8CdpjlPY=";
   };
   propagatedBuildInputs = with vapoursynthPlugins; [
     eedi3m
@@ -40,6 +40,6 @@ buildPythonPackage {
     description = "insaneAA anti-aliasing script for VapourSynth";
     homepage = "https://github.com/Beatrice-Raws/VapourSynth-insaneAA";
     license = licenses.unfree;
-    platforms = with platforms; x86 ++ x86_64;
+    platforms = platforms.x86 ++ platforms.x86_64;
   };
 }

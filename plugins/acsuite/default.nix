@@ -27,12 +27,12 @@ buildPythonPackage rec {
     # Sets the default ffmpeg executable to nixpkgs’ ffmpeg. This still allows
     # overriding the executable by passing ffmpeg_path.
     substituteInPlace acsuite/__init__.py \
-        --replace 'raise FileNotFoundError("concat: ffmpeg executable not found in PATH")' 'ffmpeg_path = "${ffmpeg}/bin/ffmpeg"'
+        --replace-fail 'raise FileNotFoundError("concat: ffmpeg executable not found in PATH")' 'ffmpeg_path = "${ffmpeg}/bin/ffmpeg"'
 
     # This does not depend on vapoursynth (since this is used from within
     # vapoursynth).
     substituteInPlace requirements.txt \
-        --replace "VapourSynth" ""
+        --replace-fail "VapourSynth" ""
   '';
 
   nativeCheckInputs = [

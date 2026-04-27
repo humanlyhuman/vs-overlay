@@ -41,7 +41,7 @@ stdenv.mkDerivation (finalAttrs: {
   '';
   postPatch = ''
     substituteInPlace VapourSynth/meson.build \
-        --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
+        --replace-fail "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
   '';
   nativeBuildInputs = [
     meson
@@ -62,7 +62,6 @@ stdenv.mkDerivation (finalAttrs: {
       isc
       lgpl21Plus
     ];
-    maintainers = with maintainers; [ ];
     platforms = platforms.all;
   };
 })

@@ -22,7 +22,7 @@ python3.pkgs.toPythonModule (
       owner = "Jaded-Encoding-Thaumaturgy";
       repo = finalAttrs.pname;
       rev = "0d03b30194ea8588fcc345fcd84a6a1201ee0f34";
-      sha256 = "sha256-cvd9anNeNM0dktZf85BgLYgLrpnfxqpkYWeGhc3A7wI=";
+      hash = "sha256-cvd9anNeNM0dktZf85BgLYgLrpnfxqpkYWeGhc3A7wI=";
     };
 
     nativeBuildInputs = [

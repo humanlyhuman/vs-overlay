@@ -17,17 +17,17 @@ python3.pkgs.buildPythonPackage rec {
     owner = "AmusementClub";
     repo = "vs-mlrt";
     rev = "v${version}";
-    sha256 = "sha256-mcIPNrPsVNgtGSSzLpwm7QYEbFOcB6IH2pepS9pVGCc=";
+    hash = "sha256-mcIPNrPsVNgtGSSzLpwm7QYEbFOcB6IH2pepS9pVGCc=";
   };
 
   models = fetchurl {
     url = "https://github.com/AmusementClub/vs-mlrt/releases/download/v${version}/models.v${version}.7z";
-    sha256 = "sha256-1OqowcRFkIIYWp4aLFTX4sd2q+6mrvau4MuPbBUd+wI=";
+    hash = "sha256-1OqowcRFkIIYWp4aLFTX4sd2q+6mrvau4MuPbBUd+wI=";
   };
 
   contribModels = fetchurl {
     url = "https://github.com/AmusementClub/vs-mlrt/releases/download/v${version}/contrib-models.v${version}.7z";
-    sha256 = "sha256-Im515f+jHfcqxYR43LIv52bisiAMHutVHsKGEh8u43Y=";
+    hash = "sha256-Im515f+jHfcqxYR43LIv52bisiAMHutVHsKGEh8u43Y=";
   };
 
   nativeBuildInputs = [ p7zip ];
@@ -38,7 +38,7 @@ python3.pkgs.buildPythonPackage rec {
 
   postPatch = ''
     substituteInPlace scripts/vsmlrt.py \
-      --replace \
+      --replace-fail \
         'models_path: str = os.path.join(plugins_path, "models")' \
         'models_path: str = "${placeholder "out"}/share/vs-mlrt/models"'
   '';

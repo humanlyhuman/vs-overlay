@@ -17,7 +17,7 @@ stdenv.mkDerivation rec {
     owner = "wwww-wwww";
     repo = "vs-noise";
     rev = "r${version}";
-    sha256 = "sha256-pA5W9CxBgoqurMeIe8ekcOYNXr+Q/rFvWufu+7fLiAs=";
+    hash = "sha256-pA5W9CxBgoqurMeIe8ekcOYNXr+Q/rFvWufu+7fLiAs=";
   };
 
   nativeBuildInputs = [
@@ -34,7 +34,7 @@ stdenv.mkDerivation rec {
 
   postPatch = ''
     substituteInPlace meson.build \
-      --replace "vapoursynth_dep.get_variable(pkgconfig: 'libdir') / 'vapoursynth'" \
+      --replace-fail "vapoursynth_dep.get_variable(pkgconfig: 'libdir') / 'vapoursynth'" \
                 "'${placeholder "out"}/lib/vapoursynth'"
   '';
 
@@ -48,7 +48,6 @@ stdenv.mkDerivation rec {
     description = "AddNoise / vs-noise plugin for VapourSynth";
     homepage = "https://github.com/wwww-wwww/vs-noise";
     license = licenses.mit;
-    maintainers = with maintainers; [ ];
     platforms = platforms.all;
   };
 }

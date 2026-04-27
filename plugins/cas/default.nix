@@ -28,7 +28,7 @@ stdenv.mkDerivation rec {
 
   postPatch = ''
     substituteInPlace meson.build \
-        --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
+        --replace-fail "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
   '';
 
   meta = with lib; {

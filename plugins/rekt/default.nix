@@ -20,14 +20,14 @@ buildPythonPackage rec {
     owner = "Ututu";
     repo = pname;
     rev = "ca1b679317bb096a96bf676111d855ca4c2c6f63";
-    sha256 = "sha256-zmtxdFMoZfYNgYjF5lb3824Be3c9K23RC4Y52F633Wc=";
+    hash = "sha256-zmtxdFMoZfYNgYjF5lb3824Be3c9K23RC4Y52F633Wc=";
   };
 
   # This does not depend on vapoursynth (since this is used from within
   # vapoursynth).
   postPatch = ''
     substituteInPlace setup.py \
-        --replace "install_requires=['vapoursynth', " "install_requires=["
+        --replace-fail "install_requires=['vapoursynth', " "install_requires=["
   '';
 
   propagatedBuildInputs = with vapoursynthPlugins; [

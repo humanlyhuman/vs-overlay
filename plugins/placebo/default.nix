@@ -14,7 +14,7 @@
 let
   libp2p = fetchurl {
     url = "https://github.com/sekrit-twc/libp2p/archive/f50288b0c8db2cb14bb98fc25a5f056609d03652.tar.gz";
-    hash = "sha256:37b14be5b1108268e55aa4fbaf838c287018ecc5b58e15efdfe064916afc44e9";
+    hash = "sha256-N7FL5bEQgmjlWqT7r4OMKHAY7MW1jhXv3+BkkWr8ROk=";
   };
 in
 stdenv.mkDerivation rec {
@@ -24,7 +24,7 @@ stdenv.mkDerivation rec {
     owner = "Lypheo";
     repo = pname;
     rev = version;
-    sha256 = "sha256-PlqqMBU9WedOqQkl8S77xIUzBpaU1Bgv9ZY8Rfh803o=";
+    hash = "sha256-PlqqMBU9WedOqQkl8S77xIUzBpaU1Bgv9ZY8Rfh803o=";
     fetchSubmodules = false;
   };
   nativeBuildInputs = [
@@ -40,7 +40,7 @@ stdenv.mkDerivation rec {
   ];
   postPatch = ''
     substituteInPlace meson.build \
-      --replace-warn "vapoursynth_dep.get_variable(pkgconfig: 'libdir')" "get_option('libdir')"
+      --replace-fail "vapoursynth_dep.get_variable(pkgconfig: 'libdir')" "get_option('libdir')"
 
     mkdir -p subprojects/libp2p-f50288b0c8db2cb14bb98fc25a5f056609d03652
     tar -xzf ${libp2p} -C subprojects/libp2p-f50288b0c8db2cb14bb98fc25a5f056609d03652 \
