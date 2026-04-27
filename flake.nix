@@ -28,6 +28,7 @@
         lib.filterAttrs (_: pkg: lib.meta.availableOn platform pkg) (
           {
             inherit (pkgs.${system}) getnative;
+            inherit (pkgs.${system}) nativeres;
           }
           // lib.filterAttrs (_: lib.isDerivation) pkgs.${system}.vapoursynthPlugins
         )
