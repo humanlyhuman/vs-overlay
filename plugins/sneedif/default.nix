@@ -49,22 +49,22 @@ buildPythonPackage rec {
     vapoursynth
   ];
 
-  postPatch = ''
-    python3 -c "
+postPatch = ''
+  python3 -c "
 import re
 
 content = open('meson.build').read()
 
 content = re.sub(
     r'r = run_command\\(.*?check: true,\\s*\\)',
-    '',
+    \"\",
     content,
     flags=re.DOTALL
 )
 
 content = re.sub(
     r'incdir = include_directories\\(.*?\\n\\)',
-    '',
+    \"\",
     content,
     flags=re.DOTALL
 )
@@ -82,7 +82,7 @@ content = content.replace(
 open('meson.build', 'w').write(content)
 "
 
-    python3 -c "
+  python3 -c "
 content = open('pyproject.toml').read()
 
 content = '\\n'.join(
@@ -92,7 +92,7 @@ content = '\\n'.join(
 
 open('pyproject.toml', 'w').write(content)
 "
-  '';
+'';
 
   doCheck = false;
   dontCheckRuntimeDeps = true;
