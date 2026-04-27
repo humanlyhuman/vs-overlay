@@ -11,6 +11,7 @@
   packaging,
   git,
   cmake,
+  fetchgit,
   vapoursynth,
 }:
 buildPythonPackage rec {
