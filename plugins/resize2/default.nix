@@ -6,7 +6,6 @@
   ninja,
   pkg-config,
   vapoursynth,
-  zimg_patched,
   python3,
 }: let
   python3Env = python3.withPackages (ps: [
@@ -34,9 +33,8 @@ in
 
       buildInputs = [
         vapoursynth
-        zimg_patched
       ];
-
+mesonFlags = [ "--wrap-mode=forcefallback" ];
       postPatch = ''
         substituteInPlace meson.build \
           --replace-fail \
