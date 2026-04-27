@@ -10,7 +10,6 @@
   packaging,
   vapoursynth,
 }:
-
 buildPythonPackage rec {
   pname = "vapoursynth-resize2";
   version = "0.4.2";
@@ -44,18 +43,18 @@ buildPythonPackage rec {
   dontCheckRuntimeDeps = true;
 
   postPatch = ''
-    python <<EOF
-import re
-p = open("pyproject.toml").read()
-p = re.sub(r'"vapoursynth>=.*?",?', "", p)
-p = re.sub(r'"ninja==.*?",?', '"ninja",', p)
-open("pyproject.toml", "w").write(p)
-EOF
+        python <<EOF
+    import re
+    p = open("pyproject.toml").read()
+    p = re.sub(r'"vapoursynth>=.*?",?', "", p)
+    p = re.sub(r'"ninja==.*?",?', '"ninja",', p)
+    open("pyproject.toml", "w").write(p)
+    EOF
 
-    substituteInPlace meson.build \
-      --replace-fail \
-      "import vapoursynth as vs; print(vs.get_include())" \
-      "print(\"${vapoursynth}/include/vapoursynth\")"
+        substituteInPlace meson.build \
+          --replace-fail \
+          "import vapoursynth as vs; print(vs.get_include())" \
+          "print(\"${vapoursynth}/include/vapoursynth\")"
   '';
 
   postInstall = ''
