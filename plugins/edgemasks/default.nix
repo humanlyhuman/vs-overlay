@@ -18,20 +18,20 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-H9kAmgoktxmxKWSG9ZBdxY4vGONlxOXwadNJdnIEjUI=";
   };
   
-  postPatch = ''
-    substituteInPlace meson.build \
-      --replace-fail \
-        "run_command(
-      find_program('python', 'python3'),
-      '-c',
-      'import vapoursynth as vs; print(vs.get_include())',
-      check: true,
-    ).stdout().strip()" \
-        "'${vapoursynth}/include/vapoursynth'" \
-      --replace-fail \
-        "py.get_install_dir() / 'vapoursynth/plugins'" \
-        "'${placeholder "out"}/lib/vapoursynth'"
-  '';
+postPatch = ''
+  substituteInPlace meson.build \
+    --replace-fail \
+      "run_command(
+    find_program('python', 'python3'),
+    '-c',
+    'import vapoursynth as vs; print(vs.get_include())',
+    check: true,
+  ).stdout().strip()" \
+      "'${vapoursynth}/include/vapoursynth'" \
+    --replace-fail \
+      "py.get_install_dir() / 'vapoursynth/plugins'" \
+      "'${placeholder "out"}/lib/vapoursynth'"
+'';
 
   nativeBuildInputs = [
     meson
