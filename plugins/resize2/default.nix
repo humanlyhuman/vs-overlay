@@ -25,7 +25,7 @@
       fetchSubmodules = true;
     };
     patches = [./0001.patch];
-
+    mesonFlags = ["-Db_lto=false"];
     nativeBuildInputs = [meson ninja pkg-config python];
     buildInputs = [vapoursynth];
 
