@@ -24,6 +24,8 @@ buildPythonPackage rec {
     repo = pname;
     rev = version;
     hash = "sha256-oOfDYHBZZ3JEYrbeiwSDNAaua7hlC61lYJOTqB6I7/Q=";
+    fetchSubmodules = true;
+
   };
 
   zimgSrc = fetchFromGitHub {
