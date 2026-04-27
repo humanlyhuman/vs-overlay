@@ -118,7 +118,7 @@
       exec_prefix=\${prefix}
       libdir=\${prefix}/lib
       includedir=$dev/include
-      
+
       Name: zimg_patched
       Description: patched zimg static library
       Version: ${version}
