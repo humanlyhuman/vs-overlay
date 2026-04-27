@@ -59,7 +59,9 @@ in
 
     postPatch = ''
       substituteInPlace pyproject.toml \
-        --replace-fail 'dynamic = ["version"]' 'version = "${version}"'
+        --replace-fail 'dynamic = ["version"]' 'version = "${version}"' \
+        --replace-fail '"vsjetengine>=1.2.0",' "" \
+        --replace-fail '"vsjetpack>=1.3.0",' ""
     '';
 
     meta = with lib; {
