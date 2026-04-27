@@ -39,14 +39,18 @@ in
       versioningit
     ];
 
-buildInputs = [ vapoursynth-with-plugins ];
+    buildInputs = [vapoursynth-with-plugins];
 
-dependencies = [
-  typer rich pyside6 numpy scipy
-  vapoursynthPlugins.jetpytools
-  vapoursynthPlugins.vs-jet-engine
-  vapoursynthPlugins.vs-jetpack
-];
+    dependencies = [
+      typer
+      rich
+      pyside6
+      numpy
+      scipy
+      vapoursynthPlugins.jetpytools
+      vapoursynthPlugins.vs-jet-engine
+      vapoursynthPlugins.vs-jetpack
+    ];
 
     nativeCheckInputs = [
       imagemagick
