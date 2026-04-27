@@ -48,7 +48,7 @@ llvmPackages.stdenv.mkDerivation rec {
   ];
 
   dontInstall = true;
-  
+
   installPhase = ''
     mkdir -p $out/lib/vapoursynth
     cp src/plugins/vsfiltermod.so $out/lib/vapoursynth/libvsfm.so
