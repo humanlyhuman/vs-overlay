@@ -49,50 +49,17 @@ buildPythonPackage rec {
     vapoursynth
   ];
 
-  postPatch = ''
-      python3 -c "
-    import re
+postPatch = ''
+  sed -i '/incdir = include_directories(/,/^)/d' meson.build
+  sed -i '/vapoursynth>=74/d' pyproject.toml
 
-    content = open('meson.build').read()
+  sed -i '/r = run_command(/,/^)/d' meson.build
 
-    content = re.sub(
-        r'r = run_command\\(.*?check: true,\\s*\\)',
-        \"\",
-        content,
-        flags=re.DOTALL
-    )
-
-    content = re.sub(
-        r'incdir = include_directories\\(.*?\\n\\)',
-        \"\",
-        content,
-        flags=re.DOTALL
-    )
-
-    content = content.replace(
-        'include_directories: incdir,',
-        'dependencies: vapoursynth_dep,'
-    )
-
-    content = content.replace(
-        \"py.get_install_dir() / 'vapoursynth/plugins'\",
-        \"'${placeholder "out"}/lib/vapoursynth'\"
-    )
-
-    open('meson.build', 'w').write(content)
-    "
-
-      python3 -c "
-    content = open('pyproject.toml').read()
-
-    content = '\\n'.join(
-        line for line in content.splitlines()
-        if 'vapoursynth>=74' not in line
-    ) + '\\n'
-
-    open('pyproject.toml', 'w').write(content)
-    "
-  '';
+  substituteInPlace meson.build \
+    --replace "include_directories: incdir," "dependencies: vapoursynth_dep," \
+    --replace "install_dir: py.get_install_dir() / 'vapoursynth/plugins'," \
+              "install_dir: get_option('libdir') / 'vapoursynth',"
+'';
 
   doCheck = false;
   dontCheckRuntimeDeps = true;
