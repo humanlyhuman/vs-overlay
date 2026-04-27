@@ -3,24 +3,19 @@
   stdenv,
   buildPythonPackage,
   fetchFromGitHub,
-
   # Python build backend
   hatchling,
-
   # Native build tools
   meson,
   ninja,
   pkg-config,
-
   # Runtime / Python deps
   vapoursynth,
-
   # C++ deps
   boost,
   opencl-headers,
   ocl-icd,
 }:
-
 buildPythonPackage rec {
   pname = "vapoursynth-sneedif";
   version = "4.2";
@@ -66,6 +61,6 @@ buildPythonPackage rec {
     homepage = "https://github.com/Jaded-Encoding-Thaumaturgy/vapoursynth-SNEEDIF";
     license = licenses.wtfpl;
     platforms = platforms.linux ++ platforms.windows;
-    maintainers = [ ];
+    maintainers = [];
   };
 }

@@ -5,7 +5,6 @@
   vapoursynth,
   setuptools,
 }:
-
 buildPythonPackage rec {
   pname = "vsutil";
   version = "0.8.0";
@@ -31,13 +30,13 @@ buildPythonPackage rec {
     ./fail-tests.diff
   ];
 
-  checkInputs = [ vapoursynth ];
+  checkInputs = [vapoursynth];
 
   meta = with lib; {
     description = "A collection of general purpose Vapoursynth functions to be reused in modules and scripts";
     homepage = "https://github.com/Irrational-Encoding-Wizardry/vsutil";
     license = licenses.mit;
-    maintainers = with maintainers; [ sbruder ];
+    maintainers = with maintainers; [sbruder];
     platforms = platforms.all;
   };
 }

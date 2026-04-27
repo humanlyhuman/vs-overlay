@@ -30,8 +30,8 @@ python3.pkgs.buildPythonPackage rec {
     hash = "sha256-Im515f+jHfcqxYR43LIv52bisiAMHutVHsKGEh8u43Y=";
   };
 
-  nativeBuildInputs = [ p7zip ];
-  buildInputs = [ vapoursynth ];
+  nativeBuildInputs = [p7zip];
+  buildInputs = [vapoursynth];
 
   dontConfigure = true;
   dontBuild = true;

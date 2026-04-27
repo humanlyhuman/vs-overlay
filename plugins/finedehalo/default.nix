@@ -6,7 +6,6 @@
   python,
   vapoursynth,
 }:
-
 buildPythonPackage {
   pname = "finedehalo";
   version = "unstable-2026-04-26";
@@ -32,13 +31,13 @@ buildPythonPackage {
     runHook postInstall
   '';
 
-  pythonImportsCheck = [ "finedehalo" ];
+  pythonImportsCheck = ["finedehalo"];
 
   meta = with lib; {
     description = "FineDehalo";
     homepage = "https://github.com/humanlyhuman/VapourSynth-scripts";
     license = licenses.unfree;
-    maintainers = with maintainers; [ humanlyhuman ];
+    maintainers = with maintainers; [humanlyhuman];
     platforms = platforms.x86 ++ platforms.x86_64;
   };
 }

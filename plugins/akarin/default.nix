@@ -78,7 +78,7 @@ buildPythonPackage {
     ++ lib.optional withBoostCharconv boost
     ++ lib.optional (stdenv.hostPlatform.isDarwin && !withBoostCharconv) (darwinMinVersionHook "26.0");
 
-  dependencies = [ vapoursynth ];
+  dependencies = [vapoursynth];
 
   meta = with lib; {
     description = "Enhanced LLVM-based std.Expr and other filters for VapourSynth";

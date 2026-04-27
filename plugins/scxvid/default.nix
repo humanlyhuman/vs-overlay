@@ -9,7 +9,6 @@
   xvidcore,
   python3,
 }:
-
 stdenv.mkDerivation rec {
   pname = "vapoursynth-scxvid";
   version = "3";
@@ -56,7 +55,7 @@ stdenv.mkDerivation rec {
     description = "Scene change detection plugin for VapourSynth using xvid";
     homepage = "https://github.com/dubhater/vapoursynth-scxvid";
     license = licenses.gpl2Only;
-    maintainers = with maintainers; [ sbruder ];
+    maintainers = with maintainers; [sbruder];
     platforms = platforms.all;
   };
 }

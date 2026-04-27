@@ -7,7 +7,6 @@
   cudatoolkit,
   cudaPackages,
 }:
-
 stdenv.mkDerivation rec {
   pname = "vstrt";
   version = "15.16";
@@ -50,7 +49,7 @@ stdenv.mkDerivation rec {
     description = "TensorRT-based GPU Runtime";
     homepage = "https://github.com/AmusementClub/vs-mlrt";
     license = licenses.gpl3;
-    maintainers = with maintainers; [ aidalgol ];
+    maintainers = with maintainers; [aidalgol];
     platforms = platforms.all;
   };
 }

@@ -41,7 +41,7 @@ stdenv.mkDerivation rec {
     description = "ONNX Runtime-based CPU/GPU Runtime";
     homepage = "https://github.com/AmusementClub/vs-mlrt/blob/master/vsort";
     license = licenses.gpl3;
-    maintainers = with maintainers; [ aidalgol ];
+    maintainers = with maintainers; [aidalgol];
     platforms = platforms.all;
   };
 }

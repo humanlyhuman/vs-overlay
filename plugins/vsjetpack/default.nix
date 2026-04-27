@@ -36,7 +36,7 @@ buildPythonPackage rec {
 
   doCheck = false;
   dontCheckRuntimeDeps = true;
-  pythonImportsCheck = [ ];
+  pythonImportsCheck = [];
 
   meta = with lib; {
     description = "Full suite of filters, wrappers, and helper functions for VapourSynth";

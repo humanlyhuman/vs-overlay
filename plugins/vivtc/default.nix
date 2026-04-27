@@ -7,7 +7,6 @@
   pkg-config,
   vapoursynth,
 }:
-
 stdenv.mkDerivation rec {
   pname = "vivtc";
   version = "unstable-2021-09-26";
@@ -24,7 +23,7 @@ stdenv.mkDerivation rec {
     ninja
     pkg-config
   ];
-  buildInputs = [ vapoursynth ];
+  buildInputs = [vapoursynth];
 
   postPatch = ''
     substituteInPlace meson.build \
@@ -35,7 +34,7 @@ stdenv.mkDerivation rec {
     description = "Field matcher and decimation filter for VapourSynth similar to TIVTC";
     homepage = "https://github.com/vapoursynth/vivtc";
     license = licenses.lgpl21Plus;
-    maintainers = with maintainers; [ sbruder ];
+    maintainers = with maintainers; [sbruder];
     platforms = platforms.all;
   };
 }

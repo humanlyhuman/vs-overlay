@@ -7,7 +7,6 @@
   vapoursynth,
   vapoursynthPlugins,
 }:
-
 stdenv.mkDerivation rec {
   pname = "vship";
   version = "5.0.1";

@@ -25,7 +25,7 @@ buildPythonPackage rec {
 
   doCheck = false;
   dontCheckRuntimeDeps = true;
-  pythonImportsCheck = [ ];
+  pythonImportsCheck = [];
 
   meta = with lib; {
     description = "Python tools and utilities used by JET packages";

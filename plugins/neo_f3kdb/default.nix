@@ -8,7 +8,6 @@
   tbb,
   zimg,
 }:
-
 stdenv.mkDerivation (finalAttrs: {
   pname = "neo_f3kdb";
   version = "10";
@@ -31,7 +30,7 @@ stdenv.mkDerivation (finalAttrs: {
     zimg
   ];
 
-  cmakeFlags = [ (lib.cmakeFeature "VERSION" "r${finalAttrs.version}") ];
+  cmakeFlags = [(lib.cmakeFeature "VERSION" "r${finalAttrs.version}")];
 
   postPatch = ''
     sed -E -i '/^find_package\(Git /,+2d' CMakeLists.txt
@@ -53,7 +52,7 @@ stdenv.mkDerivation (finalAttrs: {
       gpl3Plus
       gpl2Plus
     ];
-    maintainers = with maintainers; [ humanlyhuman ];
+    maintainers = with maintainers; [humanlyhuman];
     platforms = platforms.x86_64;
   };
 })

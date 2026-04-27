@@ -4,7 +4,6 @@
   fetchFromGitHub,
   vapoursynth,
 }:
-
 stdenv.mkDerivation rec {
   pname = "znedi3";
   version = "3";
@@ -31,9 +30,9 @@ stdenv.mkDerivation rec {
         --replace-fail "VSHelper.h" ""
   '';
 
-  buildInputs = [ vapoursynth ];
+  buildInputs = [vapoursynth];
 
-  makeFlags = (lib.optional stdenv.isx86_64 "X86=1");
+  makeFlags = lib.optional stdenv.isx86_64 "X86=1";
 
   CPPFLAGS = lib.concatStringsSep " " [
     "-I${vapoursynth}/include/vapoursynth"
@@ -49,7 +48,7 @@ stdenv.mkDerivation rec {
     description = "A CPU optimised nnedi3 filter for VapourSynth";
     homepage = "https://github.com/sekrit-twc/znedi3";
     license = licenses.gpl2Only;
-    maintainers = with maintainers; [ sbruder ];
+    maintainers = with maintainers; [sbruder];
     platforms = platforms.all;
   };
 }

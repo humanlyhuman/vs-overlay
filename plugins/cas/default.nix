@@ -7,7 +7,6 @@
   pkg-config,
   vapoursynth,
 }:
-
 stdenv.mkDerivation rec {
   pname = "VapourSynth-CAS";
   version = "2";
@@ -24,7 +23,7 @@ stdenv.mkDerivation rec {
     ninja
     pkg-config
   ];
-  buildInputs = [ vapoursynth ];
+  buildInputs = [vapoursynth];
 
   postPatch = ''
     substituteInPlace meson.build \
@@ -35,7 +34,7 @@ stdenv.mkDerivation rec {
     description = "CAS filter plugin for VapourSynth";
     homepage = "https://github.com/HomeOfVapourSynthEvolution/VapourSynth-CAS";
     license = licenses.mit;
-    maintainers = with maintainers; [ sbruder ];
+    maintainers = with maintainers; [sbruder];
     platforms = platforms.all;
   };
 }

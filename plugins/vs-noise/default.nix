@@ -8,7 +8,6 @@
   python3,
   vapoursynth,
 }:
-
 stdenv.mkDerivation rec {
   pname = "vapoursynth-noise";
   version = "4";
@@ -30,7 +29,7 @@ stdenv.mkDerivation rec {
     vapoursynth
   ];
 
-  mesonFlags = [ "-Db_lto=false" ];
+  mesonFlags = ["-Db_lto=false"];
 
   postPatch = ''
     substituteInPlace meson.build \

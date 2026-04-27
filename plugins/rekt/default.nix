@@ -6,7 +6,6 @@
   vapoursynth,
   setuptools,
 }:
-
 buildPythonPackage rec {
   pname = "rekt";
   version = "0-unstable-2022-03-02";
@@ -34,20 +33,20 @@ buildPythonPackage rec {
     vsutil
   ];
 
-  checkInputs = [ vapoursynth ];
+  checkInputs = [vapoursynth];
   checkPhase = ''
     runHook preCheck
     # This overrides the default setuptools checkPhase that detects tests (that
     # don’t work) even though this package doesn’t have tests.
     runHook postCheck
   '';
-  pythonImportsCheck = [ "rekt" ];
+  pythonImportsCheck = ["rekt"];
 
   meta = with lib; {
     description = "VapourSynth wrapper for Cropping and Stacking clips";
     homepage = "https://gitlab.com/Ututu/rekt";
     license = licenses.unfree; # no license
-    maintainers = with maintainers; [ sbruder ];
+    maintainers = with maintainers; [sbruder];
     platforms = platforms.all;
   };
 }

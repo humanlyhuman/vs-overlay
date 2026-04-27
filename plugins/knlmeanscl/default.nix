@@ -9,7 +9,6 @@
   opencl-headers,
   ocl-icd,
 }:
-
 stdenv.mkDerivation rec {
   pname = "knlmeanscl";
   version = "1.2";

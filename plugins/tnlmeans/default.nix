@@ -5,7 +5,6 @@
   which,
   vapoursynth,
 }:
-
 stdenv.mkDerivation {
   pname = "vapoursynth-tnlmeans";
   version = "unstable-2015-02-25";
@@ -21,8 +20,8 @@ stdenv.mkDerivation {
     patchShebangs .
   '';
 
-  nativeBuildInputs = [ which ];
-  buildInputs = [ vapoursynth ];
+  nativeBuildInputs = [which];
+  buildInputs = [vapoursynth];
 
   meta = with lib; {
     description = "An implementation of the NL-means denoising algorithm";

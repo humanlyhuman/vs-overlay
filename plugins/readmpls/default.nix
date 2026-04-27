@@ -8,7 +8,6 @@
   libbluray,
   vapoursynth,
 }:
-
 stdenv.mkDerivation rec {
   pname = "VapourSynth-ReadMpls";
   version = "5";
@@ -39,7 +38,7 @@ stdenv.mkDerivation rec {
     description = "ReadMpls filter for VapourSynth";
     homepage = "https://github.com/HomeOfVapourSynthEvolution/VapourSynth-ReadMpls";
     license = licenses.lgpl3Plus;
-    maintainers = with maintainers; [ sbruder ];
+    maintainers = with maintainers; [sbruder];
     platforms = platforms.all;
   };
 }

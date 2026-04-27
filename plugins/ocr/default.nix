@@ -8,7 +8,6 @@
   tesseract,
   vapoursynth,
 }:
-
 stdenv.mkDerivation rec {
   pname = "vs-ocr";
   version = "3";
@@ -39,7 +38,7 @@ stdenv.mkDerivation rec {
     description = "OCR plugin for VapourSynth";
     homepage = "https://github.com/vapoursynth/vs-ocr";
     license = licenses.mit;
-    maintainers = with maintainers; [ sbruder ];
+    maintainers = with maintainers; [sbruder];
     platforms = platforms.all;
   };
 }

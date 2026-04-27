@@ -5,7 +5,6 @@
   autoreconfHook,
   vapoursynth,
 }:
-
 stdenv.mkDerivation rec {
   pname = "fmtconv";
   version = "31";
@@ -19,10 +18,10 @@ stdenv.mkDerivation rec {
 
   preAutoreconf = "cd build/unix";
 
-  configureFlags = [ "--libdir=$(out)/lib/vapoursynth" ];
+  configureFlags = ["--libdir=$(out)/lib/vapoursynth"];
 
-  nativeBuildInputs = [ autoreconfHook ];
-  buildInputs = [ vapoursynth ];
+  nativeBuildInputs = [autoreconfHook];
+  buildInputs = [vapoursynth];
 
   meta = with lib; {
     description = "Format conversion tools for VapourSynth";

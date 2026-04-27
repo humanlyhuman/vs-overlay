@@ -23,7 +23,7 @@ stdenv.mkDerivation rec {
     pkg-config
     python3
   ];
-  buildInputs = [ vapoursynth ];
+  buildInputs = [vapoursynth];
   postPatch = ''
     sed -i '/incdir = include_directories(/,/^)/d' meson.build
 
@@ -39,7 +39,7 @@ stdenv.mkDerivation rec {
     description = "A Deblock filter plugin for VapourSynth";
     homepage = "https://github.com/HomeOfVapourSynthEvolution/VapourSynth-Deblock";
     license = licenses.gpl2Plus;
-    maintainers = with maintainers; [ humanlyhuman ];
+    maintainers = with maintainers; [humanlyhuman];
     platforms = platforms.all;
   };
 }

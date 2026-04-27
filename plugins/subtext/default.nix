@@ -9,7 +9,6 @@
   libass,
   vapoursynth,
 }:
-
 stdenv.mkDerivation rec {
   pname = "subtext";
   version = "3";
@@ -41,7 +40,7 @@ stdenv.mkDerivation rec {
     description = "Subtitle plugin for VapourSynth based on libass";
     homepage = "https://github.com/vapoursynth/subtext";
     license = licenses.mit;
-    maintainers = with maintainers; [ sbruder ];
+    maintainers = with maintainers; [sbruder];
     platforms = platforms.all;
   };
 }

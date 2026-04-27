@@ -6,7 +6,6 @@
   setuptools,
   vapoursynth,
 }:
-
 buildPythonPackage rec {
   pname = "acsuite";
   version = "6.0.0";
@@ -50,13 +49,13 @@ buildPythonPackage rec {
 
     runHook postCheck
   '';
-  pythonImportsCheck = [ "acsuite" ];
+  pythonImportsCheck = ["acsuite"];
 
   meta = with lib; {
     description = "An audiocutter.py replacement for VapourSynth using FFmpeg";
     homepage = "https://github.com/OrangeChannel/acsuite";
     license = licenses.unlicense;
-    maintainers = with maintainers; [ sbruder ];
+    maintainers = with maintainers; [sbruder];
     platforms = platforms.all;
   };
 }

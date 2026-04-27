@@ -29,13 +29,13 @@ buildPythonPackage {
     runHook postInstall
   '';
 
-  checkInputs = [ vapoursynth ];
+  checkInputs = [vapoursynth];
   checkPhase = ''
     runHook preCheck
     PYTHONPATH=$out/${python.sitePackages}:$PYTHONPATH
     runHook postCheck
   '';
-  pythonImportsCheck = [ "insaneAA" ];
+  pythonImportsCheck = ["insaneAA"];
   meta = with lib; {
     description = "insaneAA anti-aliasing script for VapourSynth";
     homepage = "https://github.com/Beatrice-Raws/VapourSynth-insaneAA";

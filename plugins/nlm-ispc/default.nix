@@ -6,7 +6,6 @@
   ispc,
   vapoursynth,
 }:
-
 stdenv.mkDerivation rec {
   pname = "vs-nlm-ispc";
   version = "4";

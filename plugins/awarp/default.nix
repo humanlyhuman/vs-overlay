@@ -30,7 +30,7 @@ stdenv.mkDerivation {
     ninja
     pkg-config
   ];
-  buildInputs = [ vapoursynth ];
+  buildInputs = [vapoursynth];
   meta = with lib; {
     description = "VapourSynth AWarp plugin";
     homepage = "https://github.com/HolyWu/VapourSynth-AWarp";

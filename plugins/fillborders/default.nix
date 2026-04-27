@@ -7,7 +7,6 @@
   pkg-config,
   vapoursynth,
 }:
-
 stdenv.mkDerivation rec {
   pname = "vapoursynth-fillborders";
   version = "2";
@@ -24,7 +23,7 @@ stdenv.mkDerivation rec {
     ninja
     pkg-config
   ];
-  buildInputs = [ vapoursynth ];
+  buildInputs = [vapoursynth];
 
   postInstall = ''
     # it installs the library in the wrong directory
@@ -36,7 +35,7 @@ stdenv.mkDerivation rec {
     description = "VapourSynth plugin to fill the borders of a clip";
     homepage = "https://github.com/dubhatervapoursynth/vapoursynth-fillborders";
     license = licenses.wtfpl;
-    maintainers = with maintainers; [ sbruder ];
+    maintainers = with maintainers; [sbruder];
     platforms = platforms.all;
   };
 }

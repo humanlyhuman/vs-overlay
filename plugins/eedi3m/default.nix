@@ -24,7 +24,7 @@ python3Packages.buildPythonPackage {
     vapoursynth
   ];
 
-  mesonFlags = [ "-Db_lto=false" ];
+  mesonFlags = ["-Db_lto=false"];
   postPatch = ''
     sed -i "/^incdir = include_directories(/,/^)/c\incdir = include_directories('${vapoursynth}/include/vapoursynth')" meson.build
     substituteInPlace pyproject.toml \

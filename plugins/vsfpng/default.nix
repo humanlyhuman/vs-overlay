@@ -8,7 +8,6 @@
   vapoursynth,
   python3,
 }:
-
 stdenv.mkDerivation rec {
   pname = "vsfpng";
   version = "1.2";
@@ -25,7 +24,7 @@ stdenv.mkDerivation rec {
     ninja
     pkg-config
   ];
-  buildInputs = [ vapoursynth ];
+  buildInputs = [vapoursynth];
   postPatch = ''
     substituteInPlace meson.build \
       --replace-fail "vapoursynth/include" "${vapoursynth}/include/vapoursynth" \

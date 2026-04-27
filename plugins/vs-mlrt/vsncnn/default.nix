@@ -8,7 +8,6 @@
   protobuf,
   onnx,
 }:
-
 stdenv.mkDerivation rec {
   pname = "vsncnn";
   version = "15.16";
@@ -52,7 +51,7 @@ stdenv.mkDerivation rec {
     description = "NCNN-based GPU Runtime";
     homepage = "https://github.com/AmusementClub/vs-mlrt";
     license = licenses.gpl3;
-    maintainers = with maintainers; [ aidalgol ];
+    maintainers = with maintainers; [aidalgol];
     platforms = platforms.all;
   };
 }
