@@ -5,9 +5,6 @@
   python3,
   hatchling,
   versioningit,
-  jetpytools,
-  vs-jet-engine,
-  vs-jetpack,
   typer,
   rich,
   pyside6,
@@ -40,9 +37,9 @@ in
     ];
 
     propagatedBuildInputs = [
-      jetpytools
-      vs-jet-engine
-      vs-jetpack
+      vapoursynthPlugins.jetpytools
+      vapoursynthPlugins.vs-jet-engine
+      vapoursynthPlugins.vs-jetpack
       typer
       rich
       pyside6
