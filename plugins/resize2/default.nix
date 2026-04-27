@@ -11,7 +11,9 @@
   packaging,
   python,
   vapoursynth,
-}: let
+}:
+
+let
   zimgMeson = builtins.toFile "meson.build" ''
     project('zimg', 'cpp',
       default_options : ['c_std=c89', 'cpp_std=c++17'],
@@ -19,15 +21,7 @@
       version : '3.0.5'
     )
 
-    py = import('python').find_installation()
-    vapoursynth_include_command = run_command(
-      py,
-      '-c',
-      'import vapoursynth as vs; print(vs.get_include())',
-      check: true,
-    )
-
-    vapoursynth_include = include_directories(vapoursynth_include_command.stdout().strip())
+    vapoursynth_include = include_directories('${vapoursynth}/include/vapoursynth')
 
     incl_dirs = include_directories(
       'graphengine/include',
@@ -78,7 +72,7 @@
     pname = "zimg_patched";
     version = "unstable-2026-04-27";
 
-    outputs = ["out" "dev"];
+    outputs = [ "out" "dev" ];
 
     src = fetchgit {
       url = "https://github.com/sekrit-twc/zimg.git";
@@ -87,8 +81,8 @@
       fetchSubmodules = true;
     };
 
-    nativeBuildInputs = [meson ninja pkg-config python];
-    buildInputs = [vapoursynth];
+    nativeBuildInputs = [ meson ninja pkg-config ];
+    buildInputs = [ vapoursynth ];
 
     postPatch = ''
       cp ${zimgMeson} meson.build
@@ -136,52 +130,54 @@
       EOF
     '';
   };
+
 in
-  buildPythonPackage rec {
-    pname = "vapoursynth-resize2";
-    version = "0.4.2";
 
-    pyproject = true;
+buildPythonPackage rec {
+  pname = "vapoursynth-resize2";
+  version = "0.4.2";
 
-    src = fetchFromGitHub {
-      owner = "Jaded-Encoding-Thaumaturgy";
-      repo = pname;
-      rev = version;
-      hash = "sha256-oOfDYHBZZ3JEYrbeiwSDNAaua7hlC61lYJOTqB6I7/Q=";
-    };
+  pyproject = true;
 
-    nativeBuildInputs = [
-      meson-python
-      meson
-      ninja
-      pkg-config
-      python
-      packaging
-    ];
+  src = fetchFromGitHub {
+    owner = "Jaded-Encoding-Thaumaturgy";
+    repo = pname;
+    rev = version;
+    hash = "sha256-oOfDYHBZZ3JEYrbeiwSDNAaua7hlC61lYJOTqB6I7/Q=";
+  };
 
-    buildInputs = [vapoursynth zimg_patched];
-    propagatedBuildInputs = [vapoursynth];
+  nativeBuildInputs = [
+    meson-python
+    meson
+    ninja
+    pkg-config
+    python
+    packaging
+  ];
 
-    dontCheckRuntimeDeps = true;
+  buildInputs = [ vapoursynth zimg_patched ];
+  propagatedBuildInputs = [ vapoursynth ];
 
-    postPatch = ''
-      python <<EOF
-      import re
-      p = open("pyproject.toml").read()
-      p = re.sub(r'"vapoursynth>=.*?",?', "", p)
-      p = re.sub(r'"ninja==.*?",?', '"ninja",', p)
-      open("pyproject.toml", "w").write(p)
-      EOF
+  dontCheckRuntimeDeps = true;
 
-      substituteInPlace meson.build \
-        --replace-fail \
-        "import vapoursynth as vs; print(vs.get_include())" \
-        "print(\"${vapoursynth}/include/vapoursynth\")"
-    '';
+  postPatch = ''
+    python <<EOF
+    import re
+    p = open("pyproject.toml").read()
+    p = re.sub(r'"vapoursynth>=.*?",?', "", p)
+    p = re.sub(r'"ninja==.*?",?', '"ninja",', p)
+    open("pyproject.toml", "w").write(p)
+    EOF
 
-    postInstall = ''
-      mkdir -p $out/lib/vapoursynth
-      plugin="$(find $out/lib -name 'libresize2${stdenv.hostPlatform.extensions.sharedLibrary}' | head -n1)"
-      ln -s "$plugin" $out/lib/vapoursynth/libresize2${stdenv.hostPlatform.extensions.sharedLibrary}
-    '';
-  }
+    substituteInPlace meson.build \
+      --replace-fail \
+      "import vapoursynth as vs; print(vs.get_include())" \
+      "print(\"${vapoursynth}/include/vapoursynth\")"
+  '';
+
+  postInstall = ''
+    mkdir -p $out/lib/vapoursynth
+    plugin="$(find $out/lib -name 'libresize2${stdenv.hostPlatform.extensions.sharedLibrary}' | head -n1)"
+    ln -s "$plugin" $out/lib/vapoursynth/libresize2${stdenv.hostPlatform.extensions.sharedLibrary}
+  '';
+}
