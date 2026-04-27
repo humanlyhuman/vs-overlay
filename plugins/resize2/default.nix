@@ -28,7 +28,6 @@
 
 mesonFlags = [ "--default-library=static" ];
 
-# disable install since zimg's meson.build doesn't have install targets
 dontUseNinjaInstall = true;
 
 postBuild = ''
