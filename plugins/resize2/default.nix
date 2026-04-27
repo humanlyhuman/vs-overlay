@@ -6,13 +6,13 @@
   ninja,
   pkg-config,
   vapoursynth,
-  python3,
+  python,
 }: let
-  python3Env = python3.withPackages (ps: [
+  pythonEnv = python.withPackages (ps: [
     ps.vapoursynth
   ]);
 in
-  python3.pkgs.toPythonModule (
+  python.pkgs.toPythonModule (
     stdenv.mkDerivation (finalAttrs: {
       pname = "vapoursynth-resize2";
       version = "0.4.2";
@@ -28,7 +28,7 @@ in
         meson
         ninja
         pkg-config
-        python3Env
+        pythonEnv
       ];
 
       buildInputs = [
@@ -39,7 +39,7 @@ in
         substituteInPlace meson.build \
           --replace-fail \
           "py = import('python').find_installation()" \
-          "py = import('python').find_installation('${python3Env}/bin/python3')"
+          "py = import('python').find_installation('${pythonEnv}/bin/python')"
 
         substituteInPlace meson.build \
           --replace-fail \
@@ -55,7 +55,7 @@ in
       postInstall = ''
         mkdir -p $out/lib/vapoursynth
         ln -s \
-          $out/${python3.sitePackages}/vapoursynth/plugins/resize2${stdenv.hostPlatform.extensions.sharedLibrary} \
+          $out/${python.sitePackages}/vapoursynth/plugins/resize2${stdenv.hostPlatform.extensions.sharedLibrary} \
           $out/lib/vapoursynth/resize2${stdenv.hostPlatform.extensions.sharedLibrary}
       '';
 
