@@ -65,10 +65,15 @@ buildPythonPackage rec {
     open("pyproject.toml", "w").write(p)
     EOF
 
-      substituteInPlace meson.build \
-        --replace-fail \
-        "import vapoursynth as vs; print(vs.get_include())" \
-        "print(\"${vapoursynth}/include/vapoursynth\")"
+  substituteInPlace meson.build \
+    --replace-fail \
+    "import vapoursynth as vs; print(vs.get_include())" \
+    "print(\"${vapoursynth}/include/vapoursynth\")"
+
+  substituteInPlace subprojects/zimg/meson.build \
+    --replace-fail \
+    "import vapoursynth as vs; print(vs.get_include())" \
+    "print(\"${vapoursynth}/include/vapoursynth\")"
   '';
 
   postInstall = ''
