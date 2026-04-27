@@ -28,12 +28,12 @@ buildPythonPackage rec {
     vapoursynth
   ];
 
-build-system = [
-  meson-python
-  meson
-  ninja
-  packaging
-];
+  build-system = [
+    meson-python
+    meson
+    ninja
+    packaging
+  ];
 
   buildInputs = [
     vapoursynth
