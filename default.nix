@@ -15,7 +15,6 @@ in
   vapoursynthPlugins = prev.lib.recurseIntoAttrs {
     adaptivegrain = prev.callPackage ./plugins/adaptivegrain { };
     awarp = prev.callPackage ./plugins/awarp { };
-    akarin = prev.callPackage ./plugins/akarin { };
     edgemasks = prev.callPackage ./plugins/edgemasks { };
     vs-noise = prev.callPackage ./plugins/vs-noise { };
     autocrop = prev.callPackage ./plugins/autocrop { };
@@ -60,6 +59,7 @@ in
     vsfiltermod = prev.callPackage ./plugins/vsfiltermod { };
     vs-mlrt = prev.callPackage ./plugins/vs-mlrt { };
 
+    akarin = callPythonPackage ./plugins/akarin { };
     insaneaa = callPythonPackage ./plugins/insaneaa { };
     acsuite = callPythonPackage ./plugins/acsuite { };
     astdr = callPythonPackage ./plugins/astdr { };
