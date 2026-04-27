@@ -104,14 +104,15 @@
         cp build/libzimg.a $out/lib/
 
         cp -r graphengine/include/graphengine $dev/include/
-        mkdir -p $dev/include/zimg
-        cp -r src/zimg/api        $dev/include/zimg/
-        cp -r src/zimg/common     $dev/include/zimg/
-        cp -r src/zimg/colorspace $dev/include/zimg/
-        cp -r src/zimg/depth      $dev/include/zimg/
-        cp -r src/zimg/graph      $dev/include/zimg/
-        cp -r src/zimg/resize     $dev/include/zimg/
-        cp -r src/zimg/unresize   $dev/include/zimg/
+        mkdir -p $dev/include
+        
+        cp -r src/zimg/api        $dev/include/
+        cp -r src/zimg/common     $dev/include/
+        cp -r src/zimg/colorspace $dev/include/
+        cp -r src/zimg/depth      $dev/include/
+        cp -r src/zimg/graph      $dev/include/
+        cp -r src/zimg/resize     $dev/include/
+        cp -r src/zimg/unresize   $dev/include/
 
       cat > $dev/lib/pkgconfig/zimg_patched.pc <<EOF
       prefix=$out
