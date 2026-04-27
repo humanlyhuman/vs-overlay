@@ -11,13 +11,14 @@
   scipy,
   vapoursynth,
   vapoursynthPlugins,
+  vapoursynth-bestsource,
   imagemagick,
 }: let
   vapoursynth-with-plugins = vapoursynth.withPlugins (
     with vapoursynthPlugins; [
       ffms2
       descale
-      bestsource
+      vapoursynth-bestsource
     ]
   );
 in
