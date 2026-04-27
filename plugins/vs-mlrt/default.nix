@@ -8,10 +8,10 @@
   vapoursynth,
   python3,
   vsncnn,
-  vsort,
-  vsov,
-  vstrt,
-  vsmigx,
+  # vsort,
+  # vsov,
+  # vstrt,
+  # vsmigx,
 }:
 stdenv.mkDerivation rec {
   pname = "vs-mlrt";
@@ -57,7 +57,8 @@ stdenv.mkDerivation rec {
     7z x ${contribModels} -o$out/share/vs-mlrt/models
 
     mkdir -p $out/lib/vapoursynth
-    for pkg in ${vsncnn} ${vsort} ${vsov} ${vstrt} ${vsmigx}; do
+    for pkg in ${vsncnn} do 
+    # ${vsort} ${vsov} ${vstrt} ${vsmigx}; 
       for lib in $pkg/lib/vapoursynth/*.so; do
         ln -s "$lib" $out/lib/vapoursynth/
       done
