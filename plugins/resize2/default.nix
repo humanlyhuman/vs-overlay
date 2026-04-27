@@ -9,6 +9,8 @@
   pkg-config,
   python,
   packaging,
+  git,
+  cmake,
   vapoursynth,
 }:
 buildPythonPackage rec {
