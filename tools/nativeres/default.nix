@@ -29,7 +29,7 @@ in
       rev = "vsview-nativeres/v${version}";
       hash = "sha256-3+j/YKmiAcESbnxJS+Cp6EAZix37OTMT0g5HG/TEsTM=";
     };
-    VERSIONINGIT_OVERRIDE = version;
+
     build-system = [
       hatchling
       versioningit
@@ -56,6 +56,11 @@ in
     pythonImportsCheck = [
       "nativeres"
     ];
+
+    postPatch = ''
+      substituteInPlace pyproject.toml \
+        --replace-fail 'dynamic = ["version"]' 'version = "${version}"'
+    '';
 
     meta = with lib; {
       description = "Descale analysis tools for VapourSynth";
