@@ -19,6 +19,7 @@
       ffms2
       descale
       vapoursynth-bestsource
+      lsmashsource
     ]
   );
 in
