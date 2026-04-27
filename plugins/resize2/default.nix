@@ -19,7 +19,7 @@
       owner = "sekrit-twc";
       repo = "zimg";
       rev = "master";
-      hash = lib.fakeHash;
+      hash = "sha256-/tvQ2uCY5czTyIYnChLuSnejE0gWVJI50J5foFV2mTo=";
     };
 
     nativeBuildInputs = [
