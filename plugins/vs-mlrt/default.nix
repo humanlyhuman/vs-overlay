@@ -7,7 +7,7 @@
   cmake,
   vapoursynth,
   python3,
-  vsncnn,
+  vapoursynthPlugins,
   # vsort,
   # vsov,
   # vstrt,
@@ -57,7 +57,7 @@ stdenv.mkDerivation rec {
     7z x ${contribModels} -o$out/share/vs-mlrt/models
 
     mkdir -p $out/lib/vapoursynth
-    for pkg in ${vsncnn} do 
+    for pkg in ${vapoursynthPlugins.vsncnn} do 
       for lib in $pkg/lib/vapoursynth/*.so; do
         ln -s "$lib" $out/lib/vapoursynth/
       done
