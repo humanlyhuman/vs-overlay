@@ -5,7 +5,6 @@
   vapoursynthPlugins,
   python,
   vapoursynth,
-  vapoursynthPlugins,
 }:
 buildPythonPackage {
   pname = "finedehalo";
