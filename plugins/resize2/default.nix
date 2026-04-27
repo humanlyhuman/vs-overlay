@@ -30,60 +30,60 @@
     buildInputs = [vapoursynth];
 
     postPatch = ''
-      cat > meson.build <<EOF
-      project('zimg', 'cpp',
-        default_options : ['c_std=c89', 'cpp_std=c++17'],
-        meson_version : '>=0.51.0',
-        version : '3.0.5'
+            cat > meson.build <<EOF
+            project('zimg', 'cpp',
+              default_options : ['c_std=c89', 'cpp_std=c++17'],
+              meson_version : '>=0.51.0',
+              version : '3.0.5'
+            )
+
+            vapoursynth_include = include_directories('${vapoursynth}/include/vapoursynth')
+
+            incl_dirs = include_directories(
+              'graphengine/include',
+              'src/zimg',
+              'src',
+            )
+
+            sources = files(
+              'graphengine/graphengine/cpuinfo.cpp',
+              'graphengine/graphengine/graph.cpp',
+              'graphengine/graphengine/node.cpp',
+              'src/zimg/api/zimg.cpp',
+              'src/zimg/colorspace/colorspace.cpp',
+              'src/zimg/common/cpuinfo.cpp',
+              'src/zimg/common/libm_wrapper.cpp',
+              'src/zimg/common/matrix.cpp',
+              'src/zimg/depth/depth.cpp',
+              'src/zimg/depth/depth_convert.cpp',
+              'src/zimg/depth/dither.cpp',
+              'src/zimg/graph/filter_base.cpp',
+              'src/zimg/graph/filtergraph.cpp',
+              'src/zimg/graph/graphbuilder.cpp',
+              'src/zimg/graph/graphengine_except.cpp',
+              'src/zimg/graph/simple_filters.cpp',
+              'src/zimg/resize/filter.cpp',
+              'src/zimg/resize/resize.cpp',
+              'src/zimg/resize/resize_impl.cpp',
+              'src/zimg/unresize/bilinear.cpp',
+              'src/zimg/unresize/unresize.cpp',
+              'src/zimg/unresize/unresize_impl.cpp'
+            )
+
+      zimg = library(
+        'zimg',
+        sources,
+        include_directories: [vapoursynth_include, incl_dirs],
+        dependencies: [dependency('threads')],
+        gnu_symbol_visibility: 'default',
+        cpp_args: ['-fvisibility=default', '-fvisibility-inlines-hidden=0']
       )
 
-      vapoursynth_include = include_directories('${vapoursynth}/include/vapoursynth')
-
-      incl_dirs = include_directories(
-        'graphengine/include',
-        'src/zimg',
-        'src',
-      )
-
-      sources = files(
-        'graphengine/graphengine/cpuinfo.cpp',
-        'graphengine/graphengine/graph.cpp',
-        'graphengine/graphengine/node.cpp',
-        'src/zimg/api/zimg.cpp',
-        'src/zimg/colorspace/colorspace.cpp',
-        'src/zimg/common/cpuinfo.cpp',
-        'src/zimg/common/libm_wrapper.cpp',
-        'src/zimg/common/matrix.cpp',
-        'src/zimg/depth/depth.cpp',
-        'src/zimg/depth/depth_convert.cpp',
-        'src/zimg/depth/dither.cpp',
-        'src/zimg/graph/filter_base.cpp',
-        'src/zimg/graph/filtergraph.cpp',
-        'src/zimg/graph/graphbuilder.cpp',
-        'src/zimg/graph/graphengine_except.cpp',
-        'src/zimg/graph/simple_filters.cpp',
-        'src/zimg/resize/filter.cpp',
-        'src/zimg/resize/resize.cpp',
-        'src/zimg/resize/resize_impl.cpp',
-        'src/zimg/unresize/bilinear.cpp',
-        'src/zimg/unresize/unresize.cpp',
-        'src/zimg/unresize/unresize_impl.cpp'
-      )
-
-zimg = library(
-  'zimg',
-  sources,
-  include_directories: [vapoursynth_include, incl_dirs],
-  dependencies: [dependency('threads')],
-  gnu_symbol_visibility: 'default',
-  cpp_args: ['-fvisibility=default', '-fvisibility-inlines-hidden=0']
-)
-
-      zimg_patched_dep = declare_dependency(
-        link_with: zimg,
-        include_directories: [vapoursynth_include, incl_dirs]
-      )
-      EOF
+            zimg_patched_dep = declare_dependency(
+              link_with: zimg,
+              include_directories: [vapoursynth_include, incl_dirs]
+            )
+            EOF
     '';
 
     configurePhase = ''
