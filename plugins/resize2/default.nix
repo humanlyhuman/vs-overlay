@@ -28,7 +28,7 @@
     mesonFlags = ["-Db_lto=false"];
     nativeBuildInputs = [meson ninja pkg-config python];
     buildInputs = [vapoursynth];
-    
+
     postPatch = ''
       substituteInPlace meson.build \
         --replace-fail "static_library('zimg'" "library('zimg'"
