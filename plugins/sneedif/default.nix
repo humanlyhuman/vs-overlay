@@ -52,7 +52,7 @@ buildPythonPackage rec {
     substituteInPlace meson.build \
       --replace-fail \
         "inc_vs = include_directories(r.stdout().strip())" \
-        "inc_vs = include_directories('${vapoursynth}/include')" \
+        "inc_vs = include_directories('${vapoursynth}/include/vapoursynth')" \
       --replace-fail \
         "install_dir: py.get_install_dir() / 'vapoursynth/plugins'," \
         "install_dir: get_option('libdir') / 'vapoursynth',"
