@@ -17,7 +17,7 @@ stdenv.mkDerivation rec {
     owner = "Mikewando";
     repo = "vsfpng";
     rev = version;
-    sha256 = "sha256-+OYUAp6T+ZGSFixw7W/QsqXVlPYea83WV88EVsI11KM=";
+    hash = "sha256-+OYUAp6T+ZGSFixw7W/QsqXVlPYea83WV88EVsI11KM=";
   };
 
   nativeBuildInputs = [
@@ -28,8 +28,8 @@ stdenv.mkDerivation rec {
   buildInputs = [ vapoursynth ];
   postPatch = ''
     substituteInPlace meson.build \
-      --replace "vapoursynth/include" "${vapoursynth}/include/vapoursynth" \
-      --replace "py.get_install_dir() / 'vapoursynth/plugins'" "'${placeholder "out"}/lib/vapoursynth'"
+      --replace-fail "vapoursynth/include" "${vapoursynth}/include/vapoursynth" \
+      --replace-fail "py.get_install_dir() / 'vapoursynth/plugins'" "'${placeholder "out"}/lib/vapoursynth'"
   '';
 
   env.NIX_CFLAGS_COMPILE = "-Wno-error=missing-field-initializers";

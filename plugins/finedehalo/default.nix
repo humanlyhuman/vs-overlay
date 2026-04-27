@@ -7,7 +7,7 @@
   vapoursynth,
 }:
 
-buildPythonPackage rec {
+buildPythonPackage {
   pname = "finedehalo";
   version = "unstable-2026-04-26";
 
@@ -15,7 +15,7 @@ buildPythonPackage rec {
     owner = "humanlyhuman";
     repo = "VapourSynth-scripts";
     rev = "18aecf2f46b3273059eb7e7c258b3b670e2cfbe2";
-    sha256 = "sha256-s1Pc2CT/yapfLjTFxjOvRcdiXhjDji8rbI1rW37vo18=";
+    hash = "sha256-s1Pc2CT/yapfLjTFxjOvRcdiXhjDji8rbI1rW37vo18=";
   };
 
   propagatedBuildInputs = with vapoursynthPlugins; [

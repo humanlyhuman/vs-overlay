@@ -16,7 +16,7 @@ stdenv.mkDerivation rec {
     owner = "HomeOfVapourSynthEvolution";
     repo = "VapourSynth-BM3D";
     rev = "r${version}";
-    sha256 = "sha256-FMal1VlijqQbuY+jJ38tZqhlg0OCMJHhVihV+DLlZFs=";
+    hash = "sha256-FMal1VlijqQbuY+jJ38tZqhlg0OCMJHhVihV+DLlZFs=";
   };
 
   nativeBuildInputs = [
@@ -48,7 +48,6 @@ stdenv.mkDerivation rec {
     description = "BM3D denoising filter for VapourSynth";
     homepage = "https://github.com/HomeOfVapourSynthEvolution/VapourSynth-BM3D";
     license = licenses.mit;
-    maintainers = [ ];
     platforms = platforms.all;
   };
 }

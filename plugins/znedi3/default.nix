@@ -13,7 +13,7 @@ stdenv.mkDerivation rec {
     owner = "sekrit-twc";
     repo = pname;
     rev = "r${version}";
-    sha256 = "sha256-ehqihRoQwi17RlLLEgCoPeWSzcXP8PKG8yIGw8I+5Gs=";
+    hash = "sha256-ehqihRoQwi17RlLLEgCoPeWSzcXP8PKG8yIGw8I+5Gs=";
     fetchSubmodules = true;
   };
 
@@ -22,13 +22,13 @@ stdenv.mkDerivation rec {
     rm -rf vsxx/{VapourSynth,VSScript,VSHelper}.h
 
     substituteInPlace vsxx/VapourSynth++.hpp \
-        --replace '"VapourSynth.h"' '<VapourSynth.h>' \
-        --replace '"VSHelper.h"' '<VSHelper.h>'
+        --replace-fail '"VapourSynth.h"' '<VapourSynth.h>' \
+        --replace-fail '"VSHelper.h"' '<VSHelper.h>'
 
     substituteInPlace Makefile \
-        --replace "VSScript.h" "" \
-        --replace "VapourSynth.h" "" \
-        --replace "VSHelper.h" ""
+        --replace-fail "VSScript.h" "" \
+        --replace-fail "VapourSynth.h" "" \
+        --replace-fail "VSHelper.h" ""
   '';
 
   buildInputs = [ vapoursynth ];

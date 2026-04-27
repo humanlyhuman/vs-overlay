@@ -52,14 +52,14 @@ buildPythonPackage rec {
         "py.get_install_dir() / 'vapoursynth/plugins'" \
         "get_option('libdir') / 'vapoursynth'"
     substituteInPlace requirements.txt \
-        --replace "VapourSynth>=69" ""
+        --replace-fail "VapourSynth>=69" ""
   '';
 
   checkInputs = [ (vapoursynth.withPlugins propagatedBinaryPlugins) ];
   pythonImportsCheck = [ "vardefunc" ];
 
   meta = with lib; {
-    description = " Some functions that may be useful ";
+    description = "Some functions that may be useful";
     homepage = "https://github.com/Ichunjo/vardefunc";
     license = licenses.unfree; # no license
     maintainers = with maintainers; [ sbruder ];

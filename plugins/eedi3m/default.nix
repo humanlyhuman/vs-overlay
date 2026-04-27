@@ -13,7 +13,7 @@ python3Packages.buildPythonPackage {
     owner = "HomeOfVapourSynthEvolution";
     repo = "VapourSynth-EEDI3";
     rev = "r9";
-    sha256 = "sha256-/3elqMGarp1+T7K0wOIEbePsa80UUhMEwnYUudNnGxg=";
+    hash = "sha256-/3elqMGarp1+T7K0wOIEbePsa80UUhMEwnYUudNnGxg=";
   };
 
   build-system = [
@@ -44,7 +44,6 @@ python3Packages.buildPythonPackage {
     description = "Renewed EEDI3 filter for VapourSynth";
     homepage = "https://github.com/HomeOfVapourSynthEvolution/VapourSynth-EEDI3";
     license = licenses.gpl2Plus;
-    maintainers = [ ];
     platforms = platforms.x86 ++ platforms.x86_64;
   };
 }

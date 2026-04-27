@@ -18,7 +18,7 @@ stdenv.mkDerivation rec {
     owner = "dubhatervapoursynth";
     repo = pname;
     rev = "v${version}";
-    sha256 = "sha256-WgoIF7ni2j6wNCutysV18B693OapzniZoy94iyZR3uA=";
+    hash = "sha256-WgoIF7ni2j6wNCutysV18B693OapzniZoy94iyZR3uA=";
   };
 
   nativeBuildInputs = [
@@ -35,7 +35,7 @@ stdenv.mkDerivation rec {
 
   postPatch = ''
       substituteInPlace meson.build \
-        --replace \
+        --replace-fail \
     "incdir = include_directories(
         run_command(
             find_program('python', 'python3'),

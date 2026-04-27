@@ -46,14 +46,14 @@ stdenv.mkDerivation (finalAttrs: {
     runHook postInstall
   '';
 
-  meta = {
+  meta = with lib; {
     description = "Plugin for VapourSynth: neo_f3kdb";
     homepage = "https://github.com/HomeOfAviSynthPlusEvolution/neo_f3kdb";
-    license = with lib.licenses; [
+    license = with licenses; [
       gpl3Plus
       gpl2Plus
     ];
-    maintainers = with lib.maintainers; [ humanlyhuman ];
-    platforms = lib.platforms.x86_64;
+    maintainers = with maintainers; [ humanlyhuman ];
+    platforms = platforms.x86_64;
   };
 })

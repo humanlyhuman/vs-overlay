@@ -17,7 +17,7 @@ stdenv.mkDerivation rec {
     owner = "HomeOfVapourSynthEvolution";
     repo = pname;
     rev = "r${version}";
-    sha256 = "sha256-cQaGasNRI0p6sz1hecErDrw6lf6G3vk98SshGdRMn+Y=";
+    hash = "sha256-cQaGasNRI0p6sz1hecErDrw6lf6G3vk98SshGdRMn+Y=";
   };
 
   nativeBuildInputs = [
@@ -32,7 +32,7 @@ stdenv.mkDerivation rec {
 
   postPatch = ''
     substituteInPlace meson.build \
-        --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
+        --replace-fail "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
   '';
 
   meta = with lib; {

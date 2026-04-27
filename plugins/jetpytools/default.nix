@@ -15,7 +15,7 @@ buildPythonPackage rec {
     owner = "Jaded-Encoding-Thaumaturgy";
     repo = "jetpytools";
     rev = "v${version}";
-    sha256 = "sha256-LDzOLkL/KKSOBT+FU9sdg0pZGVDMBzioN4C645GQvRI=";
+    hash = "sha256-LDzOLkL/KKSOBT+FU9sdg0pZGVDMBzioN4C645GQvRI=";
   };
 
   build-system = [
@@ -31,7 +31,6 @@ buildPythonPackage rec {
     description = "Python tools and utilities used by JET packages";
     homepage = "https://github.com/Jaded-Encoding-Thaumaturgy/jetpytools";
     license = licenses.mit;
-    maintainers = [ ];
     platforms = platforms.all;
   };
 }

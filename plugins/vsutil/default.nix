@@ -20,7 +20,7 @@ buildPythonPackage rec {
     owner = "Irrational-Encoding-Wizardry";
     repo = pname;
     rev = version;
-    sha256 = "sha256-15sf8mLpDUcnidD3n2yQdIQEPA2zYtb/b/h3Sx49VEc=";
+    hash = "sha256-15sf8mLpDUcnidD3n2yQdIQEPA2zYtb/b/h3Sx49VEc=";
   };
 
   patches = [

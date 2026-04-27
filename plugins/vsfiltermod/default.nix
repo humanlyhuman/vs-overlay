@@ -9,7 +9,7 @@
   harfbuzz,
   fontconfig,
 }:
-llvmPackages.stdenv.mkDerivation rec {
+llvmPackages.stdenv.mkDerivation {
   pname = "vsfiltermod";
   version = "unstable-2026-03-24";
 
@@ -17,14 +17,14 @@ llvmPackages.stdenv.mkDerivation rec {
     owner = "Cinea4678";
     repo = "VSFilterModButCMake";
     rev = "93f5a12bde15d4472c0fd8c86c18f6c1de0cf098";
-    sha256 = "sha256-c3NDDG+AgY8ojAZ2fOKWLbByl4/FRIBJTy+zBbsE6dQ=";
+    hash = "sha256-c3NDDG+AgY8ojAZ2fOKWLbByl4/FRIBJTy+zBbsE6dQ=";
   };
 
   sse2neon = fetchFromGitHub {
     owner = "DLTcollab";
     repo = "sse2neon";
     rev = "v1.7.0";
-    sha256 = "sha256-riFFGIA0H7e5StYSjO0/JDrduzfwS+lOASzk5BRUyo4=";
+    hash = "sha256-riFFGIA0H7e5StYSjO0/JDrduzfwS+lOASzk5BRUyo4=";
   };
 
   nativeBuildInputs = [
@@ -59,6 +59,5 @@ llvmPackages.stdenv.mkDerivation rec {
     homepage = "https://github.com/Cinea4678/VSFilterModButCMake";
     license = licenses.gpl3;
     platforms = platforms.linux;
-    maintainers = [ ];
   };
 }
