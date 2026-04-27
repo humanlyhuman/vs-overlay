@@ -28,7 +28,7 @@ buildPythonPackage rec {
     hash = "sha256-LmSANVwS6g5575Xsms9cwg+9SikNObZ/kgdh+sh/PAw=";
   };
 
-  build-system = [ hatchling ];
+  build-system = [hatchling];
 
   nativeBuildInputs = [
     meson
@@ -43,7 +43,7 @@ buildPythonPackage rec {
     ocl-icd
   ];
 
-  dependencies = [ vapoursynth ];
+  dependencies = [vapoursynth];
 
   postPatch = ''
     sed -i '/vapoursynth>=74/d' pyproject.toml
