@@ -85,7 +85,7 @@
       )
       EOF
     '';
-    
+
     configurePhase = ''
       meson setup build \
         --prefix=$out \
