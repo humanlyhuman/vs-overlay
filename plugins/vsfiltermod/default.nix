@@ -49,10 +49,10 @@ llvmPackages.stdenv.mkDerivation rec {
 
   installPhase = ''
     runHook preInstall
-  
+
     mkdir -p $out/lib/vapoursynth
     install -Dm755 src/plugins/vsfiltermod.so $out/lib/vapoursynth/libvsfm.so
-  
+
     runHook postInstall
   '';
 
