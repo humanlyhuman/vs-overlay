@@ -147,6 +147,7 @@ in
       pkg-config
       python
       packaging
+      zimg_patched.dev
     ];
 
     buildInputs = [vapoursynth zimg_patched];
