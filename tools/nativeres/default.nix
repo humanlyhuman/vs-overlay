@@ -16,12 +16,11 @@
   vapoursynth-with-plugins = vapoursynth.withPlugins (
     with vapoursynthPlugins; [
       ffms2
-      descale  
+      descale
       bestsource
     ]
   );
 in
-
   buildPythonApplication rec {
     pname = "nativeres";
     version = "0.2.0";
