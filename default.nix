@@ -52,6 +52,8 @@ in {
     knlmeanscl = callPythonPackage ./plugins/knlmeanscl {};
     lvsfunc = callPythonPackage ./plugins/lvsfunc {};
     rekt = callPythonPackage ./plugins/rekt {};
+    resize2 = callPythonPackage ./plugins/resize2 {};
+
     sneedif = callPythonPackage ./plugins/sneedif {};
     vardefunc = callPythonPackage ./plugins/vardefunc {};
     vs-jetpack = callPythonPackage ./plugins/vsjetpack {
