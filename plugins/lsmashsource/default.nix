@@ -10,7 +10,7 @@
   vapoursynth,
   ffmpeg,
   l-smash,
-  xxHash,
+  xxhash,
 }: let
   ffmpeg-lsmash =
     (ffmpeg.override {
@@ -51,7 +51,7 @@ in
     buildInputs = [
       l-smash
       vapoursynth
-      xxHash
+      xxhash
       ffmpeg-lsmash
     ];
     meta = with lib; {
