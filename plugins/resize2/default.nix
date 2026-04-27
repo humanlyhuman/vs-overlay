@@ -34,7 +34,7 @@ buildPythonPackage rec {
     git
     cmake
   ];
-  
+
   buildInputs = [
     vapoursynth
   ];
