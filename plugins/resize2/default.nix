@@ -44,15 +44,15 @@
         cp $dev/lib/pkgconfig/zimg.pc $dev/lib/pkgconfig/zimg_patched.pc
       fi
 
-      if [ -f $dev/lib/pkgconfig/zimg_patched.pc ]; then
-        substituteInPlace $dev/lib/pkgconfig/zimg_patched.pc \
-          --replace "Name: zimg" "Name: zimg_patched" \
-          --replace "includedir=${dev}/include" "includedir=${dev}/include"
+  if [ -f $dev/lib/pkgconfig/zimg_patched.pc ]; then
+  substituteInPlace $dev/lib/pkgconfig/zimg_patched.pc \
+    --replace "Name: zimg" "Name: zimg_patched" \
+    --replace "includedir=$dev/include" "includedir=$dev/include"
 
-        substituteInPlace $dev/lib/pkgconfig/zimg_patched.pc \
-          --replace "Requires: zimg" "" \
-          --replace "Requires.private: zimg" ""
-      fi
+  substituteInPlace $dev/lib/pkgconfig/zimg_patched.pc \
+    --replace "Requires: zimg" "" \
+    --replace "Requires.private: zimg" ""
+fi
 
       if [ -f $dev/include/zimg.h ]; then
         ln -sf $dev/include/zimg.h $dev/include/zimg/api/zimg.h
