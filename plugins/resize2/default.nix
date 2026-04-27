@@ -43,7 +43,7 @@ zimg_patched = stdenv.mkDerivation rec {
   installPhase = ''
     ninja -C build install
   '';
-};
+
     meta = with lib; {
       description = "Patched zimg fork required by vapoursynth-resize2";
       homepage = "https://github.com/sekrit-twc/zimg";
