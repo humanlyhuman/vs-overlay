@@ -49,24 +49,24 @@ buildPythonPackage rec {
   ];
 
   dontCheckRuntimeDeps = true;
-postPatch = ''
-  rm -rf subprojects/zimg
-  cp -r ${zimgSrc} subprojects/zimg
-  chmod -R +w subprojects/zimg
+  postPatch = ''
+      rm -rf subprojects/zimg
+      cp -r ${zimgSrc} subprojects/zimg
+      chmod -R +w subprojects/zimg
 
-  python <<EOF
-import re
-p = open("pyproject.toml").read()
-p = re.sub(r'"vapoursynth>=.*?",?', "", p)
-p = re.sub(r'"ninja==.*?",?', '"ninja",', p)
-open("pyproject.toml", "w").write(p)
-EOF
+      python <<EOF
+    import re
+    p = open("pyproject.toml").read()
+    p = re.sub(r'"vapoursynth>=.*?",?', "", p)
+    p = re.sub(r'"ninja==.*?",?', '"ninja",', p)
+    open("pyproject.toml", "w").write(p)
+    EOF
 
-  substituteInPlace meson.build \
-    --replace-fail \
-    "import vapoursynth as vs; print(vs.get_include())" \
-    "print(\"${vapoursynth}/include/vapoursynth\")"
-'';
+      substituteInPlace meson.build \
+        --replace-fail \
+        "import vapoursynth as vs; print(vs.get_include())" \
+        "print(\"${vapoursynth}/include/vapoursynth\")"
+  '';
 
   postInstall = ''
     mkdir -p $out/lib/vapoursynth
