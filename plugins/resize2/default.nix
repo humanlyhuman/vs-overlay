@@ -70,7 +70,7 @@
         'src/zimg/unresize/unresize_impl.cpp'
       )
 
-      zimg = static_library(
+      zimg = library(
         'zimg',
         sources,
         include_directories: [vapoursynth_include, incl_dirs],
