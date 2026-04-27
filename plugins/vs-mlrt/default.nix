@@ -8,10 +8,6 @@
   vapoursynth,
   python3,
   vapoursynthPlugins,
-  # vsort,
-  # vsov,
-  # vstrt,
-  # vsmigx,
 }:
 stdenv.mkDerivation rec {
   pname = "vs-mlrt";
