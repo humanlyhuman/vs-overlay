@@ -25,6 +25,7 @@ in {
     fmtconv = prev.callPackage ./plugins/fmtconv {};
     lsmashsource = prev.callPackage ./plugins/lsmashsource {};
     mvtools = prev.vapoursynth-mvtools;
+    knlmeanscl = prev.callPackage ./plugins/knlmeanscl {};
     neo-f3kdb = prev.callPackage ./plugins/neo_f3kdb {};
     nlm-ispc = prev.callPackage ./plugins/nlm-ispc {};
     ocr = prev.callPackage ./plugins/ocr {};
