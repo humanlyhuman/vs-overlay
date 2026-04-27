@@ -11,7 +11,7 @@
 python3.pkgs.buildPythonPackage rec {
   pname = "vs-mlrt";
   version = "15.16";
-  format = "other";  # not a standard setuptools package
+  format = "other";
 
   src = fetchFromGitHub {
     owner = "AmusementClub";
@@ -66,7 +66,7 @@ python3.pkgs.buildPythonPackage rec {
   meta = with lib; {
     description = "Machine learning runtimes for VapourSynth (meta package: scripts + models)";
     homepage = "https://github.com/AmusementClub/vs-mlrt";
-    license = licenses.gpl3;
+    license = licenses.unfree;
     platforms = platforms.linux;
   };
 }
