@@ -11,6 +11,48 @@
   vapoursynth,
   git,
 }:
+
+let
+  zimg_patched = stdenv.mkDerivation rec {
+    pname = "zimg_patched";
+    version = "unstable-2026-04-27";
+
+    src = fetchFromGitHub {
+      owner = "sekrit-twc";
+      repo = "zimg";
+      rev = "master";
+      hash = lib.fakeHash;
+    };
+
+    nativeBuildInputs = [
+      meson
+      ninja
+      pkg-config
+    ];
+
+    outputs = [ "out" "dev" ];
+
+    postInstall = ''
+      if [ -f $dev/lib/pkgconfig/zimg.pc ]; then
+        cp $dev/lib/pkgconfig/zimg.pc \
+           $dev/lib/pkgconfig/zimg_patched.pc
+
+        substituteInPlace $dev/lib/pkgconfig/zimg_patched.pc \
+          --replace-fail "Name: zimg" "Name: zimg_patched" \
+          --replace-fail "Requires: zimg" ""
+      fi
+    '';
+
+    meta = with lib; {
+      description = "Patched zimg fork required by vapoursynth-resize2";
+      homepage = "https://github.com/sekrit-twc/zimg";
+      license = licenses.wtfpl;
+      platforms = platforms.unix;
+    };
+  };
+
+in
+
 buildPythonPackage rec {
   pname = "vapoursynth-resize2";
   version = "0.4.2";
@@ -27,6 +69,7 @@ buildPythonPackage rec {
   nativeBuildInputs = [
     pkg-config
     vapoursynth
+    zimg_patched
   ];
 
   build-system = [
@@ -39,29 +82,32 @@ buildPythonPackage rec {
 
   buildInputs = [
     vapoursynth
+    zimg_patched
   ];
 
-  dependencies = [
+  propagatedBuildInputs = [
     vapoursynth
   ];
 
   dontCheckRuntimeDeps = true;
+
   postPatch = ''
-      python3 <<'EOF'
-    import re
+    python3 <<'EOF'
+import re
 
-    p = open("pyproject.toml").read()
-    p = re.sub(r'"vapoursynth>=.*?",?', "", p)
-    p = re.sub(r'"ninja==.*?",?', '"ninja",', p)
+p = open("pyproject.toml").read()
+p = re.sub(r'"vapoursynth>=.*?",?', "", p)
+p = re.sub(r'"ninja==.*?",?', '"ninja",', p)
 
-    open("pyproject.toml", "w").write(p)
-    EOF
+open("pyproject.toml", "w").write(p)
+EOF
 
-      substituteInPlace meson.build \
-        --replace-fail \
-        "import vapoursynth as vs; print(vs.get_include())" \
-        "print(\"${vapoursynth}/include/vapoursynth\")"
+    substituteInPlace meson.build \
+      --replace-fail \
+      "import vapoursynth as vs; print(vs.get_include())" \
+      "print(\"${vapoursynth}/include/vapoursynth\")"
   '';
+
   postInstall = ''
     mkdir -p $out/lib/vapoursynth
 
