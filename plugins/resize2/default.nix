@@ -98,48 +98,48 @@
     '';
 
     installPhase = ''
-              mkdir -p $out/lib
-              mkdir -p $dev/include
-              mkdir -p $dev/lib/pkgconfig
+                    mkdir -p $out/lib
+                    mkdir -p $dev/include
+                    mkdir -p $dev/lib/pkgconfig
 
-mkdir -p $out/lib
+      mkdir -p $out/lib
 
-cp build/libzimg.a libzimg.a
-mkdir ar-tmp
+      cp build/libzimg.a libzimg.a
+      mkdir ar-tmp
 
-cd ar-tmp
-ar x ../libzimg.a
-cd ..
+      cd ar-tmp
+      ar x ../libzimg.a
+      cd ..
 
-ar rcs $out/lib/libzimg.a ar-tmp/*.o
-ranlib $out/lib/libzimg.a
-rm -rf ar-tmp libzimg.a
-              cp -r graphengine/include/graphengine $dev/include/
-      mkdir -p $dev/include/zimg
+      ar rcs $out/lib/libzimg.a ar-tmp/*.o
+      ranlib $out/lib/libzimg.a
+      rm -rf ar-tmp libzimg.a
+                    cp -r graphengine/include/graphengine $dev/include/
+            mkdir -p $dev/include/zimg
 
-      cp -r src/zimg/api        $dev/include/zimg/
-      cp -r src/zimg/common     $dev/include/zimg/
-      cp -r src/zimg/colorspace $dev/include/zimg/
-      cp -r src/zimg/depth      $dev/include/zimg/
-      cp -r src/zimg/graph      $dev/include/zimg/
-      cp -r src/zimg/resize     $dev/include/zimg/
-      cp -r src/zimg/unresize   $dev/include/zimg/
+            cp -r src/zimg/api        $dev/include/zimg/
+            cp -r src/zimg/common     $dev/include/zimg/
+            cp -r src/zimg/colorspace $dev/include/zimg/
+            cp -r src/zimg/depth      $dev/include/zimg/
+            cp -r src/zimg/graph      $dev/include/zimg/
+            cp -r src/zimg/resize     $dev/include/zimg/
+            cp -r src/zimg/unresize   $dev/include/zimg/
 
-      cp -r graphengine/include/graphengine $dev/include/
+            cp -r graphengine/include/graphengine $dev/include/
 
-            cat > $dev/lib/pkgconfig/zimg_patched.pc <<EOF
-            prefix=$out
-            exec_prefix=$out
-            libdir=$out/lib
-            includedir=$dev/include
+                  cat > $dev/lib/pkgconfig/zimg_patched.pc <<EOF
+                  prefix=$out
+                  exec_prefix=$out
+                  libdir=$out/lib
+                  includedir=$dev/include
 
-            Name: zimg_patched
-            Description: patched zimg static library
-            Version: ${version}
-            Libs: -L$out/lib -lzimg
-            Libs.private: -lstdc++
-            Cflags: -I$dev/include -I$dev/include/zimg
-            EOF
+                  Name: zimg_patched
+                  Description: patched zimg static library
+                  Version: ${version}
+                  Libs: -L$out/lib -lzimg
+                  Libs.private: -lstdc++
+                  Cflags: -I$dev/include -I$dev/include/zimg
+                  EOF
     '';
   };
 in
