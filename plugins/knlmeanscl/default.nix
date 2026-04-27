@@ -12,6 +12,7 @@
   opencl-headers,
   ocl-icd,
 }:
+
 buildPythonPackage rec {
   pname = "vapoursynth-knlmeanscl";
   version = "1.2";
@@ -24,16 +25,9 @@ buildPythonPackage rec {
     hash = "sha256-mFOcKqUzDhWu7yiqiHReTFSzb5jA/YDPb7IOASX9JUo=";
   };
 
-  build-system = [
-    hatchling
-    meson
-    ninja
-    packaging
-  ];
+  build-system = [ hatchling meson ninja packaging ];
 
-  nativeBuildInputs = [
-    pkg-config
-  ];
+  nativeBuildInputs = [ pkg-config ];
 
   buildInputs = [
     vapoursynth
@@ -42,7 +36,7 @@ buildPythonPackage rec {
     ocl-icd
   ];
 
-  dependencies = [vapoursynth];
+  dependencies = [ vapoursynth ];
 
   postPatch = ''
     sed -i '/vapoursynth>=74/d' pyproject.toml
@@ -51,25 +45,17 @@ buildPythonPackage rec {
 
     substituteInPlace meson.build \
       --replace-fail \
-        "inc_vs = include_directories(r.stdout().strip())" \
-        "inc_vs = include_directories('${vapoursynth}/include/vapoursynth')" \
+      "lib_inc += include_directories(r.stdout().strip())" \
+      "lib_inc += include_directories('${vapoursynth}/include/vapoursynth')" \
       --replace-fail \
-        "install_dir: py.get_install_dir() / 'vapoursynth/plugins'," \
-        "install_dir: get_option('libdir') / 'vapoursynth',"
-  '';
-
-  postInstall = ''
-    mkdir -p $out/lib/vapoursynth
-
-    ln -s \
-      $out/lib/python*/site-packages/vapoursynth/plugins/libknlmeanscl.so \
-      $out/lib/vapoursynth/libknlmeanscl.so
+      "install: false," \
+      "install: true, install_dir: get_option('libdir') / 'vapoursynth',"
   '';
 
   doCheck = false;
 
   meta = with lib; {
-    description = "Optimized OpenCL implementation of the Non-local means de-noising algorithm";
+    description = "Optimized OpenCL implementation of Non-local means denoising";
     homepage = "https://github.com/Jaded-Encoding-Thaumaturgy/vapoursynth-knlmeanscl";
     license = licenses.gpl3Plus;
     platforms = platforms.linux;
