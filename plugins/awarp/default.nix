@@ -1,4 +1,12 @@
-{ lib, stdenv, fetchFromGitHub, meson, ninja, pkg-config, vapoursynth }:
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  meson,
+  ninja,
+  pkg-config,
+  vapoursynth,
+}:
 stdenv.mkDerivation rec {
   pname = "vapoursynth-awarp";
   version = "3";
@@ -17,7 +25,11 @@ stdenv.mkDerivation rec {
         "py.get_install_dir() / 'vapoursynth/plugins'" \
         "'${placeholder "out"}/lib/vapoursynth'"
   '';
-  nativeBuildInputs = [ meson ninja pkg-config ];
+  nativeBuildInputs = [
+    meson
+    ninja
+    pkg-config
+  ];
   buildInputs = [ vapoursynth ];
   meta = with lib; {
     description = "VapourSynth AWarp plugin";
