@@ -2,11 +2,9 @@
   lib,
   fetchFromGitHub,
   buildPythonApplication,
-
   python3,
   hatchling,
   versioningit,
-
   jetpytools,
   vs-jet-engine,
   vs-jetpack,
@@ -15,64 +13,59 @@
   pyside6,
   numpy,
   scipy,
-
   vapoursynth,
   vapoursynthPlugins,
   imagemagick,
-}:
-
-let
-  vapoursynth-with-plugins =
-    vapoursynth.withPlugins (with vapoursynthPlugins; [
-      ffms2
-      descale
-    ]);
+}: let
+  vapoursynth-with-plugins = vapoursynth.withPlugins (with vapoursynthPlugins; [
+    ffms2
+    descale
+  ]);
 in
+  buildPythonApplication rec {
+    pname = "nativeres";
+    version = "0.2.0";
+    pyproject = true;
 
-buildPythonApplication rec {
-  pname = "nativeres";
-  version = "0.2.0";
-  pyproject = true;
+    src = fetchFromGitHub {
+      owner = "Jaded-Encoding-Thaumaturgy";
+      repo = "nativeres";
+      rev = "nativeres/v${version}";
+      hash = lib.fakeHash;
+    };
 
-  src = fetchFromGitHub {
-    owner = "Jaded-Encoding-Thaumaturgy";
-    repo = "nativeres";
-    rev = "nativeres/v${version}";
-    hash = lib.fakeHash;
-  };
+    build-system = [
+      hatchling
+      versioningit
+    ];
 
-  build-system = [
-    hatchling
-    versioningit
-  ];
+    propagatedBuildInputs = [
+      jetpytools
+      vs-jet-engine
+      vs-jetpack
+      typer
+      rich
+      pyside6
+      numpy
+      scipy
+      vapoursynth-with-plugins
+    ];
 
-  propagatedBuildInputs = [
-    jetpytools
-    vs-jet-engine
-    vs-jetpack
-    typer
-    rich
-    pyside6
-    numpy
-    scipy
-    vapoursynth-with-plugins
-  ];
+    nativeCheckInputs = [
+      imagemagick
+    ];
 
-  nativeCheckInputs = [
-    imagemagick
-  ];
+    doCheck = false;
 
-  doCheck = false;
+    pythonImportsCheck = [
+      "nativeres"
+    ];
 
-  pythonImportsCheck = [
-    "nativeres"
-  ];
-
-  meta = with lib; {
-    description = "Descale analysis tools for VapourSynth";
-    homepage = "https://github.com/Jaded-Encoding-Thaumaturgy/nativeres";
-    license = licenses.mit;
-    mainProgram = "nativeres";
-    platforms = platforms.all;
-  };
-}
+    meta = with lib; {
+      description = "Descale analysis tools for VapourSynth";
+      homepage = "https://github.com/Jaded-Encoding-Thaumaturgy/nativeres";
+      license = licenses.mit;
+      mainProgram = "nativeres";
+      platforms = platforms.all;
+    };
+  }
