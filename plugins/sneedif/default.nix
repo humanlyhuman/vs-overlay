@@ -19,7 +19,6 @@
 buildPythonPackage rec {
   pname = "vapoursynth-sneedif";
   version = "4.2";
-
   pyproject = true;
 
   src = fetchFromGitHub {
@@ -29,9 +28,7 @@ buildPythonPackage rec {
     hash = "sha256-LmSANVwS6g5575Xsms9cwg+9SikNObZ/kgdh+sh/PAw=";
   };
 
-  build-system = [
-    hatchling
-  ];
+  build-system = [ hatchling ];
 
   nativeBuildInputs = [
     meson
@@ -40,29 +37,24 @@ buildPythonPackage rec {
   ];
 
   buildInputs = [
+    vapoursynth
     boost
     opencl-headers
     ocl-icd
   ];
 
-  dependencies = [
-    vapoursynth
-  ];
+  dependencies = [ vapoursynth ];
 
   postPatch = ''
-    sed -i '/incdir = include_directories(/,/^)/d' meson.build
     sed -i '/vapoursynth>=74/d' pyproject.toml
 
-    sed -i '/r = run_command(/,/^)/d' meson.build
-
     substituteInPlace meson.build \
-      --replace "include_directories: incdir," "dependencies: vapoursynth_dep," \
-      --replace "install_dir: py.get_install_dir() / 'vapoursynth/plugins'," \
-                "install_dir: get_option('libdir') / 'vapoursynth',"
+      --replace-fail \
+      "install_dir: py.get_install_dir() / 'vapoursynth/plugins'," \
+      "install_dir: get_option('libdir') / 'vapoursynth',"
   '';
 
   doCheck = false;
-  dontCheckRuntimeDeps = true;
 
   meta = with lib; {
     description = "Setsugen No Ensemble of Edge Directed Interpolation Functions for VapourSynth";
