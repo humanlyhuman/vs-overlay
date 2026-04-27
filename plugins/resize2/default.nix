@@ -9,6 +9,7 @@
   packaging,
   pkg-config,
   vapoursynth,
+  git,
 }:
 buildPythonPackage rec {
   pname = "vapoursynth-resize2";
@@ -29,6 +30,7 @@ buildPythonPackage rec {
   ];
 
   build-system = [
+    git
     meson-python
     meson
     ninja
