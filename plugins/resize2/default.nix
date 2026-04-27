@@ -44,23 +44,17 @@ buildPythonPackage rec {
   ];
 
   dontCheckRuntimeDeps = true;
+postPatch = ''
+  python3 - <<EOF
+import re
+p = open("pyproject.toml").read()
 
-  postPatch = ''
-    substituteInPlace meson.build \
-      --replace-fail \
-      "py = import('python').find_installation()" \
-      "py = import('python').find_installation(pure: false)"
+p = re.sub(r'"vapoursynth>=.*?",?', '', p)
+p = re.sub(r'"ninja==.*?",?', '"ninja",', p)
 
-    substituteInPlace meson.build \
-      --replace-fail \
-      "vapoursynth_include_command = run_command(" \
-      "# disabled by nix"
-
-    substituteInPlace meson.build \
-      --replace-fail \
-      "vapoursynth_include = include_directories(vapoursynth_include_command.stdout().strip())" \
-      "deps += dependency('vapoursynth')"
-  '';
+open("pyproject.toml", "w").write(p)
+EOF
+'';
 
   postInstall = ''
     mkdir -p $out/lib/vapoursynth
