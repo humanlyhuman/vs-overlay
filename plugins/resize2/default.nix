@@ -96,12 +96,12 @@
     buildPhase = ''
       ninja -C build
     '';
-    
+
     installPhase = ''
       mkdir -p $out/lib
       mkdir -p $dev/include
       mkdir -p $dev/lib/pkgconfig
-    
+
       mkdir -p repack
       cd repack
       ar x ../build/libzimg.a
