@@ -13,36 +13,36 @@
   autoreconfHook,
   fetchgit,
 }: let
-zimg_patched = stdenv.mkDerivation rec {
-  pname = "zimg_patched";
-  version = "unstable-2026-04-27";
+  zimg_patched = stdenv.mkDerivation rec {
+    pname = "zimg_patched";
+    version = "unstable-2026-04-27";
 
-  src = fetchgit {
-    url = "https://github.com/sekrit-twc/zimg.git";
-    rev = "refs/heads/master";
-    hash = "sha256-MRWQ6tM1LEL1C4le7Ha7CmiA/V9hXrwp27KgJiHxSes";
-    fetchSubmodules = true;
-  };
+    src = fetchgit {
+      url = "https://github.com/sekrit-twc/zimg.git";
+      rev = "refs/heads/master";
+      hash = "sha256-MRWQ6tM1LEL1C4le7Ha7CmiA/V9hXrwp27KgJiHxSes";
+      fetchSubmodules = true;
+    };
 
-  nativeBuildInputs = [
-    meson
-    ninja
-    pkg-config
-  ];
+    nativeBuildInputs = [
+      meson
+      ninja
+      pkg-config
+    ];
 
-  configurePhase = ''
-    meson setup build \
-      --prefix=$out \
-      -Ddefault_library=static
-  '';
+    configurePhase = ''
+      meson setup build \
+        --prefix=$out \
+        -Ddefault_library=static
+    '';
 
-  buildPhase = ''
-    ninja -C build
-  '';
+    buildPhase = ''
+      ninja -C build
+    '';
 
-  installPhase = ''
-    ninja -C build install
-  '';
+    installPhase = ''
+      ninja -C build install
+    '';
 
     meta = with lib; {
       description = "Patched zimg fork required by vapoursynth-resize2";
