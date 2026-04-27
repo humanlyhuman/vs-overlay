@@ -2,7 +2,6 @@
   lib,
   stdenv,
   fetchgit,
-  hostPlatform,
   rocmPackages,
   vapoursynth,
   vapoursynthPlugins,
@@ -66,7 +65,7 @@ stdenv.mkDerivation rec {
       -Wno-ignored-attributes \
       -shared -fPIC \
       -L "${vapoursynthPlugins.ffms2}/lib" -lffms2 \
-      -o vship${hostPlatform.extensions.sharedLibrary}
+      -o vship${stdenv.hostPlatform.extensions.sharedLibrary}
 
     runHook postBuild
   '';
