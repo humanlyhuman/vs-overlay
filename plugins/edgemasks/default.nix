@@ -17,7 +17,7 @@ stdenv.mkDerivation rec {
     rev = "r${version}";
     sha256 = "sha256-H9kAmgoktxmxKWSG9ZBdxY4vGONlxOXwadNJdnIEjUI=";
   };
-  
+  mesonFlags = [ "-Db_lto=false" ];
   postPatch = ''
     python3 -c "
     content = open('meson.build').read()
