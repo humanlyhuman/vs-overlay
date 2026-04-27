@@ -32,7 +32,7 @@ buildPythonPackage {
         substituteInPlace pyproject.toml \
           --replace-fail "meson==1.11.0" "meson" \
           --replace-fail "ninja==1.13.0" "ninja" \
-          --replace-fail "vapoursynth>=74" "vapoursynth"
+          --replace-fail "vapoursynth>=74" ""
 
         substituteInPlace meson.build \
           --replace-fail \
@@ -61,6 +61,7 @@ buildPythonPackage {
     meson
     ninja
     packaging
+    vapoursynth
   ];
 
   env.MESON_ARGS = lib.optionalString withBoostCharconv "-Dboost-charconv=true";
