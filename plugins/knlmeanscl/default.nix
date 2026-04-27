@@ -36,20 +36,42 @@ buildPythonPackage rec {
   ];
 
   dependencies = [vapoursynth];
+postPatch = ''
+  sed -i '/vapoursynth>=74/d' pyproject.toml
 
-  postPatch = ''
-    sed -i '/vapoursynth>=74/d' pyproject.toml
+  python3 - <<EOF
+from pathlib import Path
+p = Path("meson.build")
+s = p.read_text()
 
-    sed -i '/r = run_command(/,/^)/d' meson.build
+old = """if enable_vs
+  py = import('python').find_installation(pure: false)
 
-    substituteInPlace meson.build \
-      --replace-fail \
-      "lib_inc += include_directories(r.stdout().strip())" \
-      "lib_inc += include_directories('${vapoursynth}/include/vapoursynth')" \
-      --replace-fail \
-      "install: false," \
-      "install: true, install_dir: get_option('libdir') / 'vapoursynth',"
-  '';
+  r = run_command(
+    py,
+    '-c', 'import vapoursynth as vs; print(vs.get_include())',
+    check: true,
+  )
+  lib_inc += include_directories(r.stdout().strip())
+  lib_src += ['KNLMeansCL/NLMVapoursynth.cpp', 'KNLMeansCL/NLMVapoursynth.h']
+endif
+"""
+
+new = """if enable_vs
+  lib_inc += include_directories('${vapoursynth}/include/vapoursynth')
+  lib_src += ['KNLMeansCL/NLMVapoursynth.cpp', 'KNLMeansCL/NLMVapoursynth.h']
+endif
+"""
+
+s = s.replace(old, new)
+s = s.replace(
+    "install: false,",
+    "install: true,\n  install_dir: get_option('libdir') / 'vapoursynth',"
+)
+
+p.write_text(s)
+EOF
+'';
 
   doCheck = false;
 
