@@ -51,7 +51,7 @@ buildPythonPackage {
     incdir += inc_vs" \
             "deps += dependency('vapoursynth')"
   '';
-
+  dontCheckRuntimeDeps = true;
   nativeBuildInputs = [
     libllvm.dev
     libxml2.dev
