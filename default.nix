@@ -16,9 +16,7 @@ in
     # Native C plugins
     autocrop       = prev.callPackage ./plugins/autocrop { };
     awarp          = prev.callPackage ./plugins/awarp { };
-    beziercurve    = prev.callPackage ./plugins/beziercurve { };
     bm3d           = prev.callPackage ./plugins/bm3d { };
-    cas            = prev.callPackage ./plugins/cas { };
     d2vsource      = prev.callPackage ./plugins/d2vsource { };
     deblock        = prev.callPackage ./plugins/deblock { };
     descale        = prev.callPackage ./plugins/descale { };
@@ -36,8 +34,6 @@ in
     ocr            = prev.callPackage ./plugins/ocr { };
     placebo        = prev.callPackage ./plugins/placebo { };
     readmpls       = prev.callPackage ./plugins/readmpls { };
-    remap          = prev.callPackage ./plugins/remap { };
-    removegrain    = prev.callPackage ./plugins/removegrain { };
     sneedif        = prev.callPackage ./plugins/sneedif { };
     subtext        = prev.callPackage ./plugins/subtext { };
     tnlmeans       = prev.callPackage ./plugins/tnlmeans { };
