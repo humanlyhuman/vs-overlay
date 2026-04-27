@@ -58,7 +58,6 @@ stdenv.mkDerivation rec {
 
     mkdir -p $out/lib/vapoursynth
     for pkg in ${vsncnn} do 
-    # ${vsort} ${vsov} ${vstrt} ${vsmigx}; 
       for lib in $pkg/lib/vapoursynth/*.so; do
         ln -s "$lib" $out/lib/vapoursynth/
       done
