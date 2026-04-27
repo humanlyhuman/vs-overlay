@@ -53,6 +53,7 @@ buildPythonPackage {
     libllvm.dev
     libxml2.dev
     pkg-config
+    vapoursynth
   ];
 
   build-system = [
