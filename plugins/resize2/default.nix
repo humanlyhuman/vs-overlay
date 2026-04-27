@@ -28,7 +28,6 @@
 
   nativeBuildInputs = [ meson ninja pkg-config ];
 
-  # Bypass the hook entirely — run meson setup explicitly
   configurePhase = ''
     runHook preConfigure
     meson setup build \
@@ -77,14 +76,6 @@
     platforms = platforms.unix;
   };
 };
-
-    meta = with lib; {
-      description = "Patched zimg fork required by vapoursynth-resize2";
-      homepage = "https://github.com/sekrit-twc/zimg";
-      license = licenses.wtfpl;
-      platforms = platforms.unix;
-    };
-  };
 in
   buildPythonPackage rec {
     pname = "vapoursynth-resize2";
