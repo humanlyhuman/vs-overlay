@@ -56,28 +56,18 @@ in
     # Python wrappers
     acsuite        = callPythonPackage ./plugins/acsuite { };
     akarin         = callPythonPackage ./plugins/akarin { };
-    astdr          = callPythonPackage ./plugins/astdr { };
     awsmfunc       = callPythonPackage ./plugins/awsmfunc { };
-    dfmderainbow   = callPythonPackage ./plugins/dfmderainbow { };
     finedehalo     = callPythonPackage ./plugins/finedehalo { };
     insaneaa       = callPythonPackage ./plugins/insaneaa { };
     jetpytools     = callPythonPackage ./plugins/jetpytools { };
     lvsfunc        = callPythonPackage ./plugins/lvsfunc { };
     rekt           = callPythonPackage ./plugins/rekt { };
     vardefunc      = callPythonPackage ./plugins/vardefunc { };
-    vs-gan         = callPythonPackage ./plugins/vsgan { };
     vs-jetpack     = callPythonPackage ./plugins/vsjetpack {
       inherit (final.vapoursynthPlugins) jetpytools;
     };
-    vs-taambk      = callPythonPackage ./plugins/vsTAAmbk { };
     vsutil         = callPythonPackage ./plugins/vsutil { };
   };
 
   getnative = callPythonPackage ./tools/getnative { };
-
-  pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
-    (python-final: python-prev: {
-      styler00dollar-vsgan-trt = callPythonPackage ./tools/styler00dollar-vsgan-trt { };
-    })
-  ];
 }
