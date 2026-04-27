@@ -48,7 +48,6 @@ in {
     akarin = callPythonPackage ./plugins/akarin {};
     awsmfunc = callPythonPackage ./plugins/awsmfunc {};
     finedehalo = callPythonPackage ./plugins/finedehalo {};
-    insaneaa = callPythonPackage ./plugins/insaneaa {};
     jetpytools = callPythonPackage ./plugins/jetpytools {};
     lvsfunc = callPythonPackage ./plugins/lvsfunc {};
     rekt = callPythonPackage ./plugins/rekt {};
