@@ -97,48 +97,48 @@
       ninja -C build
     '';
 
-  installPhase = ''
-    mkdir -p $out/lib
-    mkdir -p $dev/include
-    mkdir -p $dev/lib/pkgconfig
-  
-    mkdir work-ar
-    cp build/libzimg.a work-ar/
-  
-    cd work-ar
-    ar x libzimg.a
-    rm libzimg.a
-    ar rcs $out/lib/libzimg.a *.o
-    ranlib $out/lib/libzimg.a
-    cd ..
-  
-    rm -rf work-ar
-                    cp -r graphengine/include/graphengine $dev/include/
-            mkdir -p $dev/include/zimg
+    installPhase = ''
+      mkdir -p $out/lib
+      mkdir -p $dev/include
+      mkdir -p $dev/lib/pkgconfig
 
-            cp -r src/zimg/api        $dev/include/zimg/
-            cp -r src/zimg/common     $dev/include/zimg/
-            cp -r src/zimg/colorspace $dev/include/zimg/
-            cp -r src/zimg/depth      $dev/include/zimg/
-            cp -r src/zimg/graph      $dev/include/zimg/
-            cp -r src/zimg/resize     $dev/include/zimg/
-            cp -r src/zimg/unresize   $dev/include/zimg/
+      mkdir work-ar
+      cp build/libzimg.a work-ar/
 
-            cp -r graphengine/include/graphengine $dev/include/
+      cd work-ar
+      ar x libzimg.a
+      rm libzimg.a
+      ar rcs $out/lib/libzimg.a *.o
+      ranlib $out/lib/libzimg.a
+      cd ..
 
-                  cat > $dev/lib/pkgconfig/zimg_patched.pc <<EOF
-                  prefix=$out
-                  exec_prefix=$out
-                  libdir=$out/lib
-                  includedir=$dev/include
+      rm -rf work-ar
+                      cp -r graphengine/include/graphengine $dev/include/
+              mkdir -p $dev/include/zimg
 
-                  Name: zimg_patched
-                  Description: patched zimg static library
-                  Version: ${version}
-                  Libs: -L$out/lib -lzimg
-                  Libs.private: -lstdc++
-                  Cflags: -I$dev/include -I$dev/include/zimg
-                  EOF
+              cp -r src/zimg/api        $dev/include/zimg/
+              cp -r src/zimg/common     $dev/include/zimg/
+              cp -r src/zimg/colorspace $dev/include/zimg/
+              cp -r src/zimg/depth      $dev/include/zimg/
+              cp -r src/zimg/graph      $dev/include/zimg/
+              cp -r src/zimg/resize     $dev/include/zimg/
+              cp -r src/zimg/unresize   $dev/include/zimg/
+
+              cp -r graphengine/include/graphengine $dev/include/
+
+                    cat > $dev/lib/pkgconfig/zimg_patched.pc <<EOF
+                    prefix=$out
+                    exec_prefix=$out
+                    libdir=$out/lib
+                    includedir=$dev/include
+
+                    Name: zimg_patched
+                    Description: patched zimg static library
+                    Version: ${version}
+                    Libs: -L$out/lib -lzimg
+                    Libs.private: -lstdc++
+                    Cflags: -I$dev/include -I$dev/include/zimg
+                    EOF
     '';
   };
 in
