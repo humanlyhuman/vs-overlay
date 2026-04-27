@@ -2,17 +2,16 @@
   lib,
   stdenv,
   fetchgit,
-  autoreconfHook,
-  automake,
-  autoconf,
-  libtool,
+  meson,
+  ninja,
   pkg-config,
 }:
+
 stdenv.mkDerivation rec {
   pname = "zimg_patched";
   version = "unstable-2026-04-27";
 
-  outputs = ["out" "dev"];
+  outputs = [ "out" "dev" ];
 
   src = fetchgit {
     url = "https://github.com/sekrit-twc/zimg.git";
@@ -22,23 +21,34 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [
-    autoreconfHook
-    automake
-    autoconf
-    libtool
+    meson
+    ninja
     pkg-config
   ];
 
-  configureFlags = [
-    "--enable-static"
-    "--disable-shared"
-  ];
+  # repo contains meson.build, so configure manually in build dir
+  configurePhase = ''
+    runHook preConfigure
 
-  postPatch = ''
-    #
-    if [ -f ${./0001.patch} ]; then
-      patch -p1 < ${./0001.patch}
-    fi
+    meson setup build \
+      --prefix=$out \
+      --libdir=lib \
+      --includedir=include \
+      -Ddefault_library=static
+
+    runHook postConfigure
+  '';
+
+  buildPhase = ''
+    runHook preBuild
+    ninja -C build
+    runHook postBuild
+  '';
+
+  installPhase = ''
+    runHook preInstall
+    ninja -C build install
+    runHook postInstall
   '';
 
   postInstall = ''
