@@ -56,6 +56,7 @@ in {
 
     sneedif = callPythonPackage ./plugins/sneedif {};
     vardefunc = callPythonPackage ./plugins/vardefunc {};
+    vs-jet-engine = callPythonPackage ./plugins/vs-jet-engine {};
     vs-jetpack = callPythonPackage ./plugins/vsjetpack {
       inherit (final.vapoursynthPlugins) jetpytools;
     };
@@ -63,4 +64,6 @@ in {
   };
 
   getnative = callPythonPackage ./tools/getnative {};
+  nativeres = callPythonPackage ./tools/nativeres {};
+
 }
