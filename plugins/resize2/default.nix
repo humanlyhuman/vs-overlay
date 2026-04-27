@@ -13,62 +13,58 @@
   autoreconfHook,
   fetchgit,
 }: let
-  zimg_patched = stdenv.mkDerivation rec {
-    pname = "zimg_patched";
-    version = "unstable-2026-04-27";
+zimg_patched = stdenv.mkDerivation rec {
+  pname = "zimg_patched";
+  version = "unstable-2026-04-27";
 
-    src = fetchgit {
-      url = "https://github.com/sekrit-twc/zimg.git";
-      rev = "refs/heads/master";
-      hash = "sha256-MRWQ6tM1LEL1C4le7Ha7CmiA/V9hXrwp27KgJiHxSes=";
-      fetchSubmodules = true;
-      deepClone = false;
-      leaveDotGit = false;
-    };
-
-    nativeBuildInputs = [
-      autoreconfHook
-      pkg-config
-    ];
-
-    outputs = ["out" "dev"];
-    postInstall = ''
-      mkdir -p $dev/include/zimg/api
-      mkdir -p $dev/include/graphengine
-      mkdir -p $dev/lib/pkgconfig
-
-      # zimg internal headers
-      cp -r src/zimg/common      $dev/include/zimg/
-      cp -r src/zimg/graph       $dev/include/zimg/ || true
-      cp -r src/zimg/depth       $dev/include/zimg/ || true
-      cp -r src/zimg/colorspace  $dev/include/zimg/ || true
-      cp -r src/zimg/resize      $dev/include/zimg/ || true
-      cp -r src/zimg/api/*       $dev/include/zimg/api/ || true
-      cp -r src/graphengine/graphengine/* $dev/include/graphengine/
-                    # create alias pkg-config file
-                    if [ -f $dev/lib/pkgconfig/zimg.pc ]; then
-                      cp $dev/lib/pkgconfig/zimg.pc \
-                         $dev/lib/pkgconfig/zimg_patched.pc
-                    elif [ -f $out/lib/pkgconfig/zimg.pc ]; then
-                      cp $out/lib/pkgconfig/zimg.pc \
-                         $dev/lib/pkgconfig/zimg_patched.pc
-                    else
-                      echo "zimg.pc not found"
-                      exit 1
-                    fi
-              substituteInPlace $dev/lib/pkgconfig/zimg_patched.pc \
-                --replace "Name: zimg" "Name: zimg_patched" \
-                --replace "includedir=''${prefix}/include" "includedir=$dev/include" \
-                --replace "Requires: zimg" "" \
-                --replace "Requires.private: zimg" ""
-    '';
-    meta = with lib; {
-      description = "Patched zimg fork required by vapoursynth-resize2";
-      homepage = "https://github.com/sekrit-twc/zimg";
-      license = licenses.wtfpl;
-      platforms = platforms.unix;
-    };
+  src = fetchgit {
+    url = "https://github.com/sekrit-twc/zimg.git";
+    rev = "refs/heads/master";
+    hash = "sha256-MRWQ6tM1LEL1C4le7Ha7CmiA/V9hXrwp27KgJiHxSes=";
+    fetchSubmodules = true;
   };
+
+  nativeBuildInputs = [ meson ninja pkg-config ];
+
+  outputs = [ "out" "dev" ];
+
+  installPhase = ''
+    mkdir -p $out/lib
+    mkdir -p $dev/include/graphengine
+    mkdir -p $dev/include/zimg
+    mkdir -p $dev/lib/pkgconfig
+
+    find . -name "libzimg.a" -exec cp {} $out/lib/ \;
+
+    cp -r $src/graphengine/include/graphengine/. $dev/include/graphengine/
+
+    cp -r $src/src/zimg/common     $dev/include/zimg/
+    cp -r $src/src/zimg/graph      $dev/include/zimg/
+    cp -r $src/src/zimg/depth      $dev/include/zimg/
+    cp -r $src/src/zimg/colorspace $dev/include/zimg/
+    cp -r $src/src/zimg/resize     $dev/include/zimg/
+    cp -r $src/src/zimg/api        $dev/include/zimg/
+
+    cat > $dev/lib/pkgconfig/zimg_patched.pc <<EOF
+    prefix=$out
+    includedir=$dev/include
+    libdir=$out/lib
+
+    Name: zimg_patched
+    Description: Patched zimg
+    Version: 3.0.6
+    Libs: -L\${libdir} -lzimg
+    Cflags: -I\${includedir}
+    EOF
+  '';
+
+  meta = with lib; {
+    description = "Patched zimg fork required by vapoursynth-resize2";
+    homepage = "https://github.com/sekrit-twc/zimg";
+    license = licenses.wtfpl;
+    platforms = platforms.unix;
+  };
+};
 in
   buildPythonPackage rec {
     pname = "vapoursynth-resize2";
