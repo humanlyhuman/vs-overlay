@@ -9,7 +9,7 @@
   ninja,
   pkg-config,
   packaging,
-  python3,
+  python,
   vapoursynth,
 }: let
   zimg_patched = stdenv.mkDerivation rec {
@@ -29,7 +29,7 @@
       meson
       ninja
       pkg-config
-      python3
+      python
     ];
 
     buildInputs = [
@@ -109,7 +109,7 @@ in
       meson
       ninja
       pkg-config
-      python3
+      python
       packaging
     ];
 
@@ -125,7 +125,7 @@ in
     dontCheckRuntimeDeps = true;
 
     postPatch = ''
-      python3 <<EOF
+      python <<EOF
       import re
       p = open("pyproject.toml").read()
       p = re.sub(r'"vapoursynth>=.*?",?', "", p)
