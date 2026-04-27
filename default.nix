@@ -54,6 +54,7 @@ in
     vstrt = prev.callPackage ./plugins/vs-mlrt/vstrt { };
     vship = prev.callPackage ./plugins/vship { };
     vsfpng = prev.callPackage ./plugins/vsfpng { };
+    knlmeanscl = prev.callPackage ./plugins/knlmeanscl { };
 
     insaneaa = callPythonPackage ./plugins/insaneaa { };
     acsuite = callPythonPackage ./plugins/acsuite { };
