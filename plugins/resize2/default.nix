@@ -20,8 +20,8 @@ in
 
       src = fetchFromGitHub {
         owner = "Jaded-Encoding-Thaumaturgy";
-        repo = "vapoursynth-resize2";
-        rev = "v${version}";
+        repo = finalAttrs.pname;
+        rev = "v${finalAttrs.version}";
         hash = "sha256-oOfDYHBZZ3JEYrbeiwSDNAaua7hlC61lYJOTqB6I7/Q=";
       };
 
@@ -46,7 +46,7 @@ in
         substituteInPlace meson.build \
           --replace-fail \
           "vapoursynth_include_command = run_command(" \
-          "# vapoursynth include path patched out\n# vapoursynth_include_command = run_command("
+          "# patched out by nixpkgs\n# vapoursynth_include_command = run_command("
 
         substituteInPlace meson.build \
           --replace-fail \
