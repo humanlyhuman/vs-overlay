@@ -25,7 +25,6 @@ stdenv.mkDerivation rec {
         --replace-fail '"VSHelper.h"' '<VSHelper.h>'
 
     substituteInPlace Makefile \
-        --replace-fail "VapourSynth.h" "" \
         --replace-fail "VSHelper.h" ""
   '';
 
