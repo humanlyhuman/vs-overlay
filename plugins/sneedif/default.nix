@@ -49,17 +49,17 @@ buildPythonPackage rec {
     vapoursynth
   ];
 
-postPatch = ''
-  sed -i '/incdir = include_directories(/,/^)/d' meson.build
-  sed -i '/vapoursynth>=74/d' pyproject.toml
+  postPatch = ''
+    sed -i '/incdir = include_directories(/,/^)/d' meson.build
+    sed -i '/vapoursynth>=74/d' pyproject.toml
 
-  sed -i '/r = run_command(/,/^)/d' meson.build
+    sed -i '/r = run_command(/,/^)/d' meson.build
 
-  substituteInPlace meson.build \
-    --replace "include_directories: incdir," "dependencies: vapoursynth_dep," \
-    --replace "install_dir: py.get_install_dir() / 'vapoursynth/plugins'," \
-              "install_dir: get_option('libdir') / 'vapoursynth',"
-'';
+    substituteInPlace meson.build \
+      --replace "include_directories: incdir," "dependencies: vapoursynth_dep," \
+      --replace "install_dir: py.get_install_dir() / 'vapoursynth/plugins'," \
+                "install_dir: get_option('libdir') / 'vapoursynth',"
+  '';
 
   doCheck = false;
   dontCheckRuntimeDeps = true;
