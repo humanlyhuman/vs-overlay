@@ -9,14 +9,78 @@
   ninja,
   pkg-config,
   packaging,
-  python,
+  python3,
   vapoursynth,
-}: let
+}:
+
+let
+  zimgMeson = builtins.toFile "meson.build" ''
+    project('zimg', 'cpp',
+      default_options : ['c_std=c89', 'cpp_std=c++17'],
+      meson_version : '>=0.51.0',
+      version : '3.0.5'
+    )
+
+    py = import('python').find_installation()
+    vapoursynth_include_command = run_command(
+      py,
+      '-c',
+      'import vapoursynth as vs; print(vs.get_include())',
+      check: true,
+    )
+
+    vapoursynth_include = include_directories(vapoursynth_include_command.stdout().strip())
+
+    incl_dirs = include_directories(
+      'graphengine/include',
+      'src/zimg',
+      'src',
+    )
+
+    sources = files(
+      'graphengine/graphengine/cpuinfo.cpp',
+      'graphengine/graphengine/graph.cpp',
+      'graphengine/graphengine/node.cpp',
+      'src/zimg/api/zimg.cpp',
+      'src/zimg/colorspace/colorspace.cpp',
+      'src/zimg/common/cpuinfo.cpp',
+      'src/zimg/common/libm_wrapper.cpp',
+      'src/zimg/common/matrix.cpp',
+      'src/zimg/depth/depth.cpp',
+      'src/zimg/depth/depth_convert.cpp',
+      'src/zimg/depth/dither.cpp',
+      'src/zimg/graph/filter_base.cpp',
+      'src/zimg/graph/filtergraph.cpp',
+      'src/zimg/graph/graphbuilder.cpp',
+      'src/zimg/graph/graphengine_except.cpp',
+      'src/zimg/graph/simple_filters.cpp',
+      'src/zimg/resize/filter.cpp',
+      'src/zimg/resize/resize.cpp',
+      'src/zimg/resize/resize_impl.cpp',
+      'src/zimg/unresize/bilinear.cpp',
+      'src/zimg/unresize/unresize.cpp',
+      'src/zimg/unresize/unresize_impl.cpp'
+    )
+
+    zimg = static_library(
+      'zimg',
+      sources,
+      include_directories: [vapoursynth_include, incl_dirs],
+      dependencies: [dependency('threads')],
+      gnu_symbol_visibility: 'hidden'
+    )
+
+    zimg_patched_dep = declare_dependency(
+      link_with: zimg,
+      include_directories: [vapoursynth_include, incl_dirs]
+    )
+  '';
+
   zimg_patched = stdenv.mkDerivation rec {
     pname = "zimg_patched";
     version = "unstable-2026-04-27";
 
-    outputs = ["out" "dev"];
+    outputs = [ "out" "dev" ];
 
     src = fetchgit {
       url = "https://github.com/sekrit-twc/zimg.git";
@@ -25,19 +89,11 @@
       fetchSubmodules = true;
     };
 
-    nativeBuildInputs = [
-      meson
-      ninja
-      pkg-config
-      python
-    ];
-
-    buildInputs = [
-      vapoursynth
-    ];
+    nativeBuildInputs = [ meson ninja pkg-config python3 ];
+    buildInputs = [ vapoursynth ];
 
     postPatch = ''
-      cp ${./meson.build} ./meson.build
+      cp ${zimgMeson} meson.build
     '';
 
     configurePhase = ''
@@ -74,7 +130,6 @@
       exec_prefix=$out
       libdir=$out/lib
       includedir=$dev/include
-
       Name: zimg_patched
       Description: patched zimg static library
       Version=${version}
@@ -82,76 +137,55 @@
       Cflags: -I$dev/include
       EOF
     '';
-
-    meta = with lib; {
-      description = "Patched zimg dependency";
-      homepage = "https://github.com/sekrit-twc/zimg";
-      license = licenses.wtfpl;
-      platforms = platforms.unix;
-    };
   };
+
 in
-  buildPythonPackage rec {
-    pname = "vapoursynth-resize2";
-    version = "0.4.2";
 
-    pyproject = true;
+buildPythonPackage rec {
+  pname = "vapoursynth-resize2";
+  version = "0.4.2";
 
-    src = fetchFromGitHub {
-      owner = "Jaded-Encoding-Thaumaturgy";
-      repo = pname;
-      rev = version;
-      hash = "sha256-oOfDYHBZZ3JEYrbeiwSDNAaua7hlC61lYJOTqB6I7/Q=";
-    };
+  pyproject = true;
 
-    nativeBuildInputs = [
-      meson-python
-      meson
-      ninja
-      pkg-config
-      python
-      packaging
-    ];
+  src = fetchFromGitHub {
+    owner = "Jaded-Encoding-Thaumaturgy";
+    repo = pname;
+    rev = version;
+    hash = "sha256-oOfDYHBZZ3JEYrbeiwSDNAaua7hlC61lYJOTqB6I7/Q=";
+  };
 
-    buildInputs = [
-      vapoursynth
-      zimg_patched
-    ];
+  nativeBuildInputs = [
+    meson-python
+    meson
+    ninja
+    pkg-config
+    python3
+    packaging
+  ];
 
-    propagatedBuildInputs = [
-      vapoursynth
-    ];
+  buildInputs = [ vapoursynth zimg_patched ];
+  propagatedBuildInputs = [ vapoursynth ];
 
-    dontCheckRuntimeDeps = true;
+  dontCheckRuntimeDeps = true;
 
-    postPatch = ''
-      python <<EOF
-      import re
-      p = open("pyproject.toml").read()
-      p = re.sub(r'"vapoursynth>=.*?",?', "", p)
-      p = re.sub(r'"ninja==.*?",?', '"ninja",', p)
-      open("pyproject.toml", "w").write(p)
-      EOF
+  postPatch = ''
+    python3 <<EOF
+    import re
+    p = open("pyproject.toml").read()
+    p = re.sub(r'"vapoursynth>=.*?",?', "", p)
+    p = re.sub(r'"ninja==.*?",?', '"ninja",', p)
+    open("pyproject.toml", "w").write(p)
+    EOF
 
-      substituteInPlace meson.build \
-        --replace-fail \
-        "import vapoursynth as vs; print(vs.get_include())" \
-        "print(\"${vapoursynth}/include/vapoursynth\")"
-    '';
+    substituteInPlace meson.build \
+      --replace-fail \
+      "import vapoursynth as vs; print(vs.get_include())" \
+      "print(\"${vapoursynth}/include/vapoursynth\")"
+  '';
 
-    postInstall = ''
-      mkdir -p $out/lib/vapoursynth
-
-      plugin="$(find $out/lib -name 'libresize2${stdenv.hostPlatform.extensions.sharedLibrary}' | head -n1)"
-
-      ln -s "$plugin" \
-        $out/lib/vapoursynth/libresize2${stdenv.hostPlatform.extensions.sharedLibrary}
-    '';
-
-    meta = with lib; {
-      description = "resize2 plugin for VapourSynth";
-      homepage = "https://github.com/Jaded-Encoding-Thaumaturgy/vapoursynth-resize2";
-      license = licenses.lgpl21Only;
-      platforms = platforms.all;
-    };
-  }
+  postInstall = ''
+    mkdir -p $out/lib/vapoursynth
+    plugin="$(find $out/lib -name 'libresize2${stdenv.hostPlatform.extensions.sharedLibrary}' | head -n1)"
+    ln -s "$plugin" $out/lib/vapoursynth/libresize2${stdenv.hostPlatform.extensions.sharedLibrary}
+  '';
+}
