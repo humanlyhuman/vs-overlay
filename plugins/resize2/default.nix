@@ -57,12 +57,11 @@
         echo "zimg.pc not found"
         exit 1
       fi
-
-      substituteInPlace $dev/lib/pkgconfig/zimg_patched.pc \
-        --replace "Name: zimg" "Name: zimg_patched" \
-        --replace 'includedir=${prefix}/include' "includedir=$dev/include" \
-        --replace "Requires: zimg" "" \
-        --replace "Requires.private: zimg" ""
+substituteInPlace $dev/lib/pkgconfig/zimg_patched.pc \
+  --replace "Name: zimg" "Name: zimg_patched" \
+  --replace "includedir=\${prefix}/include" "includedir=$dev/include" \
+  --replace "Requires: zimg" "" \
+  --replace "Requires.private: zimg" ""
     '';
     meta = with lib; {
       description = "Patched zimg fork required by vapoursynth-resize2";
