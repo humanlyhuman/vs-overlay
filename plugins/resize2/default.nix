@@ -25,7 +25,6 @@ stdenv.mkDerivation rec {
     pkg-config
   ];
 
-  # repo contains meson.build, so configure manually in build dir
   configurePhase = ''
     runHook preConfigure
 
