@@ -23,8 +23,7 @@ stdenv.mkDerivation rec {
     substituteInPlace vsxx/VapourSynth++.hpp \
         --replace-fail '"VapourSynth.h"' '<VapourSynth.h>' \
         --replace-fail '"VSHelper.h"' '<VSHelper.h>'
-
-
+'';
 
   buildInputs = [vapoursynth];
 
