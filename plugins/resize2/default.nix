@@ -17,7 +17,7 @@
     version = "unstable-2026-04-27";
 
     outputs = ["out" "dev"];
-
+    outputDev = "dev";
     src = fetchgit {
       url = "https://github.com/sekrit-twc/zimg.git";
       rev = "df9c1472b9541d0e79c8d02dae37fdf12f189ec2";
