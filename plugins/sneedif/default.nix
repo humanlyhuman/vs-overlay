@@ -53,6 +53,14 @@ buildPythonPackage rec {
     "sneedif"
   ];
 
+    postPatch = ''
+      # This does not depend on vapoursynth (since this is used from within
+      # vapoursynth).
+      substituteInPlace pyproject.toml \
+          --replace-fail "vapoursynth>=74" "" \
+    '';
+
+
   doCheck = false;
   dontCheckRuntimeDeps = true;
 
