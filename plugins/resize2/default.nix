@@ -19,7 +19,7 @@
 
     src = fetchgit {
       url = "https://github.com/sekrit-twc/zimg.git";
-      rev = "refs/heads/master";
+      rev = "df9c1472b9541d0e79c8d02dae37fdf12f189ec2";
       hash = "sha256-MRWQ6tM1LEL1C4le7Ha7CmiA/V9hXrwp27KgJiHxSes";
       fetchSubmodules = true;
     };
