@@ -166,7 +166,7 @@ in
     propagatedBuildInputs = [vapoursynth];
 
     dontCheckRuntimeDeps = true;
-
+    mesonFlags = ["-Db_lto=false"];
     postPatch = ''
       python <<EOF
       import re
