@@ -1,75 +1,78 @@
 {
   lib,
-  python3Packages,
   fetchFromGitHub,
+  buildPythonApplication,
+
+  python3,
+  hatchling,
+  versioningit,
+
+  jetpytools,
+  vs-jet-engine,
+  vs-jetpack,
+  typer,
+  rich,
+  pyside6,
+  numpy,
+  scipy,
+
   vapoursynth,
   vapoursynthPlugins,
   imagemagick,
-}: let
-  python = python3Packages;
-  vapoursynth-with-plugins = vapoursynth.withPlugins (
-    with vapoursynthPlugins; [
+}:
+
+let
+  vapoursynth-with-plugins =
+    vapoursynth.withPlugins (with vapoursynthPlugins; [
       ffms2
       descale
-    ]
-  );
+    ]);
 in
-  python.buildPythonApplication rec {
-    pname = "nativeres";
-    version = "0.2.0";
-    pyproject = true;
 
-    src = fetchFromGitHub {
-      owner = "Jaded-Encoding-Thaumaturgy";
-      repo = "nativeres";
-      rev = "nativeres/v${version}";
-      hash = lib.fakeHash;
-    };
+buildPythonApplication rec {
+  pname = "nativeres";
+  version = "0.2.0";
+  pyproject = true;
 
-    build-system = with python; [
-      hatchling
-      versioningit
-    ];
+  src = fetchFromGitHub {
+    owner = "Jaded-Encoding-Thaumaturgy";
+    repo = "nativeres";
+    rev = "nativeres/v${version}";
+    hash = lib.fakeHash;
+  };
 
-    propagatedBuildInputs = with python; [
-      jetpytools
-      vs-jet-engine
-      vs-jetpack
-      typer
-      rich
-      pyside6
-      numpy
-      scipy
-      vapoursynth-with-plugins
-    ];
+  build-system = [
+    hatchling
+    versioningit
+  ];
 
-    nativeCheckInputs = [
-      imagemagick
-    ];
+  propagatedBuildInputs = [
+    jetpytools
+    vs-jet-engine
+    vs-jetpack
+    typer
+    rich
+    pyside6
+    numpy
+    scipy
+    vapoursynth-with-plugins
+  ];
 
-    doCheck = false;
-    checkPhase = ''
-      runHook preCheck
-      convert -size 1280x720 canvas: +noise Random test.png
-      $out/bin/nativeres getnative test.png \
-        --dim-mode height \
-        --min 699 \
-        --max 700
-      $out/bin/nativeres getscaler test.png 700
-      $out/bin/nativeres getfreq test.png
-      runHook postCheck
-    '';
+  nativeCheckInputs = [
+    imagemagick
+  ];
 
-    pythonImportsCheck = [
-      "nativeres"
-    ];
+  doCheck = false;
 
-    meta = {
-      description = "Descale analysis tools for VapourSynth";
-      homepage = "https://github.com/Jaded-Encoding-Thaumaturgy/nativeres";
-      license = lib.licenses.mit;
-      mainProgram = "nativeres";
-      platforms = lib.platforms.all;
-      maintainers = with lib.maintainers; [humanlyhuman];
-    };
-  }
+  pythonImportsCheck = [
+    "nativeres"
+  ];
+
+  meta = with lib; {
+    description = "Descale analysis tools for VapourSynth";
+    homepage = "https://github.com/Jaded-Encoding-Thaumaturgy/nativeres";
+    license = licenses.mit;
+    mainProgram = "nativeres";
+    platforms = platforms.all;
+  };
+}
