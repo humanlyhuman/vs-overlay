@@ -97,23 +97,22 @@
       ninja -C build
     '';
 
-    installPhase = ''
-                    mkdir -p $out/lib
-                    mkdir -p $dev/include
-                    mkdir -p $dev/lib/pkgconfig
-
-      mkdir -p $out/lib
-
-      cp build/libzimg.a libzimg.a
-      mkdir ar-tmp
-
-      cd ar-tmp
-      ar x ../libzimg.a
-      cd ..
-
-      ar rcs $out/lib/libzimg.a ar-tmp/*.o
-      ranlib $out/lib/libzimg.a
-      rm -rf ar-tmp libzimg.a
+  installPhase = ''
+    mkdir -p $out/lib
+    mkdir -p $dev/include
+    mkdir -p $dev/lib/pkgconfig
+  
+    mkdir work-ar
+    cp build/libzimg.a work-ar/
+  
+    cd work-ar
+    ar x libzimg.a
+    rm libzimg.a
+    ar rcs $out/lib/libzimg.a *.o
+    ranlib $out/lib/libzimg.a
+    cd ..
+  
+    rm -rf work-ar
                     cp -r graphengine/include/graphengine $dev/include/
             mkdir -p $dev/include/zimg
 
