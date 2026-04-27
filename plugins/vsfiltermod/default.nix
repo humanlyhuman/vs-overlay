@@ -24,7 +24,7 @@ stdenv.mkDerivation rec {
     owner = "DLTcollab";
     repo = "sse2neon";
     rev = "v1.7.0";
-    sha256 = lib.fakeHash;
+    sha256 = "sha256-riFFGIA0H7e5StYSjO0/JDrduzfwS+lOASzk5BRUyo4=";
   };
 
   nativeBuildInputs = [
