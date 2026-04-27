@@ -25,7 +25,6 @@ in
     ffms2          = prev.ffms;
     fillborders    = prev.callPackage ./plugins/fillborders { };
     fmtconv        = prev.callPackage ./plugins/fmtconv { };
-    histogram      = prev.callPackage ./plugins/histogram { };
     lsmashsource   = prev.callPackage ./plugins/lsmashsource { };
     mvtools        = prev.vapoursynth-mvtools;
     neo-f3kdb      = prev.callPackage ./plugins/neo_f3kdb { };
@@ -36,7 +35,6 @@ in
     sneedif        = prev.callPackage ./plugins/sneedif { };
     subtext        = prev.callPackage ./plugins/subtext { };
     tnlmeans       = prev.callPackage ./plugins/tnlmeans { };
-    ttempsmooth    = prev.callPackage ./plugins/ttempsmooth { };
     vivtc          = prev.callPackage ./plugins/vivtc { };
     vs-filtermod   = prev.callPackage ./plugins/vsfiltermod { };
     vs-fpng        = prev.callPackage ./plugins/vsfpng { };
