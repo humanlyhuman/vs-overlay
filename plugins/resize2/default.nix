@@ -11,7 +11,9 @@
   vapoursynth,
   git,
   autoreconfHook,
-}: let
+}:
+
+let
   zimg_patched = stdenv.mkDerivation rec {
     pname = "zimg_patched";
     version = "unstable-2026-04-27";
@@ -27,24 +29,19 @@
     nativeBuildInputs = [
       autoreconfHook
       pkg-config
-      git
     ];
 
-    outputs = ["out" "dev"];
-
-    postPatch = ''
-      if [ ! -f graphengine/graphengine/cpuinfo.cpp ]; then
-        git submodule update --init --recursive
-      fi
-    '';
+    outputs = [ "out" "dev" ];
 
     postInstall = ''
       mkdir -p $dev/lib/pkgconfig
 
       if [ -f $out/lib/pkgconfig/zimg.pc ]; then
-        cp $out/lib/pkgconfig/zimg.pc $dev/lib/pkgconfig/zimg_patched.pc
+        cp $out/lib/pkgconfig/zimg.pc \
+          $dev/lib/pkgconfig/zimg_patched.pc
       elif [ -f $dev/lib/pkgconfig/zimg.pc ]; then
-        cp $dev/lib/pkgconfig/zimg.pc $dev/lib/pkgconfig/zimg_patched.pc
+        cp $dev/lib/pkgconfig/zimg.pc \
+          $dev/lib/pkgconfig/zimg_patched.pc
       fi
 
       if [ -f $dev/lib/pkgconfig/zimg_patched.pc ]; then
@@ -61,74 +58,76 @@
       platforms = platforms.unix;
     };
   };
+
 in
-  buildPythonPackage rec {
-    pname = "vapoursynth-resize2";
-    version = "0.4.2";
 
-    pyproject = true;
+buildPythonPackage rec {
+  pname = "vapoursynth-resize2";
+  version = "0.4.2";
 
-    src = fetchFromGitHub {
-      owner = "Jaded-Encoding-Thaumaturgy";
-      repo = pname;
-      rev = version;
-      hash = "sha256-oOfDYHBZZ3JEYrbeiwSDNAaua7hlC61lYJOTqB6I7/Q=";
-    };
+  pyproject = true;
 
-    nativeBuildInputs = [
-      pkg-config
-      vapoursynth
-      zimg_patched
-    ];
+  src = fetchFromGitHub {
+    owner = "Jaded-Encoding-Thaumaturgy";
+    repo = pname;
+    rev = version;
+    hash = "sha256-oOfDYHBZZ3JEYrbeiwSDNAaua7hlC61lYJOTqB6I7/Q=";
+  };
 
-    build-system = [
-      git
-      meson-python
-      meson
-      ninja
-      packaging
-    ];
+  nativeBuildInputs = [
+    pkg-config
+    vapoursynth
+    zimg_patched
+  ];
 
-    buildInputs = [
-      vapoursynth
-      zimg_patched
-    ];
+  build-system = [
+    git
+    meson-python
+    meson
+    ninja
+    packaging
+  ];
 
-    propagatedBuildInputs = [
-      vapoursynth
-    ];
+  buildInputs = [
+    vapoursynth
+    zimg_patched
+  ];
 
-    dontCheckRuntimeDeps = true;
+  propagatedBuildInputs = [
+    vapoursynth
+  ];
 
-    postPatch = ''
-          python3 <<'EOF'
-      import re
+  dontCheckRuntimeDeps = true;
 
-      p = open("pyproject.toml").read()
-      p = re.sub(r'"vapoursynth>=.*?",?', "", p)
-      p = re.sub(r'"ninja==.*?",?', '"ninja",', p)
+  postPatch = ''
+    python3 <<'EOF'
+import re
 
-      open("pyproject.toml", "w").write(p)
-      EOF
+p = open("pyproject.toml").read()
+p = re.sub(r'"vapoursynth>=.*?",?', "", p)
+p = re.sub(r'"ninja==.*?",?', '"ninja",', p)
 
-          substituteInPlace meson.build \
-            --replace-fail \
-            "import vapoursynth as vs; print(vs.get_include())" \
-            "print(\"${vapoursynth}/include/vapoursynth\")"
-    '';
+open("pyproject.toml", "w").write(p)
+EOF
 
-    postInstall = ''
-      mkdir -p $out/lib/vapoursynth
+    substituteInPlace meson.build \
+      --replace-fail \
+      "import vapoursynth as vs; print(vs.get_include())" \
+      "print(\"${vapoursynth}/include/vapoursynth\")"
+  '';
 
-      ln -s \
-        $out/lib/python*/site-packages/vapoursynth/plugins/resize2/libresize2${stdenv.hostPlatform.extensions.sharedLibrary} \
-        $out/lib/vapoursynth/libresize2${stdenv.hostPlatform.extensions.sharedLibrary}
-    '';
+  postInstall = ''
+    mkdir -p $out/lib/vapoursynth
 
-    meta = with lib; {
-      description = "resize2 plugin for VapourSynth with blur support";
-      homepage = "https://github.com/Jaded-Encoding-Thaumaturgy/vapoursynth-resize2";
-      license = licenses.lgpl21Only;
-      platforms = platforms.all;
-    };
-  }
+    ln -s \
+      $out/lib/python*/site-packages/vapoursynth/plugins/resize2/libresize2${stdenv.hostPlatform.extensions.sharedLibrary} \
+      $out/lib/vapoursynth/libresize2${stdenv.hostPlatform.extensions.sharedLibrary}
+  '';
+
+  meta = with lib; {
+    description = "resize2 plugin for VapourSynth with blur support";
+    homepage = "https://github.com/Jaded-Encoding-Thaumaturgy/vapoursynth-resize2";
+    license = licenses.lgpl21Only;
+    platforms = platforms.all;
+  };
+}
