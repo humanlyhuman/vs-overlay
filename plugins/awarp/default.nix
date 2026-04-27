@@ -10,7 +10,10 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-lNKGCyFET63qirqCgxCq4HCNPpaqjPQp0jrifVb9VKQ=";
   };
 
-  mesonFlags = [ "--libdir=${placeholder "out"}/lib/vapoursynth" ];
+  mesonFlags = [
+    "--libdir=${placeholder "out"}/lib/vapoursynth"
+    "-Dvapoursynth:includedir=${vapoursynth}/include/vapoursynth"
+  ];
 
   nativeBuildInputs = [ meson ninja pkg-config
     (vapoursynth.python3.withPackages (ps: [ vapoursynth ]))
