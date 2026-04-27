@@ -4,7 +4,7 @@
   fetchFromGitHub,
   vapoursynthPlugins,
   python,
-  vapoursynth
+  vapoursynth,
 }:
 
 buildPythonPackage rec {

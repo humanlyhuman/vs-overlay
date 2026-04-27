@@ -68,7 +68,9 @@ in
     vsTAAmbk = callPythonPackage ./plugins/vsTAAmbk { };
     vsutil = callPythonPackage ./plugins/vsutil { };
     jetpytools = callPythonPackage ./plugins/jetpytools { };
-    vsjetpack = callPythonPackage ./plugins/vsjetpack { inherit (final.vapoursynthPlugins) jetpytools; };
+    vsjetpack = callPythonPackage ./plugins/vsjetpack {
+      inherit (final.vapoursynthPlugins) jetpytools;
+    };
 
     awsmfunc = callPythonPackage ./plugins/awsmfunc { };
     lvsfunc = callPythonPackage ./plugins/lvsfunc { };

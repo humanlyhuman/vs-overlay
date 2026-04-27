@@ -27,16 +27,25 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-PlqqMBU9WedOqQkl8S77xIUzBpaU1Bgv9ZY8Rfh803o=";
     fetchSubmodules = false;
   };
-  nativeBuildInputs = [ meson ninja pkg-config ];
-  buildInputs = [ libplacebo vapoursynth vulkan-headers vulkan-loader ];
+  nativeBuildInputs = [
+    meson
+    ninja
+    pkg-config
+  ];
+  buildInputs = [
+    libplacebo
+    vapoursynth
+    vulkan-headers
+    vulkan-loader
+  ];
   postPatch = ''
     substituteInPlace meson.build \
       --replace-warn "vapoursynth_dep.get_variable(pkgconfig: 'libdir')" "get_option('libdir')"
-  
+
     mkdir -p subprojects/libp2p-f50288b0c8db2cb14bb98fc25a5f056609d03652
     tar -xzf ${libp2p} -C subprojects/libp2p-f50288b0c8db2cb14bb98fc25a5f056609d03652 \
       --strip-components=1
-  
+
     cp -r subprojects/packagefiles/libp2p-f50288b0c8db2cb14bb98fc25a5f056609d03652/. \
       subprojects/libp2p-f50288b0c8db2cb14bb98fc25a5f056609d03652/
   '';

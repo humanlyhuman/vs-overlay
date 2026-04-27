@@ -27,7 +27,6 @@ buildPythonPackage rec {
     setuptools
   ];
 
-
   src = fetchFromGitHub {
     owner = "Ichunjo";
     repo = pname;

@@ -37,7 +37,7 @@ stdenv.mkDerivation rec {
   # https://github.com/NixOS/nixpkgs/issues/86131
   BOOST_INCLUDEDIR = "${lib.getDev boost}/include";
   BOOST_LIBRARYDIR = "${lib.getLib boost}/lib";
-  
+
   postPatch = ''
     substituteInPlace meson.build \
       --replace "vapoursynth_dep.get_variable(pkgconfig: 'libdir') / 'vapoursynth'" "get_option('libdir') / 'vapoursynth'" \

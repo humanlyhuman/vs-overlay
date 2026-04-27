@@ -20,14 +20,18 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-+OYUAp6T+ZGSFixw7W/QsqXVlPYea83WV88EVsI11KM=";
   };
 
-  nativeBuildInputs = [ meson ninja pkg-config ];
+  nativeBuildInputs = [
+    meson
+    ninja
+    pkg-config
+  ];
   buildInputs = [ vapoursynth ];
   postPatch = ''
     substituteInPlace meson.build \
       --replace "vapoursynth/include" "${vapoursynth}/include/vapoursynth" \
       --replace "py.get_install_dir() / 'vapoursynth/plugins'" "'${placeholder "out"}/lib/vapoursynth'"
   '';
-  
+
   env.NIX_CFLAGS_COMPILE = "-Wno-error=missing-field-initializers";
 
   meta = with lib; {

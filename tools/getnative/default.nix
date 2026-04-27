@@ -51,14 +51,12 @@ buildPythonApplication rec {
   nativeCheckInputs = [
     imagemagick
   ];
-  
-
 
   checkInputs = [
     vapoursynth-with-plugins
   ];
 
-checkPhase = ''
+  checkPhase = ''
     convert -size 1280x720 canvas: +noise Random test.png
     $out/bin/getnative --min-height 699 --max-height 700 test.png
     $out/bin/getnative --min-height 699 --max-height 700 -u ffms2.Source test.png

@@ -5,7 +5,7 @@
   hostPlatform,
   rocmPackages,
   vapoursynth,
-  vapoursynthPlugins
+  vapoursynthPlugins,
 }:
 
 stdenv.mkDerivation rec {
@@ -35,16 +35,16 @@ stdenv.mkDerivation rec {
     ];
 
   strictDeps = true;
-  
+
   buildPhase = ''
     runHook preBuild
-  
+
     sources="
       src/VshipLib.cpp
     "
-  
+
     hip_sources=$(find src/HIP -name '*.cpp' -o -name '*.hip')
-  
+
     hipcc \
       $sources \
       $hip_sources \
@@ -68,7 +68,7 @@ stdenv.mkDerivation rec {
       -shared -fPIC \
       -L "${vapoursynthPlugins.ffms2}/lib" -lffms2 \
       -o vship${hostPlatform.extensions.sharedLibrary}
-  
+
     runHook postBuild
   '';
 

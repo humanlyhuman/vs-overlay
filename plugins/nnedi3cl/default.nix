@@ -41,23 +41,23 @@ stdenv.mkDerivation rec {
     mkdir -p $TMPDIR/boost-patched
     cp -r ${lib.getDev boost}/include/boost $TMPDIR/boost-patched/
     chmod -R u+w $TMPDIR/boost-patched
-  
+
     sed -i 's/desc\.mem_object = 0;//g' \
       $TMPDIR/boost-patched/boost/compute/image/image1d.hpp \
       $TMPDIR/boost-patched/boost/compute/image/image2d.hpp \
       $TMPDIR/boost-patched/boost/compute/image/image3d.hpp
-  
+
     sed -i 's/desc\.mem_object = [^;]*;//g' \
       NNEDI3CL/NNEDI3CL.cpp
-  
+
     export NIX_CFLAGS_COMPILE="-I$TMPDIR/boost-patched -DCL_TARGET_OPENCL_VERSION=120 $NIX_CFLAGS_COMPILE"
   '';
-  
+
   postPatch = ''
     substituteInPlace meson.build \
       --replace "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
   '';
-        
+
   meta = with lib; {
     description = "An OpenCL accelerated nnedi3 filter for VapourSynth";
     homepage = "https://github.com/HomeOfVapourSynthEvolution/VapourSynth-NNEDI3CL";

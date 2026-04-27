@@ -13,16 +13,18 @@
   xxHash,
 }:
 let
-  ffmpeg-lsmash = (ffmpeg.override {
-    source = fetchFromGitHub {
-      owner = "HomeOfAviSynthPlusEvolution";
-      repo = "FFmpeg";
-      rev = "custom-patches-for-lsmashsource";
-      hash = "sha256-vbnrdHOzANc+EXKr4SAW9Hcorbgih/apsFoTaJlIITQ=";
-    };
-  }).overrideAttrs (_old: {
-    patches = [];
-  });
+  ffmpeg-lsmash =
+    (ffmpeg.override {
+      source = fetchFromGitHub {
+        owner = "HomeOfAviSynthPlusEvolution";
+        repo = "FFmpeg";
+        rev = "custom-patches-for-lsmashsource";
+        hash = "sha256-vbnrdHOzANc+EXKr4SAW9Hcorbgih/apsFoTaJlIITQ=";
+      };
+    }).overrideAttrs
+      (_old: {
+        patches = [ ];
+      });
 in
 stdenv.mkDerivation (finalAttrs: {
   pname = "lsmashsource";

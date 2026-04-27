@@ -32,15 +32,14 @@ buildPythonPackage rec {
       --replace-fail '"VapourSynth >= 57",' "" \
       --replace-fail "vs-rekt" "rekt"
   '';
-  propagatedBuildInputs =
-    [
-      setuptools
-      numpy
-    ]
-    ++ (with vapoursynthPlugins; [
-      rekt
-      vsutil
-    ]);
+  propagatedBuildInputs = [
+    setuptools
+    numpy
+  ]
+  ++ (with vapoursynthPlugins; [
+    rekt
+    vsutil
+  ]);
 
   checkInputs = [ (vapoursynth.withPlugins propagatedBinaryPlugins) ];
   pythonImportsCheck = [ "awsmfunc" ];

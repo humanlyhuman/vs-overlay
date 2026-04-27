@@ -21,8 +21,16 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-mFOcKqUzDhWu7yiqiHReTFSzb5jA/YDPb7IOASX9JUo=";
   };
 
-  nativeBuildInputs = [ which pkg-config ];
-  buildInputs = [ vapoursynth boost opencl-headers ocl-icd ];
+  nativeBuildInputs = [
+    which
+    pkg-config
+  ];
+  buildInputs = [
+    vapoursynth
+    boost
+    opencl-headers
+    ocl-icd
+  ];
 
   configureFlags = [
     "--install=${placeholder "out"}/lib/vapoursynth"

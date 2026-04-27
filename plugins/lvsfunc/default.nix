@@ -50,20 +50,19 @@ buildPythonPackage rec {
         --replace "VapourSynth>=51" "" \
   '';
 
-  propagatedBuildInputs =
-    [
-      rich
-      toolz
-    ]
-    ++ (with vapoursynthPlugins; [
-      debandshit
-      edi_rpow2
-      havsfunc
-      kagefunc
-      mvsfunc
-      vsTAAmbk
-      vsutil
-    ]);
+  propagatedBuildInputs = [
+    rich
+    toolz
+  ]
+  ++ (with vapoursynthPlugins; [
+    debandshit
+    edi_rpow2
+    havsfunc
+    kagefunc
+    mvsfunc
+    vsTAAmbk
+    vsutil
+  ]);
 
   checkInputs = [ (vapoursynth.withPlugins propagatedBinaryPlugins) ];
   pythonImportsCheck = [ "lvsfunc" ];

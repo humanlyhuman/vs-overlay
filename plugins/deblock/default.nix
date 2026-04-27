@@ -26,9 +26,9 @@ stdenv.mkDerivation rec {
   buildInputs = [ vapoursynth ];
   postPatch = ''
     sed -i '/incdir = include_directories(/,/^)/d' meson.build
-  
+
     sed -i "/py = import('python').find_installation/a vapoursynth_dep = dependency('vapoursynth')" meson.build
-  
+
     substituteInPlace meson.build \
       --replace "include_directories: incdir," "dependencies: vapoursynth_dep," \
       --replace "install_dir: py.get_install_dir() / 'vapoursynth/plugins'," \
