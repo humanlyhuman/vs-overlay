@@ -27,7 +27,7 @@ in
     src = fetchFromGitHub {
       owner = "Jaded-Encoding-Thaumaturgy";
       repo = "nativeres";
-      rev = "nativeres/v${version}";
+      rev = "vsview-nativeres/v${version}";
       hash = lib.fakeHash;
     };
 
