@@ -96,19 +96,23 @@
     buildPhase = ''
       ninja -C build
     '';
-
     installPhase = ''
       mkdir -p $out/lib
-      mkdir -p $dev/include
+      mkdir -p $dev/include  
       mkdir -p $dev/lib/pkgconfig
-
+    
       mkdir -p repack
       cd repack
-      ar x ../build/libzimg.a
+    
+      for obj in $(ar t ../build/libzimg.a); do
+        cp "../$obj" .
+      done
+    
       ar rcs $out/lib/libzimg.a *.o
       ranlib $out/lib/libzimg.a
       cd ..
       rm -rf repack
+    
       cp -r graphengine/include/graphengine $dev/include/
       mkdir -p $dev/include/zimg
       cp -r src/zimg/api        $dev/include/zimg/
@@ -119,6 +123,7 @@
       cp -r src/zimg/resize     $dev/include/zimg/
       cp -r src/zimg/unresize   $dev/include/zimg/
       cp -r graphengine/include/graphengine $dev/include/
+    
       cat > $dev/lib/pkgconfig/zimg_patched.pc <<EOF
       prefix=$out
       exec_prefix=$out
