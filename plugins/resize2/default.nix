@@ -33,35 +33,35 @@
 
     outputs = ["out" "dev"];
 
-postInstall = ''
-  mkdir -p $dev/lib/pkgconfig
-  mkdir -p $dev/include/zimg/api
+    postInstall = ''
+      mkdir -p $dev/lib/pkgconfig
+      mkdir -p $dev/include/zimg/api
 
-  # pkg-config alias
-  if [ -f $out/lib/pkgconfig/zimg.pc ]; then
-    cp $out/lib/pkgconfig/zimg.pc $dev/lib/pkgconfig/zimg_patched.pc
-  elif [ -f $dev/lib/pkgconfig/zimg.pc ]; then
-    cp $dev/lib/pkgconfig/zimg.pc $dev/lib/pkgconfig/zimg_patched.pc
-  fi
+      # pkg-config alias
+      if [ -f $out/lib/pkgconfig/zimg.pc ]; then
+        cp $out/lib/pkgconfig/zimg.pc $dev/lib/pkgconfig/zimg_patched.pc
+      elif [ -f $dev/lib/pkgconfig/zimg.pc ]; then
+        cp $dev/lib/pkgconfig/zimg.pc $dev/lib/pkgconfig/zimg_patched.pc
+      fi
 
-  if [ -f $dev/lib/pkgconfig/zimg_patched.pc ]; then
-    substituteInPlace $dev/lib/pkgconfig/zimg_patched.pc \
-      --replace "Name: zimg" "Name: zimg_patched" \
-      --replace "includedir=${dev}/include" "includedir=${dev}/include"
+      if [ -f $dev/lib/pkgconfig/zimg_patched.pc ]; then
+        substituteInPlace $dev/lib/pkgconfig/zimg_patched.pc \
+          --replace "Name: zimg" "Name: zimg_patched" \
+          --replace "includedir=${dev}/include" "includedir=${dev}/include"
 
-    substituteInPlace $dev/lib/pkgconfig/zimg_patched.pc \
-      --replace "Requires: zimg" "" \
-      --replace "Requires.private: zimg" ""
-  fi
+        substituteInPlace $dev/lib/pkgconfig/zimg_patched.pc \
+          --replace "Requires: zimg" "" \
+          --replace "Requires.private: zimg" ""
+      fi
 
-  if [ -f $dev/include/zimg.h ]; then
-    ln -sf $dev/include/zimg.h $dev/include/zimg/api/zimg.h
-  fi
+      if [ -f $dev/include/zimg.h ]; then
+        ln -sf $dev/include/zimg.h $dev/include/zimg/api/zimg.h
+      fi
 
-  if [ -f $dev/include/zimg++.hpp ]; then
-    ln -sf $dev/include/zimg++.hpp $dev/include/zimg/api/zimg++.hpp
-  fi
-'';
+      if [ -f $dev/include/zimg++.hpp ]; then
+        ln -sf $dev/include/zimg++.hpp $dev/include/zimg/api/zimg++.hpp
+      fi
+    '';
     meta = with lib; {
       description = "Patched zimg fork required by vapoursynth-resize2";
       homepage = "https://github.com/sekrit-twc/zimg";
