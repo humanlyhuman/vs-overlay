@@ -1,0 +1,170 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+Subject: [PATCH] add standalone Linux CSRI build target
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 1111111..2222222 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -8,6 +8,7 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
+ # Common options
+ option(VSFILTERMOD_BUILD_DIRECTSHOW "Build DirectShow filter (Windows only)" ON)
++option(VSFILTERMOD_BUILD_CSRI "Build standalone CSRI renderer" ON)
+
+ # On non-Windows, disable DirectShow components
+ if(NOT WIN32)
+@@ -82,6 +83,11 @@ add_subdirectory(src/platform)
+ # Cross-platform VapourSynth/AviSynth plugin
+ add_subdirectory(src/plugins)
+
++# Standalone CSRI build (Linux/macOS)
++if(VSFILTERMOD_BUILD_CSRI)
++    add_subdirectory(src/csri)
++endif()
++
+ # Windows DirectShow filter
+ if(VSFILTERMOD_BUILD_DIRECTSHOW)
+     add_subdirectory(src/vsfilter)
+diff --git a/src/csri/CMakeLists.txt b/src/csri/CMakeLists.txt
+new file mode 100644
+index 0000000..3333333
+--- /dev/null
++++ b/src/csri/CMakeLists.txt
+@@ -0,0 +1,34 @@
++add_library(vsfiltermod-csri SHARED
++    ../vsfilter/csriapi.cpp
++)
++
++target_include_directories(vsfiltermod-csri PRIVATE
++    ${CMAKE_SOURCE_DIR}/src/compat
++    ${CMAKE_SOURCE_DIR}/src/subtitles
++    ${CMAKE_SOURCE_DIR}/src/subpic
++    ${CMAKE_SOURCE_DIR}/src/platform
++    ${CMAKE_SOURCE_DIR}/src/vsfilter
++    ${CMAKE_SOURCE_DIR}/src/zlib
++    ${CMAKE_SOURCE_DIR}/src/libpng
++)
++
++target_link_libraries(vsfiltermod-csri PRIVATE
++    subtitles
++    subpic
++    platform
++    libssf
++    libpng
++    zlib
++)
++
++set_target_properties(vsfiltermod-csri PROPERTIES
++    OUTPUT_NAME "vsfiltermod-csri"
++    PREFIX "lib"
++)
++
++install(TARGETS vsfiltermod-csri
++    LIBRARY DESTINATION lib
++)
+diff --git a/src/vsfilter/csriapi.cpp b/src/vsfilter/csriapi.cpp
+index 4444444..5555555 100644
+--- a/src/vsfilter/csriapi.cpp
++++ b/src/vsfilter/csriapi.cpp
+@@ -18,11 +18,29 @@
+  *
+  */
+ 
++#ifdef _WIN32
+ #include "stdafx.h"
+ #include <afxdlgs.h>
+ #include <atlpath.h>
++#else
++#include <cstring>
++#include <string>
++#include <codecvt>
++#include <locale>
++#endif
++
+ #include "resource.h"
+-#include "..\subtitles\VobSubFile.h"
+-#include "..\subtitles\RTS.h"
+-#include "..\subtitles\SSF.h"
+-#include "..\SubPic\MemSubPic.h"
++
++#ifdef _WIN32
++#include "..\\subtitles\\VobSubFile.h"
++#include "..\\subtitles\\RTS.h"
++#include "..\\subtitles\\SSF.h"
++#include "..\\SubPic\\MemSubPic.h"
++#else
++#include "../subtitles/VobSubFile.h"
++#include "../subtitles/RTS.h"
++#include "../subtitles/SSF.h"
++#include "../SubPic/MemSubPic.h"
++#endif
+ 
+-#define CSRIAPI extern "C" __declspec(dllexport)
++#ifdef _WIN32
++#define CSRIAPI extern "C" __declspec(dllexport)
++#else
++#define CSRIAPI extern "C"
++#endif
+@@ -44,6 +62,24 @@ typedef struct csri_vsfilter_inst csri_inst;
+ #include "csri.h"
+ 
++#ifndef _WIN32
++class CCritSec {
++public:
++    void Lock() {}
++    void Unlock() {}
++};
++
++static std::wstring utf8_to_wide(const char *s)
++{
++    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> conv;
++    return conv.from_bytes(s ? s : "");
++}
++#endif
++
+ #ifdef _VSMOD
+ static csri_rend csri_vsfilter = "vsfiltermod";
+ #else
+@@ -54,19 +90,31 @@ static csri_rend csri_vsfilter = "vsfilter";
+ 
+ CSRIAPI csri_inst *csri_open_file(csri_rend *renderer, const char *filename, struct csri_openflag *flags)
+ {
++#ifdef _WIN32
+     int namesize;
+     wchar_t *namebuf;
+-
+     namesize = MultiByteToWideChar(CP_UTF8, 0, filename, -1, NULL, 0);
+     if(!namesize)
+         return 0;
+     namesize++;
+     namebuf = new wchar_t[namesize];
+     MultiByteToWideChar(CP_UTF8, 0, filename, -1, namebuf, namesize);
++#else
++    std::wstring namebuf = utf8_to_wide(filename);
++#endif
+ 
+     csri_inst *inst = new csri_inst();
+     inst->cs = new CCritSec();
+     inst->rts = new CRenderedTextSubtitle(inst->cs);
++
++#ifdef _WIN32
+     if(inst->rts->Open(CString(namebuf), DEFAULT_CHARSET))
++#else
++    if(inst->rts->Open(namebuf.c_str(), DEFAULT_CHARSET))
++#endif
+     {
++#ifdef _WIN32
+         delete[] namebuf;
++#endif
+         inst->readorder = 0;
+         return inst;
+     }
+@@ -74,7 +122,9 @@ CSRIAPI csri_inst *csri_open_file(csri_rend *renderer, const char *filename, str
+     else
+     {
++#ifdef _WIN32
+         delete[] namebuf;
++#endif
+         delete inst->rts;
+         delete inst->cs;
+         delete inst;
