@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v27
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      - name: Setup Cachix
+        uses: cachix/cachix-action@v17
+        with:
+          name: mycache
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+
+      - name: Show flake
+        run: nix flake show
+
+      - name: Build all hydraJobs
+        run: nix build .#hydraJobs --print-build-logs
+
+      - name: Check flake
+        run: nix flake check
