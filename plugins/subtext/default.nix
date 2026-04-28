@@ -5,6 +5,7 @@
   meson,
   ninja,
   pkg-config,
+  python3,
   ffmpeg,
   libass,
   vapoursynth,
@@ -22,6 +23,7 @@ stdenv.mkDerivation rec {
     meson
     ninja
     pkg-config
+    python3
   ];
   buildInputs = [
     ffmpeg
