@@ -49,8 +49,13 @@
             inherit (pkgs.${system}) getnative;
             inherit (pkgs.${system}) nativeres;
           }
-          // lib.filterAttrs (_: lib.isDerivation)
-          pkgs.${system}.vapoursynthPlugins
+          // lib.filterAttrs
+  (_: pkg:
+    lib.isDerivation pkg
+    && !(pkg.meta.broken or false)
+    && lib.meta.availableOn platform pkg
+  )
+  pkgs.${system}.vapoursynthPlugins
         )
     );
 
