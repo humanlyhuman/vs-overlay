@@ -21,10 +21,6 @@ stdenv.mkDerivation rec {
 
   sourceRoot = "source/vsncnn";
 
-  patches = [
-    ./no-git-call-in-cmake.patch
-  ];
-
   nativeBuildInputs = [
     cmake
   ];
@@ -35,6 +31,10 @@ stdenv.mkDerivation rec {
     protobuf
     onnx
   ];
+  
+  postPatch = ''
+    sed -i '/find_package(Git REQUIRED)/,+5 d' CMakeLists.txt
+  '';
 
   cmakeFlags = [
     "-DVCS_TAG=v${version}"

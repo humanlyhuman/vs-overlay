@@ -19,7 +19,7 @@ in
 
       src = fetchFromGitHub {
         owner = "Jaded-Encoding-Thaumaturgy";
-        repo = finalAttrs.pname;
+        repo = "vapoursynth-descale";
         rev = "0d03b30194ea8588fcc345fcd84a6a1201ee0f34";
         hash = "sha256-cvd9anNeNM0dktZf85BgLYgLrpnfxqpkYWeGhc3A7wI=";
       };

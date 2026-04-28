@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
 
   src = fetchFromGitHub {
     owner = "dubhatervapoursynth";
-    repo = pname;
+    repo = "vapoursynth-scxvid";
     rev = "v${version}";
     hash = "sha256-WgoIF7ni2j6wNCutysV18B693OapzniZoy94iyZR3uA=";
   };
@@ -55,7 +55,7 @@ stdenv.mkDerivation rec {
     description = "Scene change detection plugin for VapourSynth using xvid";
     homepage = "https://github.com/dubhater/vapoursynth-scxvid";
     license = licenses.gpl2Only;
-    maintainers = with maintainers; [sbruder];
+    maintainers = with maintainers; [humanlyhuman];
     platforms = platforms.linux;
   };
 }

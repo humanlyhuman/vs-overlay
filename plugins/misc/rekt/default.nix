@@ -45,7 +45,7 @@ buildPythonPackage rec {
   meta = with lib; {
     description = "VapourSynth wrapper for Cropping and Stacking clips";
     homepage = "https://gitlab.com/Ututu/rekt";
-    license = licenses.unfree; 
+    license = licenses.unfree;
     maintainers = with maintainers; [sbruder];
     platforms = platforms.linux;
   };

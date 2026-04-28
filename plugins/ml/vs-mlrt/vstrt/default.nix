@@ -4,52 +4,62 @@
   fetchFromGitHub,
   cmake,
   vapoursynth,
-  cudatoolkit,
   cudaPackages,
-}:
-stdenv.mkDerivation rec {
-  pname = "vstrt";
-  version = "15.16";
+  pkgs,
+}: let
+  empty = name:
+    pkgs.runCommand name {} ''
+      mkdir -p $out
+    '';
 
-  src = fetchFromGitHub {
-    owner = "AmusementClub";
-    repo = "vs-mlrt";
-    rev = "v${version}";
-    hash = "sha256-mcIPNrPsVNgtGSSzLpwm7QYEbFOcB6IH2pepS9pVGCc=";
-  };
+  cudaPackages' = cudaPackages.overrideScope (final: prev: {
+    cuda_compat = empty "cuda_compat-empty";
+    libcudla = empty "libcudla-empty";
+  });
+in
+  stdenv.mkDerivation rec {
+    pname = "vstrt";
+    version = "15.16";
 
-  sourceRoot = "source/vstrt";
+    src = fetchFromGitHub {
+      owner = "AmusementClub";
+      repo = "vs-mlrt";
+      rev = "v${version}";
+      hash = "sha256-mcIPNrPsVNgtGSSzLpwm7QYEbFOcB6IH2pepS9pVGCc=";
+    };
 
-  patches = [
-    ./no-git-call-in-cmake.patch
-  ];
+    cmakeFlags = [
+      "-DVCS_TAG=v${version}"
+      "-DCMAKE_SKIP_RPATH=ON"
+      "-DVAPOURSYNTH_INCLUDE_DIRECTORY=${vapoursynth}/include/vapoursynth"
+      "-DTENSORRT_HOME=${cudaPackages'.tensorrt}"
+    ];
 
-  nativeBuildInputs = [
-    cmake
-  ];
+    sourceRoot = "source/vstrt";
 
-  buildInputs = [
-    vapoursynth
-    cudatoolkit
-    cudaPackages.tensorrt
-  ];
+    postPatch = ''
+      sed -i '/find_package(Git REQUIRED)/,+5 d' CMakeLists.txt
+    '';
+    nativeBuildInputs = [
+      cmake
+    ];
+    buildInputs = [
+      vapoursynth
+      cudaPackages'.cuda_cudart
+      cudaPackages'.tensorrt
+      cudaPackages'.cuda_nvcc
+    ];
 
-  cmakeFlags = [
-    "-DVCS_TAG=v${version}"
-    "-DCMAKE_CXX_FLAGS=-I${vapoursynth}/include/vapoursynth"
-    "-DCMAKE_SKIP_RPATH=ON"
-  ];
+    postInstall = ''
+      mkdir $out/lib/vapoursynth
+      ln -s $out/lib/libvstrt.so $out/lib/vapoursynth
+    '';
 
-  postInstall = ''
-    mkdir $out/lib/vapoursynth
-    ln -s $out/lib/libvstrt.so $out/lib/vapoursynth
-  '';
-
-  meta = with lib; {
-    description = "TensorRT-based GPU Runtime";
-    homepage = "https://github.com/AmusementClub/vs-mlrt";
-    license = licenses.gpl3;
-    maintainers = with maintainers; [humanlyhuman];
-    platforms = platforms.linux;
-  };
-}
+    meta = with lib; {
+      description = "TensorRT-based GPU Runtime";
+      homepage = "https://github.com/AmusementClub/vs-mlrt";
+      license = licenses.gpl3;
+      maintainers = with maintainers; [humanlyhuman];
+      platforms = platforms.linux;
+    };
+  }

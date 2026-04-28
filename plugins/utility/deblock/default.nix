@@ -13,7 +13,7 @@ stdenv.mkDerivation rec {
   version = "8";
   src = fetchFromGitHub {
     owner = "HomeOfVapourSynthEvolution";
-    repo = pname;
+    repo = "VapourSynth-Deblock";
     rev = "r${version}";
     hash = "sha256-ipQfEZY5ZD+notSD1jJxyxoU3zpGBRhcOIuz808TDn4=";
   };

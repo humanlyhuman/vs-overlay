@@ -20,7 +20,7 @@
     vapoursynthPlugins.descale
     vapoursynthPlugins.akarin
     vapoursynthPlugins.resize2
-    vapoursynth-bestsource
+    vapoursynthPlugins.bestsource
   ];
 
   jetpytools = vapoursynthPlugins.jetpytools.override {
@@ -35,11 +35,11 @@
     vapoursynth = vapoursynth-with-plugins;
   };
 
-  vsjetengine = vapoursynthPlugins.vs-jet-engine.override {
+  vsjetengine = vapoursynthPlugins.vsjetengine.override {
     vapoursynth = vapoursynth-with-plugins;
   };
 
-  vsjetpack = vapoursynthPlugins.vs-jetpack.override {
+  vsjetpack = vapoursynthPlugins.vsjetpack.override {
     vapoursynth = vapoursynth-with-plugins;
   };
 in

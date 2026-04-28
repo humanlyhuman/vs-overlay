@@ -7,12 +7,12 @@ let
   );
 in
 {
-  vapoursynthPlugins = final.lib.recurseIntoAttrs {
+  vapoursynthPlugins = final.lib.recurseIntoAttrs rec {
 
     neo_f3kdb = final.callPackage ./plugins/deband/neo_f3kdb {};
     placebo    = final.callPackage ./plugins/deband/placebo {};
 
-    sneedif = final.callPackage ./plugins/deinterlace/sneedif {};
+    sneedif = callPythonPackage ./plugins/deinterlace/sneedif {};
     vivtc   = final.callPackage ./plugins/deinterlace/vivtc {};
     znedi3  = final.callPackage ./plugins/deinterlace/znedi3 {};
 
@@ -43,14 +43,14 @@ in
     subtext    = final.callPackage ./plugins/subtitle/subtext {};
     vsfiltermod = final.callPackage ./plugins/subtitle/vsfiltermod {};
 
-    akarin      = final.callPackage ./plugins/utility/akarin {};
+    akarin      = callPythonPackage ./plugins/utility/akarin {};
     autocrop    = final.callPackage ./plugins/utility/autocrop {};
     deblock     = final.callPackage ./plugins/utility/deblock {};
     fillborders = final.callPackage ./plugins/utility/fillborders {};
     remap       = final.callPackage ./plugins/utility/remap {};
     scxvid      = final.callPackage ./plugins/utility/scxvid {};
     vship       = final.callPackage ./plugins/utility/vship {};
-    vsfpng      = final.callPackage ./plugins/utility/vsfpng {};
+    vsfpng      = final.callPackage ./plugins/source/vsfpng {};
     vszip       = final.callPackage ./plugins/utility/vszip {};
 
     acsuite    = callPythonPackage ./plugins/misc/acsuite {};
@@ -60,7 +60,7 @@ in
     lvsfunc    = callPythonPackage ./plugins/misc/lvsfunc {};
     rekt       = callPythonPackage ./plugins/misc/rekt {};
     vsjetengine = callPythonPackage ./plugins/misc/vsjetengine {};
-    vsjetpack  = callPythonPackage ./plugins/misc/vsjetpack {};
+    vsjetpack  = callPythonPackage ./plugins/misc/vsjetpack {inherit jetpytools;};
     vsutil     = callPythonPackage ./plugins/misc/vsutil {};
 
     ffms2   = final.ffms;

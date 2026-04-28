@@ -13,7 +13,7 @@
   propagatedBinaryPlugins = with vapoursynthPlugins; [
     d2vsource
     descale
-    vs-jetpack
+    vsjetpack
     numpy
     fmtconv
     knlmeanscl
@@ -59,8 +59,8 @@ in
     meta = with lib; {
       description = "A collection of LightArrowsEXE’s VapourSynth functions and wrappers";
       homepage = "https://lvsfunc.readthedocs.io";
-      license = licenses.mit; 
-      maintainers = with maintainers; [sbruder];
+      license = licenses.mit;
+      maintainers = with maintainers; [humanlyhuman];
       platforms = platforms.linux;
       broken = pythonOlder "3.10";
     };

@@ -54,7 +54,7 @@ python3.pkgs.buildPythonPackage rec {
     7z x ${contribModels} -o$out/share/vs-mlrt
 
     mkdir -p $out/lib/vapoursynth
-    for pkg in ${vapoursynthPlugins.vs-ncnn}; do
+    for pkg in ${vapoursynthPlugins.vsncnn}; do
       for lib in $pkg/lib/vapoursynth/*.so; do
         ln -s "$lib" $out/lib/vapoursynth/
       done

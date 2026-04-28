@@ -22,7 +22,7 @@ buildPythonPackage rec {
 
   src = fetchFromGitHub {
     owner = "Jaded-Encoding-Thaumaturgy";
-    repo = pname;
+    repo = "vapoursynth-resize2";
     rev = version;
     hash = "sha256-oOfDYHBZZ3JEYrbeiwSDNAaua7hlC61lYJOTqB6I7/Q=";
   };
