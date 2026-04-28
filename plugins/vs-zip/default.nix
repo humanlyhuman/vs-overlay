@@ -34,25 +34,25 @@ in
 
     zigBuildFlags = ["-Doptimize=ReleaseFast"];
 
-postPatch = ''
-  cat > build.zig.zon <<EOF
-  .{
-      .name = .vszip,
-      .version = "13.0.0",
-      .paths = .{""},
-      .fingerprint = 0x7466a154dbe09310,
-      .minimum_zig_version = "0.15.2",
-      .dependencies = .{
-          .vapoursynth = .{
-              .url = "path:${vapoursynth-zig}",
+    postPatch = ''
+      cat > build.zig.zon <<EOF
+      .{
+          .name = .vszip,
+          .version = "13.0.0",
+          .paths = .{""},
+          .fingerprint = 0x7466a154dbe09310,
+          .minimum_zig_version = "0.15.2",
+          .dependencies = .{
+              .vapoursynth = .{
+                  .url = "path:${vapoursynth-zig}",
+              },
+              .zigimg = .{
+                  .url = "path:${zigimg}",
+              },
           },
-          .zigimg = .{
-              .url = "path:${zigimg}",
-          },
-      },
-  }
-  EOF
-'';
+      }
+      EOF
+    '';
 
     postInstall = ''
       mkdir -p $out/lib/vapoursynth
