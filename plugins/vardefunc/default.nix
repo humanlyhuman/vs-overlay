@@ -7,7 +7,7 @@
   setuptools,
 }: let
   propagatedBinaryPlugins = with vapoursynthPlugins; [
-    neo_f3kdb
+    neo-f3kdb
     ffms2
     scxvid
   ];
