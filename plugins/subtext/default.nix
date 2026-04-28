@@ -52,8 +52,8 @@ stdenv.mkDerivation rec {
     runHook preInstall
 
     install -Dm755 \
-      libsubtext${stdenv.hostPlatform.extensions.sharedLibrary} \
-      $out/lib/vapoursynth/libsubtext${stdenv.hostPlatform.extensions.sharedLibrary}
+      subtext${stdenv.hostPlatform.extensions.sharedLibrary} \
+      $out/lib/vapoursynth/subtext${stdenv.hostPlatform.extensions.sharedLibrary}
 
     runHook postInstall
   '';
