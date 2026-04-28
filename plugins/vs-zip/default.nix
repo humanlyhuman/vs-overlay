@@ -5,8 +5,7 @@
   linkFarm,
   zig,
   vapoursynth,
-}:
-let
+}: let
   zigDeps = linkFarm "vszip-zig-deps" [
     {
       name = "vapoursynth-4.0.0-jLYMQ799AgCA8sL5lgewK9acIrAKjs-ByT2pdKI5dHq2";
@@ -28,36 +27,36 @@ let
     }
   ];
 in
-stdenv.mkDerivation (finalAttrs: {
-  pname = "vapoursynth-plugin-vszip";
-  version = "R13";
+  stdenv.mkDerivation (finalAttrs: {
+    pname = "vapoursynth-plugin-vszip";
+    version = "R13";
 
-  src = fetchFromGitHub {
-    owner = "dnjulek";
-    repo = "vapoursynth-zip";
-    rev = finalAttrs.version;
-    hash = "sha256-k+HfMTn9FLUOCBHFAsSiqHHFF9Q4hUqJpfainN/e2Gc=";
-  };
+    src = fetchFromGitHub {
+      owner = "dnjulek";
+      repo = "vapoursynth-zip";
+      rev = finalAttrs.version;
+      hash = "sha256-k+HfMTn9FLUOCBHFAsSiqHHFF9Q4hUqJpfainN/e2Gc=";
+    };
 
-  nativeBuildInputs = [ zig.hook ];
-  buildInputs = [ vapoursynth ];
+    nativeBuildInputs = [zig.hook];
+    buildInputs = [vapoursynth];
 
-  zigBuildFlags = [ "-Doptimize=ReleaseFast" ];
+    zigBuildFlags = ["-Doptimize=ReleaseFast"];
 
-  postPatch = ''
-    ln -s ${zigDeps} $ZIG_GLOBAL_CACHE_DIR/p
-  '';
+    postPatch = ''
+      ln -s ${zigDeps} $ZIG_GLOBAL_CACHE_DIR/p
+    '';
 
-  postInstall = ''
-    mkdir -p $out/lib/vapoursynth
-    mv $out/lib/libvszip${stdenv.hostPlatform.extensions.sharedLibrary} \
-       $out/lib/vapoursynth/
-  '';
+    postInstall = ''
+      mkdir -p $out/lib/vapoursynth
+      mv $out/lib/libvszip${stdenv.hostPlatform.extensions.sharedLibrary} \
+         $out/lib/vapoursynth/
+    '';
 
-  meta = {
-    description = "VapourSynth zip/vszip plugin";
-    homepage = "https://github.com/dnjulek/vapoursynth-zip";
-    license = lib.licenses.mit;
-    platforms = lib.platforms.linux;
-  };
-})
+    meta = {
+      description = "VapourSynth zip/vszip plugin";
+      homepage = "https://github.com/dnjulek/vapoursynth-zip";
+      license = lib.licenses.mit;
+      platforms = lib.platforms.linux;
+    };
+  })
