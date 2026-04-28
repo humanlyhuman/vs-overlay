@@ -15,7 +15,7 @@
     owner = "zigimg";
     repo = "zigimg";
     rev = "362cdd6bce109f7bc674be134cddd378f52da5d4";
-    hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+    hash = "sha256-Pe7OAtocaH18FhpSwz3NNZLrBI9BS1rfOehq2UVmu6g=";
   };
 in
   stdenv.mkDerivation (finalAttrs: {
