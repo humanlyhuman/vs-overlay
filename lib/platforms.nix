@@ -9,8 +9,4 @@ in
     "aarch64-linux" = {
       system = "aarch64-linux";
     };
-
-    "i686-linux" = {
-      system = "i686-linux";
-    };
   }
