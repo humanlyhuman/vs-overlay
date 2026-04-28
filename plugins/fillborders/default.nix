@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
     owner = "dubhatervapoursynth";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-zGVrqnzQ8ezN9eehwh5/eMdUNMmuS3PXvQ2wLL3Remg=";
+    hash = "sha256-MTnoNHowJ3gWEPdtym48aDlvGO5R2GWiQKNOkw4RfjA=";
   };
 
   nativeBuildInputs = [
