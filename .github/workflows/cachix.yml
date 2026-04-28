@@ -43,11 +43,12 @@ jobs:
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
           
       - name: Build everything
-        run: nix build \
-          --print-build-logs \
-          --accept-flake-config \
-          --no-link
-
+        run: |
+          nix build \
+            --print-build-logs \
+            --accept-flake-config \
+            --no-link
+  
   devshell:
     name: DevShell integration test
     runs-on: ubuntu-latest
