@@ -3,9 +3,22 @@
   stdenv,
   fetchFromGitHub,
   zig,
-  fetchZigDeps,
   vapoursynth,
 }:
+let
+  vapoursynth-zig = fetchFromGitHub {
+    owner = "dnjulek";
+    repo = "vapoursynth-zig";
+    rev = "8e93fe3433bb977135f81040bb59d964c58a1cb9";
+    hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+  };
+  zigimg = fetchFromGitHub {
+    owner = "zigimg";
+    repo = "zigimg";
+    rev = "362cdd6bce109f7bc674be134cddd378f52da5d4";
+    hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+  };
+in
 stdenv.mkDerivation (finalAttrs: {
   pname = "vapoursynth-plugin-vszip";
   version = "R13";
@@ -17,15 +30,16 @@ stdenv.mkDerivation (finalAttrs: {
     hash = "sha256-k+HfMTn9FLUOCBHFAsSiqHHFF9Q4hUqJpfainN/e2Gc=";
   };
 
-  zigDeps = fetchZigDeps {
-    inherit (finalAttrs) pname version src;
-    hash = "sha256-...";
-  };
+  nativeBuildInputs = [ zig.hook ];
+  buildInputs = [ vapoursynth ];
 
-  nativeBuildInputs = [zig.hook];
-  buildInputs = [vapoursynth];
+  zigBuildFlags = [ "-Doptimize=ReleaseFast" ];
 
-  zigBuildFlags = ["-Doptimize=ReleaseFast"];
+  postPatch = ''
+    mkdir -p .zig-cache/deps
+    ln -s ${vapoursynth-zig} .zig-cache/deps/vapoursynth-zig-8e93fe3433bb977135f81040bb59d964c58a1cb9
+    ln -s ${zigimg} .zig-cache/deps/zigimg-362cdd6bce109f7bc674be134cddd378f52da5d4
+  '';
 
   postInstall = ''
     mkdir -p $out/lib/vapoursynth
