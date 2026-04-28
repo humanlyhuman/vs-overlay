@@ -7,7 +7,7 @@
     ];
 
     extra-trusted-public-keys = [
-      "humanlyhuman-vs-repo.cachix.org-1:3Dep7SJrZH4ao/jMu9KF4vd8Ul0AHlSj6GNMISDP96I="
+      "humanlyhuman-vs-repo.cachix.org-1:zfX0GM54Ue2QJkBzzdx2uc8AyZ7xbVReKLchjhszxyc="
     ];
   };
 
