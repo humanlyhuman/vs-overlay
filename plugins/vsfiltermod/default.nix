@@ -9,6 +9,7 @@
   harfbuzz,
   fontconfig,
 }:
+
 llvmPackages.stdenv.mkDerivation rec {
   pname = "vsfiltermod";
   version = "unstable-2026-03-24";
@@ -20,12 +21,9 @@ llvmPackages.stdenv.mkDerivation rec {
     hash = "sha256-c3NDDG+AgY8ojAZ2fOKWLbByl4/FRIBJTy+zBbsE6dQ=";
   };
 
-  sse2neon = fetchFromGitHub {
-    owner = "DLTcollab";
-    repo = "sse2neon";
-    rev = "v1.7.0";
-    hash = "sha256-riFFGIA0H7e5StYSjO0/JDrduzfwS+lOASzk5BRUyo4=";
-  };
+  patches = [
+    ./0001-enable-linux-csri.patch
+  ];
 
   nativeBuildInputs = [
     cmake
@@ -41,23 +39,31 @@ llvmPackages.stdenv.mkDerivation rec {
 
   cmakeFlags = [
     "-DVSFILTERMOD_BUILD_DIRECTSHOW=OFF"
-    "-DCMAKE_CXX_FLAGS=-I${vapoursynth}/include/vapoursynth"
+    "-DVSFILTERMOD_BUILD_CSRI=ON"
     "-DCMAKE_SKIP_RPATH=ON"
-    "-Dsse2neon_SOURCE_DIR=${sse2neon}"
-    "-DFETCHCONTENT_FULLY_DISCONNECTED=ON"
   ];
 
   installPhase = ''
     runHook preInstall
 
     mkdir -p $out/lib/vapoursynth
-    install -Dm755 src/plugins/vsfiltermod.so $out/lib/vapoursynth/libvsfm.so
+
+    install -Dm755 src/plugins/vsfiltermod.so \
+      $out/lib/vapoursynth/libvsfm.so
+
+    if [ -f src/csri/libvsfiltermod-csri.so ]; then
+      install -Dm755 src/csri/libvsfiltermod-csri.so \
+        $out/lib/libvsfiltermod-csri.so
+    elif [ -f libvsfiltermod-csri.so ]; then
+      install -Dm755 libvsfiltermod-csri.so \
+        $out/lib/libvsfiltermod-csri.so
+    fi
 
     runHook postInstall
   '';
 
   meta = with lib; {
-    description = "VSFilterMod subtitle renderer with VapourSynth interface and CMake build system";
+    description = "VSFilterMod with VapourSynth plugin and CSRI renderer";
     homepage = "https://github.com/Cinea4678/VSFilterModButCMake";
     license = licenses.gpl3;
     platforms = platforms.linux;
