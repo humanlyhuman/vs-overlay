@@ -38,7 +38,7 @@ in
       # This does not depend on vapoursynth (since this is used from within
       # vapoursynth).
       substituteInPlace requirements.txt \
-          --replace-fail "VapourSynth>=51" "" \
+          --replace-fail "VapourSynth>=69" "" \
     '';
 
     propagatedBuildInputs =
