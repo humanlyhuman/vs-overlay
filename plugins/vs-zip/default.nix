@@ -11,7 +11,7 @@
   };
   zigimg-tarball = builtins.fetchurl {
     url = "https://github.com/zigimg/zigimg/archive/362cdd6bce109f7bc674be134cddd378f52da5d4.tar.gz";
-    sha256 = "sha256-WI2J34mVt8aBBkvwuWXMj80khTt6US6uj6CaofBHSks=";
+    sha256 = "sha256-Er1qOyhm+rpIubkcwWBCoWljFyjVDj+Arp583ocJlLs=";
   };
 in
   stdenv.mkDerivation (finalAttrs: {
