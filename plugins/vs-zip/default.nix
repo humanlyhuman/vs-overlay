@@ -12,7 +12,7 @@
   };
   zigimg-src = fetchzip {
     url = "https://github.com/zigimg/zigimg/archive/362cdd6bce109f7bc674be134cddd378f52da5d4.tar.gz";
-    sha256 = "sha256-Er1qOyhm+rpIubkcwWBCoWljFyjVDj+Arp583ocJlLs=";
+    sha256 = "sha256-Pe7OAtocaH18FhpSwz3NNZLrBI9BS1rfOehq2UVmu6g=";
   };
 in
   stdenv.mkDerivation (finalAttrs: {
