@@ -31,7 +31,7 @@ in
       owner = "Jaded-Encoding-Thaumaturgy";
       repo = pname;
       rev = "v${version}";
-      hash = "sha256-Yv7WBr9suuYsDI9LfZVcTBuDTPkd/DMCk/lQ58qsLyw=";
+      hash = "sha256-x1EDBddLKsCXIbMy8+en2G6L6+yZKTQq8SSoOP7kAvU=";
     };
 
     postPatch = ''
