@@ -96,6 +96,6 @@ in
       homepage = "https://github.com/Jaded-Encoding-Thaumaturgy/nativeres";
       license = licenses.mit;
       mainProgram = "nativeres";
-      platforms = platforms.all;
+      platforms = platforms.linux;
     };
   }

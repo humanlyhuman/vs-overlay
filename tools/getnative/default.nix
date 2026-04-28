@@ -66,6 +66,6 @@ in
       license = licenses.mit;
       mainProgram = "getnative";
       maintainers = with maintainers; [humanlyhuman];
-      platforms = platforms.all;
+      platforms = platforms.linux;
     };
   }

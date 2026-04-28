@@ -1,69 +1,71 @@
-final: prev: let
-  # This is required to allow vapoursynth.withPlugins to be used inside python packages,
-  # where normally python3Packages.vapoursynth would be used,
-  # which only includes the python module without the frameserver.
-  callPythonPackage = prev.lib.callPackageWith (
+final: prev:
+let
+  callPythonPackage = final.lib.callPackageWith (
     final
     // final.vapoursynth.python3.pkgs
-    // {
-      inherit (final) vapoursynth;
-    }
+    // { inherit (final) vapoursynth; }
   );
-in {
-  vapoursynthPlugins = prev.lib.recurseIntoAttrs {
-    # Native C plugins
-    autocrop = prev.callPackage ./plugins/autocrop {};
-    awarp = prev.callPackage ./plugins/awarp {};
-    bm3d = prev.callPackage ./plugins/bm3d {};
-    d2vsource = prev.callPackage ./plugins/d2vsource {};
-    deblock = prev.callPackage ./plugins/deblock {};
-    descale = prev.callPackage ./plugins/descale {};
-    edgemasks = prev.callPackage ./plugins/edgemasks {};
-    ffms2 = prev.ffms;
-    fillborders = prev.callPackage ./plugins/fillborders {};
-    fmtconv = prev.callPackage ./plugins/fmtconv {};
-    lsmashsource = prev.callPackage ./plugins/lsmashsource {};
-    mvtools = prev.vapoursynth-mvtools;
-    neo-f3kdb = prev.callPackage ./plugins/neo_f3kdb {};
-    nlm-ispc = prev.callPackage ./plugins/nlm-ispc {};
-    ocr = prev.callPackage ./plugins/ocr {};
-    placebo = prev.callPackage ./plugins/placebo {};
-    readmpls = prev.callPackage ./plugins/readmpls {};
-    remap = prev.callPackage ./plugins/remap {};
-    subtext = prev.callPackage ./plugins/subtext {};
-    scxvid = prev.callPackage ./plugins/scxvid {};
-    tnlmeans = prev.callPackage ./plugins/tnlmeans {};
-    vivtc = prev.callPackage ./plugins/vivtc {};
-    vs-filtermod = prev.callPackage ./plugins/vsfiltermod {};
-    vs-fpng = prev.callPackage ./plugins/vsfpng {};
-    vs-hip = prev.callPackage ./plugins/vship {};
-    vs-mlrt = prev.callPackage ./plugins/vs-mlrt {};
-    vs-ncnn = prev.callPackage ./plugins/vs-mlrt/vsncnn {};
-    vs-noise = prev.callPackage ./plugins/vs-noise {};
-    # vs-trt = prev.callPackage ./plugins/vs-mlrt/vstrt {};
-    vs-zip = prev.callPackage ./plugins/vs-zip {};
-    znedi3 = prev.callPackage ./plugins/znedi3 {};
+in
+{
+  vapoursynthPlugins = final.lib.recurseIntoAttrs {
 
-    # Python wrappers
-    acsuite = callPythonPackage ./plugins/acsuite {};
-    akarin = callPythonPackage ./plugins/akarin {};
-    awsmfunc = callPythonPackage ./plugins/awsmfunc {};
-    finedehalo = callPythonPackage ./plugins/finedehalo {};
-    jetpytools = callPythonPackage ./plugins/jetpytools {};
-    knlmeanscl = callPythonPackage ./plugins/knlmeanscl {};
-    lvsfunc = callPythonPackage ./plugins/lvsfunc {};
-    rekt = callPythonPackage ./plugins/rekt {};
-    resize2 = callPythonPackage ./plugins/resize2 {};
+    neo_f3kdb = final.callPackage ./plugins/deband/neo_f3kdb {};
+    placebo    = final.callPackage ./plugins/deband/placebo {};
 
-    sneedif = callPythonPackage ./plugins/sneedif {};
-    # vardefunc = callPythonPackage ./plugins/vardefunc {
-    #  vs-jetpack = final.vapoursynthPlugins.vs-jetpack;
-    #};
-    vs-jet-engine = callPythonPackage ./plugins/vs-jet-engine {};
-    vs-jetpack = callPythonPackage ./plugins/vsjetpack {
-      inherit (final.vapoursynthPlugins) jetpytools;
-    };
-    vsutil = callPythonPackage ./plugins/vsutil {};
+    sneedif = final.callPackage ./plugins/deinterlace/sneedif {};
+    vivtc   = final.callPackage ./plugins/deinterlace/vivtc {};
+    znedi3  = final.callPackage ./plugins/deinterlace/znedi3 {};
+
+    bm3d      = final.callPackage ./plugins/denoise/bm3d {};
+    knlmeanscl = callPythonPackage ./plugins/denoise/knlmeanscl {};
+    nlm-ispc  = final.callPackage ./plugins/denoise/nlm-ispc {};
+    tnlmeans  = final.callPackage ./plugins/denoise/tnlmeans {};
+
+    vsnoise = final.callPackage ./plugins/grain/vs-noise {};
+
+    awarp     = final.callPackage ./plugins/mask/awarp {};
+    edgemasks = final.callPackage ./plugins/mask/edgemasks {};
+
+    vsmlrtmodels = final.callPackage ./plugins/ml/vs-mlrt/models {};
+    vsncnn       = final.callPackage ./plugins/ml/vs-mlrt/vsncnn {};
+    vsort        = final.callPackage ./plugins/ml/vs-mlrt/vsort {};
+    vstrt        = final.callPackage ./plugins/ml/vs-mlrt/vstrt {};
+
+    descale = final.callPackage ./plugins/resize/descale {};
+    fmtconv = final.callPackage ./plugins/resize/fmtconv {};
+    resize2 = callPythonPackage ./plugins/resize/resize2 {};
+
+    d2vsource   = final.callPackage ./plugins/source/d2vsource {};
+    lsmashsource = final.callPackage ./plugins/source/lsmashsource {};
+    readmpls    = final.callPackage ./plugins/source/readmpls {};
+
+    ocr        = final.callPackage ./plugins/subtitle/ocr {};
+    subtext    = final.callPackage ./plugins/subtitle/subtext {};
+    vsfiltermod = final.callPackage ./plugins/subtitle/vsfiltermod {};
+
+    akarin      = final.callPackage ./plugins/utility/akarin {};
+    autocrop    = final.callPackage ./plugins/utility/autocrop {};
+    deblock     = final.callPackage ./plugins/utility/deblock {};
+    fillborders = final.callPackage ./plugins/utility/fillborders {};
+    remap       = final.callPackage ./plugins/utility/remap {};
+    scxvid      = final.callPackage ./plugins/utility/scxvid {};
+    vship       = final.callPackage ./plugins/utility/vship {};
+    vsfpng      = final.callPackage ./plugins/utility/vsfpng {};
+    vszip       = final.callPackage ./plugins/utility/vszip {};
+
+    acsuite    = callPythonPackage ./plugins/misc/acsuite {};
+    awsmfunc   = callPythonPackage ./plugins/misc/awsmfunc {};
+    finedehalo = callPythonPackage ./plugins/misc/finedehalo {};
+    jetpytools = callPythonPackage ./plugins/misc/jetpytools {};
+    lvsfunc    = callPythonPackage ./plugins/misc/lvsfunc {};
+    rekt       = callPythonPackage ./plugins/misc/rekt {};
+    vsjetengine = callPythonPackage ./plugins/misc/vsjetengine {};
+    vsjetpack  = callPythonPackage ./plugins/misc/vsjetpack {};
+    vsutil     = callPythonPackage ./plugins/misc/vsutil {};
+
+    ffms2   = final.ffms;
+    mvtools = final.vapoursynth-mvtools;
+    bestsource = final.vapoursynth-bestsource;
   };
 
   getnative = callPythonPackage ./tools/getnative {};
