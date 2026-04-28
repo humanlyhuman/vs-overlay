@@ -18,17 +18,12 @@ stdenv.mkDerivation (finalAttrs: {
     rev = "v${finalAttrs.version}";
     hash = "sha256-GVMhksXz3Dep9YqgbouEy7d7AuFiHezbkxwjWj1fqvk=";
   };
-  postPatch = ''
-    substituteInPlace meson.build \
-      --replace-fail \
-        "run_command(
-          find_program('python', 'python3'),
-          '-c',
-          'import vapoursynth as vs; print(vs.get_include())',
-          check: true,
-      ).stdout().strip()" \
-        "'${vapoursynth}/include/vapoursynth'"
-  '';
+postPatch = ''
+  substituteInPlace meson.build \
+    --replace-fail \
+    "import vapoursynth as vs; print(vs.get_include())" \
+    "print('${vapoursynth}/include/vapoursynth')"
+'';
   nativeBuildInputs = [
     meson
     ninja
