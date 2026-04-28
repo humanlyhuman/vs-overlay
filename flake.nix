@@ -27,7 +27,7 @@
       system: _:
         import nixpkgs {
           inherit system;
-          overlays = [ self.overlays.default ];
+          overlays = [self.overlays.default];
 
           config = {
             allowUnfree = true;
@@ -50,7 +50,7 @@
             inherit (pkgs.${system}) nativeres;
           }
           // lib.filterAttrs (_: lib.isDerivation)
-            pkgs.${system}.vapoursynthPlugins
+          pkgs.${system}.vapoursynthPlugins
         )
     );
 
