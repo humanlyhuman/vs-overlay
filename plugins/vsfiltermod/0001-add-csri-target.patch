@@ -1,0 +1,47 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -9,6 +9,7 @@
+ 
+ # Common options
+ option(VSFILTERMOD_BUILD_DIRECTSHOW "Build DirectShow filter (Windows only)" ON)
++option(VSFILTERMOD_BUILD_CSRI "Build standalone CSRI renderer" ON)
+ 
+ # On non-Windows, disable DirectShow components
+ if(NOT WIN32)
+@@ -100,6 +101,10 @@
+ # Cross-platform VapourSynth/AviSynth plugin
+ add_subdirectory(src/plugins)
+ 
++if(VSFILTERMOD_BUILD_CSRI)
++  add_subdirectory(src/csri)
++endif()
++
+ # Windows DirectShow filter
+ if(VSFILTERMOD_BUILD_DIRECTSHOW)
+   add_subdirectory(src/vsfilter)
+diff --git a/src/csri/CMakeLists.txt b/src/csri/CMakeLists.txt
+new file mode 100644
+--- /dev/null
++++ b/src/csri/CMakeLists.txt
+@@ -0,0 +1,21 @@
++add_library(vsfiltermod-csri SHARED
++  ../vsfilter/csriapi.cpp
++)
++
++target_link_libraries(vsfiltermod-csri PRIVATE
++  subtitles
++  subpic
++  platform
++  libssf
++  libpng
++  zlib
++)
++
++target_include_directories(vsfiltermod-csri PRIVATE
++  ${CMAKE_SOURCE_DIR}/src/vsfilter
++)
++
++set_target_properties(vsfiltermod-csri PROPERTIES
++  OUTPUT_NAME "vsfiltermod-csri"
++)
