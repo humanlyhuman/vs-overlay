@@ -19,9 +19,9 @@ jobs:
 
       - name: Flake show
         run: nix flake show --accept-flake-config
-
+        
       - name: Flake check
-        run: nix flake check --accept-flake-config
+        run: nix flake check --print-build-logs --accept-flake-config
 
   build:
     name: Build + Cachix
@@ -42,12 +42,11 @@ jobs:
           name: mycache
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
           
-      - name: Build all packages
-        run: |
-          nix build .#packages.x86_64-linux \
-            --print-build-logs \
-            --accept-flake-config \
-            --no-link
+      - name: Build everything
+        run: nix build \
+          --print-build-logs \
+          --accept-flake-config \
+          --no-link
 
   devshell:
     name: DevShell integration test
