@@ -16,10 +16,10 @@ stdenv.mkDerivation (finalAttrs: {
     hash = "sha256-o3uvZl7BbuePRrkUPNFuxmKqxsFbUzc7lef7cURJ3SY=";
   };
 
-  nativeBuildInputs = [ zig.hook ];
-  buildInputs = [ vapoursynth ];
+  nativeBuildInputs = [zig.hook];
+  buildInputs = [vapoursynth];
 
-  zigBuildFlags = [ "-Doptimize=ReleaseFast" ];
+  zigBuildFlags = ["-Doptimize=ReleaseFast"];
 
   postInstall = ''
     mkdir -p $out/lib/vapoursynth
@@ -32,6 +32,6 @@ stdenv.mkDerivation (finalAttrs: {
     homepage = "https://github.com/dnjulek/vapoursynth-zip";
     license = lib.licenses.mit;
     platforms = lib.platforms.linux;
-    maintainers = [ ];
+    maintainers = [];
   };
 })
