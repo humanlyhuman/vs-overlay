@@ -61,6 +61,10 @@ llvmPackages.stdenv.mkDerivation rec {
           --replace '..\subtitles\RTS.h' '../subtitles/RTS.h' \
           --replace '..\subtitles\SSF.h' '../subtitles/SSF.h' \
           --replace '..\SubPic\MemSubPic.h' '../subpic/MemSubPic.h'
+  --replace 'typedef const char *csri_rend;' 'typedef const char *csri_rend;\n#include "csri.h"' \
+  --replace '#include "csri.h"' "" \
+  --replace 'enum csri_pixfmt pixfmt;' 'csri_pixfmt pixfmt;' \
+  --replace 'MultiByteToWideChar(CP_UTF8,' 'MultiByteToWideChar(65001,'
   '';
 
   nativeBuildInputs = [
