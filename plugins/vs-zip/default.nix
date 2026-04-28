@@ -12,19 +12,24 @@ stdenv.mkDerivation (finalAttrs: {
   src = fetchFromGitHub {
     owner = "dnjulek";
     repo = "vapoursynth-zip";
-    rev = "R13";
+    rev = finalAttrs.version;
     hash = "sha256-k+HfMTn9FLUOCBHFAsSiqHHFF9Q4hUqJpfainN/e2Gc=";
   };
 
-  nativeBuildInputs = [zig.hook];
-  buildInputs = [vapoursynth];
+  zigDeps = fetchZigDeps {
+    inherit (finalAttrs) pname version src;
+    hash = "sha256-...";
+  };
 
-  zigBuildFlags = ["-Doptimize=ReleaseFast"];
+  nativeBuildInputs = [ zig.hook ];
+  buildInputs = [ vapoursynth ];
+
+  zigBuildFlags = [ "-Doptimize=ReleaseFast" ];
 
   postInstall = ''
     mkdir -p $out/lib/vapoursynth
     mv $out/lib/libvszip${stdenv.hostPlatform.extensions.sharedLibrary} \
-       $out/lib/vapoursynth/libvszip${stdenv.hostPlatform.extensions.sharedLibrary}
+       $out/lib/vapoursynth/
   '';
 
   meta = {
@@ -32,6 +37,5 @@ stdenv.mkDerivation (finalAttrs: {
     homepage = "https://github.com/dnjulek/vapoursynth-zip";
     license = lib.licenses.mit;
     platforms = lib.platforms.linux;
-    maintainers = [];
   };
 })
