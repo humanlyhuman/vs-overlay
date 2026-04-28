@@ -41,7 +41,7 @@ in {
     vs-ncnn = prev.callPackage ./plugins/vs-mlrt/vsncnn {};
     vs-noise = prev.callPackage ./plugins/vs-noise {};
     vs-trt = prev.callPackage ./plugins/vs-mlrt/vstrt {};
-    vs-zip = prev.callPackage ./plugins/vs-mlrt/vs-zip {};
+    vs-zip = prev.callPackage ./plugins//vs-zip {};
     znedi3 = prev.callPackage ./plugins/znedi3 {};
 
     # Python wrappers
