@@ -7,14 +7,10 @@
   setuptools,
 }: let
   propagatedBinaryPlugins = with vapoursynthPlugins; [
-    adaptivegrain
     bilateral
-    eedi3m
     neo_f3kdb
     ffms2
-    nnedi3cl
     scxvid
-    wwxd
   ];
 in
   buildPythonPackage rec {
@@ -35,8 +31,6 @@ in
 
     propagatedBuildInputs =
       (with vapoursynthPlugins; [
-        fvsfunc
-        havsfunc
         lvsfunc
         vsutil
       ])
