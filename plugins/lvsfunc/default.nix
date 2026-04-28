@@ -10,7 +10,6 @@
   pythonOlder,
 }: let
   propagatedBinaryPlugins = with vapoursynthPlugins; [
-    continuityfixer
     d2vsource
     descale
     fmtconv
