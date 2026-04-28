@@ -9,7 +9,6 @@
   vapoursynth,
   python3,
 }:
-
 stdenv.mkDerivation (finalAttrs: {
   pname = "d2vsource";
   version = "1.4";
@@ -54,7 +53,7 @@ stdenv.mkDerivation (finalAttrs: {
     description = "D2V parser and decoder for VapourSynth";
     homepage = "https://github.com/dwbuiten/d2vsource";
     license = licenses.lgpl21Plus;
-    maintainers = with maintainers; [ humanlyhuman ];
+    maintainers = with maintainers; [humanlyhuman];
     platforms = platforms.all;
   };
 })
