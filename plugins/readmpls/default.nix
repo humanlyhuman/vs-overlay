@@ -29,10 +29,10 @@ stdenv.mkDerivation rec {
     vapoursynth
   ];
 
-  postPatch = ''
-    substituteInPlace meson.build \
-        --replace-fail "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
-  '';
+postPatch = ''
+  substituteInPlace meson.build \
+      --replace-fail "vapoursynth_dep.get_variable(pkgconfig: 'libdir') / 'vapoursynth'" "get_option('libdir') / 'vapoursynth'"
+'';
 
   meta = with lib; {
     description = "ReadMpls filter for VapourSynth";
