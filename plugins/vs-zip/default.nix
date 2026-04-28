@@ -42,8 +42,6 @@ in
     nativeBuildInputs = [zig.hook];
     buildInputs = [vapoursynth];
 
-    zigBuildFlags = ["-Doptimize=ReleaseFast"];
-
     postPatch = ''
       cat > build.zig.zon <<EOF
       .{
