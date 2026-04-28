@@ -10,19 +10,14 @@
   pythonOlder,
 }: let
   propagatedBinaryPlugins = with vapoursynthPlugins; [
-    adaptivegrain
     combmask
     continuityfixer
     d2vsource
     descale
-    eedi3m
     fmtconv
     knlmeanscl
-    nnedi3
     readmpls
     retinex
-    #rgsf
-    tcanny
     znedi3
   ];
 in
