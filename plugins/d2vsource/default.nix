@@ -19,18 +19,21 @@ stdenv.mkDerivation (finalAttrs: {
     hash = "sha256-GVMhksXz3Dep9YqgbouEy7d7AuFiHezbkxwjWj1fqvk=";
   };
   postPatch = ''
-      substituteInPlace meson.build \
-          --replace-fail \
-              "incdir = include_directories(
-        run_command(
-            find_program('python', 'python3'),
-            '-c',
-            'import vapoursynth as vs; print(vs.get_include())',
-            check: true,
-        ).stdout().strip(),
-        'src/core'
-    )" \
-              "incdir = include_directories('src/core'\n'${vapoursynth}/include/vapoursynth')"
+    substituteInPlace meson.build \
+      --replace-fail \
+        "incdir = include_directories(
+  run_command(
+      find_program('python', 'python3'),
+      '-c',
+      'import vapoursynth as vs; print(vs.get_include())',
+      check: true,
+  ).stdout().strip(),
+  'src/core'
+)" \
+        "incdir = include_directories(
+  '${vapoursynth}/include/vapoursynth',
+  'src/core'
+)"
   '';
   nativeBuildInputs = [
     meson
@@ -46,7 +49,7 @@ stdenv.mkDerivation (finalAttrs: {
     description = "D2V parser and decoder for VapourSynth";
     homepage = "https://github.com/dwbuiten/d2vsource";
     license = licenses.lgpl21Plus;
-    maintainers = with maintainers; [sbruder];
+    maintainers = with maintainers; [ sbruder ];
     platforms = platforms.all;
   };
 })
