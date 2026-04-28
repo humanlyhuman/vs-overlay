@@ -10,7 +10,6 @@
   pythonOlder,
 }: let
   propagatedBinaryPlugins = with vapoursynthPlugins; [
-    combmask
     continuityfixer
     d2vsource
     descale
