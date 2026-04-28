@@ -11,10 +11,10 @@
     overlays = [(import vs-overlay)];
   };
 in
-pkgs.mkShell {
-  packages = [
-    (pkgs.vapoursynth.withPlugins (
-      builtins.filter pkgs.lib.isDerivation (builtins.attrValues pkgs.vapoursynthPlugins)
-    ))
-  ];
-}
+  pkgs.mkShell {
+    packages = [
+      (pkgs.vapoursynth.withPlugins (
+        builtins.filter pkgs.lib.isDerivation (builtins.attrValues pkgs.vapoursynthPlugins)
+      ))
+    ];
+  }
