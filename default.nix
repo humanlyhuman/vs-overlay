@@ -56,10 +56,10 @@ in {
     resize2 = callPythonPackage ./plugins/resize2 {};
 
     sneedif = callPythonPackage ./plugins/sneedif {};
-    vardefunc = callPythonPackage ./plugins/vardefunc {
-      inherit (final.vapoursynth.python3.pkgs) pytimeconv;
-      inherit (final.vapoursynthPlugins) vs-jetpack;
-    };
+vardefunc = callPythonPackage ./plugins/vardefunc {
+  inherit (final.vapoursynth.python3.pkgs) pytimeconv;
+  vs-jetpack = final.vapoursynthPlugins.vs-jetpack;
+};
     vs-jet-engine = callPythonPackage ./plugins/vs-jet-engine {};
     vs-jetpack = callPythonPackage ./plugins/vsjetpack {
       inherit (final.vapoursynthPlugins) jetpytools;
