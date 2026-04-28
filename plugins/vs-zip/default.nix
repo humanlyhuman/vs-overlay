@@ -18,7 +18,6 @@ vsynth-tarball = mkZigTarball {
     url = "git+https://github.com/zigimg/zigimg.git#362cdd6bce109f7bc674be134cddd378f52da5d4";
     hash = "sha256:588d89df8995b7c681064bf0b965cc8fcd24853b7a512eae8fa09aa1f0474a4b";
   };
-  ];
 in
   stdenv.mkDerivation (finalAttrs: {
     pname = "vapoursynth-plugin-vszip";
