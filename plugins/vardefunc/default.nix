@@ -25,7 +25,7 @@ in
       owner = "Ichunjo";
       repo = pname;
       rev = "${version}";
-      sha256 = "0bkchcshxmfcfbqapw367y3cfj1rdz78a55fkcvznvy61fhqvzl7";
+      sha256 = "sha256-Tl2ElO6F3JIIvRLimpRlMXC4/Aju0wNbbXhYxzykWVU=";
     };
 
     propagatedBuildInputs =
