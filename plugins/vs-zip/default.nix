@@ -12,7 +12,7 @@
     url = "https://github.com/dnjulek/vapoursynth-zig.git";
     rev = "8e93fe3433bb977135f81040bb59d964c58a1cb9";
     hash = "sha256-tcBr4q7/8u/8xmBO2dbtExi3n5j006nh6/fniO37UK4=";
-};
+  };
   zigimg-src = fetchgit {
     url = "https://github.com/zigimg/zigimg.git";
     rev = "362cdd6bce109f7bc674be134cddd378f52da5d4";
