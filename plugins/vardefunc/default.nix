@@ -37,7 +37,7 @@ in
       ++ propagatedBinaryPlugins;
 
     postPatch = ''
-      substituteInPlace requirements.txt \
+      substituteInPlace pyproject.toml \
         --replace-fail "VapourSynth>=69" ""
     '';
 
