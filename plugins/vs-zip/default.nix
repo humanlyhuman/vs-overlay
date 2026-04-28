@@ -21,10 +21,10 @@ stdenv.mkDerivation (finalAttrs: {
     hash = "sha256-...";
   };
 
-  nativeBuildInputs = [ zig.hook ];
-  buildInputs = [ vapoursynth ];
+  nativeBuildInputs = [zig.hook];
+  buildInputs = [vapoursynth];
 
-  zigBuildFlags = [ "-Doptimize=ReleaseFast" ];
+  zigBuildFlags = ["-Doptimize=ReleaseFast"];
 
   postInstall = ''
     mkdir -p $out/lib/vapoursynth
