@@ -11,15 +11,13 @@
 }:
 stdenv.mkDerivation rec {
   pname = "subtext";
-  version = "3";
-
+  version = "6";
   src = fetchFromGitHub {
     owner = "vapoursynth";
     repo = pname;
     rev = "R${version}";
-    hash = "sha256-Tux8WFbUn4Bt1EL9r+f+Y/av9w9Y23gc79m1JcZWj50=";
+    hash = "sha256-2wv5/izb0pWcD0SXiwNk/lORbEDLZlx+7yNRhB2H6G4=";
   };
-
   nativeBuildInputs = [
     meson
     ninja
@@ -30,17 +28,11 @@ stdenv.mkDerivation rec {
     libass
     vapoursynth
   ];
-
-  postPatch = ''
-    substituteInPlace meson.build \
-        --replace-fail "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
-  '';
-
   meta = with lib; {
     description = "Subtitle plugin for VapourSynth based on libass";
     homepage = "https://github.com/vapoursynth/subtext";
     license = licenses.mit;
-    maintainers = with maintainers; [sbruder];
+    maintainers = with maintainers; [ sbruder ];
     platforms = platforms.all;
   };
 }
