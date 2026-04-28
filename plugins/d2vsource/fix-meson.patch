@@ -1,7 +1,7 @@
 --- a/meson.build
 +++ b/meson.build
 @@ -27,13 +27,7 @@
-deps = [libavcodec_dep, libavutil_dep, libavformat_dep]
+ deps = [libavcodec_dep, libavutil_dep, libavformat_dep]
 -incdir = include_directories(
 -    run_command(
 -        find_program('python', 'python3'),
