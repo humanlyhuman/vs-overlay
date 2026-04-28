@@ -57,7 +57,7 @@ in {
 
     sneedif = callPythonPackage ./plugins/sneedif {};
     vardefunc = callPythonPackage ./plugins/vardefunc {
-      pytimeconv = python3Packages.pytimeconv;
+      pytimeconv = pytimeconv;
     };
     vs-jet-engine = callPythonPackage ./plugins/vs-jet-engine {};
     vs-jetpack = callPythonPackage ./plugins/vsjetpack {
