@@ -13,4 +13,4 @@
 -)
 +incdir = include_directories()
 
- py = import('python').find_installation(pure: false)
+link_args = []
