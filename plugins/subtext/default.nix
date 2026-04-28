@@ -16,7 +16,7 @@ stdenv.mkDerivation rec {
     owner = "vapoursynth";
     repo = pname;
     rev = "R${version}";
-    hash = "sha256-2wv5/izb0pWcD0SXiwNk/lORbEDLZlx+7yNRhB2H6G4=";
+    hash = "sha256-MX1QQ0h82PLXasYrnFbrkaeAXmGENCxyqWmnVUP27dY=";
   };
   nativeBuildInputs = [
     meson
