@@ -10,7 +10,8 @@
 -        'import vapoursynth as vs; print(vs.get_include())',
 -        check: true,
 -    ).stdout().strip(),
+-    'src/core'
 -)
 +incdir = include_directories()
 
-link_args = []
+ link_args = []
