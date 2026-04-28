@@ -10,7 +10,6 @@
   vsjetpack,
   lvsfunc ? null,
 }:
-
 buildPythonPackage rec {
   pname = "vardefunc";
   version = "0.13.0";
@@ -39,7 +38,7 @@ buildPythonPackage rec {
       lvsfunc
     ];
 
-  pythonImportsCheck = [ "vardefunc" ];
+  pythonImportsCheck = ["vardefunc"];
 
   meta = with lib; {
     description = "Vardë's Vapoursynth functions";
