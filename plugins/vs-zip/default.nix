@@ -13,7 +13,7 @@ stdenv.mkDerivation (finalAttrs: {
     owner = "dnjulek";
     repo = "vapoursynth-zip";
     rev = "R13";
-    hash = "sha256-o3uvZl7BbuePRrkUPNFuxmKqxsFbUzc7lef7cURJ3SY=";
+    hash = "sha256-k+HfMTn9FLUOCBHFAsSiqHHFF9Q4hUqJpfainN/e2Gc=";
   };
 
   nativeBuildInputs = [zig.hook];
