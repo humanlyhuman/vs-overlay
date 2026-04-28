@@ -54,20 +54,31 @@
         )
     );
 
-    hydraJobs = let
-      flatten = system: attrs:
-        lib.concatMapAttrs
-        (
-          name: value:
-            if lib.isDerivation value
-            then {"${system}-${name}" = value;}
-            else if lib.isAttrs value
-            then flatten system value
-            else {}
-        )
-        attrs;
-    in
-      lib.concatMapAttrs flatten self.packages;
+hydraJobs =
+  let
+    flatten =
+      system: attrs:
+        lib.foldlAttrs
+          (acc: name: value:
+            acc
+            // (
+              if lib.isDerivation value then
+                { "${system}-${name}" = value; }
+              else if lib.isAttrs value then
+                flatten system value
+              else
+                {}
+            )
+          )
+          {}
+          attrs;
+  in
+  lib.foldlAttrs
+    (acc: system: pkgsForSystem:
+      acc // flatten system pkgsForSystem
+    )
+    {}
+    self.packages;
 
     devShells = eachSystem (
       system: _: {
