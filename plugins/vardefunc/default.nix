@@ -24,7 +24,7 @@ in
     src = fetchFromGitHub {
       owner = "Ichunjo";
       repo = pname;
-      rev = "v${version}";
+      rev = "${version}";
       sha256 = "0bkchcshxmfcfbqapw367y3cfj1rdz78a55fkcvznvy61fhqvzl7";
     };
 
