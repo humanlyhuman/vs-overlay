@@ -47,12 +47,6 @@ in
         toolz
       ]
       ++ (with vapoursynthPlugins; [
-        debandshit
-        edi_rpow2
-        havsfunc
-        kagefunc
-        mvsfunc
-        vsTAAmbk
         vsutil
       ]);
 
