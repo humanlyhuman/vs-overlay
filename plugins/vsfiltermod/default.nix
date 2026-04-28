@@ -23,49 +23,49 @@ llvmPackages.stdenv.mkDerivation rec {
   patches = [
     ./0001-top-level-csri.patch
   ];
-postPatch = ''
-  mkdir -p src/csri
+  postPatch = ''
+      mkdir -p src/csri
 
-  cat > src/csri/CMakeLists.txt <<'EOF'
-add_library(vsfiltermod-csri SHARED
-  ../vsfilter/csriapi.cpp
-)
+      cat > src/csri/CMakeLists.txt <<'EOF'
+    add_library(vsfiltermod-csri SHARED
+      ../vsfilter/csriapi.cpp
+    )
 
-target_link_libraries(vsfiltermod-csri PRIVATE
-  subtitles
-  subpic
-  platform
-  libssf
-  libpng
-  zlib
-)
+    target_link_libraries(vsfiltermod-csri PRIVATE
+      subtitles
+      subpic
+      platform
+      libssf
+      libpng
+      zlib
+    )
 
-target_include_directories(vsfiltermod-csri PRIVATE
-  ''${CMAKE_SOURCE_DIR}/src/vsfilter
-)
+    target_include_directories(vsfiltermod-csri PRIVATE
+      ''${CMAKE_SOURCE_DIR}/src/vsfilter
+    )
 
-set_target_properties(vsfiltermod-csri PROPERTIES
-  OUTPUT_NAME vsfiltermod-csri
-)
+    set_target_properties(vsfiltermod-csri PROPERTIES
+      OUTPUT_NAME vsfiltermod-csri
+    )
 
-install(TARGETS vsfiltermod-csri
-  LIBRARY DESTINATION lib
-)
-EOF
+    install(TARGETS vsfiltermod-csri
+      LIBRARY DESTINATION lib
+    )
+    EOF
 
-  sed -i '/afxdlgs.h/d' src/vsfilter/csriapi.cpp
-  sed -i '/atlpath.h/d' src/vsfilter/csriapi.cpp
+      sed -i '/afxdlgs.h/d' src/vsfilter/csriapi.cpp
+      sed -i '/atlpath.h/d' src/vsfilter/csriapi.cpp
 
-  substituteInPlace src/vsfilter/csriapi.cpp \
-    --replace '#include "stdafx.h"' '#include "../subtitles/stdafx.h"' \
-    --replace '..\subtitles\VobSubFile.h' '../subtitles/VobSubFile.h' \
-    --replace '..\subtitles\RTS.h' '../subtitles/RTS.h' \
-    --replace '..\subtitles\SSF.h' '../subtitles/SSF.h' \
-    --replace '..\SubPic\MemSubPic.h' '../subpic/MemSubPic.h' \
-    --replace 'typedef const char *csri_rend;\n#include "csri.h"' 'typedef const char *csri_rend;' \
-    --replace 'enum csri_pixfmt pixfmt;' 'int pixfmt;' \
-    --replace 'MultiByteToWideChar(CP_UTF8,' 'MultiByteToWideChar(65001,'
-'';
+      substituteInPlace src/vsfilter/csriapi.cpp \
+        --replace '#include "stdafx.h"' '#include "../subtitles/stdafx.h"' \
+        --replace '..\subtitles\VobSubFile.h' '../subtitles/VobSubFile.h' \
+        --replace '..\subtitles\RTS.h' '../subtitles/RTS.h' \
+        --replace '..\subtitles\SSF.h' '../subtitles/SSF.h' \
+        --replace '..\SubPic\MemSubPic.h' '../subpic/MemSubPic.h' \
+        --replace 'typedef const char *csri_rend;\n#include "csri.h"' 'typedef const char *csri_rend;' \
+        --replace 'enum csri_pixfmt pixfmt;' 'int pixfmt;' \
+        --replace 'MultiByteToWideChar(CP_UTF8,' 'MultiByteToWideChar(65001,'
+  '';
 
   nativeBuildInputs = [
     cmake
