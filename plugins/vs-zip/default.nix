@@ -7,7 +7,7 @@
 }: let
   vsynth-tarball = builtins.fetchurl {
     url = "https://github.com/dnjulek/vapoursynth-zig/archive/8e93fe3433bb977135f81040bb59d964c58a1cb9.tar.gz";
-    sha256 = "sha256-MkNqPTsPu0bi3V63yzkUX7a6hWvzQrQSwTp2g407dwQ=";
+    sha256 = "sha256-Vnh7Kf00v35Egzmu8dBKVYSHmKmMuVIcmLbtLOOf4bc=";
   };
   zigimg-tarball = builtins.fetchurl {
     url = "https://github.com/zigimg/zigimg/archive/362cdd6bce109f7bc674be134cddd378f52da5d4.tar.gz";
