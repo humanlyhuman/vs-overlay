@@ -39,7 +39,7 @@ jobs:
       - name: Setup Cachix
         uses: cachix/cachix-action@v17
         with:
-          name: mycache
+          name: humanlyhuman-vs-repo
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
           
       - name: Build everything
@@ -65,7 +65,7 @@ jobs:
       - name: Setup Cachix
         uses: cachix/cachix-action@v17
         with:
-          name: mycache
+          name: humanlyhuman-vs-repo
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
       - name: Evaluate dev shell
