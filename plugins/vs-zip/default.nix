@@ -33,13 +33,12 @@ in
     buildInputs = [vapoursynth];
 
     zigBuildFlags = ["-Doptimize=ReleaseFast"];
-  ZIG_GLOBAL_CACHE_DIR = "/build/zig-cache";
-  postPatch = ''
-    mkdir -p $ZIG_GLOBAL_CACHE_DIR/p
-    ln -s ${vapoursynth-zig} $ZIG_GLOBAL_CACHE_DIR/p/vapoursynth-4.0.0-jLYMQ799AgCA8sL5lgewK9acIrAKjs-ByT2pdKI5dHq2
-    ln -s ${zigimg} $ZIG_GLOBAL_CACHE_DIR/p/zigimg-0.1.0-8_eo2jNrFQD4mu3EAUkfQRmCkyfprdIXc8JQ6uyxhjSQ
-  '';
-
+    ZIG_GLOBAL_CACHE_DIR = "/build/zig-cache";
+    postPatch = ''
+      mkdir -p $ZIG_GLOBAL_CACHE_DIR/p
+      ln -s ${vapoursynth-zig} $ZIG_GLOBAL_CACHE_DIR/p/vapoursynth-4.0.0-jLYMQ799AgCA8sL5lgewK9acIrAKjs-ByT2pdKI5dHq2
+      ln -s ${zigimg} $ZIG_GLOBAL_CACHE_DIR/p/zigimg-0.1.0-8_eo2jNrFQD4mu3EAUkfQRmCkyfprdIXc8JQ6uyxhjSQ
+    '';
 
     postInstall = ''
       mkdir -p $out/lib/vapoursynth
