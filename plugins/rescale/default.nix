@@ -7,7 +7,6 @@
   pkg-config,
   vapoursynth,
 }:
-
 stdenv.mkDerivation rec {
   pname = "Vapoursynth-RemapFrames";
   version = "1.1";
@@ -24,13 +23,13 @@ stdenv.mkDerivation rec {
     ninja
     pkg-config
   ];
-  buildInputs = [ vapoursynth ];
+  buildInputs = [vapoursynth];
 
   meta = with lib; {
     description = "Vapoursynth port of RemapFrames";
     homepage = "https://github.com/Irrational-Encoding-Wizardry/Vapoursynth-RemapFrames";
     license = licenses.bsd2;
-    maintainers = with maintainers; [ sbruder ];
+    maintainers = with maintainers; [sbruder];
     platforms = platforms.all;
   };
 }
