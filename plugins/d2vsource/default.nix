@@ -18,8 +18,20 @@ stdenv.mkDerivation (finalAttrs: {
     rev = "v${finalAttrs.version}";
     hash = "sha256-GVMhksXz3Dep9YqgbouEy7d7AuFiHezbkxwjWj1fqvk=";
   };
-  patches = [./fix-meson.patch];
-  nativeBuildInputs = [
+postPatch = ''
+  substituteInPlace meson.build \
+      --replace-fail \
+          "incdir = include_directories(
+    run_command(
+        find_program('python', 'python3'),
+        '-c',
+        'import vapoursynth as vs; print(vs.get_include())',
+        check: true,
+    ).stdout().strip(),
+    'src/core'
+)" \
+          "incdir = include_directories('src/core')"
+'';  nativeBuildInputs = [
     meson
     ninja
     pkg-config
