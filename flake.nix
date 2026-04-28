@@ -54,8 +54,7 @@
         )
     );
 
-    hydraJobs = {
-      inherit (self) packages;
-    };
+hydraJobs =
+  nixpkgs.lib.flattenTree self.packages;
   };
 }
