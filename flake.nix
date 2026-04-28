@@ -53,8 +53,21 @@
           pkgs.${system}.vapoursynthPlugins
         )
     );
+hydraJobs =
+  let
+    lib = nixpkgs.lib;
 
-    hydraJobs =
-      nixpkgs.lib.flattenTree self.packages;
-  };
+    flatten = system: attrs:
+      lib.concatMapAttrs
+        (name: value:
+          if lib.isDerivation value then
+            { "${system}-${name}" = value; }
+          else if lib.isAttrs value then
+            flatten system value
+          else
+            {}
+        )
+        attrs;
+  in
+  lib.concatMapAttrs flatten self.packages;
 }
