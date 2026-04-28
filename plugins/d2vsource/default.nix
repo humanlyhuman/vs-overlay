@@ -30,7 +30,7 @@ stdenv.mkDerivation (finalAttrs: {
         ).stdout().strip(),
         'src/core'
     )" \
-              "incdir = include_directories('src/core')"
+              "incdir = include_directories('src/core'\n'${vapoursynth}/include/vapoursynth')"
   '';
   nativeBuildInputs = [
     meson
