@@ -55,14 +55,14 @@ in
 
     zigBuildFlags = ["-Doptimize=ReleaseFast"];
 
-preBuild = ''
-  mkdir -p "$ZIG_GLOBAL_CACHE_DIR/p"
-  for dep in ${deps}/*; do
-    name=$(basename "$dep")
-    ln -s "$dep" "$ZIG_GLOBAL_CACHE_DIR/p/$name"
-    tar -czf "$ZIG_GLOBAL_CACHE_DIR/p/$name.tar.gz" -C "$dep" .
-  done
-'';
+    preBuild = ''
+      mkdir -p "$ZIG_GLOBAL_CACHE_DIR/p"
+      for dep in ${deps}/*; do
+        name=$(basename "$dep")
+        ln -s "$dep" "$ZIG_GLOBAL_CACHE_DIR/p/$name"
+        tar -czf "$ZIG_GLOBAL_CACHE_DIR/p/$name.tar.gz" -C "$dep" .
+      done
+    '';
 
     postInstall = ''
       mkdir -p $out/lib/vapoursynth
