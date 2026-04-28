@@ -49,10 +49,10 @@ postPatch = ''
   )
 EOF
 
-  substituteInPlace src/vsfilter/csriapi.cpp \
-    --replace '#include "stdafx.h"' '#include "../subtitles/stdafx.h"' \
-    --replace '#include <afxdlgs.h>' '' \
-    --replace '#include <atlpath.h>' ''
+substituteInPlace src/vsfilter/csriapi.cpp \
+  --replace '#include "stdafx.h"' '#include "../subtitles/stdafx.h"' \
+  --replace '#include <afxdlgs.h>' "" \
+  --replace '#include <atlpath.h>' ""
 '';
 
   nativeBuildInputs = [
