@@ -8,8 +8,9 @@
   pytimeconv,
   vapoursynth,
   vsjetpack,
-  lvsfunc,
+  lvsfunc ? null,
 }:
+
 buildPythonPackage rec {
   pname = "vardefunc";
   version = "0.13.0";
@@ -27,18 +28,18 @@ buildPythonPackage rec {
     versioningit
   ];
 
-  dependencies = [
-    numpy
-    pytimeconv
-    vapoursynth
-    vsjetpack
-  ];
+  dependencies =
+    [
+      numpy
+      pytimeconv
+      vapoursynth
+      vsjetpack
+    ]
+    ++ lib.optionals (lvsfunc != null) [
+      lvsfunc
+    ];
 
-  optional-dependencies = {
-    comp = [lvsfunc];
-  };
-
-  pythonImportsCheck = ["vardefunc"];
+  pythonImportsCheck = [ "vardefunc" ];
 
   meta = with lib; {
     description = "Vardë's Vapoursynth functions";
