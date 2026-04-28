@@ -29,6 +29,7 @@ in {
     ocr = prev.callPackage ./plugins/ocr {};
     placebo = prev.callPackage ./plugins/placebo {};
     readmpls = prev.callPackage ./plugins/readmpls {};
+    remap = prev.callPackage ./plugins/remap {};
     subtext = prev.callPackage ./plugins/subtext {};
     scxvid = prev.callPackage ./plugins/scxvid {};
     tnlmeans = prev.callPackage ./plugins/tnlmeans {};
