@@ -9,7 +9,6 @@
   harfbuzz,
   fontconfig,
 }:
-
 llvmPackages.stdenv.mkDerivation rec {
   pname = "vsfiltermod";
   version = "unstable-2026-03-24";
