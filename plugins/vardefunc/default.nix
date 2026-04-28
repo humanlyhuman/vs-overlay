@@ -8,7 +8,6 @@
   pytimeconv,
   vapoursynth,
   vsjetpack,
-  lvsfunc ? null,
 }:
 buildPythonPackage rec {
   pname = "vardefunc";
@@ -33,9 +32,6 @@ buildPythonPackage rec {
       pytimeconv
       vapoursynth
       vsjetpack
-    ]
-    ++ lib.optionals (lvsfunc != null) [
-      lvsfunc
     ];
 
   pythonImportsCheck = ["vardefunc"];
