@@ -57,7 +57,7 @@ in {
 
     sneedif = callPythonPackage ./plugins/sneedif {};
     vardefunc = callPythonPackage ./plugins/vardefunc {
-      pytimeconv = pytimeconv;
+      inherit (final.vapoursynth.python3.pkgs) pytimeconv;
     };
     vs-jet-engine = callPythonPackage ./plugins/vs-jet-engine {};
     vs-jetpack = callPythonPackage ./plugins/vsjetpack {
