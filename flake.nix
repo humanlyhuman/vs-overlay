@@ -35,53 +35,52 @@
           };
         }
     );
-in {
-  overlays.default = import ./default.nix;
+  in {
+    overlays.default = import ./default.nix;
 
-  formatter = eachSystem (
-    system: _: pkgs.${system}.nixfmt-tree
-  );
+    formatter = eachSystem (
+      system: _: pkgs.${system}.nixfmt-tree
+    );
 
-  packages = eachSystem (
-    system: platform:
-      lib.filterAttrs (_: pkg: lib.meta.availableOn platform pkg) (
-        {
-          inherit (pkgs.${system}) getnative;
-          inherit (pkgs.${system}) nativeres;
-        }
-        // lib.filterAttrs (_: lib.isDerivation)
-        pkgs.${system}.vapoursynthPlugins
-      )
-  );
+    packages = eachSystem (
+      system: platform:
+        lib.filterAttrs (_: pkg: lib.meta.availableOn platform pkg) (
+          {
+            inherit (pkgs.${system}) getnative;
+            inherit (pkgs.${system}) nativeres;
+          }
+          // lib.filterAttrs (_: lib.isDerivation)
+          pkgs.${system}.vapoursynthPlugins
+        )
+    );
 
-  hydraJobs =
-    let
+    hydraJobs = let
       flatten = system: attrs:
         lib.concatMapAttrs
-          (name: value:
-            if lib.isDerivation value then
-              { "${system}-${name}" = value; }
-            else if lib.isAttrs value then
-              flatten system value
-            else
-              {}
-          )
-          attrs;
+        (
+          name: value:
+            if lib.isDerivation value
+            then {"${system}-${name}" = value;}
+            else if lib.isAttrs value
+            then flatten system value
+            else {}
+        )
+        attrs;
     in
-    lib.concatMapAttrs flatten self.packages;
+      lib.concatMapAttrs flatten self.packages;
 
-  devShells = eachSystem (system: _:
-    {
-      everything = pkgs.${system}.mkShell {
-        packages = [
-          (pkgs.${system}.vapoursynth.withPlugins (
-            builtins.filter
+    devShells = eachSystem (
+      system: _: {
+        everything = pkgs.${system}.mkShell {
+          packages = [
+            (pkgs.${system}.vapoursynth.withPlugins (
+              builtins.filter
               (pkg: lib.isDerivation pkg && lib.meta.availableOn system pkg)
               (builtins.attrValues pkgs.${system}.vapoursynthPlugins)
-          ))
-        ];
-      };
-    }
-  );
-};
+            ))
+          ];
+        };
+      }
+    );
+  };
 }
