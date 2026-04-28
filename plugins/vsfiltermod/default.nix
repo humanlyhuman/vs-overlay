@@ -24,32 +24,32 @@ llvmPackages.stdenv.mkDerivation rec {
     ./0001-top-level-csri.patch
   ];
 
-  postPatch = ''
-      mkdir -p src/csri
+postPatch = ''
+  mkdir -p src/csri
 
-      cat > src/csri/CMakeLists.txt <<'EOF'
-      add_library(vsfiltermod-csri SHARED
-        ../vsfilter/csriapi.cpp
-      )
+  cat > src/csri/CMakeLists.txt <<'EOF'
+  add_library(vsfiltermod-csri SHARED
+    ../vsfilter/csriapi.cpp
+  )
 
-      target_link_libraries(vsfiltermod-csri PRIVATE
-        subtitles
-        subpic
-        platform
-        libssf
-        libpng
-        zlib
-      )
+  target_link_libraries(vsfiltermod-csri PRIVATE
+    subtitles
+    subpic
+    platform
+    libssf
+    libpng
+    zlib
+  )
 
-      target_include_directories(vsfiltermod-csri PRIVATE
-        ${CMAKE_SOURCE_DIR}/src/vsfilter
-      )
+  target_include_directories(vsfiltermod-csri PRIVATE
+    ''${CMAKE_SOURCE_DIR}/src/vsfilter
+  )
 
-      set_target_properties(vsfiltermod-csri PROPERTIES
-        OUTPUT_NAME "vsfiltermod-csri"
-      )
-    EOF
-  '';
+  set_target_properties(vsfiltermod-csri PROPERTIES
+    OUTPUT_NAME "vsfiltermod-csri"
+  )
+EOF
+'';
 
   nativeBuildInputs = [
     cmake
