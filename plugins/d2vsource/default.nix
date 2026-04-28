@@ -18,6 +18,7 @@ stdenv.mkDerivation (finalAttrs: {
     rev = "v${finalAttrs.version}";
     hash = "sha256-GVMhksXz3Dep9YqgbouEy7d7AuFiHezbkxwjWj1fqvk=";
   };
+  patches = [ ./fix-meson.patch ];
   nativeBuildInputs = [
     meson
     ninja
