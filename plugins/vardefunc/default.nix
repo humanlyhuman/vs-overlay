@@ -7,7 +7,7 @@
   numpy,
   pytimeconv,
   vapoursynth,
-  vsjetpack,
+  vs-jetpack,
 }:
 buildPythonPackage rec {
   pname = "vardefunc";
@@ -30,7 +30,7 @@ buildPythonPackage rec {
     numpy
     pytimeconv
     vapoursynth
-    vsjetpack
+    vs-jetpack
   ];
 
   pythonImportsCheck = ["vardefunc"];
