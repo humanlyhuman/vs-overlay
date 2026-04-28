@@ -36,7 +36,7 @@ stdenv.mkDerivation rec {
             check: true,
         ).stdout().strip(),
     )" \
-              "incdir = include_directories()"
+              "incdir = include_directories('${vapoursynth}/include/vapoursynth')"
   '';
   buildInputs = [
     ffmpeg
