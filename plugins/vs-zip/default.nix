@@ -36,6 +36,11 @@ in
       mv $out/lib/libvszip${stdenv.hostPlatform.extensions.sharedLibrary} \
          $out/lib/vapoursynth/
     '';
+  postPatch = ''
+    substituteInPlace build.zig \
+      --replace-fail 'lib.linkLibC();' 'lib.*.linkLibC();'
+  '';
+
     meta = {
       description = "VapourSynth zip plugin";
       homepage = "https://github.com/dnjulek/vapoursynth-zip";
