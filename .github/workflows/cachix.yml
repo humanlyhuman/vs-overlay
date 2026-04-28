@@ -20,12 +20,12 @@ jobs:
         with:
           name: mycache
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
-
+      
       - name: Show flake
-        run: nix flake show
-
+        run: nix flake show --accept-flake-config
+      
       - name: Build all hydraJobs
-        run: nix build .#hydraJobs --print-build-logs
-
+        run: nix build .#hydraJobs --print-build-logs --accept-flake-config
+      
       - name: Check flake
-        run: nix flake check
+        run: nix flake check --accept-flake-config
