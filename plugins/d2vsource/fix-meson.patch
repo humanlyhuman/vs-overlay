@@ -12,6 +12,4 @@
 -    ).stdout().strip(),
 -    'src/core'
 -)
-+incdir = include_directories()
-
- link_args = []
++incdir = include_directories('src/core')
