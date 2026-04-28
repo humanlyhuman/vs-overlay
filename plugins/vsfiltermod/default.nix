@@ -21,7 +21,7 @@ llvmPackages.stdenv.mkDerivation rec {
   };
 
   patches = [
- ./0001-add-csri-target.patch
+    ./0001-add-csri-target.patch
   ];
 
   nativeBuildInputs = [
