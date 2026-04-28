@@ -37,12 +37,12 @@ in
       hash = "sha256-x1EDBddLKsCXIbMy8+en2G6L6+yZKTQq8SSoOP7kAvU=";
     };
 
-    postPatch = ''
-      # This does not depend on vapoursynth (since this is used from within
-      # vapoursynth).
-      substituteInPlace requirements.txt \
-          --replace-fail "VapourSynth>=69" "" \
-    '';
+postPatch = ''
+  substituteInPlace requirements.txt \
+    --replace-fail "VapourSynth>=69" "" \
+    --replace-fail "vsjetpack>=1.1.0" "" \
+    --replace-fail "numpy~=2.1.1" ""
+'';
 
     propagatedBuildInputs =
       [
