@@ -54,7 +54,7 @@
         )
     );
 
-hydraJobs =
-  nixpkgs.lib.flattenTree self.packages;
+    hydraJobs =
+      nixpkgs.lib.flattenTree self.packages;
   };
 }
