@@ -9,7 +9,7 @@
     owner = "dnjulek";
     repo = "vapoursynth-zig";
     rev = "8e93fe3433bb977135f81040bb59d964c58a1cb9";
-    hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+    hash = "sha256-tcBr4q7/8u/8xmBO2dbtExi3n5j006nh6/fniO37UK4=";
   };
   zigimg = fetchFromGitHub {
     owner = "zigimg";
