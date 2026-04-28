@@ -43,8 +43,8 @@ stdenv.mkDerivation (finalAttrs: {
     runHook preInstall
 
     install -Dm755 \
-      libd2vsource${stdenv.hostPlatform.extensions.sharedLibrary} \
-      $out/lib/vapoursynth/libd2vsource${stdenv.hostPlatform.extensions.sharedLibrary}
+      d2vsource${stdenv.hostPlatform.extensions.sharedLibrary} \
+      $out/lib/vapoursynth/d2vsource${stdenv.hostPlatform.extensions.sharedLibrary}
 
     runHook postInstall
   '';
