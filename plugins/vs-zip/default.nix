@@ -34,11 +34,25 @@ in
 
     zigBuildFlags = ["-Doptimize=ReleaseFast"];
 
-    postPatch = ''
-      mkdir -p .zig-cache/deps
-      ln -s ${vapoursynth-zig} .zig-cache/deps/vapoursynth-zig-8e93fe3433bb977135f81040bb59d964c58a1cb9
-      ln -s ${zigimg} .zig-cache/deps/zigimg-362cdd6bce109f7bc674be134cddd378f52da5d4
-    '';
+postPatch = ''
+  cat > build.zig.zon <<EOF
+  .{
+      .name = .vszip,
+      .version = "13.0.0",
+      .paths = .{""},
+      .fingerprint = 0x7466a154dbe09310,
+      .minimum_zig_version = "0.15.2",
+      .dependencies = .{
+          .vapoursynth = .{
+              .url = "path:${vapoursynth-zig}",
+          },
+          .zigimg = .{
+              .url = "path:${zigimg}",
+          },
+      },
+  }
+  EOF
+'';
 
     postInstall = ''
       mkdir -p $out/lib/vapoursynth
