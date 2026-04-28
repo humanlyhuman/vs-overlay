@@ -8,10 +8,13 @@
   vapoursynth,
   setuptools,
   pythonOlder,
+  numpy,
 }: let
   propagatedBinaryPlugins = with vapoursynthPlugins; [
     d2vsource
     descale
+    vs-jetpack
+    numpy
     fmtconv
     knlmeanscl
     readmpls
