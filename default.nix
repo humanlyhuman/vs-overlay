@@ -19,7 +19,6 @@ in {
     deblock = prev.callPackage ./plugins/deblock {};
     descale = prev.callPackage ./plugins/descale {};
     edgemasks = prev.callPackage ./plugins/edgemasks {};
-    eedi3m = prev.callPackage ./plugins/eedi3m {};
     ffms2 = prev.ffms;
     fillborders = prev.callPackage ./plugins/fillborders {};
     fmtconv = prev.callPackage ./plugins/fmtconv {};
