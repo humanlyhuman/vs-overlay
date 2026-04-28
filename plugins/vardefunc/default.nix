@@ -26,13 +26,12 @@ buildPythonPackage rec {
     versioningit
   ];
 
-  dependencies =
-    [
-      numpy
-      pytimeconv
-      vapoursynth
-      vsjetpack
-    ];
+  dependencies = [
+    numpy
+    pytimeconv
+    vapoursynth
+    vsjetpack
+  ];
 
   pythonImportsCheck = ["vardefunc"];
 
