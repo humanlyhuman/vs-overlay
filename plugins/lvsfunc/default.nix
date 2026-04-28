@@ -15,7 +15,6 @@
     fmtconv
     knlmeanscl
     readmpls
-    retinex
     znedi3
   ];
 in
