@@ -2,7 +2,7 @@
   lib,
   stdenv,
   fetchFromGitHub,
-  zig,
+  zig_0_13,
   vapoursynth,
 }: let
   vsynth-tarball = builtins.fetchurl {
@@ -23,7 +23,7 @@ in
       rev = finalAttrs.version;
       hash = "sha256-k+HfMTn9FLUOCBHFAsSiqHHFF9Q4hUqJpfainN/e2Gc=";
     };
-    nativeBuildInputs = [zig.hook];
+    nativeBuildInputs = [zig_0_13.hook];
     buildInputs = [vapoursynth];
     zigBuildFlags = ["-Doptimize=ReleaseFast"];
     preBuild = ''
