@@ -24,43 +24,43 @@ llvmPackages.stdenv.mkDerivation rec {
     ./0001-top-level-csri.patch
   ];
   postPatch = ''
-          mkdir -p src/csri
+              mkdir -p src/csri
 
-cat > src/csri/CMakeLists.txt <<'EOF'
-add_library(vsfiltermod-csri SHARED
-  ../vsfilter/csriapi.cpp
-)
+    cat > src/csri/CMakeLists.txt <<'EOF'
+    add_library(vsfiltermod-csri SHARED
+      ../vsfilter/csriapi.cpp
+    )
 
-target_link_libraries(vsfiltermod-csri PRIVATE
-  subtitles
-  subpic
-  platform
-  libssf
-  libpng
-  zlib
-)
+    target_link_libraries(vsfiltermod-csri PRIVATE
+      subtitles
+      subpic
+      platform
+      libssf
+      libpng
+      zlib
+    )
 
-target_include_directories(vsfiltermod-csri PRIVATE
-  ''${CMAKE_SOURCE_DIR}/src/vsfilter
-)
+    target_include_directories(vsfiltermod-csri PRIVATE
+      ''${CMAKE_SOURCE_DIR}/src/vsfilter
+    )
 
-set_target_properties(vsfiltermod-csri PROPERTIES
-  OUTPUT_NAME vsfiltermod-csri
-)
+    set_target_properties(vsfiltermod-csri PROPERTIES
+      OUTPUT_NAME vsfiltermod-csri
+    )
 
-install(TARGETS vsfiltermod-csri
-  LIBRARY DESTINATION lib
-)
-EOF
+    install(TARGETS vsfiltermod-csri
+      LIBRARY DESTINATION lib
+    )
+    EOF
 
-    substituteInPlace src/vsfilter/csriapi.cpp \
-      --replace '#include "stdafx.h"' '#include "../subtitles/stdafx.h"' \
-      --replace '#include <afxdlgs.h>' "" \
-      --replace '#include <atlpath.h>' "" \
-      --replace '..\subtitles\VobSubFile.h' '../subtitles/VobSubFile.h' \
-      --replace '..\subtitles\RTS.h' '../subtitles/RTS.h' \
-      --replace '..\subtitles\SSF.h' '../subtitles/SSF.h' \
-      --replace '..\SubPic\MemSubPic.h' '../subpic/MemSubPic.h'
+        substituteInPlace src/vsfilter/csriapi.cpp \
+          --replace '#include "stdafx.h"' '#include "../subtitles/stdafx.h"' \
+          --replace '#include <afxdlgs.h>' "" \
+          --replace '#include <atlpath.h>' "" \
+          --replace '..\subtitles\VobSubFile.h' '../subtitles/VobSubFile.h' \
+          --replace '..\subtitles\RTS.h' '../subtitles/RTS.h' \
+          --replace '..\subtitles\SSF.h' '../subtitles/SSF.h' \
+          --replace '..\SubPic\MemSubPic.h' '../subpic/MemSubPic.h'
   '';
 
   nativeBuildInputs = [
