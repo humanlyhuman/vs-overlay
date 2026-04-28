@@ -44,7 +44,12 @@ in
     zigBuildFlags = ["-Doptimize=ReleaseFast"];
 
     postPatch = ''
-      ln -s ${zigDeps} $ZIG_GLOBAL_CACHE_DIR/p
+      mkdir -p /build/zig-cache/p
+      ln -s ${zigDeps}/* /build/zig-cache/p/
+    '';
+    
+    preBuild = ''
+      export ZIG_GLOBAL_CACHE_DIR=/build/zig-cache
     '';
 
     postInstall = ''
