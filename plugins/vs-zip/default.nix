@@ -3,6 +3,7 @@
   stdenv,
   fetchFromGitHub,
   zig,
+  fetchZigDeps,
   vapoursynth,
 }:
 stdenv.mkDerivation (finalAttrs: {
