@@ -41,7 +41,7 @@ llvmPackages.stdenv.mkDerivation rec {
     )
 
     target_include_directories(vsfiltermod-csri PRIVATE
-      ${CMAKE_SOURCE_DIR}/src/vsfilter
+      ''${CMAKE_SOURCE_DIR}/src/vsfilter
     )
 
     set_target_properties(vsfiltermod-csri PROPERTIES
