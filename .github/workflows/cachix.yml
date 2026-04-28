@@ -41,10 +41,10 @@ jobs:
         with:
           name: mycache
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
-
+          
       - name: Build all packages
         run: |
-          nix build .#packages \
+          nix build .#packages.x86_64-linux \
             --print-build-logs \
             --accept-flake-config \
             --no-link
