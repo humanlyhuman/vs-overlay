@@ -25,6 +25,19 @@ stdenv.mkDerivation rec {
     pkg-config
     python3
   ];
+  postPatch = ''
+      substituteInPlace meson.build \
+          --replace-fail \
+              "incdir = include_directories(
+        run_command(
+            find_program('python', 'python3'),
+            '-c',
+            'import vapoursynth as vs; print(vs.get_include())',
+            check: true,
+        ).stdout().strip(),
+    )" \
+              "incdir = include_directories()"
+  '';
   buildInputs = [
     ffmpeg
     libass
