@@ -230,18 +230,6 @@ python3.pkgs.buildPythonPackage rec {
     for archive in ${lib.concatMapStringsSep " " (x: "${x}") externalModelsList}; do
       7z x -y "$archive" -o$out/share/vs-mlrt/models
     done
-    mkdir -p $out/lib/vapoursynth
-    for pkg in \
-      ${vapoursynthPlugins.vsncnn} \
-      ${vapoursynthPlugins.vsort} \
-      ${vapoursynthPlugins.vsmigx} \
-      ${vapoursynthPlugins.vsov} \
-      ${vapoursynthPlugins.vstrt}
-    do
-      for lib in $pkg/lib/vapoursynth/*.so; do
-        ln -s "$lib" $out/lib/vapoursynth/
-      done
-    done
     runHook postInstall
   '';
 
