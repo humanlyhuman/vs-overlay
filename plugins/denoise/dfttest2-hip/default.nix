@@ -54,7 +54,6 @@ stdenv.mkDerivation rec {
     done
   '';
 
-
   meta = with lib; {
     description = "DFTTest2 denoise filter for VapourSynth using HIP/ROCm";
     homepage = "https://github.com/AmusementClub/vs-dfttest2/";
