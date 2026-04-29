@@ -38,8 +38,8 @@ stdenv.mkDerivation rec {
 
   postPatch = ''
     substituteInPlace rtc_source/CMakeLists.txt \
-      --replace "nvrtc_static" "nvrtc" \
-      --replace "nvrtc-builtins_static" "nvrtc"
+      --replace-fail "nvrtc_static" "nvrtc" \
+      --replace-fail "nvrtc-builtins_static" "nvrtc"
   '';
 
   postInstall = ''
