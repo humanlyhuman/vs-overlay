@@ -14,7 +14,7 @@ stdenv.mkDerivation rec {
 
   src = fetchFromGitHub {
     owner = "myrsloik";
-    repo = pname;
+    repo = "VapourSynth-FFT3DFilter";
     rev = "64323f0fdee4dd4fe429ee6287906dbae8e7571c";
     hash = "sha256-NDFnaddkS4kvTH32YtOKtxSV/TwaOvMf1lmPcWJwXGg=";
   };
