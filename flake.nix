@@ -28,10 +28,14 @@
       system: _:
         import nixpkgs {
           inherit system;
-          overlays = [self.overlays.default];
+          overlays = [
+            (final: prev: {
+              cudaPackages = prev.cudaPackages_12_6;
+            })
+            self.overlays.default
+          ];
           config = {
             allowUnfree = true;
-            allowUnsupportedSystem = true;
           };
         }
     );
