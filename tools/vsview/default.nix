@@ -85,16 +85,15 @@
 
     doCheck = false;
   };
+defaultVsPlugins = with vapoursynthPlugins; [
+  lsmas
+  ffms2
+  fmtconv
+  resize2
+  awarp
+];
 
-  defaultVsPlugins = with vapoursynthPlugins; [
-    lsmas
-    ffms2
-    fmtconv
-    resize2
-    awarp
-  ];
-
-  vsRuntime = vapoursynth.withPlugins (_: defaultVsPlugins);
+vsRuntime = vapoursynth.withPlugins defaultVsPlugins;
 
 in
 buildPythonApplication rec {
