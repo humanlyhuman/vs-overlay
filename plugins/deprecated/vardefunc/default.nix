@@ -76,8 +76,8 @@ in
       "vsjetpack"
     ];
     postPatch = ''
-    substituteInPlace vardefunc/vsjet_proxy.py \
-      --replace-fail "FieldBasedT" "FieldBased"
+      substituteInPlace vardefunc/vsjet_proxy.py \
+        --replace-fail "FieldBasedT" "FieldBased"
     '';
 
     dontCheckRuntimeDeps = true;

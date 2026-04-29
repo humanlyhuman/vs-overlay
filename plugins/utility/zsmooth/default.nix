@@ -50,7 +50,7 @@ in
 
       substituteInPlace hatch_build.py \
         --replace-fail '"python-zig"' '"${zig_0_15}/bin/zig"'
-    ''; 
+    '';
     postInstall = ''
       mkdir -p $out/lib/vapoursynth
 
