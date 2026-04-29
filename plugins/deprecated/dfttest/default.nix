@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
 
   src = fetchFromGitHub {
     owner = "HomeOfVapourSynthEvolution";
-    repo = pname;
+    repo = "VapourSynth-DFTTest";
     rev = "r${version}";
     hash = "sha256-2FQnKBaLJiBHnB0UEqTQEqI4L5Lt/gzsZ8g6euOnI6g=";
   };

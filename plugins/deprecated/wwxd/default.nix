@@ -33,7 +33,7 @@ in
 
     meta = with lib; {
       description = "Xvid-like scene change detection for VapourSynth";
-      homepage = "https://github.com/dubhater/vapoursynth-wwxd";
+      homepage = "https://github.com/dubhatervapoursynth/vapoursynth-wwxd";
       license = licenses.unfree; # no license
       maintainers = with maintainers; [];
       platforms = platforms.linux;

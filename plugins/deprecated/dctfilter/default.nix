@@ -14,7 +14,7 @@ stdenv.mkDerivation rec {
 
   src = fetchFromGitHub {
     owner = "HomeOfVapourSynthEvolution";
-    repo = pname;
+    repo = "VapourSynth-DCTFilter";
     rev = "r${version}";
     hash = "sha256-AORb/bBVT+k9fklM4Mjo0NTqQP4QcY4gvfZLJGATVAw=";
   };

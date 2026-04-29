@@ -12,7 +12,7 @@ stdenv.mkDerivation rec {
 
   src = fetchFromGitHub {
     owner = "dubhatervapoursynth";
-    repo = pname;
+    repo = "vapoursynth-fluxsmooth";
     rev = "v${version}";
     hash = "sha256-u12XjXOZCasgQtrxtuAjFxYaziMCWFNK0rqV5qM/Qnw=";
   };
@@ -24,7 +24,7 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     description = "A vapoursynth filter plugin for smoothing of fluctuations";
-    homepage = "https://github.com/dubhater/vapoursynth-fluxsmooth";
+    homepage = "https://github.com/dubhatervapoursynth/vapoursynth-fluxsmooth";
     license = licenses.unfree;
     maintainers = with maintainers; [sbruder];
     platforms = platforms.linux;

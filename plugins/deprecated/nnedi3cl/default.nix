@@ -16,7 +16,7 @@ stdenv.mkDerivation rec {
 
   src = fetchFromGitHub {
     owner = "HomeOfVapourSynthEvolution";
-    repo = pname;
+    repo = "VapourSynth-NNEDI3CL";
     rev = "r${version}";
     hash = "sha256-zW/qEtZTDJOTarXbXhv+nks25eePutLDpLck4TuMKUk=";
   };

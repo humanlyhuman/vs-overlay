@@ -13,7 +13,7 @@ stdenv.mkDerivation rec {
 
   src = fetchFromGitHub {
     owner = "dubhatervapoursynth";
-    repo = pname;
+    repo = "vapoursynth-median";
     rev = "v${version}";
     hash = "sha256-23rNaTanNgD1ClKSbEfRzLRbLekubY4TnL28ecKLoJs=";
   };
@@ -25,7 +25,7 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     description = "VapourSynth plugin to generate a pixel-by-pixel median of several clips";
-    homepage = "https://github.com/dubhater/vapoursynth-median/";
+    homepage = "https://github.com/dubhatervapoursynth/vapoursynth-median/";
     license = licenses.unfree; # no license
     maintainers = with maintainers; [sbruder];
     platforms = platforms.linux;

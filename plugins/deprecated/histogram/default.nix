@@ -24,8 +24,8 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     description = "Histogram plugin for VapourSynth";
-    homepage = "https://github.com/dubhater/vapoursynth-histogram";
-    license = licenses.gpl2Plus; # https://github.com/dubhater/vapoursynth-histogram/issues/2
+    homepage = "https://github.com/dubhatervapoursynth/vapoursynth-histogram";
+    license = licenses.gpl2Plus; # https://github.com/dubhatervapoursynth/vapoursynth-histogram/issues/2
     maintainers = with maintainers; [sbruder];
     platforms = platforms.linux;
   };

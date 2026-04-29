@@ -13,7 +13,7 @@ stdenv.mkDerivation rec {
 
   src = fetchFromGitHub {
     owner = "HomeOfVapourSynthEvolution";
-    repo = pname;
+    repo = "VapourSynth-TTempSmooth";
     rev = "r${version}";
     hash = "sha256-v33SDyonEyrEuMIYDogK9JQ3qaTyrynyFQnfOTLu/EA=";
   };

@@ -25,7 +25,7 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     description = "nnedi3 filter for VapourSynth";
-    homepage = "https://github.com/dubhater/vapoursynth-nnedi3";
+    homepage = "https://github.com/dubhatervapoursynth/vapoursynth-nnedi3";
     license = licenses.gpl2;
     maintainers = with maintainers; [];
     platforms = platforms.linux;

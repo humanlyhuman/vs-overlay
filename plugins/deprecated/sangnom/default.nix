@@ -13,7 +13,7 @@ stdenv.mkDerivation rec {
 
   src = fetchFromGitHub {
     owner = "dubhatervapoursynth";
-    repo = pname;
+    repo = "vapoursynth-sangnom";
     rev = "r${version}";
     hash = "sha256-2lEnwms2wSOyMRmasRG1r8iPAFmBObP6pDzPIinJLz0=";
   };
@@ -25,7 +25,7 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     description = "VapourSynth Single Field Deinterlacer";
-    homepage = "https://github.com/dubhater/vapoursynth-sangnom";
+    homepage = "https://github.com/dubhatervapoursynth/vapoursynth-sangnom";
     license = licenses.mit;
     maintainers = with maintainers; [];
     platforms = platforms.linux;

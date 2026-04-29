@@ -12,7 +12,7 @@ in
 
     src = fetchFromGitHub {
       owner = "Irrational-Encoding-Wizardry";
-      repo = pname;
+      repo = "vapoursynth-autocrop";
       rev = version;
       hash = "sha256-TAVogEE09JvIGOiw5UJbQXdggyJC+9KNNeWChg4v8JY=";
     };

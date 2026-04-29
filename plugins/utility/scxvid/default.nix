@@ -53,7 +53,7 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     description = "Scene change detection plugin for VapourSynth using xvid";
-    homepage = "https://github.com/dubhater/vapoursynth-scxvid";
+    homepage = "https://github.com/dubhatervapoursynth/vapoursynth-scxvid";
     license = licenses.gpl2Only;
     maintainers = with maintainers; [humanlyhuman];
     platforms = platforms.linux;
