@@ -14,13 +14,14 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "WolframRhodium";
     repo = "VapourSynth-BM3DCUDA";
-    rev = "${version}";
+    rev = version;
     hash = "sha256-spp+usDmiXW97PsPwZSmvsnMc7hWV9s4nZOZNwdg5Aw=";
   };
 
   nativeBuildInputs = [
     cmake
     rocmPackages.clr
+    rocmPackages.llvm.clang
   ];
 
   buildInputs = [
@@ -33,8 +34,18 @@ stdenv.mkDerivation rec {
     "-DENABLE_CPU=OFF"
     "-DENABLE_CUDA=OFF"
     "-DENABLE_HIP=ON"
+
+    "-DCMAKE_C_COMPILER=clang"
+    "-DCMAKE_CXX_COMPILER=clang++"
+    "-DCMAKE_HIP_COMPILER=hipcc"
+
     "-DCMAKE_SKIP_RPATH=ON"
   ];
+
+  env = {
+    HIP_PATH = "${rocmPackages.clr}";
+    ROCM_PATH = "${rocmPackages.clr}";
+  };
 
   postInstall = ''
     mkdir -p $out/lib/vapoursynth
@@ -45,9 +56,7 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     description = "BM3D denoise filter for VapourSynth using HIP/ROCm";
-    homepage = "https://github.com/WolframRhodium/VapourSynth-BM3DCUDA";
     license = licenses.gpl3Only;
-    maintainers = with maintainers; [ humanlyhuman ];
     platforms = platforms.linux;
   };
 }
