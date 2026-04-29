@@ -44,7 +44,7 @@ stdenv.mkDerivation rec {
   '';
 
   meta = with lib; {
-    description = "CPU Non-local Means denoise filter for VapourSynth using ISPC";
+    description = "CUDA-accelerated Non-Local Means denoiser for VapourSynth";
     homepage = "https://github.com/AmusementClub/vs-nlm-cuda";
     license = licenses.gpl3Only;
     maintainers = with maintainers; [humanlyhuman];

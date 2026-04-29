@@ -27,8 +27,7 @@ stdenv.mkDerivation rec {
     vapoursynth
     onnxruntime.dev
     onnx
-    cuda_nvcc
-    cuda_cudart
+    cudatoolkit
     protobuf
     abseil-cpp
   ];
