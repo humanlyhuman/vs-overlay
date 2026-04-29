@@ -47,8 +47,8 @@
       cython
     ];
 
-    buildInputs = [ vapoursynth ];
-    dependencies = [ vapoursynth ];
+    buildInputs = [vapoursynth];
+    dependencies = [vapoursynth];
 
     postPatch = ''
       substituteInPlace pyproject.toml \
@@ -94,59 +94,58 @@
   ];
 
   vsRuntime = vapoursynth.withPlugins defaultVsPlugins;
-
 in
-buildPythonApplication rec {
-  pname = "vsview";
-  version = "0.5.0";
-  src = monorepo;
-  pyproject = true;
+  buildPythonApplication rec {
+    pname = "vsview";
+    version = "0.5.0";
+    src = monorepo;
+    pyproject = true;
 
-  build-system = [ hatchling versioningit ];
+    build-system = [hatchling versioningit];
 
-  dependencies = [
-    vsRuntime
+    dependencies = [
+      vsRuntime
 
-    vapoursynthPlugins.vsjetengine
-    vapoursynthPlugins.jetpytools
-    vapoursynthPlugins.vsjetpack
+      vapoursynthPlugins.vsjetengine
+      vapoursynthPlugins.jetpytools
+      vapoursynthPlugins.vsjetpack
 
-    vspackrgb
-    vsview-cli
+      vspackrgb
+      vsview-cli
 
-    pyside6
-    pydantic
-    platformdirs
-    rich
-    pygments
-    pluggy
-    numpy
-    scipy
-  ];
+      pyside6
+      pydantic
+      platformdirs
+      rich
+      pygments
+      pluggy
+      numpy
+      scipy
+    ];
 
-  postPatch = ''
-    substituteInPlace pyproject.toml \
-      --replace-fail 'dynamic = ["version"]' 'version = "0.5.0"' \
-      --replace-fail '"vapoursynth>=69",' "" \
-      --replace-fail '"vsjetengine>=1.2.0",' "" \
-      --replace-fail '"vspackrgb>=1.0.0",' "" \
-      --replace-fail '"vsview-cli>=1.0.0",' "" \
-      --replace-fail '"jetpytools>=2.2.7",' "" \
-      --replace-fail '"platformdirs>=4.9.2",' "" \
-      --replace-fail '"pyside6>=6.11.0",' "" \
-      --replace-fail '"pydantic>=2.0.0",' "" \
-      --replace-fail '"rich>=14.0.0",' "" \
-      --replace-fail '"pygments>=2.20.0",' "" \
-      --replace-fail '"pluggy>=1.6.0",' ""
-  '';
+    postPatch = ''
+      substituteInPlace pyproject.toml \
+        --replace-fail 'dynamic = ["version"]' 'version = "0.5.0"' \
+        --replace-fail '"vapoursynth>=69",' "" \
+        --replace-fail '"vsjetengine>=1.2.0",' "" \
+        --replace-fail '"vspackrgb>=1.0.0",' "" \
+        --replace-fail '"vsview-cli>=1.0.0",' "" \
+        --replace-fail '"jetpytools>=2.2.7",' "" \
+        --replace-fail '"platformdirs>=4.9.2",' "" \
+        --replace-fail '"pyside6>=6.11.0",' "" \
+        --replace-fail '"pydantic>=2.0.0",' "" \
+        --replace-fail '"rich>=14.0.0",' "" \
+        --replace-fail '"pygments>=2.20.0",' "" \
+        --replace-fail '"pluggy>=1.6.0",' ""
+    '';
 
-  nativeCheckInputs = [ imagemagick ];
-  doCheck = false;
+    nativeCheckInputs = [imagemagick];
+    doCheck = false;
 
-  meta = with lib; {
-    description = "The next-generation VapourSynth previewer";
-    homepage = "https://github.com/Jaded-Encoding-Thaumaturgy/vs-view";
-    mainProgram = "vsview";
-    platforms = platforms.linux;
-  };
-}
+    meta = with lib; {
+      description = "The next-generation VapourSynth previewer";
+      homepage = "https://github.com/Jaded-Encoding-Thaumaturgy/vs-view";
+      mainProgram = "vsview";
+      platforms = platforms.linux;
+    };
+  }
