@@ -6,17 +6,7 @@
   vapoursynth,
   cudaPackages,
   pkgs,
-}: let
-  empty = name:
-    pkgs.runCommand name {} ''
-      mkdir -p $out
-    '';
-
-  cudaPackages' = cudaPackages.overrideScope (final: prev: {
-    cuda_compat = empty "cuda_compat-empty";
-    libcudla = empty "libcudla-empty";
-  });
-in
+}:
   stdenv.mkDerivation rec {
     pname = "vstrt";
     version = "15.16";
@@ -32,7 +22,7 @@ in
       "-DVCS_TAG=v${version}"
       "-DCMAKE_SKIP_RPATH=ON"
       "-DVAPOURSYNTH_INCLUDE_DIRECTORY=${vapoursynth}/include/vapoursynth"
-      "-DTENSORRT_HOME=${cudaPackages'.tensorrt}"
+      "-DTENSORRT_HOME=${cudaPackages.tensorrt}"
     ];
 
     sourceRoot = "source/vstrt";
@@ -43,11 +33,10 @@ in
     nativeBuildInputs = [
       cmake
     ];
-    buildInputs = [
+    buildInputs = with cudaPackages; [
       vapoursynth
-      cudaPackages'.cuda_cudart
-      cudaPackages'.tensorrt
-      cudaPackages'.cuda_nvcc
+      tensorrt
+      cudatoolkit
     ];
 
     postInstall = ''
