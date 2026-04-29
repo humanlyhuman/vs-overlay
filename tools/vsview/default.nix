@@ -163,7 +163,6 @@ in
     nativeCheckInputs = [imagemagick];
     doCheck = false;
 
-
     meta = {
       description = "The next-generation VapourSynth previewer";
       homepage = "https://github.com/Jaded-Encoding-Thaumaturgy/vs-view";
