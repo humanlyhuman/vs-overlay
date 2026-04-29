@@ -24,7 +24,9 @@ in
       rev = "96211df1eb46cda49ffbf1c930d627fe3a5d5d5a";
       hash = "sha256-mPueRo2+lks6XRcl+ZLv6ZdnY7ipd8pHWTRp/qNJy38=";
     };
-
+    patches = [
+      ./0ae722f4aaab224f13fe159795748103e4f0335a.patch
+    ];
     propagatedBuildInputs =
       (with vapoursynthPlugins; [
         havsfunc

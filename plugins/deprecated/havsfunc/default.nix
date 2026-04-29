@@ -37,12 +37,12 @@
 in
   buildPythonPackage rec {
     pname = "havsfunc";
-    version = "unstable-2022-09-08";
+    version = "r33";
     src = fetchFromGitHub {
       owner = "HomeOfVapourSynthEvolution";
       repo = pname;
-      rev = "2c6d3fedc3c4c3f3ed2460f7014d1227fe2fe207";
-      hash = "sha256-YJl/X9niJelgovwUK6S50lvQUe/yYAbXEHWBbMqfXz0=";
+      rev = version;
+      hash = "sha256-9/xTyk5rVHPlQC73tC17PsRhD0NReEAYIoN/4NkTI5A=";
     };
 
     format = "other";

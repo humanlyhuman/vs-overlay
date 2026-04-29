@@ -129,6 +129,7 @@ in {
       inherit vsjetpack;
     };
     wwxd = final.callPackage ./plugins/deprecated/wwxd {};
+    eoefunc = callPythonPackage ./plugins/deprecated/eoefunc {};
   };
 
   getnative = callPythonPackage ./tools/getnative {};
