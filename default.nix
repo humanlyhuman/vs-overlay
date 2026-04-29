@@ -78,6 +78,7 @@ in {
     vship = final.callPackage ./plugins/utility/vship {};
     vsfpng = final.callPackage ./plugins/source/vsfpng {};
     vszip = final.callPackage ./plugins/utility/vszip {};
+    zsmooth = callPythonPackage ./plugins/utility/zsmooth {};
 
     acsuite = callPythonPackage ./plugins/misc/acsuite {};
     awsmfunc = callPythonPackage ./plugins/misc/awsmfunc {};
@@ -104,6 +105,7 @@ in {
     dfttest = final.callPackage ./plugins/deprecated/dfttest {};
     eedi2 = final.callPackage ./plugins/deprecated/eedi2 {};
     eedi3m = legacyOpenCLPluginBoost ./plugins/deprecated/eedi3m;
+    eoefunc = callPythonPackage ./plugins/deprecated/eoefunc {};
     fft3dfilter = final.callPackage ./plugins/deprecated/fft3dfilter {};
     fvsfunc = callPythonPackage ./plugins/deprecated/fvsfunc {};
     fluxsmooth = final.callPackage ./plugins/deprecated/fluxsmooth {};
@@ -129,9 +131,9 @@ in {
       inherit vsjetpack;
     };
     wwxd = final.callPackage ./plugins/deprecated/wwxd {};
-    eoefunc = callPythonPackage ./plugins/deprecated/eoefunc {};
   };
 
   getnative = callPythonPackage ./tools/getnative {};
   nativeres = callPythonPackage ./tools/nativeres {};
+  vsview = callPythonPackage ./tools/vsview {};
 }
