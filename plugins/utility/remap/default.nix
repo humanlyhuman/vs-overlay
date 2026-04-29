@@ -13,7 +13,7 @@ stdenv.mkDerivation rec {
 
   src = fetchFromGitHub {
     owner = "Irrational-Encoding-Wizardry";
-    repo = pname;
+    repo = "Vapoursynth-RemapFrames";
     rev = "v${version}";
     hash = "sha256-Km8VSXCia1o+9dYr4Qqmhk5j1D6xpiVHhqMHnun2Jc4=";
   };
