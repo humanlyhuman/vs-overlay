@@ -6,29 +6,35 @@
   hatchling,
   rustPlatform,
   a52dec,
-  libmpeg2
+  libmpeg2,
   libdvdread,
   rustc,
+  pkg-config,
+  vapoursynth,
+  ninja,
+  meson,
+  packaging,
 }:
 buildPythonPackage rec {
   pname = "dvdsrc2";
-  version = "4.2";
+  version = "49e7e8b61800e51bb98be1fdc31c00d5b65844ce";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "jsaowji";
     repo = "dvdsrc2";
-    rev = "R${version}";
-    hash = "sha256-LmSANVwS6g5575Xsms9cwg+9SikNObZ/kgdh+sh/PAw=";
+    rev = "49e7e8b61800e51bb98be1fdc31c00d5b65844ce";
+    hash = "sha256-EJzoTQfzC95GK8BuV28YjKd6XoVqGonSLGoOKhYADps=";
   };
 
-  build-system = [hatchling];
+  build-system = [hatchling packaging];
 
   nativeBuildInputs = [
     pkg-config
     hatchling
+    ninja
+    meson
   ];
-
   buildInputs = [
     vapoursynth
     rustc
