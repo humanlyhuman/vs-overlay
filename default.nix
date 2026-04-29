@@ -3,6 +3,28 @@ final: prev: let
     final
     // final.vapoursynth.python3.pkgs
     // {inherit (final) vapoursynth;}
+    // {
+      hatch-cython = final.python3Packages.buildPythonPackage rec {
+        pname = "hatch-cython";
+        version = "0.6.0";
+
+        format = "pyproject";
+
+        src = final.fetchPypi {
+          pname = "hatch_cython";
+          inherit version;
+          hash = "sha256-tkgLQXuRnrcTjhZl4RnbVwWFtIb6zGI+piyzAmQYrEw=";
+        };
+
+        nativeBuildInputs = with final.python3Packages; [
+          hatchling
+          cython
+          setuptools
+        ];
+
+        pythonImportsCheck = ["hatch_cython"];
+      };
+    }
   );
 
   legacyBoost =
@@ -46,7 +68,7 @@ in {
     awarp = final.callPackage ./plugins/mask/awarp {};
     edgemasks = final.callPackage ./plugins/mask/edgemasks {};
 
-    vsmlrtmodels = final.callPackage ./plugins/ml/vs-mlrt/models {};
+    # vsmlrtmodels = final.callPackage ./plugins/ml/vs-mlrt/models { };
     vsncnn = final.callPackage ./plugins/ml/vs-mlrt/vsncnn {};
     vsort = final.callPackage ./plugins/ml/vs-mlrt/vsort {};
     vsort-cuda = final.callPackage ./plugins/ml/vs-mlrt/vsort-cuda {};

@@ -6,9 +6,11 @@
   rustPlatform,
   maturin,
   hatchling,
+  hatch-cython,
   versioningit,
   cython,
   setuptools,
+  vapoursynthPlugins,
   rich,
   pyside6,
   cargo,
@@ -21,7 +23,6 @@
   pluggy,
   imagemagick,
   vapoursynth,
-  vapoursynthPlugins,
 }: let
   monorepo = fetchFromGitHub {
     owner = "Jaded-Encoding-Thaumaturgy";
@@ -31,66 +32,36 @@
     fetchSubmodules = true;
   };
 
-  vapoursynth' = vapoursynth.withPlugins (with vapoursynthPlugins; [
-    ffms2
-    lsmashsource
-    descale
-    akarin
-    resize2
-    bestsource
-  ]);
-
-  mkVsPlugin = p: p.override {vapoursynth = vapoursynth';};
-
   vspackrgb = buildPythonPackage rec {
     pname = "vspackrgb";
     version = "1.2.1";
+
     src = monorepo;
     sourceRoot = "source/src/vspackrgb";
     pyproject = true;
 
-    build-system = [setuptools cython];
-    dependencies = [vapoursynth' numpy];
+    build-system = [
+      hatchling
+      hatch-cython
+      setuptools
+      cython
+    ];
+
+    buildInputs = [
+      vapoursynth
+    ];
+
+    dependencies = [
+      vapoursynth
+    ];
 
     postPatch = ''
-      cat > pyproject.toml << EOF
-      [build-system]
-      requires = ["setuptools", "cython>=3.0.0"]
-      build-backend = "setuptools.build_meta"
-
-      [project]
-      name = "vspackrgb"
-      version = "${version}"
-      requires-python = ">=3.12"
-      dependencies = []
-
-      [tool.setuptools.packages.find]
-      where = ["src"]
-
-      [tool.setuptools.package-data]
-      vspackrgb = ["py.typed", "*.pyi"]
-      EOF
-
-      cython -3 \
-        -X boundscheck=False \
-        -X wraparound=False \
-        -X nonecheck=False \
-        -X cdivision=True \
-        src/vspackrgb/cython.pyx
-
-      cat > setup.py << EOF
-      from setuptools import setup, Extension
-      setup(
-          ext_modules=[
-              Extension(
-                  "vspackrgb.cython",
-                  sources=["src/vspackrgb/cython.c"],
-                  extra_compile_args=["-O3"],
-                  define_macros=[("Py_LIMITED_API", "0x030C0000")],
-              )
-          ]
-      )
-      EOF
+      substituteInPlace pyproject.toml \
+        --replace-fail 'dynamic = ["version"]' 'version = "${version}"' \
+        --replace-fail '"hatch-cython @ git+https://github.com/Varde-s-Forks/hatch-cython.git",' '"hatch-cython",' \
+        --replace-fail '"versioningit",' "" \
+        --replace-fail '"vapoursynth",' "" \
+        --replace-fail '"vapoursynth"' ""
     '';
 
     doCheck = false;
@@ -128,10 +99,10 @@ in
     build-system = [hatchling versioningit];
 
     dependencies = [
-      vapoursynth'
-      (mkVsPlugin vapoursynthPlugins.vsjetengine)
-      (mkVsPlugin vapoursynthPlugins.vsjetpack)
-      (mkVsPlugin vapoursynthPlugins.jetpytools)
+      vapoursynth
+      vapoursynthPlugins.vsjetengine
+      vapoursynthPlugins.jetpytools
+      vapoursynthPlugins.vsjetpack
       vspackrgb
       vsview-cli
       pyside6
