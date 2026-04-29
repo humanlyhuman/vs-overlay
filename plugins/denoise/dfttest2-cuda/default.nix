@@ -28,7 +28,7 @@ stdenv.mkDerivation rec {
 
   cmakeFlags = [
     "-DCMAKE_BUILD_TYPE=Release"
-    "-DVAPOURSYNTH_INCLUDE_DIRECTORY=${vapoursynth}/include/vapoursynth"
+    "-DVS_INCLUDE_DIR=${vapoursynth}/include/vapoursynth"
     "-DENABLE_CPU=OFF"
     "-DENABLE_HIP=OFF"
     "-DENABLE_CUDA=ON"
@@ -36,7 +36,7 @@ stdenv.mkDerivation rec {
   ];
 
   postPatch = ''
-    substituteInPlace rtc_source/CMakeLists.txt \
+    substituteInPlace CMakeLists.txt \
       --replace-fail "nvrtc_static" "nvrtc" \
       --replace-fail "nvrtc-builtins_static" "nvrtc"
   '';
@@ -45,7 +45,6 @@ stdenv.mkDerivation rec {
     mkdir -p $out/lib/vapoursynth
     for f in $out/lib/*.so; do
       ln -s "$f" $out/lib/vapoursynth/
-    install -Dm644 "$out/dfftest2.py"
     done
   '';
 

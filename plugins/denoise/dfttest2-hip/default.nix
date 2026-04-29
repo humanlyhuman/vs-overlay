@@ -21,6 +21,7 @@ stdenv.mkDerivation rec {
     cmake
     rocmPackages.clr
     rocmPackages.llvm.clang
+    rocmPackages.hipfft
   ];
 
   buildInputs = [
@@ -29,7 +30,7 @@ stdenv.mkDerivation rec {
 
   cmakeFlags = [
     "-DCMAKE_BUILD_TYPE=Release"
-    "-DVAPOURSYNTH_INCLUDE_DIRECTORY=${vapoursynth}/include/vapoursynth"
+    "-DVS_INCLUDE_DIR=${vapoursynth}/include/vapoursynth"
     "-DENABLE_CPU=OFF"
     "-DENABLE_CUDA=OFF"
     "-DENABLE_HIP=ON"

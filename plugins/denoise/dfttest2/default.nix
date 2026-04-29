@@ -26,24 +26,28 @@ stdenv.mkDerivation rec {
 
   cmakeFlags = [
     "-DCMAKE_BUILD_TYPE=Release"
-    "-DVAPOURSYNTH_INCLUDE_DIRECTORY=${vapoursynth}/include/vapoursynth"
+    "-DVS_INCLUDE_DIR=${vapoursynth}/include/vapoursynth"
     "-DENABLE_CPU=ON"
     "-DENABLE_HIP=OFF"
     "-DENABLE_CUDA=OFF"
     "-DCMAKE_SKIP_RPATH=ON"
   ];
 
-  postPatch = ''
-    substituteInPlace rtc_source/CMakeLists.txt \
-      --replace-fail "nvrtc_static" "nvrtc" \
-      --replace-fail "nvrtc-builtins_static" "nvrtc"
+  srcvectorclass = fetchFromGitHub {
+    owner = "vectorclass";
+    repo = "version2";
+    rev = "a0a33986fb1fe8a5b7844e8a1b1f197ce19af35d";
+    hash = "sha256-Lpj3IskrUwduRC4v7QobK1s2iVmkPCmiaVTSqOI0zvg=";
+  };
+
+  preConfigure = ''
+    ln -s ${srcvectorclass}/* $src/cpu_source/vectorclass/
   '';
 
   postInstall = ''
     mkdir -p $out/lib/vapoursynth
     for f in $out/lib/*.so; do
       ln -s "$f" $out/lib/vapoursynth/
-    install -Dm644 "$out/dfftest2.py" "$out/lib/vapoursynth/dfftest2.py"
     done
   '';
 
