@@ -41,7 +41,7 @@ stdenv.mkDerivation rec {
   };
 
   preConfigure = ''
-    ln -s ${srcvectorclass}/* $src/cpu_source/vectorclass/
+    ln -s ${srcvectorclass}/* ./cpu_source/vectorclass/
   '';
 
   postInstall = ''

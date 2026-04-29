@@ -54,6 +54,8 @@ in {
     vsmigx = final.callPackage ./plugins/ml/vs-mlrt/vsmigx {};
     vsov = final.callPackage ./plugins/ml/vs-mlrt/vsov {};
 
+    manipmv = final.callPackage ./plugins/motion/manipmv {};
+
     descale = final.callPackage ./plugins/resize/descale {};
     fmtconv = final.callPackage ./plugins/resize/fmtconv {};
     resize2 = callPythonPackage ./plugins/resize/resize2 {};
