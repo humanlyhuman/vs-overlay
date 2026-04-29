@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
     owner = "AmusementClub";
     repo = "vs-nlm-cuda";
     rev = "v${version}";
-    hash = "sha256-+NOXOv6e/xoiD+IoZc8QxnKc64RSmWkABGJ0gT8gg5s=";
+    hash = "sha256-LXYLzZ8Gu3Qomus65eIAbP/p3eDdIBkCwnUHq5O/ia8=";
   };
 
   nativeBuildInputs = [
