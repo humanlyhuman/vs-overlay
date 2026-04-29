@@ -13,7 +13,7 @@ stdenv.mkDerivation rec {
 
   src = fetchFromGitHub {
     owner = "dubhatervapoursynth";
-    repo = pname;
+    repo = "vapoursynth-fillborders";
     rev = "v${version}";
     hash = "sha256-MTnoNHowJ3gWEPdtym48aDlvGO5R2GWiQKNOkw4RfjA=";
   };
