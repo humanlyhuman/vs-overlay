@@ -53,9 +53,6 @@ stdenv.mkDerivation rec {
   postPatch = ''
     substituteInPlace meson.build \
       --replace-fail "vapoursynth_dep.get_pkgconfig_variable('libdir')" "get_option('libdir')"
-
-    substituteInPlace EEDI3/EEDI3CL.cpp \
-      --replace-fail "mem_object" "buffer" || true
   '';
 
   preConfigure = ''

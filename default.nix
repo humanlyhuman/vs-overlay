@@ -46,6 +46,7 @@ in {
     vsmlrtmodels = final.callPackage ./plugins/ml/vs-mlrt/models {};
     vsncnn = final.callPackage ./plugins/ml/vs-mlrt/vsncnn {};
     vsort = final.callPackage ./plugins/ml/vs-mlrt/vsort {};
+    vsort-cuda = final.callPackage ./plugins/ml/vs-mlrt/vsort-cuda {};
     vstrt = final.callPackage ./plugins/ml/vs-mlrt/vstrt {};
     vsmigx = final.callPackage ./plugins/ml/vs-mlrt/vsmigx {};
     vsov = final.callPackage ./plugins/ml/vs-mlrt/vsov {};
