@@ -4,12 +4,11 @@
   fetchFromGitHub,
   cmake,
   vapoursynth,
-  ncnn,
+  rocmPackages,
   protobuf,
-  onnx,
 }:
 stdenv.mkDerivation rec {
-  pname = "vsncnn";
+  pname = "vsmigx";
   version = "15.16";
 
   src = fetchFromGitHub {
@@ -19,37 +18,42 @@ stdenv.mkDerivation rec {
     hash = "sha256-mcIPNrPsVNgtGSSzLpwm7QYEbFOcB6IH2pepS9pVGCc=";
   };
 
-  sourceRoot = "source/vsncnn";
+  sourceRoot = "source/vsmigx";
 
   nativeBuildInputs = [
     cmake
   ];
 
-  buildInputs = [
+  buildInputs = with rocmPackages; [
     vapoursynth
-    ncnn
+    migraphx
+    miopen
+    miopen-hip
+    clr
+    rocblas
+    hipblaslt
+    hipblas-common
     protobuf
-    onnx
+  ];
+
+  cmakeFlags = [
+    "-DVCS_TAG=v${version}"
+    "-DCMAKE_SKIP_RPATH=ON"
+    "-DCMAKE_CXX_FLAGS=-I${vapoursynth}/include/vapoursynth"
   ];
 
   postPatch = ''
     sed -i '/find_package(Git REQUIRED)/,+5 d' CMakeLists.txt
   '';
 
-  cmakeFlags = [
-    "-DVCS_TAG=v${version}"
-    "-DCMAKE_CXX_FLAGS=-I${vapoursynth}/include/vapoursynth"
-    "-DCMAKE_SKIP_RPATH=ON"
-  ];
-
   postInstall = ''
     mkdir -p $out/lib/vapoursynth
-    ln -s $out/lib/libvsncnn.so $out/lib/vapoursynth/libvsncnn.so
+    ln -s $out/lib/libvsmigx.so $out/lib/vapoursynth/libvsmigx.so
   '';
 
   meta = with lib; {
-    description = "NCNN-based GPU Runtime";
-    homepage = "https://github.com/AmusementClub/vs-mlrt";
+    description = "ONNX Runtime-based CPU/GPU Runtime";
+    homepage = "https://github.com/AmusementClub/vs-mlrt/blob/master/vsmigx";
     license = licenses.gpl3;
     maintainers = with maintainers; [humanlyhuman];
     platforms = platforms.linux;

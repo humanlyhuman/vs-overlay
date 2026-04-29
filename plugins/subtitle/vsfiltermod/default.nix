@@ -57,14 +57,13 @@ llvmPackages.stdenv.mkDerivation rec {
       sed -i '/atlpath.h/d' src/vsfilter/csriapi.cpp
 
       substituteInPlace src/vsfilter/csriapi.cpp \
-        --replace '#include "stdafx.h"' '#include "../subtitles/stdafx.h"' \
-        --replace '..\subtitles\VobSubFile.h' '../subtitles/VobSubFile.h' \
-        --replace '..\subtitles\RTS.h' '../subtitles/RTS.h' \
-        --replace '..\subtitles\SSF.h' '../subtitles/SSF.h' \
-        --replace '..\SubPic\MemSubPic.h' '../subpic/MemSubPic.h' \
-        --replace 'typedef const char *csri_rend;\n#include "csri.h"' 'typedef const char *csri_rend;' \
-        --replace 'enum csri_pixfmt pixfmt;' 'int pixfmt;' \
-        --replace 'MultiByteToWideChar(CP_UTF8,' 'MultiByteToWideChar(65001,'
+        --replace-fail '#include "stdafx.h"' '#include "../subtitles/stdafx.h"' \
+        --replace-fail '..\subtitles\VobSubFile.h' '../subtitles/VobSubFile.h' \
+        --replace-fail '..\subtitles\RTS.h' '../subtitles/RTS.h' \
+        --replace-fail '..\subtitles\SSF.h' '../subtitles/SSF.h' \
+        --replace-fail '..\SubPic\MemSubPic.h' '../subpic/MemSubPic.h' \
+        --replace-fail 'enum csri_pixfmt pixfmt;' 'int pixfmt;' \
+        --replace-fail 'MultiByteToWideChar(CP_UTF8,' 'MultiByteToWideChar(65001,'
   '';
 
   nativeBuildInputs = [

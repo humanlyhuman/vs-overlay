@@ -52,7 +52,7 @@ in
 
     postInstall = ''
       mkdir $out/lib/vapoursynth
-      ln -s $out/lib/libvstrt.so $out/lib/vapoursynth
+      ln -s $out/lib/libvstrt.so $out/lib/vapoursynth/libvstrt.so
     '';
 
     meta = with lib; {

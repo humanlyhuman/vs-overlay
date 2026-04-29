@@ -30,8 +30,8 @@ stdenv.mkDerivation rec {
     sed -i "/py = import('python').find_installation/a vapoursynth_dep = dependency('vapoursynth')" meson.build
 
     substituteInPlace meson.build \
-      --replace "include_directories: incdir," "dependencies: vapoursynth_dep," \
-      --replace "install_dir: py.get_install_dir() / 'vapoursynth/plugins'," \
+      --replace-fail "include_directories: incdir," "dependencies: vapoursynth_dep," \
+      --replace-fail "install_dir: py.get_install_dir() / 'vapoursynth/plugins'," \
                 "install_dir: get_option('libdir') / 'vapoursynth',"
   '';
 

@@ -1,0 +1,47 @@
+{
+  lib,
+  buildPythonPackage,
+  fetchgit,
+  numpy,
+  vapoursynthPlugins,
+  python,
+  vapoursynth,
+}:
+buildPythonPackage rec {
+  pname = "mt_lutspa";
+  version = "unstable-2015-10-14";
+
+  src = fetchgit {
+    url = "https://gist.github.com/tp7/1e39044e1b660ef0a02c";
+    rev = "4ab492db4431bd27466b42d96bc5878db822499e";
+    hash = "sha256-Ivgc+wolDyoXaP2t0OnL9E1BL301w6/DsO2xzJzR/Gs=";
+  };
+
+  patches = [
+    ./0001-Use-vs.core-instead-of-vs.get_core.patch
+  ];
+
+  propagatedBuildInputs = [
+    numpy
+  ];
+
+  format = "other";
+
+  installPhase = ''
+    install -D mt_lutspa.py $out/${python.sitePackages}/mt_lutspa.py
+  '';
+
+  checkInputs = [vapoursynth];
+  checkPhase = ''
+    PYTHONPATH=$out/${python.sitePackages}:$PYTHONPATH
+  '';
+  pythonImportsCheck = ["mt_lutspa"];
+
+  meta = with lib; {
+    description = "A vapoursynth plugin to computes the value of a pixel according to its spatial position";
+    homepage = "https://gist.github.com/tp7/1e39044e1b660ef0a02c";
+    license = licenses.unfree; # no license
+    maintainers = with maintainers; [sbruder];
+    platforms = platforms.linux;
+  };
+}
