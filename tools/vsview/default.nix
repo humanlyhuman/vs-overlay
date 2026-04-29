@@ -162,11 +162,7 @@ in
 
     nativeCheckInputs = [imagemagick];
     doCheck = false;
-    postFixup = ''
-      wrapProgram $out/bin/vsview \
-        --unset PYTHONPATH \
-        --prefix PATH : ${lib.makeBinPath [python]}
-    '';
+
 
     meta = {
       description = "The next-generation VapourSynth previewer";
