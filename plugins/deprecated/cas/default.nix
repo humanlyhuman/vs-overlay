@@ -9,12 +9,12 @@
 }:
 stdenv.mkDerivation rec {
   pname = "CAS";
-  version = "2";
+  version = "02.0";
 
   src = fetchFromGitHub {
     owner = "HomeOfVapourSynthEvolution";
-    repo = pname;
-    rev = "r${version}";
+    repo = "VapourSynth-CAS";
+    rev = "${version}";
     hash = "sha256-xWWTGhpRI+rQqt+Wui1hxwstI0RuM8CgpsRj97b5mH0=";
   };
 
