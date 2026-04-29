@@ -31,6 +31,8 @@ in {
     znedi3 = final.callPackage ./plugins/deinterlace/znedi3 {};
 
     bm3d = final.callPackage ./plugins/denoise/bm3d {};
+    bm3dcuda = final.callPackage ./plugins/denoise/bm3dcuda {};
+    bm3dhip = final.callPackage ./plugins/denoise/bm3dhip {};
     knlmeanscl = callPythonPackage ./plugins/denoise/knlmeanscl {};
     nlm-ispc = final.callPackage ./plugins/denoise/nlm-ispc {};
     nlm-cuda = final.callPackage ./plugins/denoise/nlm-cuda {};

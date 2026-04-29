@@ -48,6 +48,7 @@ buildPythonPackage rec {
     libmpeg2
     libdvdread
   ];
+  pythonImportsCheck = [ ];
   preBuild = ''
     export HOME=$TMPDIR
     export CARGO_HOME=$TMPDIR/cargo
