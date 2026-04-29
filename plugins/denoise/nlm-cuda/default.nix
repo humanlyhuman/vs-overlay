@@ -23,8 +23,9 @@ stdenv.mkDerivation rec {
     ispc
   ];
 
-  buildInputs = [
+  buildInputs = with cudaPackages; [
     vapoursynth
+    cudatoolkit
   ];
 
   cmakeFlags = [

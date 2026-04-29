@@ -13,8 +13,8 @@ stdenv.mkDerivation rec {
 
   src = fetchFromGitHub {
     owner = "HomeOfVapourSynthEvolution";
-    repo = pname;
-    rev = "r${version}";
+    repo = "VapourSynth-CTMF";
+    rev = "v${version}";
     hash = "sha256-pScmi7160vyGn9cFiGc7XI0f8+vMFvbjEo+NGp5aD40=";
   };
 
