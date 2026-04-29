@@ -13,7 +13,7 @@ in
 
     src = fetchFromGitHub {
       owner = "dubhatervapoursynth";
-      repo = pname;
+      repo = "vapoursynth-wwxd";
       rev = "v${version}";
       hash = "sha256-1cP0a31SNRRnYemzvP+/6V1UqZZZorrq+SrVmjs8KQQ=";
     };
