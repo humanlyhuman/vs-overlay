@@ -53,7 +53,7 @@ in {
     resize2 = callPythonPackage ./plugins/resize/resize2 {};
 
     d2vsource = final.callPackage ./plugins/source/d2vsource {};
-    dvdscr2 = callPythonPackage ./plugins/source/dvdscr2 {};
+    dvdsrc2 = callPythonPackage ./plugins/source/dvdsrc2 {};
     lsmashsource = final.callPackage ./plugins/source/lsmashsource {};
     readmpls = final.callPackage ./plugins/source/readmpls {};
 
