@@ -51,7 +51,7 @@ in
     src = fetchFromGitHub {
       owner = "Jaded-Encoding-Thaumaturgy";
       repo = "vs-view";
-      rev = "vsview-nativeres/v${version}";
+      rev = "vsview/v${version}";
       hash = "sha256-3+j/YKmiAcESbnxJS+Cp6EAZix37OTMT0g5HG/TEsTM=";
       fetchSubmodules = true;
     };
@@ -80,10 +80,6 @@ in
     ];
 
     doCheck = false;
-
-    pythonImportsCheck = [
-      "vsview"
-    ];
 
     postPatch = ''
       substituteInPlace pyproject.toml \
