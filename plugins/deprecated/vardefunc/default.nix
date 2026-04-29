@@ -78,7 +78,7 @@ in
     postPatch = ''
     substituteInPlace vardefunc/vsjet_proxy.py \
       --replace "FieldBasedT" "FieldBased"
-  '';
+    '';
 
     dontCheckRuntimeDeps = true;
 
