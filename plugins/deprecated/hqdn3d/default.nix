@@ -12,7 +12,7 @@ stdenv.mkDerivation rec {
 
   src = fetchFromGitHub {
     owner = "Hinterwaeldlers";
-    repo = pname;
+    repo = "vapourSynth-hqdn3d";
     rev = "eb820cb23f7dc47eb67ea95def8a09ab69251d30";
     hash = "sha256-BObHZs7GQW6UFUwohII1MXHtk5ooGh/LfZ3ZsqoPQBU=";
   };
