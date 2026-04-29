@@ -5,7 +5,7 @@
   cmake,
   cudaPackages,
   vapoursynth,
-  }:
+}:
 stdenv.mkDerivation rec {
   pname = "bm3dcuda";
   version = "R2.16";
@@ -36,13 +36,12 @@ stdenv.mkDerivation rec {
     "-DCMAKE_SKIP_RPATH=ON"
   ];
 
-  
   postPatch = ''
     substituteInPlace rtc_source/CMakeLists.txt \
       --replace "nvrtc_static" "nvrtc" \
       --replace "nvrtc-builtins_static" "nvrtc"
   '';
-  
+
   postInstall = ''
     mkdir -p $out/lib/vapoursynth
     for f in $out/lib/*.so; do

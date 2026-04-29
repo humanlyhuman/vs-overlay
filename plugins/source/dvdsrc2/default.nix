@@ -26,11 +26,11 @@ buildPythonPackage rec {
     hash = "sha256-G+Du36fld2HNXV/QYCJ/h8bHvmZ1Ec1BhHojVt1D32g=";
   };
   cargoDeps = rustPlatform.importCargoLock {
-  lockFile = src + "/Cargo.lock";
-  outputHashes = {
-    "vapoursynth4-rs-0.4.0" = "sha256-grhrX68DjmuMmUJBSodCK1kBZo8TCmyLFe55qfEkX5I=";
+    lockFile = src + "/Cargo.lock";
+    outputHashes = {
+      "vapoursynth4-rs-0.4.0" = "sha256-grhrX68DjmuMmUJBSodCK1kBZo8TCmyLFe55qfEkX5I=";
+    };
   };
-};
 
   build-system = [hatchling packaging];
 
@@ -48,7 +48,7 @@ buildPythonPackage rec {
     libmpeg2
     libdvdread
   ];
-  pythonImportsCheck = [ ];
+  pythonImportsCheck = [];
   preBuild = ''
     export HOME=$TMPDIR
     export CARGO_HOME=$TMPDIR/cargo

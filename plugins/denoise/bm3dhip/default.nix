@@ -6,7 +6,6 @@
   rocmPackages,
   vapoursynth,
 }:
-
 stdenv.mkDerivation rec {
   pname = "bm3dhip";
   version = "R2.16";
