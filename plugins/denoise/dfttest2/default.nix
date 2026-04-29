@@ -20,7 +20,7 @@ stdenv.mkDerivation rec {
     cmake
   ];
 
-  buildInputs = with cudaPackages; [
+  buildInputs = [
     vapoursynth
   ];
 
