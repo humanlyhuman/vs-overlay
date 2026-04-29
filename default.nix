@@ -38,8 +38,8 @@ in {
     nlm-cuda = final.callPackage ./plugins/denoise/nlm-cuda {};
     tnlmeans = final.callPackage ./plugins/denoise/tnlmeans {};
     dfttest2 = final.callPackage ./plugins/denoise/dfttest2 {};
-    dfttest2-cuda = final.callPackage ./plugins/denoise/dfttest2-cuda {};
-    dfttest2-hip = final.callPackage ./plugins/denoise/dfttest2-hip {};
+    dfttest2-cuda = final.callPackage ./plugins/denoise/dfttest2cuda {};
+    dfttest2-hip = final.callPackage ./plugins/denoise/dfttest2hip {};
 
     vsnoise = final.callPackage ./plugins/grain/vs-noise {};
 
