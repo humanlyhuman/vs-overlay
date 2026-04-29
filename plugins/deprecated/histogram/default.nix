@@ -12,7 +12,7 @@ stdenv.mkDerivation rec {
 
   src = fetchFromGitHub {
     owner = "dubhatervapoursynth";
-    repo = pname;
+    repo = "vapoursynth-histogram";
     rev = "v${version}";
     hash = "sha256-NME20pZZndUCcR1fY+mieBVrHxBYpB0xO1wbyghxsvE=";
   };
