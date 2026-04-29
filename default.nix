@@ -46,7 +46,7 @@ in {
     awarp = final.callPackage ./plugins/mask/awarp {};
     edgemasks = final.callPackage ./plugins/mask/edgemasks {};
 
-    # vsmlrtmodels = final.callPackage ./plugins/ml/vs-mlrt/models { };
+    vsmlrtmodels = final.callPackage ./plugins/ml/vs-mlrt/models { };
     vsncnn = final.callPackage ./plugins/ml/vs-mlrt/vsncnn {};
     vsort = final.callPackage ./plugins/ml/vs-mlrt/vsort {};
     vsort-cuda = final.callPackage ./plugins/ml/vs-mlrt/vsort-cuda {};
