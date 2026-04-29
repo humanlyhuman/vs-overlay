@@ -4,16 +4,15 @@
   buildPythonPackage,
   fetchFromGitHub,
   hatchling,
-  rustPlatform,
+  packaging,
   a52dec,
   libmpeg2,
   libdvdread,
   rustc,
+  cargo,
   pkg-config,
   vapoursynth,
-  ninja,
-  meson,
-  packaging,
+  rustPlatform,
 }:
 buildPythonPackage rec {
   pname = "dvdsrc2";
@@ -24,16 +23,23 @@ buildPythonPackage rec {
     owner = "jsaowji";
     repo = "dvdsrc2";
     rev = "49e7e8b61800e51bb98be1fdc31c00d5b65844ce";
-    hash = "sha256-EJzoTQfzC95GK8BuV28YjKd6XoVqGonSLGoOKhYADps=";
+    hash = "sha256-G+Du36fld2HNXV/QYCJ/h8bHvmZ1Ec1BhHojVt1D32g=";
   };
+  cargoDeps = rustPlatform.importCargoLock {
+  lockFile = src + "/Cargo.lock";
+  outputHashes = {
+    "vapoursynth4-rs-0.4.0" = "sha256-grhrX68DjmuMmUJBSodCK1kBZo8TCmyLFe55qfEkX5I=";
+  };
+};
 
   build-system = [hatchling packaging];
 
   nativeBuildInputs = [
     pkg-config
     hatchling
-    ninja
-    meson
+    rustc
+    cargo
+    rustPlatform.cargoSetupHook
   ];
   buildInputs = [
     vapoursynth
@@ -42,10 +48,21 @@ buildPythonPackage rec {
     libmpeg2
     libdvdread
   ];
-
+  preBuild = ''
+    export HOME=$TMPDIR
+    export CARGO_HOME=$TMPDIR/cargo
+  '';
+  cargoRoot = ".";
   dependencies = [vapoursynth];
   postPatch = ''
     sed -i '/vapoursynth>=74/d' pyproject.toml
+
+    substituteInPlace hatch_build.py \
+      --replace-fail '["cargo", "build", "--release"]' \
+                '["cargo", "build", "--release", "--offline", "--frozen"]'
+
+    substituteInPlace libdvdread-sys/build.rs \
+      --replace-fail '"7.1.0"' '"7.0.1"'
   '';
 
   postInstall = ''
