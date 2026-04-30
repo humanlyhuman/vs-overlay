@@ -62,6 +62,7 @@ in {
     dfttest2 = final.callPackage ./plugins/denoise/dfttest2 {};
     dfttest2-cuda = final.callPackage ./plugins/denoise/dfttest2cuda {};
     dfttest2-hip = final.callPackage ./plugins/denoise/dfttest2hip {};
+    wnnm = callPythonPackage ./plugins/denoise/wnnm {};
 
     vsnoise = final.callPackage ./plugins/grain/vs-noise {};
 
