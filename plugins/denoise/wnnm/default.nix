@@ -2,23 +2,15 @@
   lib,
   stdenv,
   fetchFromGitHub,
+  cmake,
+  ninja,
+  pkg-config,
   vapoursynth,
-  hatchling,
-  buildPythonPackage,
-  hatch-vcs,
+  mkl,
 }:
-buildPythonPackage rec {
-  pname = "wnnm";
+stdenv.mkDerivation rec {
+  pname = "vapoursynth-wnnm";
   version = "3";
-
-  pyproject = true;
-
-  build-system = [
-    hatchling
-    hatch-vcs
-  ];
-  nativeBuildInputs = [vapoursynth];
-  buildInputs = [vapoursynth];
 
   src = fetchFromGitHub {
     owner = "AmusementClub";
@@ -26,21 +18,30 @@ buildPythonPackage rec {
     rev = "v${version}";
     hash = "sha256-fPtHaDrG1Ku1/Uv0Bh3hUfqbOEyfnhFVFblspRhHqlE=";
   };
+  
+  patches = [ ./wnnm-mkl-int.patch ];
 
-  postPatch = ''
-    substituteInPlace pyproject.toml \
-    --replace-fail '"vapoursynth>=74"' ' '
-  '';
+  nativeBuildInputs = [
+    cmake
+    ninja
+    pkg-config
+  ];
 
-  postInstall = ''
-    mkdir -p $out/lib/vapoursynth
-    find $out -name '*.so' -path '*/vapoursynth/plugins/*' \
-      -exec ln -s {} $out/lib/vapoursynth/ \;
-  '';
+  buildInputs = [
+    vapoursynth
+    mkl
+  ];
+
+  cmakeFlags = [
+    "-DCMAKE_BUILD_TYPE=Release"
+    "-DBLA_VENDOR=Intel10_64lp"
+  ];
 
   meta = with lib; {
-    description = "Weighted Nuclear Norm Minimization Denoiser for VapourSynth.";
+    description = "Weighted Nuclear Norm Minimization denoiser for VapourSynth";
     homepage = "https://github.com/AmusementClub/VapourSynth-WNNM";
     license = licenses.mit;
+    maintainers = with maintainers; [humanlyhuman];
+    platforms = platforms.linux;
   };
 }

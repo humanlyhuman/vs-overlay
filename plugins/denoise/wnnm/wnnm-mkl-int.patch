@@ -1,0 +1,23 @@
+--- a/source/wnnm.cpp
++++ b/source/wnnm.cpp
+@@
+-    int m = square(block_size);
+-    int n = active_group_size;
+-
+-    int svd_info;
++ #if defined(__INTEL_MKL__)
++    MKL_INT m = square(block_size);
++    MKL_INT n = active_group_size;
++    MKL_INT svd_info;
++ #else
++    int m = square(block_size);
++    int n = active_group_size;
++    int svd_info;
++ #endif
+@@
+-    int k = 1;
++ #if defined(__INTEL_MKL__)
++    MKL_INT k = 1;
++ #else
++    int k = 1;
++ #endif
