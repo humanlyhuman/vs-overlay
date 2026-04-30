@@ -15,7 +15,7 @@ buildPythonPackage rec {
     owner = "AmusementClub";
     repo = "VapourSynth-WNNM";
     rev = "v${version}";
-    hash = "";
+    hash = "sha256-fPtHaDrG1Ku1/Uv0Bh3hUfqbOEyfnhFVFblspRhHqlE=";
   };
   nativeBuildInputs = [ hatchling ];
   buildInputs = [ vapoursynth ];
