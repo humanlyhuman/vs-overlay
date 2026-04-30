@@ -5,8 +5,8 @@
   vapoursynth,
   hatchling,
   buildPythonPackage,
+  hatch-vcs,
 }:
-
 buildPythonPackage rec {
   pname = "wnnm";
   version = "3";
@@ -15,7 +15,10 @@ buildPythonPackage rec {
 
   build-system = [
     hatchling
+    hatch-vcs
   ];
+  nativeBuildInputs = [vapoursynth];
+  buildInputs = [vapoursynth];
 
   src = fetchFromGitHub {
     owner = "AmusementClub";
@@ -23,6 +26,17 @@ buildPythonPackage rec {
     rev = "v${version}";
     hash = "sha256-fPtHaDrG1Ku1/Uv0Bh3hUfqbOEyfnhFVFblspRhHqlE=";
   };
+
+  postPatch = ''
+    substituteInPlace pyproject.toml \
+    --replace-fail '"vapoursynth>=74"' ' '
+  '';
+
+  postInstall = ''
+    mkdir -p $out/lib/vapoursynth
+    find $out -name '*.so' -path '*/vapoursynth/plugins/*' \
+      -exec ln -s {} $out/lib/vapoursynth/ \;
+  '';
 
   meta = with lib; {
     description = "Weighted Nuclear Norm Minimization Denoiser for VapourSynth.";
