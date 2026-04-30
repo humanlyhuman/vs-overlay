@@ -17,7 +17,6 @@ buildPythonPackage rec {
     rev = "v${version}";
     hash = "sha256-fPtHaDrG1Ku1/Uv0Bh3hUfqbOEyfnhFVFblspRhHqlE=";
   };
-  nativeBuildInputs = [ hatchling ];
   buildInputs = [ vapoursynth ];
   meta = with lib; {
     description = "Weighted Nuclear Norm Minimization Denoiser for VapourSynth.";
