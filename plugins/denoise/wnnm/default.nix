@@ -18,8 +18,6 @@ stdenv.mkDerivation rec {
     rev = "v${version}";
     hash = "sha256-fPtHaDrG1Ku1/Uv0Bh3hUfqbOEyfnhFVFblspRhHqlE=";
   };
-  
-  patches = [ ./wnnm-mkl-int.patch ];
 
   nativeBuildInputs = [
     cmake
@@ -34,7 +32,10 @@ stdenv.mkDerivation rec {
 
   cmakeFlags = [
     "-DCMAKE_BUILD_TYPE=Release"
-    "-DBLA_VENDOR=Intel10_64lp"
+  ];
+
+  patches = [
+    ./wnnm-mkl-int.patch
   ];
 
   meta = with lib; {
