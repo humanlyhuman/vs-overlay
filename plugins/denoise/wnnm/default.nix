@@ -55,6 +55,7 @@ stdenv.mkDerivation rec {
         --replace-fail 'int svd_ldvt' 'MKL_INT svd_ldvt' \
         --replace-fail 'std::min(m, n)' 'std::min<MKL_INT>(m, n)'
   '';
+
   meta = with lib; {
     description = "Weighted Nuclear Norm Minimization denoiser for VapourSynth";
     homepage = "https://github.com/AmusementClub/VapourSynth-WNNM";

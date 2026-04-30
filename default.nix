@@ -102,6 +102,7 @@ in {
     vship = final.callPackage ./plugins/utility/vship {};
     vszip = final.callPackage ./plugins/utility/vszip {};
     zsmooth = callPythonPackage ./plugins/utility/zsmooth {};
+    hysteresis = callPythonPackage ./plugins/utility/hysteresis {};
 
     acsuite = callPythonPackage ./plugins/misc/acsuite {};
     awsmfunc = callPythonPackage ./plugins/misc/awsmfunc {};
