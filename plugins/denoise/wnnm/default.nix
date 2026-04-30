@@ -9,6 +9,8 @@
 buildPythonPackage rec {
   pname = "wnnm";
   version = "3";
+  pyproject = true;
+  build-system = ["hatchling"];
   src = fetchFromGitHub {
     owner = "AmusementClub";
     repo = "VapourSynth-WNNM";
