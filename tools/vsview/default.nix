@@ -106,6 +106,7 @@ in
       vapoursynthPlugins.jetpytools
       vapoursynthPlugins.vsjetpack
       numpy
+      scipy
     ];
 
     dependencies = [
@@ -120,7 +121,6 @@ in
       rich
       pygments
       pluggy
-      scipy
     ];
 
     postPatch = ''
