@@ -6,6 +6,7 @@
   vapoursynth,
   rocmPackages,
   protobuf,
+  makeWrapper
 }:
 stdenv.mkDerivation rec {
   pname = "vsmigx";
@@ -22,6 +23,7 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [
     cmake
+    makeWrapper
   ];
 
   buildInputs = with rocmPackages; [
@@ -45,12 +47,22 @@ stdenv.mkDerivation rec {
   postPatch = ''
     sed -i '/find_package(Git REQUIRED)/,+5 d' CMakeLists.txt
   '';
-
   postInstall = ''
     mkdir -p $out/lib/vapoursynth
     ln -s $out/lib/libvsmigx.so $out/lib/vapoursynth/libvsmigx.so
-  '';
 
+    mkdir -p $out/lib/vapoursynth/vsmlrt-hip
+
+    makeWrapper ${rocmPackages.migraphx}/bin/migraphx-driver \
+      $out/lib/vapoursynth/vsmlrt-hip/migraphx-driver \
+      --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [
+        rocmPackages.migraphx
+        rocmPackages.miopen
+        rocmPackages.clr
+        rocmPackages.rocblas
+        rocmPackages.hipblaslt
+      ]}
+  '';
   meta = with lib; {
     description = "ONNX Runtime-based CPU/GPU Runtime";
     homepage = "https://github.com/AmusementClub/vs-mlrt/blob/master/vsmigx";
