@@ -158,7 +158,7 @@ in {
     vardefunc = callPythonPackage ./plugins/deprecated/vardefunc {
       inherit lvsfunc vsjetpack;
     };
-  
+
     wwxd = final.callPackage ./plugins/deprecated/wwxd {};
   };
 
