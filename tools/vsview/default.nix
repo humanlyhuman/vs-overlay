@@ -105,6 +105,7 @@ in
       vapoursynthPlugins.vsjetengine
       vapoursynthPlugins.jetpytools
       vapoursynthPlugins.vsjetpack
+      numpy
     ];
 
     dependencies = [
@@ -119,7 +120,6 @@ in
       rich
       pygments
       pluggy
-      numpy
       scipy
     ];
 
