@@ -101,13 +101,14 @@ in
     pyproject = true;
 
     build-system = [hatchling versioningit];
-
-    dependencies = [
-      vsRuntime
-
+    buildInputs = [
       vapoursynthPlugins.vsjetengine
       vapoursynthPlugins.jetpytools
       vapoursynthPlugins.vsjetpack
+    ];
+
+    dependencies = [
+      vsRuntime
 
       vspackrgb
       vsview-cli
