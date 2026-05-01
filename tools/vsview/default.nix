@@ -22,6 +22,14 @@
   pygments,
   pluggy,
   imagemagick,
+  vsRuntime ?
+    vapoursynth.withPlugins [
+      vapoursynthPlugins.lsmashsource
+      vapoursynthPlugins.ffms2
+      vapoursynthPlugins.fmtconv
+      vapoursynthPlugins.resize2
+      vapoursynthPlugins.awarp
+    ],
   vapoursynth,
 }: let
   monorepo = fetchFromGitHub {
@@ -95,12 +103,15 @@ in
     build-system = [hatchling versioningit];
 
     dependencies = [
-      vapoursynth
+      vsRuntime
+
       vapoursynthPlugins.vsjetengine
       vapoursynthPlugins.jetpytools
       vapoursynthPlugins.vsjetpack
+
       vspackrgb
       vsview-cli
+
       pyside6
       pydantic
       platformdirs
@@ -129,10 +140,7 @@ in
 
     nativeCheckInputs = [imagemagick];
     doCheck = false;
-    postInstall = ''
-      wrapProgram $out/bin/vsview \
-        --set VS_PLUGIN_DIR "${vapoursynth}/lib/vapoursynth" \
-    '';
+
     meta = with lib; {
       description = "The next-generation VapourSynth previewer";
       homepage = "https://github.com/Jaded-Encoding-Thaumaturgy/vs-view";

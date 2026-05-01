@@ -2,7 +2,7 @@ final: prev: let
   callPythonPackage = final.lib.callPackageWith (
     final
     // final.vapoursynth.python3.pkgs
-    // {inherit (final) vapoursynth;}
+    // {inherit (prev) vapoursynth;}
     // {
       hatch-cython = final.python3Packages.buildPythonPackage rec {
         pname = "hatch-cython";
@@ -158,11 +158,31 @@ in {
     vardefunc = callPythonPackage ./plugins/deprecated/vardefunc {
       inherit lvsfunc vsjetpack;
     };
-
+  
     wwxd = final.callPackage ./plugins/deprecated/wwxd {};
   };
 
   getnative = callPythonPackage ./tools/getnative {};
   nativeres = callPythonPackage ./tools/nativeres {};
-  vsview = callPythonPackage ./tools/vsview {};
+  vsview = let
+    mkVsview = extraPlugins:
+      callPythonPackage ./tools/vsview {
+        vsRuntime = final.vapoursynth.withPlugins (extraPlugins
+          ++ [
+            final.vapoursynthPlugins.lsmashsource
+            final.vapoursynthPlugins.ffms2
+            final.vapoursynthPlugins.fmtconv
+            final.vapoursynthPlugins.resize2
+            final.vapoursynthPlugins.awarp
+          ]);
+      };
+    base = mkVsview [];
+  in
+    base.overrideAttrs (old: {
+      passthru =
+        (old.passthru or {})
+        // {
+          withPlugins = extraPlugins: mkVsview extraPlugins;
+        };
+    });
 }
