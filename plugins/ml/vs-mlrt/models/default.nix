@@ -23,6 +23,9 @@ python3.pkgs.buildPythonPackage rec {
     url = "https://github.com/AmusementClub/vs-mlrt/releases/download/v15.16/models.v15.16.7z";
     hash = "sha256-1OqowcRFkIIYWp4aLFTX4sd2q+6mrvau4MuPbBUd+wI=";
   };
+  patches = [
+    ./0001-migx.patch
+  ];
 
   contribModels = fetchurl {
     url = "https://github.com/AmusementClub/vs-mlrt/releases/download/v15.16/contrib-models.v15.16.7z";

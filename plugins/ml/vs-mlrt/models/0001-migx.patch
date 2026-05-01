@@ -1,0 +1,23 @@
+diff --git a/scripts/vsmlrt.py b/scripts/vsmlrt.py
+index c1abcf5..9585976 100644
+--- a/scripts/vsmlrt.py
++++ b/scripts/vsmlrt.py
+@@ -2307,9 +2307,16 @@ def migraphx_driver(
+     if os.access(mxr_path, mode=os.R_OK) and os.path.getsize(mxr_path) >= 1024:
+         return mxr_path
+ 
++    xdg_cache = os.environ.get(
++    "XDG_CACHE_HOME",
++    os.path.join(os.path.expanduser("~"), ".cache")
++    )
++
+     alter_mxr_path = os.path.join(
+-        tempfile.gettempdir(),
+-        os.path.splitdrive(mxr_path)[1][1:]
++        xdg_cache,
++        "vsmlrt",
++        "migraphx",
++        os.path.basename(mxr_path)
+     )
+ 
+     if os.access(alter_mxr_path, mode=os.R_OK) and os.path.getsize(mxr_path) >= 1024:

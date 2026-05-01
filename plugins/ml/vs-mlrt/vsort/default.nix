@@ -8,7 +8,7 @@
   pkgs,
 }:
 stdenv.mkDerivation rec {
-  pname = "vstrt";
+  pname = "vsort";
   version = "15.16";
 
   src = fetchFromGitHub {
@@ -26,7 +26,7 @@ stdenv.mkDerivation rec {
     "-DTENSORRT_HOME=${cudaPackages.tensorrt}"
   ];
 
-  sourceRoot = "source/vstrt";
+  sourceRoot = "source/vsort";
 
   postPatch = ''
     sed -i '/find_package(Git REQUIRED)/,+5 d' CMakeLists.txt
