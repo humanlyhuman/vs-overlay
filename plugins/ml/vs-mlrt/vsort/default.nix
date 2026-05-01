@@ -4,8 +4,10 @@
   fetchFromGitHub,
   cmake,
   vapoursynth,
-  cudaPackages,
   pkgs,
+  protobuf,
+  onnx,
+  onnxruntime,
 }:
 stdenv.mkDerivation rec {
   pname = "vsort";
@@ -22,8 +24,8 @@ stdenv.mkDerivation rec {
     "-DVCS_TAG=v${version}"
     "-DCMAKE_SKIP_RPATH=ON"
     "-DENABLE_CUDA=OFF"
+    "-DENABLE_CPU=ON"
     "-DVAPOURSYNTH_INCLUDE_DIRECTORY=${vapoursynth}/include/vapoursynth"
-    "-DTENSORRT_HOME=${cudaPackages.tensorrt}"
   ];
 
   sourceRoot = "source/vsort";
@@ -34,15 +36,16 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [
     cmake
   ];
-  buildInputs = with cudaPackages; [
+  buildInputs = [
     vapoursynth
-    tensorrt
-    cudatoolkit
+    protobuf
+    onnx
+    onnxruntime.dev
   ];
 
   postInstall = ''
     mkdir $out/lib/vapoursynth
-    ln -s $out/lib/libvstrt.so $out/lib/vapoursynth/libvstrt.so
+    ln -s $out/lib/libvsort.so $out/lib/vapoursynth/libvsort.so
   '';
 
   meta = with lib; {

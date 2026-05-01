@@ -6,7 +6,7 @@
   vapoursynth,
   rocmPackages,
   protobuf,
-  makeWrapper
+  makeWrapper,
 }:
 stdenv.mkDerivation rec {
   pname = "vsmigx";
@@ -56,12 +56,12 @@ stdenv.mkDerivation rec {
     makeWrapper ${rocmPackages.migraphx}/bin/migraphx-driver \
       $out/lib/vapoursynth/vsmlrt-hip/migraphx-driver \
       --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [
-        rocmPackages.migraphx
-        rocmPackages.miopen
-        rocmPackages.clr
-        rocmPackages.rocblas
-        rocmPackages.hipblaslt
-      ]}
+      rocmPackages.migraphx
+      rocmPackages.miopen
+      rocmPackages.clr
+      rocmPackages.rocblas
+      rocmPackages.hipblaslt
+    ]}
   '';
   meta = with lib; {
     description = "ONNX Runtime-based CPU/GPU Runtime";
