@@ -90,6 +90,11 @@ in
         --replace-fail '"vsjetengine>=1.2.0",' "" \
         --replace-fail '"vsjetpack>=1.3.0",' ""
     '';
+    
+    postInstall = ''
+      wrapProgram $out/bin/nativeres \
+        --set VS_PLUGIN_DIR "${vapoursynth}/lib/vapoursynth"
+    '';
 
     meta = with lib; {
       description = "Descale analysis tools for VapourSynth";

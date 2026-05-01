@@ -85,15 +85,6 @@
 
     doCheck = false;
   };
-  defaultVsPlugins = with vapoursynthPlugins; [
-    lsmashsource
-    ffms2
-    fmtconv
-    resize2
-    awarp
-  ];
-
-  vsRuntime = vapoursynth.withPlugins defaultVsPlugins;
 in
   buildPythonApplication rec {
     pname = "vsview";
@@ -104,15 +95,12 @@ in
     build-system = [hatchling versioningit];
 
     dependencies = [
-      vsRuntime
-
+      vapoursynth
       vapoursynthPlugins.vsjetengine
       vapoursynthPlugins.jetpytools
       vapoursynthPlugins.vsjetpack
-
       vspackrgb
       vsview-cli
-
       pyside6
       pydantic
       platformdirs
@@ -141,7 +129,10 @@ in
 
     nativeCheckInputs = [imagemagick];
     doCheck = false;
-
+    postInstall = ''
+      wrapProgram $out/bin/vsview \
+        --set VS_PLUGIN_DIR "${vapoursynth}/lib/vapoursynth" \
+    '';
     meta = with lib; {
       description = "The next-generation VapourSynth previewer";
       homepage = "https://github.com/Jaded-Encoding-Thaumaturgy/vs-view";
